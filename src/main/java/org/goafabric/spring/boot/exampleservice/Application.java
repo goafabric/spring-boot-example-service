@@ -1,14 +1,15 @@
 package org.goafabric.spring.boot.exampleservice;
 
-import org.goafabric.spring.boot.exampleservice.configuration.BaseConfiguration;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Created by amautsch on 26.06.2015.
  */
 
+@SpringBootApplication
 public class Application {
     public static void main(String[] args){
-        SpringApplication.run(BaseConfiguration.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }
