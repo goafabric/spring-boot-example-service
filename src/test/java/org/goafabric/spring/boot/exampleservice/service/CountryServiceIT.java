@@ -29,7 +29,7 @@ public class CountryServiceIT {
 
     @Test
     public void testGetAllCountries() {
-        final List<Country> countries = countryService.getAllCountries();
+        final List<Country> countries = countryService.findAll();
         assertThat(countries).isNotNull().isNotEmpty();
     }
 

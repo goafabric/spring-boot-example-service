@@ -15,14 +15,14 @@ import java.util.List;
 public interface CountryService {
     String RESOURCE = "/countries";
 
-    @RequestMapping(method = RequestMethod.GET)
-    List<Country> getAllCountries();
+    @RequestMapping(path = "findAll", method = RequestMethod.GET)
+    List<Country> findAll();
 
+    @RequestMapping(path = "findByIsoCode", method = RequestMethod.GET)
+    Country findByIsoCode(@RequestParam("isoCode") String isoCode);
 
-    /*
-    public Country findByIsoCode(@NonNull final String isoCode) {
-    public Country findByName(@NonNull final String name) {
-    */
+    @RequestMapping(path = "findByName", method = RequestMethod.GET)
+    Country findByName(@RequestParam("name") String name);
 
     @RequestMapping(method = RequestMethod.POST)
     void save(Country country);
