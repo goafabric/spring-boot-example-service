@@ -1,0 +1,16 @@
+#management endpoints
+#management.server.context-path=/management
+#endpoints.health.sensitive=false
+#endpoints.trace.enabled=false
+#management.endpoints.web.base-path=/manage
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+
+info:
+  status: yo
+
+
+
