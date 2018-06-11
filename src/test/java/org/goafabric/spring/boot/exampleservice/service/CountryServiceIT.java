@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 /**
@@ -27,12 +29,13 @@ public class CountryServiceIT {
 
     @Test
     public void testGetAllCountries() {
-        assertThat(countryService.getAllCountries()).isNotNull().isNotEmpty();
+        final List<Country> countries = countryService.getAllCountries();
+        assertThat(countries).isNotNull().isNotEmpty();
     }
 
     @Test
     public void testFindCountryByIsoCode() {
-        final Country country = countryService.findCountryByIsoCode("de");
+        final Country country = countryService.findByIsoCode("de");
         assertThat(country).isNotNull();
         assertThat(country.getIsoCode()).isEqualTo("de");
         assertThat(country.getName()).isEqualTo("Germany");
@@ -40,24 +43,22 @@ public class CountryServiceIT {
 
     @Test
     public void testFindCountryByName() {
-        final Country country = countryService.findCountryByName("Germany");
+        final Country country = countryService.findByName("Germany");
         assertThat(country.getIsoCode()).isEqualTo("de");
         assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
-    public void testSave() {
-        countryService.save(createStubCountry());
-    }
-
-    @Test
     public void testDelete() {
-        countryService.delete("1");
+        countryService.save(createStubCountry());
+
+        final Country country = countryService.findByIsoCode("xx");
+        countryService.delete(country.getId());
     }
 
     private Country createStubCountry() {
         return Country.builder()
-                .id("1").isoCode("de").name("Germany")
+                .isoCode("xx").name("xx")
                 .build();
     }
 

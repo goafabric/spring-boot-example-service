@@ -32,12 +32,12 @@ public class CountryLogicBean {
             countryRepository.findAll());
     }
 
-    public Country findCountryByIsoCode(@NonNull final String isoCode) {
+    public Country findByIsoCode(@NonNull final String isoCode) {
         return countryMapper.toDTO(
             countryRepository.findByIsoCode(isoCode));
     }
 
-    public Country findCountryByName(@NonNull final String name) {
+    public Country findByName(@NonNull final String name) {
         return countryMapper.toDTO(
                 countryRepository.findByName(name));
     }

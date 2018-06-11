@@ -19,3 +19,11 @@ db:
     url: jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:init_database.sql'
 
 
+#spring:
+#    datasource:
+#      url: jdbc:h2:mem:test
+#      username: sa
+#      password:
+#      hikari:
+#        maximum-pool-size: 100
+#        connection-test-query: "SELECT 1"
