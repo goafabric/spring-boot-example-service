@@ -1,7 +1,9 @@
 package org.goafabric.spring.boot.exampleservice.logic;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -20,20 +22,21 @@ public class CountryLogicBean {
         );
     }
 
-    public Country findCountyByIsoCode(final String isoCode) {
+    @Cacheable
+    public Country findCountryByIsoCode(@NonNull final String isoCode) {
         return createStubCountry();
     }
 
-    public Country findCountryByName(final String name) {
+    public Country findCountryByName(@NonNull final String name) {
         return createStubCountry();
     }
 
 
-    public void save(final Country country) {
+    public void save(@NonNull final Country country) {
 
     }
 
-    public void delete(final String id) {
+    public void delete(@NonNull final String id) {
 
     }
 

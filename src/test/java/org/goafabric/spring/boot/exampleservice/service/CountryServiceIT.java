@@ -32,12 +32,17 @@ public class CountryServiceIT {
 
     @Test
     public void testFindCountryByIsoCode() {
-        assertThat(countryService.findCountryByName("de")).isNotNull();
+        final Country country = countryService.findCountryByIsoCode("de");
+        assertThat(country).isNotNull();
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
     public void testFindCountryByName() {
-        assertThat(countryService.findCountryByName("Germany")).isNotNull();
+        final Country country = countryService.findCountryByName("Germany");
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test

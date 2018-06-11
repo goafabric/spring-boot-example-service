@@ -7,6 +7,8 @@ create table country
 			primary key,
 	isocode varchar(2)
 	name varchar(100),
+
+	version bigint default 0
 );
 
 INSERT INTO country(1, "de", "Germany")
