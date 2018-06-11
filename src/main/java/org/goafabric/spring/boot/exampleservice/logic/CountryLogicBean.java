@@ -2,11 +2,14 @@ package org.goafabric.spring.boot.exampleservice.logic;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.goafabric.spring.boot.exampleservice.mapper.CountryMapper;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,40 +19,37 @@ import java.util.List;
 
 @Slf4j
 @Component
+@Transactional
 public class CountryLogicBean {
     @Autowired
     private CountryRepository countryRepository;
 
+    @Autowired
+    private CountryMapper countryMapper;
+
     public List<Country> getAllCountries() {
-        return Arrays.asList(
-                createStubCountry()
-        );
+        return countryMapper.toDTOs(
+            countryRepository.findAll());
     }
 
     public Country findCountryByIsoCode(@NonNull final String isoCode) {
-        countryRepository.findByIsoCode(isoCode);
-        return createStubCountry();
+        return countryMapper.toDTO(
+            countryRepository.findByIsoCode(isoCode));
     }
 
     public Country findCountryByName(@NonNull final String name) {
-        countryRepository.findByName(name);
-        return createStubCountry();
+        return countryMapper.toDTO(
+                countryRepository.findByName(name));
     }
 
 
     public void save(@NonNull final Country country) {
-
+        countryRepository.save(
+                countryMapper.toBO(country));
     }
 
     public void delete(@NonNull final String id) {
-
+        countryRepository.deleteById(id);
     }
-
-    private Country createStubCountry() {
-        return Country.builder()
-                .id("1").isoCode("de").name("Germany")
-                .build();
-    }
-
 }
 

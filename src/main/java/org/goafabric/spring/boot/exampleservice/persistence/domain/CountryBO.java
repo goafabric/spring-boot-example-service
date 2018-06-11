@@ -19,8 +19,11 @@ public class CountryBO {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
+    @Column(name = "isocode")
     private String isoCode;
+
     private String name;
+    private String information;
 
     @Version //optimistic locking
     private Long version;

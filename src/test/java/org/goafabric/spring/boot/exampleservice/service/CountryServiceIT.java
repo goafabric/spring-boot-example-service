@@ -27,7 +27,7 @@ public class CountryServiceIT {
 
     @Test
     public void testGetAllCountries() {
-        assertThat(countryService.getAllCountries()).isNotNull();
+        assertThat(countryService.getAllCountries()).isNotNull().isNotEmpty();
     }
 
     @Test
