@@ -2,8 +2,9 @@ package org.goafabric.spring.boot.exampleservice.logic;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -16,18 +17,22 @@ import java.util.List;
 @Slf4j
 @Component
 public class CountryLogicBean {
+    @Autowired
+    private CountryRepository countryRepository;
+
     public List<Country> getAllCountries() {
         return Arrays.asList(
                 createStubCountry()
         );
     }
 
-    @Cacheable
     public Country findCountryByIsoCode(@NonNull final String isoCode) {
+        countryRepository.findByIsoCode(isoCode);
         return createStubCountry();
     }
 
     public Country findCountryByName(@NonNull final String name) {
+        countryRepository.findByName(name);
         return createStubCountry();
     }
 
