@@ -25,27 +25,32 @@ public class CountryLogicBean {
     @Autowired
     private CountryMapper countryMapper;
 
+    //@RolesAllowed("STANDARD_READ_ROLE")
     public List<Country> findAll() {
         return countryMapper.toDTOs(
             countryRepository.findAll());
     }
 
+    //@RolesAllowed("STANDARD_READ_ROLE")
     public Country findByIsoCode(@NonNull final String isoCode) {
         return countryMapper.toDTO(
             countryRepository.findByIsoCode(isoCode));
     }
 
+    //@RolesAllowed("STANDARD_READ_ROLE")
     public Country findByName(@NonNull final String name) {
         return countryMapper.toDTO(
                 countryRepository.findByName(name));
     }
 
 
+    //@RolesAllowed("STANDARD_WRITE_ROLE")
     public void save(@NonNull final Country country) {
         countryRepository.save(
                 countryMapper.toBO(country));
     }
 
+    //@RolesAllowed("STANDARD_WRITE_ROLE")
     public void delete(@NonNull final String id) {
         countryRepository.deleteById(id);
     }

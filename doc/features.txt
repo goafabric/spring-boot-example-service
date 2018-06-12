@@ -1,0 +1,9 @@
+- HTTP2 + SSL
+- REST
+- Data Access via Spring Data JPA
+
+- Mapping
+- Lombok (@NonNull, @Data)
+
+- Security
+- Actuator
