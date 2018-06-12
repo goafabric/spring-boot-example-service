@@ -1,3 +1,4 @@
+/*
 package org.goafabric.spring.boot.exampleservice.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,3 +45,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/
