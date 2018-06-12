@@ -5,12 +5,13 @@
 #management.endpoints.web.base-path=/manage
 
 management:
-    endpoint:
-        metrics:
-            enabled: true
+    endpoints:
+      web:
+        exposure:
+          include: "*"
 
 info:
-    status: yo
+    status: ok
 
 db:
     username: sa
