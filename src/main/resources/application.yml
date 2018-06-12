@@ -19,6 +19,14 @@ db:
     url: jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:init_database.sql'
 
 
+server:
+    http2:
+      enabled: true
+    ssl:
+      key-store: classpath:keystore.jks
+      key-store-password: password
+
+
 #spring:
 #    datasource:
 #      url: jdbc:h2:mem:test

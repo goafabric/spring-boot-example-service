@@ -1,6 +1,5 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
-import org.goafabric.spring.boot.exampleservice.logic.CountryLogicBean;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,19 +15,11 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
  * Created by andreas.mautsch on 11.06.2018.
  */
 
-@SpringBootTest
+@SpringBootTest()
 @RunWith(SpringRunner.class)
 public class CountryServiceIT {
-    /*
     @Autowired
-    private CountryService countryService;
-    */
-
-    //http://localhost:8080/countries/findByIsoCode?isoCode=es
-    //http://localhost:8080/countries/findByName?name=Germany
-
-    @Autowired
-    private CountryLogicBean countryService;
+    private CountryServiceBean countryService;
 
     @Test
     public void testGetAllCountries() {
