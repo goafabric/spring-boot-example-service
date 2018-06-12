@@ -24,6 +24,9 @@ public class CountryServiceIT {
     private CountryService countryService;
     */
 
+    //http://localhost:8080/countries/findByIsoCode?isoCode=es
+    //http://localhost:8080/countries/findByName?name=Germany
+
     @Autowired
     private CountryLogicBean countryService;
 
