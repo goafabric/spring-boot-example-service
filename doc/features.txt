@@ -3,6 +3,7 @@
 - HTTP2 (including SSL)
 - REST
 - Data Access via Spring Data JPA
+- Cache
 
 - Mapping with MapStruct
 - Lombok (@NonNull, @Data, @Builder)
@@ -12,6 +13,6 @@
 
 - Reactive (Flux)
 
-http://localhost:8080/countries/findByIsoCode?isoCode=es
-http://localhost:8080/countries/findByName?name=Germany
+https://localhost:8080/countries/findByIsoCode?isoCode=es
+https://localhost:8080/countries/findByName?name=Germany
 
