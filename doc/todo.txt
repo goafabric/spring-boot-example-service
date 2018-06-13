@@ -1,11 +1,9 @@
 - besseres Zertifikat
 
 - Passwort verschlüsselung
-- Datenbank Konfiguration
+- Datenbank Konfiguration für Spring Data
 - Feign Client
 
 
 keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
 
-http://localhost:8080/countries/findByIsoCode?isoCode=es
-http://localhost:8080/countries/findByName?name=Germany
