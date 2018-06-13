@@ -46,13 +46,15 @@ public class CountryServiceIT {
     public void testDelete() {
         countryService.save(createStubCountry());
 
-        final Country country = countryService.findByIsoCode("xx");
+        final Country country = countryService.findByIsoCode("pi");
         countryService.delete(country.getId());
     }
 
     private Country createStubCountry() {
         return Country.builder()
-                .isoCode("xx").name("xx")
+                .isoCode("pi")
+                .name("Phantasy Island")
+                .description("The Island where magic happens")
                 .build();
     }
 

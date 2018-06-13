@@ -1,13 +1,13 @@
 - Java 10
 
-- HTTP2 + SSL
+- HTTP2 (including SSL)
 - REST
 - Data Access via Spring Data JPA
 
-- Mapping
-- Lombok (@NonNull, @Data)
+- Mapping with MapStruct
+- Lombok (@NonNull, @Data, @Builder)
 
-- Security
+- (Security)
 - Actuator
 
 - Reactive (Flux)
