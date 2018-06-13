@@ -1,3 +1,5 @@
+- Java 10
+
 - HTTP2 + SSL
 - REST
 - Data Access via Spring Data JPA
