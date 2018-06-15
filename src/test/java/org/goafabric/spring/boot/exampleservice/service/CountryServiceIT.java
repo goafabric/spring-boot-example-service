@@ -51,11 +51,12 @@ public class CountryServiceIT {
     }
 
     private Country createStubCountry() {
-        return Country.builder()
+        final Country country = Country.builder()
                 .isoCode("pi")
                 .name("Phantasy Island")
                 .description("The Island where magic happens")
                 .build();
+        return country;
     }
 
 

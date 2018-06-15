@@ -16,6 +16,6 @@ import org.springframework.data.repository.query.Param;
 public interface CountryRepository extends JpaRepository<CountryBO, String> {
     CountryBO findByIsoCode(String isoCode);
 
-    @Query("SELECT c from CountryBO c WHERE name = :name") //needs to have -parameters enabled during compile
+    @Query("SELECT c from CountryBO c WHERE name = :name")
     CountryBO findByName(@Param("name") String name);
 }

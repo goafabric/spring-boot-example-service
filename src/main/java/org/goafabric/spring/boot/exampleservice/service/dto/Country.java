@@ -1,9 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.service.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * Created by andreas.mautsch on 11.06.2018.
