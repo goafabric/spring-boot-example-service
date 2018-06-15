@@ -12,6 +12,9 @@ server:
       key-store-password: password
 
 management:
+    endpoint:
+      health:
+        show-details: always
     endpoints:
       web:
         exposure:
