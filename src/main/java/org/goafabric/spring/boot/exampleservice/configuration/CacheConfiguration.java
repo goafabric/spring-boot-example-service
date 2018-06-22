@@ -29,7 +29,7 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     @Override
     public CacheManager cacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager(PERSISENCE);
-        cacheManager.setAllowNullValues(false);
+        //cacheManager.setAllowNullValues(false);
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }
