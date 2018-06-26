@@ -78,6 +78,10 @@
 </node>
 <node CREATED="1529050862045" ID="ID_1883633012" MODIFIED="1529050865393" TEXT="CountryServiceBean"/>
 </node>
+<node CREATED="1530000785965" ID="ID_1586511509" MODIFIED="1530000787217" POSITION="left" TEXT="Links">
+<node CREATED="1530000787565" LINK="https://start.spring.io/" MODIFIED="1530000787565" TEXT="https://start.spring.io/"/>
+<node CREATED="1530000824037" LINK="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Migration-Guide" MODIFIED="1530000824037" TEXT="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Migration-Guide"/>
+</node>
 <node CREATED="1529051417796" ID="ID_334881204" MODIFIED="1529051420447" POSITION="left" TEXT="Features">
 <node CREATED="1529061201173" HGAP="16" ID="ID_1113217357" MODIFIED="1529061439161" TEXT="Spring Boot2" VSHIFT="-29">
 <node CREATED="1529061331709" HGAP="12" ID="ID_502778911" MODIFIED="1529061350871" TEXT="Create Standalone Spring applications" VSHIFT="-17"/>
