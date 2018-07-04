@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 /**
@@ -48,6 +49,12 @@ public class CountryServiceIT {
 
         final Country country = countryService.findByIsoCode("pi");
         countryService.delete(country.getId());
+    }
+
+    @Test
+    public void testFindCountryByIsoCodeNull() {
+        assertThatThrownBy(() ->
+            countryService.findByIsoCode(null)).isInstanceOf(IllegalArgumentException.class);
     }
 
     private Country createStubCountry() {
