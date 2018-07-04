@@ -56,6 +56,7 @@ public class CountryServiceIT {
                 .name("Phantasy Island")
                 .description("The Island where magic happens")
                 .build();
+        country.setName("Phantasy Star");
         return country;
     }
 
