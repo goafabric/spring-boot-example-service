@@ -21,6 +21,7 @@
         <spring.boot.version>2.0.2</spring.boot.version>
         <!-- needed for java 1.10 -->
         <lombok.version>1.18.0</lombok.version>
+        <contiperf.version>2.2.0</contiperf.version>
     </properties>
 
 
@@ -152,6 +153,12 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.databene</groupId>
+            <artifactId>contiperf</artifactId>
+            <version>${contiperf.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
