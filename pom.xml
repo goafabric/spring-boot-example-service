@@ -22,7 +22,7 @@
         <!-- needed for java 1.10 -->
         <lombok.version>1.18.0</lombok.version>
         <contiperf.version>2.2.0</contiperf.version>
-        <docker.image.prefix>springio</docker.image.prefix>
+        <docker.image.prefix>goafabric</docker.image.prefix>
     </properties>
 
 
