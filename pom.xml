@@ -18,8 +18,14 @@
         <compiler.level>1.8</compiler.level>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
         <spring.boot.version>2.1.1.RELEASE</spring.boot.version>
-        <lombok.version>1.18.0</lombok.version>
-        <contiperf.version>2.2.0</contiperf.version>
+        <lombok.version>1.18.4</lombok.version>
+        <contiperf.version>2.3.4</contiperf.version>
+
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
+        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
+        <dockerfile-maven-plugin.version>1.4.9</dockerfile-maven-plugin.version>
+
         <docker.image.prefix>goafabric</docker.image.prefix>
     </properties>
 
@@ -137,22 +143,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${compiler.level}</source>
                     <target>${compiler.level}</target>
@@ -162,7 +155,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.1</version>
+                <version>${jacoco-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -189,7 +182,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.18.1</version>                <configuration>
+                <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
                 <includes>
                     <include>**/*IT.java</include>
                 </includes>
@@ -206,26 +200,38 @@
                     </execution>
                 </executions>
             </plugin>
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>1.3.6</version>
-                        <configuration>
-                            <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                            <buildArgs>
-                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                            </buildArgs>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>default</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile-maven-plugin.version}</version>
+                    <configuration>
+                        <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                        <buildArgs>
+                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                        </buildArgs>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>default</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
         </plugins>
 
     </build>
