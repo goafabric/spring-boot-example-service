@@ -12,6 +12,8 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <compiler.level>1.8</compiler.level>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
@@ -111,8 +113,13 @@
             <artifactId>h2</artifactId>
         </dependency>
 
-        <!-- needed for java 1.9 -->
+        <!-- needed for java 1.9+ -->
         <!--
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version>
+        </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -122,17 +129,6 @@
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
             <version>2.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-api</artifactId>
-            <version>1.2.0</version>
         </dependency>
         -->
 
@@ -184,7 +180,6 @@
                 <configuration>
                     <source>${compiler.level}</source>
                     <target>${compiler.level}</target>
-                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
