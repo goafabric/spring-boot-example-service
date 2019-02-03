@@ -1,13 +1,18 @@
 keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
 
+#deployment
 docker tag goafabric/spring-boot-exampleservice goafabric/spring-boot-exampleservice:stable
 
 docker push goafabric/spring-boot-exampleservice:stable
 |
 docker pull goafabric/spring-boot-exampleservice:stable
 
+#run
 docker run -p 8080:8080 -t goafabric/spring-boot-exampleservice:stable
 
+docker logs -f c78d3bd105c2
+
+#swarm
 
 docker swarm init
 
