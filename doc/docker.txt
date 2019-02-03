@@ -27,5 +27,4 @@ docker run -d -p 9000:9000 --restart always -v /var/run/docker.sock:/var/run/doc
 #postgres
 docker volume create postgres_data
 
-docker run -e POSTGRES_PASSWORD=postgres -d -v postgres_data postgres:9.6 
-
+docker run -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v postgres_data:/var/lib/postgresql/data postgres:9.6 
