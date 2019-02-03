@@ -19,3 +19,10 @@ docker swarm init
 docker stack deploy -c docker-compose.yml exampleservice
 
 docker service logs -f exampleservice_web
+
+#postgres
+docker volume create postgres_data
+
+docker run -e POSTGRES_PASSWORD=postgres -d -v postgres_data postgres:9.6 
+
+docker run -e POSTGRES_PASSWORD=postgres -v postgres_data postgres:9.6 
