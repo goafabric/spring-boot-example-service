@@ -4,10 +4,10 @@ services:
     # replace username/repo:tag with your name and image details
     image: goafabric/spring-boot-exampleservice:stable
     deploy:
-      replicas: 2
+      replicas: 1
       resources:
         limits:
-          cpus: "1"
+          cpus: "2"
           memory: 100M
       restart_policy:
         condition: on-failure
