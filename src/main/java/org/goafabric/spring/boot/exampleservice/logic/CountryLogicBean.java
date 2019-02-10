@@ -25,6 +25,12 @@ public class CountryLogicBean {
     @Autowired
     private CountryMapper countryMapper;
 
+    public Country getById(@NonNull final String id) {
+        return countryMapper.toDTO(
+            countryRepository.getOne(id));
+    }
+
+
     public List<Country> findAll() {
         return countryMapper.toDTOs(
             countryRepository.findAll());
@@ -40,9 +46,10 @@ public class CountryLogicBean {
                 countryRepository.findByName(name));
     }
 
-    public void save(@NonNull final Country country) {
-        countryRepository.save(
-                countryMapper.toBO(country));
+    public Country save(@NonNull final Country country) {
+        return countryMapper.toDTO(
+            countryRepository.save(
+                    countryMapper.toBO(country)));
     }
 
     public void delete(@NonNull final String id) {
