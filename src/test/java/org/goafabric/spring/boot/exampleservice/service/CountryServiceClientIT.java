@@ -5,6 +5,7 @@ import org.goafabric.spring.boot.exampleservice.client.CountryServiceClient;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -17,8 +18,9 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 //@SpringBootTest
 @RunWith(SpringRunner.class)
 public class CountryServiceClientIT {
-    private CountryServiceClient countryService
-            = new CountryServiceClient("http://localhost:8080");
+    @Autowired
+    private CountryServiceClient countryService;
+    //@LocalServerPort is a meta-annotation for @Value("${local.server.port}")
 
     @Test
     public void testGetById() {
