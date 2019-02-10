@@ -3,6 +3,9 @@ Datum in Mapper
 Mapstruct testen
 PlantUML + Jmeter
 
+flyway
+exception handling
+
 
 - Passwort verschlüsselung
 - Datenbank Konfiguration für Spring Data

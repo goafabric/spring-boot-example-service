@@ -24,19 +24,19 @@ public class CountryServiceClient implements CountryService {
 
     @Override
     public List<Country> findAll() {
-        return restTemplate.getForObject(serviceUri + "/findall",
+        return restTemplate.getForObject(serviceUri + "/findAll",
                 List.class);
     }
 
     @Override
     public Country findByIsoCode(String isoCode) {
-        return restTemplate.getForObject(serviceUri + "/findByIsoCode",
+        return restTemplate.getForObject(serviceUri + "/findByIsoCode?isoCode={isoCode}",
                 Country.class, isoCode);
     }
 
     @Override
     public Country findByName(String name) {
-        return restTemplate.getForObject(serviceUri + "/findName",
+        return restTemplate.getForObject(serviceUri + "/findByName?name={name}",
                 Country.class, name);
     }
 
@@ -48,7 +48,7 @@ public class CountryServiceClient implements CountryService {
 
     @Override
     public void delete(String id) {
-        restTemplate.delete(serviceUri + "/delete",
+        restTemplate.delete(serviceUri + "/delete?id={id}",
                 id);
     }
 }

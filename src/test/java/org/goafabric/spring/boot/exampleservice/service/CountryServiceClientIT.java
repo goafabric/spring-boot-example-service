@@ -54,9 +54,11 @@ public class CountryServiceClientIT {
         countryService.save(createStubCountry());
 
         final Country country = countryService.findByIsoCode("pi");
+        assertThat(country).isNotNull();
         countryService.delete(country.getId());
     }
 
+    //does  not work because due to json string is not null but empty
     @Test
     public void testFindCountryByIsoCodeNull() {
         assertThatThrownBy(() ->
