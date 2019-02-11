@@ -40,8 +40,8 @@ public class CountryServiceBean implements CountryService {
         return countryLogicBean.findByName(name);
     }
 
-    @PostMapping("save")
-    public Country save(Country country) {
+    @PostMapping(value = "save", consumes = "application/json")
+    public Country save(@RequestBody Country country) {
         return countryLogicBean.save(country);
     }
 

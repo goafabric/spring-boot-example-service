@@ -52,7 +52,7 @@ public class CountryServiceClientIT {
     }
 
     @Test
-    public void testDelete() {
+    public void testSaveAndDelete() {
         countryService.save(createStubCountry());
 
         final Country country = countryService.findByIsoCode("pi");
