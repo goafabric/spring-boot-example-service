@@ -4,6 +4,8 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  * Created by andreas.mautsch on 11.06.2018.
@@ -24,6 +26,10 @@ public class CountryBO {
 
     private String name;
     private String information;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime date;
+
 
     @Version //optimistic locking
     private Long version;

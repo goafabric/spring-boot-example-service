@@ -1,9 +1,9 @@
 server:
-    http2:
-      enabled: true
-    ssl:
-      key-store: classpath:keystore.jks
-      key-store-password: password
+#    http2:
+#      enabled: true
+#    ssl:
+#      key-store: classpath:keystore.jks
+#      key-store-password: password
 
 management:
     endpoint:
