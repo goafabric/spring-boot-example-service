@@ -11,8 +11,13 @@ docker run -p 8080:8080 --name exampleservice -t goafabric/spring-boot-examplese
 docker logs -f c78d3bd105c2
 
 #create
-docker container create -p 8080:8080 --name exampleservice -t goafabric/spring-boot-exampleservice:stable
-docker container run exampleservice
+docker create -p 8080:8080 --name exampleservice -t goafabric/spring-boot-exampleservice:stable
+docker start exampleservice
+
+#prune
+docker prune -a
+
+--------------
 
 #swarm
 docker swarm init
