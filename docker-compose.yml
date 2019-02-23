@@ -2,7 +2,7 @@ version: "3"
 services:
   web:
     # replace username/repo:tag with your name and image details
-    image: goafabric/spring-boot-exampleservice:stable
+    image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
     deploy:
       replicas: 1
       resources:

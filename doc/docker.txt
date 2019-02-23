@@ -1,18 +1,16 @@
 #deployment
 docker tag goafabric/spring-boot-exampleservice goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
-
 docker push goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
-|
-docker pull goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
+|docker pull goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 
 #run
 docker run -p 8080:8080 --name exampleservice -t goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 
-docker logs -f c78d3bd105c2
-
 #create
+docker rm exampleservice
 docker create -p 8080:8080 --name exampleservice -t goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 docker start exampleservice
+docker logs -f exampleservice
 
 #prune
 docker prune -a
@@ -21,9 +19,7 @@ docker prune -a
 
 #swarm
 docker swarm init
-
 docker stack deploy -c docker-compose.yml exampleservice
-
 docker service logs -f exampleservice_web
 
 
