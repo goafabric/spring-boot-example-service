@@ -17,7 +17,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - webnet
+      - example_net
 
   postgres:
     image: postgres:9.5-alpine
@@ -25,13 +25,13 @@ services:
     expose:
     - "5432"
     ports:
-    - "5435:5432"
+    - "5432:5432"
     environment:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
     - POSTGRES_DB=countrydb
     networks:
-    - webnet
+    - example_net
 
 networks:
-  webnet:
+  example_net:

@@ -17,18 +17,19 @@ management:
 info:
     status: ok
 
-db:
-    username: sa
-    password:
-    poolsize: 100
-    url: jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:init_database.sql'
+#db:
+#    username: sa
+#    password:
+#    poolsize: 100
+#    url: jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
 #    url: jdbc:h2:tcp://localhost/~/database/spring
 
-#spring:
-#    datasource:
-#      url: jdbc:h2:mem:test
-#      username: sa
-#      password:
-#      hikari:
-#        maximum-pool-size: 100
-#        connection-test-query: "SELECT 1"
+spring:
+    datasource:
+      url: jdbc:h2:mem:test
+      #;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
+      username: sa
+      password:
+      hikari:
+        maximum-pool-size: 100
+        connection-test-query: "SELECT 1"

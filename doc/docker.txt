@@ -18,6 +18,7 @@ docker prune -a
 #compose
 docker-compose -p example_stack rm
 docker-compose -f docker-compose.yml -p example_stack up -d
+
 docker-compose -p example_stack stop
 
 
