@@ -1,16 +1,27 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = SpringDataConfiguration.BASE_PACKAGE)
+//@Import(FlywayAutoConfiguration.class)
 public class SpringDataConfiguration {
     public static final String BASE_PACKAGE = "org.goafabric";
 
-    /*
     @Bean
     public DataSource dataSource(
             @Value("${db.username}") String username, @Value("${db.password}") String password,
@@ -44,5 +55,5 @@ public class SpringDataConfiguration {
 
         return transactionManager;
     }
-    */
+
 }
