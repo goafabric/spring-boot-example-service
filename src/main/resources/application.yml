@@ -17,27 +17,25 @@ management:
 info:
     status: ok
 
-db:
-    username: sa
-    password:
-    poolsize: 100
-    url: jdbc:h2:mem:test
+#db:
+#    username: sa
+#    password:
+#    poolsize: 100
+#    url: jdbc:h2:mem:test
     #;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
 #    url: jdbc:h2:tcp://localhost/~/database/spring
 
-#spring:
-#    datasource:
-#      url: jdbc:h2:mem:test
-      #;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
-#      username: sa
-#      password:
-#      hikari:
-#        maximum-pool-size: 100
-#        connection-test-query: "SELECT 1"
-
 spring:
-  flyway:
-    url: jdbc:h2:mem:test
+    datasource:
+      url: jdbc:h2:mem:test
+      username: sa
+      password:
+      hikari:
+        maximum-pool-size: 100
+        connection-test-query: "SELECT 1"
+
+    flyway:
+      url: jdbc:h2:mem:test
 #  locations: classpath:db/migration
-    baseline-on-migrate: true
-    enabled: true
+      baseline-on-migrate: true
+      enabled: true
