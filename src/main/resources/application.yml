@@ -35,8 +35,9 @@ db:
 #        maximum-pool-size: 100
 #        connection-test-query: "SELECT 1"
 
-flyway:
-  url: jdbc:h2:mem:test
+spring:
+  flyway:
+    url: jdbc:h2:mem:test
 #  locations: classpath:db/migration
-  baseline-on-migrate: true
-  enabled: true
+    baseline-on-migrate: true
+    enabled: true
