@@ -16,6 +16,9 @@ services:
         condition: on-failure
     ports:
       - "8080:8080"
+    environment:
+      - spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/countrydb
+
     networks:
       - example_net
 
