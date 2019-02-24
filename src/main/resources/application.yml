@@ -27,13 +27,11 @@ info:
 
 spring:
     datasource:
-      #url: jdbc:h2:mem:test
-      #username: sa
-      #password:
-
-      url: jdbc:postgresql://localhost:5432/countrydb
+      url: jdbc:h2:mem:test
+      #url: jdbc:postgresql://localhost:5432/countrydb
       username: postgres
       password: postgres
+
 
       hikari:
         maximum-pool-size: 100
