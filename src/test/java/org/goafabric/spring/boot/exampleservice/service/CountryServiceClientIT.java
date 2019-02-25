@@ -53,6 +53,7 @@ public class CountryServiceClientIT {
     }
 
     @Test
+    @Ignore
     public void testSaveAndDelete() {
         countryService.save(createStubCountry());
 
