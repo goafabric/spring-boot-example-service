@@ -241,23 +241,38 @@
                     <plugin>
                         <groupId>com.spotify</groupId>
                         <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>${dockerfile-maven-plugin.version}</version>
-                        <configuration>
-                            <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                            <buildArgs>
-                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                            </buildArgs>
-                        </configuration>
+                        <version>1.4.10</version>
                         <executions>
                             <execution>
-                                <id>default</id>
-                                <phase>install</phase>
+                                <id>tag-version</id>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>build</goal>
+                                    <goal>tag</goal>
+                                </goals>
+                            </execution>
+
+                            <execution>
+                                <id>push-version</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>push</goal>
                                 </goals>
                             </execution>
                         </executions>
+
+                        <configuration>
+                            <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                            <tag>${project.version}</tag>
+                            <buildArgs>
+                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                            </buildArgs>
+                            <noCache>true</noCache>
+                            <dockerfile>Dockerfile</dockerfile>
+                            <verbose>true</verbose>
+                        </configuration>
                     </plugin>
+
                 </plugins>
             </build>
         </profile>
