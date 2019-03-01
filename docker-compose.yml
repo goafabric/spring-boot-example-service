@@ -26,9 +26,9 @@ services:
     image: postgres:9.5-alpine
     container_name: postgres
     expose:
-    - "50210"
+    - "5432"
     ports:
-    - "50210:50210"
+    - "50210:5432"
     environment:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
