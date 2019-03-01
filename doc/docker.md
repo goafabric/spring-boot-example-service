@@ -16,9 +16,8 @@ docker logs -f exampleservice
 docker system prune -a && docker volume prune -f
 
 #compose
-#docker pull goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 docker-compose -f docker-compose.yml -p example_stack up -d
-docker-compose -p filestorage_stack down --volumes
+docker-compose -p example_stack down --volumes
 
 docker-compose -p example_stack stop
 docker-compose -p example_stack rm -f

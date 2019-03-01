@@ -5,7 +5,7 @@ services:
   exampleservice:
     # replace username/repo:tag with your name and image details
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
-    container_name: exampleservice
+    container_name: exampleservice_example_net
     deploy:
       replicas: 1
       resources:
@@ -15,7 +15,7 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "50700:50700"
+      - "50700:8080"
     environment:
       - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
     networks:
@@ -26,11 +26,11 @@ services:
 
   postgres:
     image: postgres:9.5-alpine
-    container_name: postgres
+    container_name: postgres_example_net
     expose:
     - "5432"
     ports:
-    - "50210:5432"
+    - "50710:5432"
     environment:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
@@ -43,3 +43,4 @@ services:
 
 networks:
   example_net:
+    driver: bridge
