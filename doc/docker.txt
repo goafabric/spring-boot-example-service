@@ -20,8 +20,8 @@ docker system prune -a && docker volume prune
 docker-compose -f docker-compose.yml -p example_stack up -d
 
 docker-compose -p example_stack stop
-docker-compose -p example_stack rm
-docker volume prune
+docker-compose -p example_stack rm -f
+docker volume prune -f
 
 --------------
 
