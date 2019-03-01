@@ -15,12 +15,14 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "50200:8080"
+      - "50700:50700"
     environment:
-      - spring.datasource.url=jdbc:postgresql://host.docker.internal:50210/countrydb
-
+      - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
     networks:
       - example_net
+    depends_on:
+    - postgres
+
 
   postgres:
     image: postgres:9.5-alpine
@@ -33,8 +35,11 @@ services:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
     - POSTGRES_DB=countrydb
+    volumes:
+    - ./data/postgres:/var/lib/postgresql/data
     networks:
     - example_net
+
 
 networks:
   example_net:
