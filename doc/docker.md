@@ -17,7 +17,7 @@ docker system prune -a && docker volume prune -f
 
 #compose
 docker-compose -f docker-compose.yml -p example_stack up -d
-docker-compose -p example_stack down --volumes
+docker-compose -p example_stack down --volumes && docker volume prune -f
 
 docker-compose -p example_stack stop
 docker-compose -p example_stack rm -f
@@ -28,6 +28,8 @@ docker-compose -p example_stack rm -f
 #swarm
 docker swarm init
 docker stack deploy -c docker-compose.yml example_stack
+docker stack rm example_stack
+
 docker service logs -f exampleservice_example_net
 
 
