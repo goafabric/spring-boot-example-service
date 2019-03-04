@@ -24,9 +24,9 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
-        <dockerfile-maven-plugin.version>1.4.9</dockerfile-maven-plugin.version>
+        <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
 
-        <docker.image.prefix>goafabric</docker.image.prefix>
+        <docker.image.prefix>docker.io/goafabric</docker.image.prefix>
     </properties>
 
 
@@ -240,66 +240,31 @@
                                 <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                             </buildArgs>
                             <tag>${project.version}</tag>
+                            <noCache>true</noCache>
+                            <dockerfile>Dockerfile</dockerfile>
+                            <verbose>true</verbose>
+                            <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                         </configuration>
                         <executions>
                             <execution>
-                                <id>default</id>
-                                <phase>install</phase>
+                                <id>tag-version</id>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>build</goal>
+                                    <goal>tag</goal>
                                 </goals>
                             </execution>
-                            <!--
                             <execution>
-                                <id>push-image</id>
-                                <phase>deploy</phase>
+                                <id>push-version</id>
+                                <phase>install</phase>
                                 <goals>
                                     <goal>push</goal>
                                 </goals>
                             </execution>
-                            -->
                         </executions>
                     </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
-
-    <!--
-    <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>dockerfile-maven-plugin</artifactId>
-        <version>1.4.10</version>
-        <executions>
-            <execution>
-                <id>tag-version</id>
-                <phase>package</phase>
-                <goals>
-                    <goal>build</goal>
-                    <goal>tag</goal>
-                </goals>
-            </execution>
-
-            <execution>
-                <id>push-version</id>
-                <phase>install</phase>
-                <goals>
-                    <goal>push</goal>
-                </goals>
-            </execution>
-        </executions>
-
-        <configuration>
-            <repository>${docker.registry}/${project.artifactId}</repository>
-            <tag>${project.version}</tag>
-            <buildArgs>
-                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-            </buildArgs>
-            <noCache>true</noCache>
-            <dockerfile>Dockerfile</dockerfile>
-            <verbose>true</verbose>
-        </configuration>
-    </plugin>
-    -->
-
 </project>
