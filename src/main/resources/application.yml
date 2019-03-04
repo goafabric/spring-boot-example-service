@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 50700
   tomcat.max-threads: 10
 
 #    http2:

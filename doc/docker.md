@@ -4,11 +4,11 @@ docker push goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 docker pull goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 
 #run
-docker run -p 8080:8080 --name exampleservice -t goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
+docker run -p 50700:50700 --name exampleservice -t goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 
 #create
 docker rm exampleservice
-docker create -p 8080:8080 --name exampleservice -t goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
+docker create -p 50700:50700 --name exampleservice -t goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
 docker start exampleservice
 docker logs -f exampleservice
 
@@ -27,8 +27,8 @@ docker-compose -p example_stack rm -f
 
 #swarm
 docker swarm init
-docker stack deploy -c docker-compose.yml exampleservicestack
-docker service logs -f exampleservice_web
+docker stack deploy -c docker-compose.yml example_stack
+docker service logs -f exampleservice_example_net
 
 
 #portainer
