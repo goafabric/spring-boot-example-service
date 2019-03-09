@@ -15,8 +15,8 @@ services:
     - postgres_data:/var/lib/postgresql/data
     networks:
     - exampleservice_net
-    restart: 'no'
     mem_limit: 256M
+    restart: 'no'
 
   exampleservice:
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
@@ -36,8 +36,8 @@ services:
       - exampleservice_net
     depends_on:
     - postgres
-    restart: 'no'
     mem_limit: 256M
+    restart: 'no'
 
 volumes:
     postgres_data:
