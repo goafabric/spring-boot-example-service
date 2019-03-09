@@ -30,6 +30,7 @@ services:
 #        condition: on-failure
     ports:
       - "50700:50700"
+      - "50701:50701"
     environment:
       - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
     networks:
@@ -37,7 +38,7 @@ services:
     depends_on:
     - postgres
     mem_limit: 256M
-    restart: 'on-failure'
+    restart: 'no'
 
 volumes:
     postgres_data:
