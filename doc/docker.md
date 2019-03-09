@@ -15,16 +15,6 @@ docker logs -f exampleservice
 #prune
 docker system prune -a && docker volume prune -f
 
-#compose
-docker-compose -f docker-compose.yml -p example_stack up -d
-docker-compose -p example_stack down --volumes && docker volume prune -f
-
-docker-compose -p example_stack stop
-docker-compose -p example_stack rm -f
-
-
---------------
-
 #swarm
 docker swarm init
 docker stack deploy -c docker-compose.yml example_stack
@@ -33,14 +23,15 @@ docker stack rm example_stack
 docker service logs -f exampleservice_example_net
 
 
-#portainer
-docker volume create portainer_data
-docker run -d -p 9000:9000 --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+#compose
+docker-compose -f doc/docker-compose.yml -p exampleservice_stack up -d
+docker-compose -f doc/docker-compose.yml -p exampleservice_stack down --volumes
 
-#postgres
-docker volume create postgres_data
 
-docker run -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v postgres_data:/var/lib/postgresql/data postgres:9.6 
+
+--------------
+
+
 
 ---
 

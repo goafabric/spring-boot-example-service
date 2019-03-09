@@ -28,8 +28,7 @@ spring:
       password: postgres
 
       hikari:
-        maximum-pool-size: 100
-        connection-test-query: "SELECT 1"
+        maximum-pool-size: 10
 
     flyway:
 #  locations: classpath:db/migration

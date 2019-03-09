@@ -1,0 +1,47 @@
+version: "2"
+
+
+services:
+  postgres:
+    image: postgres:9.6-alpine
+    ports:
+    - "50710:5432"
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=countrydb
+    command: postgres -c 'shared_buffers=128MB' -c 'max_connections=100' -c 'shared_preload_libraries=pg_stat_statements'
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    networks:
+    - exampleservice_net
+    restart: 'no'
+    mem_limit: 256M
+
+  exampleservice:
+    image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
+#    deploy:
+#      replicas: 2
+#      resources:
+#        limits:
+#          cpus: "1"
+#          memory: 128M
+#      restart_policy:
+#        condition: on-failure
+    ports:
+      - "50700:50700"
+    environment:
+      - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
+    networks:
+      - exampleservice_net
+    depends_on:
+    - postgres
+    restart: 'no'
+    mem_limit: 256M
+
+volumes:
+    postgres_data:
+
+networks:
+  exampleservice_net:
+    driver: bridge
