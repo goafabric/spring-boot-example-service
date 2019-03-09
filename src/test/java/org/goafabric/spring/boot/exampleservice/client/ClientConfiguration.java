@@ -20,6 +20,6 @@ public class ClientConfiguration {
     */
     @Bean
     public CountryServiceClient countryServiceClient() {
-        return new CountryServiceClient("http://localhost:8080");
+        return new CountryServiceClient("http://localhost:50700");
     }
 }
