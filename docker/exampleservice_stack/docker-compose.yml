@@ -4,6 +4,7 @@ version: "2"
 services:
   postgres:
     image: postgres:9.6-alpine
+    restart: 'no'
     ports:
     - "50710:5432"
     environment:
@@ -16,21 +17,12 @@ services:
     networks:
     - exampleservice_net
     mem_limit: 256M
-    restart: 'no'
 
   exampleservice:
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
-#    deploy:
-#      replicas: 2
-#      resources:
-#        limits:
-#          cpus: "1"
-#          memory: 128M
-#      restart_policy:
-#        condition: on-failure
+    restart: on-failure:5
     ports:
       - "50700:50700"
-      - "50701:50701"
     environment:
       - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
     networks:
@@ -38,7 +30,6 @@ services:
     depends_on:
     - postgres
     mem_limit: 256M
-    restart: 'no'
 
 volumes:
     postgres_data:
