@@ -27,7 +27,7 @@ public class CountryServiceLoadNRIT {
     @Rule
     public ContiPerfRule rule = new ContiPerfRule();
 
-    @PerfTest(invocations=500000, threads=10)
+    @PerfTest(invocations=500000, threads=2)
     @Test
     public void testGetAllCountries() {
         log.info("test");
