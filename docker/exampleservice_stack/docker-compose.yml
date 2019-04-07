@@ -11,7 +11,7 @@ services:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
     - POSTGRES_DB=countrydb
-    command: postgres -c 'shared_buffers=128MB' -c 'max_connections=100' -c 'shared_preload_libraries=pg_stat_statements'
+    command: postgres -c 'shared_buffers=64MB' -c 'max_connections=20' -c 'shared_preload_libraries=pg_stat_statements'
     volumes:
     - postgres_data:/var/lib/postgresql/data
     networks:
