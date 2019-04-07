@@ -1,9 +1,9 @@
-version: "2"
+version: "3"
 
 
 services:
   postgres:
-    image: postgres:9.6-alpine
+    image: postgres:9.5-alpine
     restart: 'no'
     ports:
     - "50710:5432"
@@ -16,7 +16,7 @@ services:
     - postgres_data:/var/lib/postgresql/data
     networks:
     - exampleservice_net
-    mem_limit: 256M
+#    mem_limit: 256M
 
   exampleservice:
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
@@ -29,7 +29,7 @@ services:
       - exampleservice_net
     depends_on:
     - postgres
-    mem_limit: 256M
+ #   mem_limit: 256M
 
 volumes:
     postgres_data:
