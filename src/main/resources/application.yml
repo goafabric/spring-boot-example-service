@@ -1,6 +1,6 @@
 server:
   port: 50700
-  tomcat.max-threads: 10
+  tomcat.max-threads: 20
 
 #    http2:
 #      enabled: true
