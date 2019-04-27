@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest//(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @RunWith(SpringRunner.class)
 @Slf4j
 public class CountryServiceLoadNRIT {
@@ -27,7 +27,7 @@ public class CountryServiceLoadNRIT {
     @Rule
     public ContiPerfRule rule = new ContiPerfRule();
 
-    @PerfTest(invocations=500000, threads=2)
+    @PerfTest(invocations=500000, threads=10)
     @Test
     public void testGetAllCountries() {
         log.info("test");
