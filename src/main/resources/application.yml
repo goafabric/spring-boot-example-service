@@ -1,4 +1,7 @@
 server:
+  port: 50700
+  tomcat.max-threads: 20
+
 #    http2:
 #      enabled: true
 #    ssl:
@@ -17,18 +20,19 @@ management:
 info:
     status: ok
 
-db:
-    username: sa
-    password:
-    poolsize: 100
-    url: jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:init_database.sql'
-#    url: jdbc:h2:tcp://localhost/~/database/spring
 
-#spring:
-#    datasource:
-#      url: jdbc:h2:mem:test
-#      username: sa
-#      password:
-#      hikari:
-#        maximum-pool-size: 100
-#        connection-test-query: "SELECT 1"
+spring:
+    datasource:
+      url: jdbc:h2:mem:countrydb
+      #url: jdbc:h2:mem:countrydb;INIT=RUNSCRIPT FROM 'classpath:db/migration/V1__init.sql'
+      #url: jdbc:postgresql://localhost:5432/countrydb
+      username: postgres
+      password: postgres
+
+      hikari:
+        maximum-pool-size: 10
+
+    flyway:
+      locations: classpath:db/migration
+      baseline-on-migrate: true
+      enabled: true

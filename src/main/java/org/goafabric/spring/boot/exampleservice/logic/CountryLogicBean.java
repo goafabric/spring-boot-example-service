@@ -32,6 +32,7 @@ public class CountryLogicBean {
 
 
     public List<Country> findAll() {
+        //spin(10000);
         return countryMapper.toDTOs(
             countryRepository.findAll());
     }
@@ -55,5 +56,12 @@ public class CountryLogicBean {
     public void delete(@NonNull final String id) {
         countryRepository.deleteById(id);
     }
+
+    private static void spin(int milliseconds) {
+        long sleepTime = milliseconds*1000000L; // convert to nanoseconds
+        long startTime = System.nanoTime();
+        while ((System.nanoTime() - startTime) < sleepTime) {}
+    }
+
 }
 
