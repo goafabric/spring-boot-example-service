@@ -3,6 +3,7 @@ package org.goafabric.spring.boot.exampleservice.service;
 import org.goafabric.spring.boot.exampleservice.logic.CountryLogicBean;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 
 @RequestMapping(value = CountryService.RESOURCE,
-        produces = "application/json")
+        produces = MediaType.APPLICATION_JSON_VALUE)
 
 @RestController
 public class CountryServiceBean implements CountryService {
@@ -21,7 +22,7 @@ public class CountryServiceBean implements CountryService {
 
 
     @GetMapping("getById")
-    public Country getById(@RequestParam("id") String id) {
+    public Country getById(@RequestParam String id) {
         return countryLogicBean.getById(id);
     }
 
@@ -31,22 +32,22 @@ public class CountryServiceBean implements CountryService {
     }
 
     @GetMapping("findByIsoCode")
-    public Country findByIsoCode(@RequestParam("isoCode") String isoCode) {
+    public Country findByIsoCode(@RequestParam String isoCode) {
         return countryLogicBean.findByIsoCode(isoCode);
     }
 
     @GetMapping("findByName")
-    public Country findByName(@RequestParam("name") String name) {
+    public Country findByName(@RequestParam String name) {
         return countryLogicBean.findByName(name);
     }
 
-    @PostMapping(value = "save", consumes = "application/json")
+    @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Country save(@RequestBody Country country) {
         return countryLogicBean.save(country);
     }
 
     @DeleteMapping("delete")
-    public void delete(@RequestParam("id") String id) {
+    public void delete(@RequestParam String id) {
         countryLogicBean.delete(id);
     }
 
