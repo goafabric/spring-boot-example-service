@@ -259,11 +259,9 @@
                             <from>
                                 <image>adoptopenjdk/openjdk11:alpine</image>
                             </from>
-                            <!--
                             <to>
                                 <image>${docker.image.prefix}/${project.artifactId}</image>
                             </to>
-                            -->
                             <tags>
                                 <tag>${project.version}</tag>
                             </tags>
