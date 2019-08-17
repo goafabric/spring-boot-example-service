@@ -6,7 +6,7 @@
 
     <groupId>org.goafabric</groupId>
     <artifactId>spring-boot-exampleservice</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
@@ -26,7 +26,7 @@
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
 
-        <docker.image.prefix>docker.io/goafabric</docker.image.prefix>
+        <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
     </properties>
 
 
@@ -222,9 +222,19 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>0.9.10</version>
+                <configuration>
+                    <to>
+                        <image>${docker.image.prefix}/${project.artifactId}</image>
+                    </to>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
+    <!--
     <profiles>
         <profile>
             <id>docker-image</id>
@@ -267,4 +277,5 @@
             </build>
         </profile>
     </profiles>
+    -->
 </project>
