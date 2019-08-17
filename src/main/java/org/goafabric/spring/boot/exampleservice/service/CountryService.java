@@ -1,31 +1,21 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(value = CountryService.RESOURCE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
 public interface CountryService {
-    String RESOURCE = "/countries";
+    public static final String RESOURCE = "/countries";
 
-    @GetMapping("getById")
-    Country getById(@RequestParam("id") String id);
+    Country getById(String id);
 
-    @GetMapping("findAll")
     List<Country> findAll();
 
-    @GetMapping("findByIsoCode")
-    Country findByIsoCode(@RequestParam("isoCode") String isoCode);
+    Country findByIsoCode(String isoCode);
 
-    @GetMapping("findByName")
-    Country findByName(@RequestParam("name") String name);
+    Country findByName(String name);
 
-    @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
-    Country save(@RequestBody Country country);
+    Country save(Country country);
 
-    @DeleteMapping("delete")
-    void delete(@RequestParam String id);
+    void delete(String id);
 }

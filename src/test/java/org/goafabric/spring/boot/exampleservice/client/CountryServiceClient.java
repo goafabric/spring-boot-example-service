@@ -19,7 +19,7 @@ public class CountryServiceClient implements CountryService {
 
     @Override
     public Country getById(String id) {
-        return restTemplate.getForObject(serviceUri + "/getById/{id}",
+        return restTemplate.getForObject(serviceUri + "/getById/?id={id}",
                 Country.class, id);
     }
 
