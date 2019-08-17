@@ -261,13 +261,13 @@
                             </from>
                             <to>
                                 <image>${docker.image.prefix}/${project.artifactId}</image>
+                                <tags>
+                                    <tag>${project.version}</tag>
+                                </tags>
                             </to>
-                            <tags>
-                                <tag>${project.version}</tag>
-                            </tags>
                             <container>
                                 <jvmFlags>
-                                    <jvmFlag>-Xms256m</jvmFlag>
+                                    <jvmFlag>-Xms128m</jvmFlag>
                                     <jvmFlag>-Xmx256m</jvmFlag>
                                     <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
                                 </jvmFlags>

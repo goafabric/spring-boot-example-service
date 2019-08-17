@@ -20,8 +20,8 @@ public class CountryServiceBean implements CountryService {
     private CountryLogicBean countryLogicBean;
 
 
-    @GetMapping("getById/{id}")
-    public Country getById(@PathVariable("id") String id) {
+    @GetMapping("getById")
+    public Country getById(@RequestParam("id") String id) {
         return countryLogicBean.getById(id);
     }
 
