@@ -5,7 +5,7 @@ import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import java.util.List;
 
 public interface CountryService {
-    public static final String RESOURCE = "/countries";
+    String RESOURCE = "/countries";
 
     Country getById(String id);
 
