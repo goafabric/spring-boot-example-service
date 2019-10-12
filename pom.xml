@@ -26,7 +26,7 @@
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
 
-        <docker.image.prefix>docker.io/goafabric</docker.image.prefix>
+        <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
         <!--
         <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
         -->
@@ -236,7 +236,7 @@
                     <plugin>
                         <groupId>com.google.cloud.tools</groupId>
                         <artifactId>jib-maven-plugin</artifactId>
-                        <version>1.5.0</version>
+                        <version>1.6.1</version>
                         <configuration>
                             <from>
                                 <image>adoptopenjdk/openjdk11:alpine</image>
