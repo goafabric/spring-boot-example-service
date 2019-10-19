@@ -3,7 +3,7 @@ version: "3"
 services:
   exampleservice:
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
-    restart: none
+    restart: 'no'
     ports:
       - "50700:50700"
 #    environment:
