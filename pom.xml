@@ -26,10 +26,10 @@
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
 
-        <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
         <!--
-        <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
+        <docker.image.prefix>docker.io/goafabric</docker.image.prefix>
         -->
+        <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
     </properties>
 
 
@@ -228,7 +228,6 @@
         </plugins>
     </build>
 
-<!--
     <profiles>
         <profile>
             <id>docker-image</id>
@@ -272,7 +271,7 @@
             </build>
         </profile>
     </profiles>
--->
+    <!--
     <profiles>
         <profile>
             <id>docker-image</id>
@@ -330,5 +329,6 @@
             </build>
         </profile>
     </profiles>
+        -->
 
 </project>
