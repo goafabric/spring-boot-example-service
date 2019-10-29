@@ -239,7 +239,7 @@
                         <version>1.7.0</version>
                         <configuration>
                             <from>
-                                <image>adoptopenjdk/openjdk11:jdk-11.0.4_11-alpine</image>
+                                <image>adoptopenjdk/openjdk11:alpine</image>
                             </from>
                             <to>
                                 <image>${docker.image.prefix}/${project.artifactId}</image>
