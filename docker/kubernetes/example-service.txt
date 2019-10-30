@@ -1,0 +1,28 @@
+-- init
+minikube start --vm-driver="virtualbox"
+minikube dashboard
+
+-- deployment barebone
+#create deplomyment and pod
+kubectl run spring-boot-exampleservice --image=goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT --port=50700
+kubectl expose deployment spring-boot-exampleservice --type=NodePort
+minikube service spring-boot-exampleservice --url
+
+-- deployment spring boot with file
+kubectl apply -f example-service.yml
+minikube service spring-boot-exampleservice --url
+
+-- delete
+kubectl delete services spring-boot-exampleservice
+kubectl delete deployment spring-boot-exampleservice
+kubectl delete services app-postgres
+kubectl delete deployment app-postgres
+
+-- scale
+kubectl get replicasets
+curl http://192.168.99.100:30100/actuator/info
+
+-- general
+kubectl get pods
+kubectl describe pods
+kubectl get deployments

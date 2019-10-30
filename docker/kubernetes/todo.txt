@@ -1,0 +1,7 @@
+- Best Practices
+https://severalnines.com/database-blog/using-kubernetes-deploy-postgresql
+- configmap
+- volumes
+
+- app-postgres => postgres
+- spring-boot-examplservice => exampleservice
