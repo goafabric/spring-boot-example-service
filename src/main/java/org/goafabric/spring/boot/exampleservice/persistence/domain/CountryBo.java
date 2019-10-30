@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="country")
 @Data
-public class CountryBO {
+public class CountryBo {
     private static final long serialVersionUID = 1L;
 
     @Id

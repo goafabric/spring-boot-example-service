@@ -26,41 +26,35 @@ public class CountryLogicBean {
     private CountryMapper countryMapper;
 
     public Country getById(@NonNull final String id) {
-        return countryMapper.toDTO(
+        return countryMapper.toDto(
             countryRepository.getOne(id));
     }
 
 
     public List<Country> findAll() {
         //spin(10000);
-        return countryMapper.toDTOs(
+        return countryMapper.toDtos(
             countryRepository.findAll());
     }
 
     public Country findByIsoCode(@NonNull final String isoCode) {
-        return countryMapper.toDTO(
+        return countryMapper.toDto(
             countryRepository.findByIsoCode(isoCode));
     }
 
     public Country findByName(@NonNull final String name) {
-        return countryMapper.toDTO(
+        return countryMapper.toDto(
                 countryRepository.findByName(name));
     }
 
     public Country save(@NonNull final Country country) {
-        return countryMapper.toDTO(
+        return countryMapper.toDto(
             countryRepository.save(
-                    countryMapper.toBO(country)));
+                    countryMapper.toBo(country)));
     }
 
     public void delete(@NonNull final String id) {
         countryRepository.deleteById(id);
-    }
-
-    private static void spin(int milliseconds) {
-        long sleepTime = milliseconds*1000000L; // convert to nanoseconds
-        long startTime = System.nanoTime();
-        while ((System.nanoTime() - startTime) < sleepTime) {}
     }
 
 }
