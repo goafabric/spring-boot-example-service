@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by andreas.mautsch on 11.06.2018.
  */
 @Entity
-@Table(name="country")
+@Table(name="country") //, schema = "countries")
 @Data
 public class CountryBo {
     private static final long serialVersionUID = 1L;
@@ -27,7 +27,6 @@ public class CountryBo {
 
     //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     //private LocalDateTime date;
-
 
     @Version //optimistic locking
     private Long version;
