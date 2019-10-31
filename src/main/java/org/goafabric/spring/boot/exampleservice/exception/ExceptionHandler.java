@@ -12,13 +12,13 @@ import javax.persistence.EntityNotFoundException;
 public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handleDataRetrievalException(Exception ex) {
-        log.error(ex.getMessage(), ex);
+        log.warn(ex.getMessage(), ex);
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(Exception ex) {
-        log.error(ex.getMessage(), ex);
+        log.warn(ex.getMessage(), ex);
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.PRECONDITION_FAILED);
     }
 
