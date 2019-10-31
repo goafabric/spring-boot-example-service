@@ -1,6 +1,8 @@
 package org.goafabric.spring.boot.exampleservice.client;
 
 import java.util.Arrays;
+
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -20,10 +22,5 @@ public class ClientConfiguration {
         });
 
         return restTemplate;
-    }
-
-    @Bean
-    public CountryServiceClient countryServiceClient() {
-        return new CountryServiceClient("http://localhost:50700");
     }
 }

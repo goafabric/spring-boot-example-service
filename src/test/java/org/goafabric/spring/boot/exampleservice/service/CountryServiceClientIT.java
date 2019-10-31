@@ -1,25 +1,40 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.goafabric.spring.boot.exampleservice.client.CountryServiceClient;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CountryServiceClientIT {
     @Autowired
+    private RestTemplate restTemplate;
+
+    @LocalServerPort
+    private int port;
+
     private CountryServiceClient countryService;
+
+    @PostConstruct
+    private void init() {
+        this.countryService
+                = new CountryServiceClient(restTemplate, "http://localhost:" + port);
+    }
 
     @Test
     public void testGetById() {

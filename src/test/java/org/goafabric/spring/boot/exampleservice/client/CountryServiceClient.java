@@ -8,12 +8,12 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 public class CountryServiceClient implements CountryService {
-    @Autowired
     private RestTemplate restTemplate;
 
     private final String serviceUri;
 
-    public CountryServiceClient(String baseUri) {
+    public CountryServiceClient(RestTemplate restTemplate, String baseUri) {
+        this.restTemplate = restTemplate;
         this.serviceUri = baseUri + CountryService.RESOURCE;
     }
 
