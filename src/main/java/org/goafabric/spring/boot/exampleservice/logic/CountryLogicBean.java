@@ -18,7 +18,6 @@ import java.util.List;
 
 @Slf4j
 @Component
-@Repository
 @Transactional
 public class CountryLogicBean {
     @Autowired

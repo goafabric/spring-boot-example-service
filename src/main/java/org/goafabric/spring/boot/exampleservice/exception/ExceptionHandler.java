@@ -1,15 +1,16 @@
 package org.goafabric.spring.boot.exampleservice.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
+import javax.persistence.EntityNotFoundException;
+
 @Slf4j
 @ControllerAdvice
 public class ExceptionHandler {
-    @org.springframework.web.bind.annotation.ExceptionHandler(DataRetrievalFailureException.class)
+    @org.springframework.web.bind.annotation.ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handleDataRetrievalException(Exception ex) {
         log.error(ex.getMessage(), ex);
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
