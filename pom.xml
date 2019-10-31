@@ -23,12 +23,11 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
-        <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
-
         <!--
         <docker.image.prefix>docker.io/goafabric</docker.image.prefix>
         -->
         <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
+        <usertype.core.version>7.0.0.CR1</usertype.core.version>
     </properties>
 
 
@@ -100,13 +99,12 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.9.3</version>
         </dependency>
 
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
-            <version>7.0.0.CR1</version>
+            <version>${usertype.core.version}</version>
         </dependency>
 
         <dependency>
@@ -126,7 +124,6 @@
         </dependency>
 
         <!-- *** Test *** -->
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -269,64 +266,4 @@
             </build>
         </profile>
     </profiles>
-    <!--
-    <profiles>
-        <profile>
-            <id>docker-image</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>1.4.10</version>
-                        <executions>
-                            <execution>
-                                <id>build-version</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                                <configuration>
-                                    <classifier>docker-info-latest</classifier>
-                                    <noCache>true</noCache>
-                                </configuration>
-                            </execution>
-
-                            <execution>
-                                <id>tag-version</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                </goals>
-                                <configuration>
-                                    <classifier>docker-info-version</classifier>
-                                </configuration>
-                            </execution>
-
-                            <execution>
-                                <id>push-version</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>push</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-
-                        <configuration>
-                            <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                            <tag>${project.version}</tag>
-                            <buildArgs>
-                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                            </buildArgs>
-                            <noCache>true</noCache>
-                            <dockerfile>Dockerfile</dockerfile>
-                            <verbose>true</verbose>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-        -->
-
 </project>
