@@ -22,13 +22,6 @@ public class ClientConfiguration {
         return restTemplate;
     }
 
-    /*
-    @Bean
-    public CountryServiceClient countryServiceClient(
-            @Value("${local.server.port}") String port) {
-        return new CountryServiceClient("http://localhost:" + port);
-    }
-    */
     @Bean
     public CountryServiceClient countryServiceClient() {
         return new CountryServiceClient("http://localhost:50700");

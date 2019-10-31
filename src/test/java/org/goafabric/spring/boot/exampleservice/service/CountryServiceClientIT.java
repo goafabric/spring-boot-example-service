@@ -16,19 +16,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-//@SpringBootTest
 @RunWith(SpringRunner.class)
 public class CountryServiceClientIT {
     @Autowired
     private CountryServiceClient countryService;
-    //@LocalServerPort is a meta-annotation for @Value("${local.server.port}")
 
     @Test
     public void testGetById() {
         final Country country = countryService.getById("1");
-        AssertionsForClassTypes.assertThat(country).isNotNull();
-        AssertionsForClassTypes.assertThat(country.getIsoCode()).isEqualTo("de");
-        AssertionsForClassTypes.assertThat(country.getName()).isEqualTo("Germany");
+        assertThat(country).isNotNull();
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
@@ -40,16 +38,16 @@ public class CountryServiceClientIT {
     @Test
     public void testFindCountryByIsoCode() {
         final Country country = countryService.findByIsoCode("de");
-        AssertionsForClassTypes.assertThat(country).isNotNull();
-        AssertionsForClassTypes.assertThat(country.getIsoCode()).isEqualTo("de");
-        AssertionsForClassTypes.assertThat(country.getName()).isEqualTo("Germany");
+        assertThat(country).isNotNull();
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
     public void testFindCountryByName() {
         final Country country = countryService.findByName("Germany");
-        AssertionsForClassTypes.assertThat(country.getIsoCode()).isEqualTo("de");
-        AssertionsForClassTypes.assertThat(country.getName()).isEqualTo("Germany");
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
