@@ -1,4 +1,4 @@
-package org.goafabric.spring.boot.exampleservice.client;
+package org.goafabric.spring.boot.exampleservice.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
