@@ -32,7 +32,6 @@ public class CountryLogicBean {
 
 
     public List<Country> findAll() {
-        //spin(10000);
         return countryMapper.toDtos(
             countryRepository.findAll());
     }
