@@ -10,13 +10,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -66,13 +69,13 @@ public class CountryServiceClientIT {
     }
 
     @Test
-    @Ignore
     public void testSaveAndDelete() {
         countryService.save(createStubCountry());
 
         final Country country = countryService.findByIsoCode("pi");
         assertThat(country).isNotNull();
         countryService.delete(country.getId());
+        //countryService.getById(country.getId());
     }
 
     //does  not work because due to json string is not null but empty
@@ -81,6 +84,17 @@ public class CountryServiceClientIT {
     public void testFindCountryByIsoCodeNull() {
         assertThatThrownBy(() ->
                 countryService.findByIsoCode(null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void testNotFound() {
+        try {
+            countryService.getById("xxzz");
+            fail("should net get here");
+        } catch (HttpClientErrorException e) {
+            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+            assertThat(e.getResponseBodyAsString()).isNotNull();
+        }
     }
 
     private Country createStubCountry() {
