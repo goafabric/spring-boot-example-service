@@ -1,8 +1,1 @@
-#compose
-docker-compose -f docker/exampleservice_stack/docker-compose.yml up -d
-docker-compose -f docker/exampleservice_stack/docker-compose.yml down --volumes
-
-#CREATE EXTENSION pg_stat_statements;
-
-#prune
-docker system prune -a && docker volume prune -f
+docker run -p 50700:50700 goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT

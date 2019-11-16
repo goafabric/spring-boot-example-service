@@ -1,34 +1,50 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.goafabric.spring.boot.exampleservice.client.CountryServiceClient;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-//@SpringBootTest
 @RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CountryServiceClientIT {
     @Autowired
+    private RestTemplate restTemplate;
+
+    @LocalServerPort
+    private int port;
+
     private CountryServiceClient countryService;
-    //@LocalServerPort is a meta-annotation for @Value("${local.server.port}")
+
+    @PostConstruct
+    private void init() {
+        this.countryService
+                = new CountryServiceClient(restTemplate, "http://localhost:" + port);
+    }
 
     @Test
     public void testGetById() {
         final Country country = countryService.getById("1");
-        AssertionsForClassTypes.assertThat(country).isNotNull();
-        AssertionsForClassTypes.assertThat(country.getIsoCode()).isEqualTo("de");
-        AssertionsForClassTypes.assertThat(country.getName()).isEqualTo("Germany");
+        assertThat(country).isNotNull();
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
@@ -40,26 +56,26 @@ public class CountryServiceClientIT {
     @Test
     public void testFindCountryByIsoCode() {
         final Country country = countryService.findByIsoCode("de");
-        AssertionsForClassTypes.assertThat(country).isNotNull();
-        AssertionsForClassTypes.assertThat(country.getIsoCode()).isEqualTo("de");
-        AssertionsForClassTypes.assertThat(country.getName()).isEqualTo("Germany");
+        assertThat(country).isNotNull();
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
     public void testFindCountryByName() {
         final Country country = countryService.findByName("Germany");
-        AssertionsForClassTypes.assertThat(country.getIsoCode()).isEqualTo("de");
-        AssertionsForClassTypes.assertThat(country.getName()).isEqualTo("Germany");
+        assertThat(country.getIsoCode()).isEqualTo("de");
+        assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
-    @Ignore
     public void testSaveAndDelete() {
         countryService.save(createStubCountry());
 
         final Country country = countryService.findByIsoCode("pi");
         assertThat(country).isNotNull();
         countryService.delete(country.getId());
+        //countryService.getById(country.getId());
     }
 
     //does  not work because due to json string is not null but empty
@@ -68,6 +84,17 @@ public class CountryServiceClientIT {
     public void testFindCountryByIsoCodeNull() {
         assertThatThrownBy(() ->
                 countryService.findByIsoCode(null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void testNotFound() {
+        try {
+            countryService.getById("xxzz");
+            fail("should net get here");
+        } catch (HttpClientErrorException e) {
+            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+            assertThat(e.getResponseBodyAsString()).isNotNull();
+        }
     }
 
     private Country createStubCountry() {

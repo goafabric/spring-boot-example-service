@@ -15,7 +15,7 @@ management:
     endpoints:
       web:
         exposure:
-          include: "*"
+          include: "info,health"
 
 info:
     status: ok
@@ -24,7 +24,6 @@ info:
 spring:
     datasource:
       url: jdbc:h2:mem:countrydb
-      #url: jdbc:h2:mem:countrydb;INIT=RUNSCRIPT FROM 'classpath:db/migration/V1__init.sql'
       #url: jdbc:postgresql://localhost:5432/countrydb
       username: postgres
       password: postgres
@@ -34,5 +33,4 @@ spring:
 
     flyway:
       locations: classpath:db/migration
-      baseline-on-migrate: true
-      enabled: true
+#      schemas: countries

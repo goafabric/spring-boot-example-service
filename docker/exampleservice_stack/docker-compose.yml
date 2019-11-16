@@ -1,35 +1,35 @@
 version: "3"
 
-
 services:
-  postgres:
-    image: postgres:9.5-alpine
-    restart: 'no'
-    ports:
-    - "50710:5432"
-    environment:
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
-    - POSTGRES_DB=countrydb
-    command: postgres -c 'shared_buffers=64MB' -c 'max_connections=20' -c 'shared_preload_libraries=pg_stat_statements'
-    volumes:
-    - postgres_data:/var/lib/postgresql/data
-    networks:
-    - exampleservice_net
-#    mem_limit: 256M
-
   exampleservice:
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
-    restart: on-failure:5
+    restart: 'no'
     ports:
       - "50700:50700"
-    environment:
-      - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
+#    environment:
+#      - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
+    healthcheck:
+      test: ["CMD", "wget", "-Y", "off", "-O", "/dev/null", "http://localhost:50700/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
     networks:
       - exampleservice_net
-    depends_on:
-    - postgres
- #   mem_limit: 256M
+
+#  postgres:
+#    image: postgres:9.5-alpine
+#    restart: 'no'
+#    ports:
+#      - "50710:5432"
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_DB=countrydb
+#    command: postgres -c 'shared_buffers=64MB' -c 'max_connections=20' -c 'shared_preload_libraries=pg_stat_statements'
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    networks:
+#      - exampleservice_net
 
 volumes:
     postgres_data:

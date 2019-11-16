@@ -17,16 +17,17 @@
         <java.version>1.8</java.version>
         <compiler.level>1.8</compiler.level>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
-        <spring.boot.version>2.1.3.RELEASE</spring.boot.version>
-        <lombok.version>1.18.4</lombok.version>
+        <spring.boot.version>2.2.0.RELEASE</spring.boot.version>
         <contiperf.version>2.3.4</contiperf.version>
 
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
-        <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
-
+        <!--
         <docker.image.prefix>docker.io/goafabric</docker.image.prefix>
+        -->
+        <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
+        <usertype.core.version>7.0.0.CR1</usertype.core.version>
     </properties>
 
 
@@ -75,7 +76,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
 
         <dependency>
@@ -99,13 +99,12 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.9.3</version>
         </dependency>
 
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
-            <version>7.0.0.CR1</version>
+            <version>${usertype.core.version}</version>
         </dependency>
 
         <dependency>
@@ -125,7 +124,6 @@
         </dependency>
 
         <!-- *** Test *** -->
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -231,34 +229,35 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>${dockerfile-maven-plugin.version}</version>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>1.7.0</version>
                         <configuration>
-                            <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                            <buildArgs>
-                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                            </buildArgs>
-                            <tag>${project.version}</tag>
-                            <noCache>true</noCache>
-                            <dockerfile>Dockerfile</dockerfile>
-                            <verbose>true</verbose>
-                            <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                            <from>
+                                <image>adoptopenjdk/openjdk11:alpine</image>
+                            </from>
+                            <to>
+                                <image>${docker.image.prefix}/${project.artifactId}</image>
+                                <tags>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                            </to>
+                            <container>
+                                <jvmFlags>
+                                    <jvmFlag>-Xms128m</jvmFlag>
+                                    <jvmFlag>-Xmx256m</jvmFlag>
+                                    <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+                                </jvmFlags>
+                                <volumes>
+                                    <volume>/tmp</volume>
+                                </volumes>
+                            </container>
                         </configuration>
                         <executions>
                             <execution>
-                                <id>tag-version</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>build</goal>
-                                    <goal>tag</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>push-version</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>push</goal>
                                 </goals>
                             </execution>
                         </executions>

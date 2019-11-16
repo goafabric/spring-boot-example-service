@@ -1,0 +1,108 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: spring-boot-exampleservice
+spec:
+  selector:
+    app: spring-boot-exampleservice
+  ports:
+    - protocol: TCP
+      port: 50700
+      nodePort: 30100 #this is the external port
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-exampleservice
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-exampleservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spring-boot-exampleservice
+    spec:
+      initContainers:
+        - name: check-db-ready
+          image: postgres:9.5-alpine
+          command: ['sh', '-c',
+                    'until pg_isready -h app-postgres -p 5432;
+                     do echo waiting for database; sleep 2; done;']
+      containers:
+        - name: spring-boot-exampleservice
+          image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50700
+          env:
+            - name: spring.datasource.url
+              value: "jdbc:postgresql://app-postgres:5432/countrydb"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 50700
+            initialDelaySeconds: 30 #takes 20 seconds per pod on my machine
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 50700
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-postgres
+spec:
+  selector:
+    app: app-postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+  type: ClusterIP
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-postgres
+spec:
+  selector:
+    matchLabels:
+      app: app-postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-postgres
+    spec:
+      containers:
+        - name: app-postgres
+          image: postgres:9.5-alpine
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_DB
+              value: "countrydb"
+
+
+
