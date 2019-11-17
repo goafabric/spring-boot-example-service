@@ -1,0 +1,4 @@
+#!/bin/bash
+export STACK_NAME="example_service_stack"
+
+./stack_util ${STACK_NAME} $1
