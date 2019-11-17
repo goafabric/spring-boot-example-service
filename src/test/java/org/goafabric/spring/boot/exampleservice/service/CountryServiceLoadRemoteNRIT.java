@@ -39,12 +39,28 @@ public class CountryServiceLoadRemoteNRIT {
                 = new CountryServiceClient(restTemplate, "http://localhost:" + port);
     }
 
-    @PerfTest(invocations=500000, threads=1)
+    @PerfTest(invocations=500000, threads=10)
     @Test
     public void testGetAllCountries() {
-        log.info("test");
+        log.info("getAll");
         final List<Country> countries = countryService.findAll();
         assertThat(countries).isNotNull().isNotEmpty();
+    }
+
+    @PerfTest(invocations=500000, threads=10)
+    @Test
+    public void testGetAndSaveCountries() {
+        log.info("GetAndSave");
+        final Country country = Country.builder()
+                .isoCode("pi")
+                .name("Phantasy Island " + System.currentTimeMillis())
+                .description("The Island where magic happens")
+                .build();
+
+        countryService.save(country);
+
+        Country countryNew = countryService.findByName(country.getName());
+        assertThat(country.getName()).isEqualTo(countryNew.getName());
     }
 
 }
