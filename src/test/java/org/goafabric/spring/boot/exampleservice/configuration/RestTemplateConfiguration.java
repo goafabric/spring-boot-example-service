@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 
 @Configuration
-public class ClientConfiguration {
+public class RestTemplateConfiguration {
     @Bean
     public RestTemplate restTemplate() {
         final RestTemplate restTemplate = new RestTemplate();
