@@ -7,7 +7,7 @@ services:
     ports:
       - "50700:50700"
     environment:
-      - spring.datasource.url=jdbc:postgresql://postgres:5432/countrydb
+      - spring.datasource.url=jdbc:postgresql://example_service_stack_postgres:5432/countrydb
     healthcheck:
       test: ["CMD", "wget", "-Y", "off", "-O", "/dev/null", "http://localhost:50700/actuator/health"]
       interval: 30s
@@ -17,6 +17,7 @@ services:
       - exampleservice_net
 
   postgres:
+    container_name: example_service_stack_postgres
     image: postgres:9.6.15-alpine
     restart: 'no'
     ports:
