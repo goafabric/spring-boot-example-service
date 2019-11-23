@@ -34,3 +34,12 @@ spring:
     flyway:
       locations: classpath:db/migration
 #      schemas: countries
+
+logging:
+  level:
+    root: warn
+    org.goafabric: info
+    org.spring.framework: trace
+    org.spring.framework.web: info
+    org.spring.framework.security: warn
+
