@@ -32,5 +32,5 @@ spring:
         maximum-pool-size: 10
 
     flyway:
-      locations: classpath:db/migrationxx
+      locations: classpath:db/migration
 #      schemas: countries
