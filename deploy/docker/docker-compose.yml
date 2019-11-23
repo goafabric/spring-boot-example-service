@@ -8,8 +8,8 @@ services:
     ports:
       - "50700:50700"
     environment:
-      - spring.config.location=/usr/share/config/application.yml
-      - logging.config=/usr/share/config/logback.xml
+      - spring.config.location=/app/config/application.yml
+      - logging.config=/app/config/logback.xml
       - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
     healthcheck:
       test: ["CMD", "wget", "-Y", "off", "-O", "/dev/null", "http://localhost:50700/actuator/health"]
@@ -17,8 +17,8 @@ services:
       timeout: 10s
       retries: 10
     volumes:
-        - ../config/application.yml:/usr/share/config/application.yml
-        - ../config/logback.xml:/usr/share/config/logback.xml
+        - ../config/application.yml:/app/config/application.yml
+        - ../config/logback.xml:/app/config/logback.xml
     networks:
       - example-service-net
 
