@@ -2,13 +2,13 @@ version: "3"
 
 services:
   example-service:
-    container_name: example-service-${STACK_NAME}
+    container_name: example-service_${STACK_NAME}
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
     restart: 'no'
     ports:
-      - "50700:50700"
+      - "50700"
     environment:
-      - spring.datasource.url=jdbc:postgresql://postgres-${STACK_NAME}:5432/countrydb
+      - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
     healthcheck:
       test: ["CMD", "wget", "-Y", "off", "-O", "/dev/null", "http://localhost:50700/actuator/health"]
       interval: 30s
@@ -18,11 +18,11 @@ services:
       - example-service-net
 
   postgres:
-    container_name: postgres-${STACK_NAME}
+    container_name: postgres_${STACK_NAME}
     image: postgres:9.6.15-alpine
     restart: 'no'
     ports:
-      - "50710:5432"
+      - "50710"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
