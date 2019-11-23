@@ -6,14 +6,19 @@ services:
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
     restart: 'no'
     ports:
-      - "50700"
+      - "50700:50700"
     environment:
+      - spring.config.location=/usr/share/config/application.yml
+      - logging.config=/usr/share/config/logback.xml
       - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
     healthcheck:
       test: ["CMD", "wget", "-Y", "off", "-O", "/dev/null", "http://localhost:50700/actuator/health"]
       interval: 30s
       timeout: 10s
       retries: 10
+    volumes:
+        - ../config/application.yml:/usr/share/config/application.yml
+        - ../config/logback.xml:/usr/share/config/logback.xml
     networks:
       - example-service-net
 
@@ -22,7 +27,7 @@ services:
     image: postgres:9.6.15-alpine
     restart: 'no'
     ports:
-      - "50710"
+      - "50710:50710"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
