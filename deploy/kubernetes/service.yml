@@ -114,6 +114,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: example-config
-
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pgdata
+      volumes:
+        - name: pgdata
 
 
