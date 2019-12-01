@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: spring-boot-exampleservice
+  name: example-service
 spec:
   selector:
-    app: spring-boot-exampleservice
+    app: example-service
   ports:
     - protocol: TCP
       port: 50700
@@ -16,32 +16,32 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-boot-exampleservice
+  name: example-service
 spec:
   selector:
     matchLabels:
-      app: spring-boot-exampleservice
+      app: example-service
   replicas: 1
   template:
     metadata:
       labels:
-        app: spring-boot-exampleservice
+        app: example-service
     spec:
       initContainers:
         - name: check-db-ready
           image: postgres:9.5-alpine
           command: ['sh', '-c',
-                    'until pg_isready -h app-postgres -p 5432;
+                    'until pg_isready -h postgres -p 5432;
                      do echo waiting for database; sleep 2; done;']
       containers:
-        - name: spring-boot-exampleservice
+        - name: example-service
           image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
           imagePullPolicy: Always
           ports:
             - containerPort: 50700
           env:
             - name: spring.datasource.url
-              value: "jdbc:postgresql://app-postgres:5432/countrydb"
+              value: "jdbc:postgresql://postgres:5432/countrydb"
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -64,10 +64,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: app-postgres
+  name: postgres
 spec:
   selector:
-    app: app-postgres
+    app: postgres
   ports:
     - protocol: TCP
       port: 5432
@@ -79,20 +79,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-postgres
+  name: postgres
 spec:
   selector:
     matchLabels:
-      app: app-postgres
+      app: postgres
   replicas: 1
   template:
     metadata:
       labels:
-        app: app-postgres
+        app: postgres
     spec:
       containers:
-        - name: app-postgres
-          image: postgres:9.5-alpine
+        - name: postgres
+          image: postgres:9.6.15-alpine
           imagePullPolicy: Always
           ports:
             - containerPort: 5432

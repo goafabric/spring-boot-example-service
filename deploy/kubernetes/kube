@@ -1,0 +1,24 @@
+#!/bin/bash
+export COMMAND=$1
+
+
+function func_delete {
+    echo delete $1 ...
+    kubectl delete services $1
+    kubectl delete deployment $1
+}
+
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl apply -f service.yml
+    minikube service example-service --url
+elif [ "${COMMAND}" = "down" ]
+then
+    func_delete example-service
+    func_delete postgres
+else
+    echo Doing nothing !
+fi
+
+#CleanUp: docker volume prune
