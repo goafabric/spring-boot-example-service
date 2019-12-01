@@ -1,0 +1,36 @@
+server:
+  port: 50700
+  tomcat.max-threads: 20
+
+#    http2:
+#      enabled: true
+#    ssl:
+#      key-store: classpath:keystore.jks
+#      key-store-password: password
+
+management:
+    endpoint:
+      health:
+        show-details: always
+    endpoints:
+      web:
+        exposure:
+          include: "info,health"
+
+info:
+    status: ok
+
+
+spring:
+    datasource:
+      url: jdbc:h2:mem:countrydb
+      #url: jdbc:postgresql://localhost:5432/countrydb
+      username: postgres
+      password: postgres
+
+      hikari:
+        maximum-pool-size: 10
+
+    flyway:
+      locations: classpath:db/migration
+#      schemas: countries
