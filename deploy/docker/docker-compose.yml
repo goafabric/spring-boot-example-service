@@ -1,41 +1,49 @@
 version: "3"
 
 services:
-  exampleservice:
+  example-service:
+    container_name: example-service_${STACK_NAME}
     image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
     restart: 'no'
     ports:
       - "50700:50700"
     environment:
-      - spring.datasource.url=jdbc:postgresql://example_service_stack_postgres:5432/countrydb
+      - spring.config.location=/app/config/application.yml
+      - logging.config=/app/config/logback-spring.xml
+      - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
     healthcheck:
       test: ["CMD", "wget", "-Y", "off", "-O", "/dev/null", "http://localhost:50700/actuator/health"]
       interval: 30s
       timeout: 10s
       retries: 10
+    volumes:
+      - applogs:/app/logs
+      - ../config/application.yml:/app/config/application.yml
+      - ../config/logback-spring.xml:/app/config/logback-spring.xml
     networks:
-      - exampleservice_net
+      - example-service-net
 
   postgres:
-    container_name: example_service_stack_postgres
+    container_name: postgres_${STACK_NAME}
     image: postgres:9.6.15-alpine
     restart: 'no'
     ports:
-      - "50710:5432"
+      - "50710:50710"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=countrydb
     command: postgres -c 'shared_buffers=64MB' -c 'max_connections=30' -c 'shared_preload_libraries=pg_stat_statements'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
       - ./initdb/00_pg_statements.sql:/docker-entrypoint-initdb.d/00_pg_statements.sql
     networks:
-      - exampleservice_net
+      - example-service-net
 
 volumes:
-    postgres_data:
+    applogs:
+    pgdata:
 
 networks:
-  exampleservice_net:
+  example-service-net:
     driver: bridge
