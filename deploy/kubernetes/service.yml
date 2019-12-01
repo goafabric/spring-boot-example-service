@@ -40,9 +40,15 @@ spec:
           ports:
             - containerPort: 50700
           env:
+#            - name: spring.config.location
+#              value: /app/config/application.yml
+#            - name: logging.config
+#              value: /app/config/logback-spring.xml
             - name: spring.datasource.url
               value: "jdbc:postgresql://postgres:5432/countrydb"
           volumeMounts:
+            - mountPath: /app/logs
+              name: applogs
             - mountPath: /app/config/application.yml
               name: application-volume
             - mountPath: /app/config/logback-spring.xml
@@ -65,6 +71,7 @@ spec:
             failureThreshold: 3
 
       volumes:
+        - name: applogs
         - name: application-volume
           hostPath:
             path: /config/application.yml
