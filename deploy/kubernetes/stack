@@ -11,12 +11,14 @@ function func_delete {
 
 if [ "${COMMAND}" = "up" ]
 then
+    kubectl apply -f config.yml
     kubectl apply -f service.yml
     minikube service example-service --url
 elif [ "${COMMAND}" = "down" ]
 then
     func_delete example-service
     func_delete postgres
+    kubectl delete configmap example-config
 else
     echo Doing nothing !
 fi
