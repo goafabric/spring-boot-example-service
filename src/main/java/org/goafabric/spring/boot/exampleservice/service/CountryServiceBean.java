@@ -4,6 +4,7 @@ import org.goafabric.spring.boot.exampleservice.logic.CountryLogicBean;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
         produces = MediaType.APPLICATION_JSON_VALUE)
 
 @RestController
+@PreAuthorize("hasRole('STANDARD_ROLE')")
 public class CountryServiceBean implements CountryService {
     @Autowired
     private CountryLogicBean countryLogicBean;
