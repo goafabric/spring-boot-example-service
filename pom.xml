@@ -225,7 +225,7 @@
                 <version>2.5.4</version>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
-                    <descriptor>src/main/assembly/assembly.xml</descriptor>
+                    <descriptor>deploy/assembly/assembly.xml</descriptor>
                     <finalName>${project.name}-${project.version}-deploy</finalName>
                 </configuration>
                 <executions>
