@@ -33,4 +33,4 @@ security:
     enabled: true
   credentials:
     user: admin
-    password: "{bcrypt}$2a$10$9KXX20zlgM6qv.Ni6YFM8eIl6EjjoTQv07ucrET6iJDkoIDxlPr4m"
+    password: "$2a$10$mievjAFubpUyOAccOiN9ceHKi.3v4IaAs9YsnGnfAaLXxmraigVEG"
