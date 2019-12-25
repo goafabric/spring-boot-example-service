@@ -29,4 +29,8 @@ spring:
 #      schemas: countries
 
 security:
-  enabled: true
+  authentication:
+    enabled: true
+  credentials:
+    user: admin
+    password: "{bcrypt}$2a$10$oivPaAOLxh2bbS7kgob3seOh6WpzmoAgLWOjxtnf81Hyxn5O7ZV9W"

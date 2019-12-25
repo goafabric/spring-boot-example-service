@@ -1,6 +1,7 @@
 
 package org.goafabric.spring.boot.exampleservice.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,23 +10,31 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ConditionalOnProperty(value = "security.enabled", matchIfMissing = false)
+@ConditionalOnProperty(value = "security.authentication.enabled", matchIfMissing = false)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Value("${security.credentials.user}")
+    private String user;
+
+    @Value("${security.credentials.password}")
+    private String password;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        final PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        /*
+        final String password = PasswordEncoderFactories
+                .createDelegatingPasswordEncoder()
+                .encode("admin");
+         */
+
         auth.inMemoryAuthentication()
                 .withUser("admin")
-                .password(encoder.encode("admin"))
+                .password(password)
                 .roles("STANDARD_ROLE");
     }
 
