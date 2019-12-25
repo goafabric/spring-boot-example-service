@@ -57,7 +57,7 @@
         <appender-ref ref="Console"/>
     </logger>
 
-    <logger name="org.flywaydb.core" level="INFO" additivity="false">
+    <logger name="org.flywaydb.core" level="WARN" additivity="false">
         <appender-ref ref="RollingFile"/>
         <appender-ref ref="Console"/>
     </logger>

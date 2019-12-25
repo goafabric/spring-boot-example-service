@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ConditionalOnProperty(value = "security.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "security.enabled", matchIfMissing = false)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean

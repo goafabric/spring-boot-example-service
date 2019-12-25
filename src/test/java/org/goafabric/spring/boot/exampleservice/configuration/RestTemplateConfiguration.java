@@ -17,6 +17,7 @@ public class RestTemplateConfiguration {
         restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
         restTemplate.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+            request.getHeaders().setBasicAuth("admin", "admin");
             return execution.execute(request, body);
         });
 
