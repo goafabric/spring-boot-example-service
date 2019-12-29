@@ -30,7 +30,7 @@ spring:
 
 security:
   authentication:
-    enabled: false
+    enabled: true
   credentials:
     user: admin
     password: "$2a$10$mievjAFubpUyOAccOiN9ceHKi.3v4IaAs9YsnGnfAaLXxmraigVEG"

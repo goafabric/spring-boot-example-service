@@ -1,14 +1,4 @@
-FeignClient,
-Datum in Mapper
-Mapstruct testen
-PlantUML + Jmeter
+- Passwörter in Datenbank
+- Login für Tests
 
-flyway
-exception handling
-
-
-- Passwort verschlüsselung
-- Datenbank Konfiguration für Spring Data
-- Feign Client
-
-
+keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
