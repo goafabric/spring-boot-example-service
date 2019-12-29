@@ -14,10 +14,10 @@ import java.util.Arrays;
 @Configuration
 @PropertySource("test.properties")
 public class RestTemplateConfiguration {
-    @Value("${credentials.user}")
+    @Value("${client.user}")
     private String user;
 
-    @Value("${credentials.password}")
+    @Value("${client.password}")
     private String password;
 
     @Bean
