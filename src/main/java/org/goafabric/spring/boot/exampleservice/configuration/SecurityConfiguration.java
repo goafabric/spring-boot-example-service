@@ -35,7 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        //System.out.println(passwordEncoder().encode("admin"));
         auth.jdbcAuthentication()
                 .dataSource(dataSource);
     }
@@ -51,10 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .password(password)
                 .roles("STANDARD_ROLE");
     }
-
-     */
-
-
+    */
 
     @Override
     protected void configure(final HttpSecurity httpSecurity) throws Exception {

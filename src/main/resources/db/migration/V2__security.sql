@@ -20,4 +20,5 @@ INSERT INTO users (username, password, enabled)
     1);
 
 INSERT INTO authorities (username, authority)
-  values ('admin', 'STANDARD_ROLE');
+  values ('admin', 'ROLE_STANDARD_ROLE'); -- Needs manual Prefix Role
+
