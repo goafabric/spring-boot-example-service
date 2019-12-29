@@ -27,6 +27,9 @@ spring:
     flyway:
       locations: classpath:db/migration
 #      schemas: countries
+    jpa:
+      hibernate:
+        ddl-auto: none
 
 security:
   authentication:

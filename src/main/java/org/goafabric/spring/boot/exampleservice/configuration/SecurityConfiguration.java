@@ -1,6 +1,7 @@
 
 package org.goafabric.spring.boot.exampleservice.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +29,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${security.credentials.password}")
     private String password;
 
+    @Autowired
+    private DataSource dataSource;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+        //System.out.println(passwordEncoder().encode("admin"));
+        auth.jdbcAuthentication()
+                .dataSource(dataSource);
+    }
+
+    /*
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -36,6 +51,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .password(password)
                 .roles("STANDARD_ROLE");
     }
+
+     */
+
 
 
     @Override
