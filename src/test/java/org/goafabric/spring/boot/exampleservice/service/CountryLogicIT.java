@@ -1,5 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
+import org.goafabric.spring.boot.exampleservice.logic.CountryLogicBean;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,19 +19,19 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class CountryServiceIT {
+public class CountryLogicIT {
     @Autowired
-    private CountryServiceBean countryService;
+    private CountryLogicBean countryLogic;
 
     @Test
     public void testGetAllCountries() {
-        final List<Country> countries = countryService.findAll();
+        final List<Country> countries = countryLogic.findAll();
         assertThat(countries).isNotNull().isNotEmpty();
     }
 
     @Test
     public void testFindCountryByIsoCode() {
-        final Country country = countryService.findByIsoCode("de");
+        final Country country = countryLogic.findByIsoCode("de");
         assertThat(country).isNotNull();
         assertThat(country.getIsoCode()).isEqualTo("de");
         assertThat(country.getName()).isEqualTo("Germany");
@@ -38,23 +39,23 @@ public class CountryServiceIT {
 
     @Test
     public void testFindCountryByName() {
-        final Country country = countryService.findByName("Germany");
+        final Country country = countryLogic.findByName("Germany");
         assertThat(country.getIsoCode()).isEqualTo("de");
         assertThat(country.getName()).isEqualTo("Germany");
     }
 
     @Test
     public void testDelete() {
-        countryService.save(createStubCountry());
+        countryLogic.save(createStubCountry());
 
-        final Country country = countryService.findByIsoCode("pi");
-        countryService.delete(country.getId());
+        final Country country = countryLogic.findByIsoCode("pi");
+        countryLogic.delete(country.getId());
     }
 
     @Test
     public void testFindCountryByIsoCodeNull() {
         assertThatThrownBy(() ->
-            countryService.findByIsoCode(null)).isInstanceOf(IllegalArgumentException.class);
+            countryLogic.findByIsoCode(null)).isInstanceOf(IllegalArgumentException.class);
     }
 
     private Country createStubCountry() {
