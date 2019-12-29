@@ -1,4 +1,6 @@
 - Passwörter in Datenbank
 - Login für Tests
+- Better SSL Certificate
+- Jasypt
 
 keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
