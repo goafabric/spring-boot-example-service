@@ -2,7 +2,6 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,12 +22,6 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ConditionalOnProperty(value = "security.authentication.enabled", matchIfMissing = false)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Value("${security.credentials.user}")
-    private String user;
-
-    @Value("${security.credentials.password}")
-    private String password;
-
     @Autowired
     private DataSource dataSource;
 
@@ -38,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder())
                 .withUser("admin")
-                .password(password)
+                .password(passwordEncoder().encode("admin"))
                 .roles("STANDARD_ROLE");
         //System.out.println(passwordEncoder().encode("admin"));
     }
