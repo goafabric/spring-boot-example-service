@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .withUser("admin")
                 .password(passwordEncoder().encode("admin"))
-                .roles("STANDARD_ROLE");
+                .roles("standard_role");
         //System.out.println(passwordEncoder().encode("admin"));
     }
 
