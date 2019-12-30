@@ -1,4 +1,3 @@
-- Passwörter in Datenbank
 - Login für Tests
 - Better SSL Certificate
 - Jasypt

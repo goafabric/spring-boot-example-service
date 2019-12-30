@@ -35,20 +35,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource);
+        auth.inMemoryAuthentication()
+                .passwordEncoder(passwordEncoder())
+                .withUser("admin")
+                .password(password)
+                .roles("STANDARD_ROLE");
+        //System.out.println(passwordEncoder().encode("admin"));
     }
 
     /*
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        //System.out.println(passwordEncoder().encode("admin"));
-        auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder())
-                .withUser("admin")
-                .password(password)
-                .roles("STANDARD_ROLE");
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder());
     }
     */
 
