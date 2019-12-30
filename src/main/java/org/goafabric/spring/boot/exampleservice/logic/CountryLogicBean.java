@@ -30,7 +30,7 @@ public class CountryLogicBean {
 
     //@Cacheable
     public Country getById(@NonNull final String id) {
-        return countryMapper.toDto(
+        return countryMapper.xtoDto(
             countryRepository.getOne(id));
     }
 
