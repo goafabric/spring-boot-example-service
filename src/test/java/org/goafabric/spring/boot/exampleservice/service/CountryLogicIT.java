@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
  * Created by andreas.mautsch on 11.06.2018.
  */
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class CountryLogicIT {
     @Autowired

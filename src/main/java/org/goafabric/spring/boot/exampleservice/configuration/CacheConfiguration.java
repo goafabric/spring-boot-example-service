@@ -5,31 +5,25 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
-import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableCaching
 public class CacheConfiguration extends CachingConfigurerSupport {
-    //names of the different caches, at least one per concern
-    public static final String PERSISENCE = "persistence";
+    //names of the different caches, at least one per Resource
+    public static final String COUNTRIES = "countries";
 
     private static final int INITIAL_CACHE_CAPACITY = 100;
-    private static final long MAX_CACHE_CAPACITY = 1000L;
-    private static final long CACHE_EXPIRY = 60L;
+    private static final long MAX_CACHE_CAPACITY = 100L;
+    private static final long CACHE_EXPIRY = 10L;
 
     @Bean
     @Override
     public CacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager(PERSISENCE);
-        //cacheManager.setAllowNullValues(false);
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager(COUNTRIES);
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }
@@ -41,6 +35,7 @@ public class CacheConfiguration extends CachingConfigurerSupport {
                 .expireAfterAccess(CACHE_EXPIRY, TimeUnit.MINUTES);
     }
 
+    /*
     @Bean
     @Override
     public KeyGenerator keyGenerator() {
@@ -62,4 +57,6 @@ public class CacheConfiguration extends CachingConfigurerSupport {
             return key;
         }
     }
+
+     */
 }
