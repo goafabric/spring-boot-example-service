@@ -25,6 +25,7 @@ public class CountryLogicIT {
 
     @Test
     public void testGetAllCountries() {
+        assert(false);
         final List<Country> countries = countryLogic.findAll();
         assertThat(countries).isNotNull().isNotEmpty();
     }
