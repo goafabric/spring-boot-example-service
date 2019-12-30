@@ -1,5 +1,6 @@
 - Login für Tests
 - Better SSL Certificate
 - Jasypt
+- Caching Problem
 
 keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
