@@ -3,7 +3,6 @@
 - Jasypt
 - Caching Problem
 
-- admin in user umbennen und standard_role als lower casd
 - upgrad auf keycloak 8
 - rest client
 
