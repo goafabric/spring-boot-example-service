@@ -17,7 +17,7 @@ import java.util.List;
         produces = MediaType.APPLICATION_JSON_VALUE)
 
 @RestController
-@PreAuthorize("hasRole('standard_role')")
+@PreAuthorize("hasRole('STANDARD_ROLE')")
 public class CountryServiceBean implements CountryService {
     @Autowired
     private CountryLogicBean countryLogicBean;
