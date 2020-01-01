@@ -245,7 +245,6 @@
         </plugins>
     </build>
 
-    <!--
     <profiles>
         <profile>
             <id>docker-image</id>
@@ -278,7 +277,7 @@
                         </configuration>
                         <executions>
                             <execution>
-                                <phase>package</phase>
+                                <phase>install</phase>
                                 <goals>
                                     <goal>build</goal>
                                 </goals>
@@ -289,7 +288,8 @@
             </build>
         </profile>
     </profiles>
-    -->
+
+    <!--
     <profiles>
         <profile>
             <id>docker-image</id>
@@ -332,5 +332,6 @@
             </build>
         </profile>
     </profiles>
+    -->
 
 </project>
