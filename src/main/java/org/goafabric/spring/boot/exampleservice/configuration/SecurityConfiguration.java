@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Override
+    @Override //in memory authentication
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.inMemoryAuthentication()
@@ -33,11 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .withUser("admin")
                 .password(passwordEncoder().encode("admin"))
                 .roles("STANDARD_ROLE");
-        //System.out.println(passwordEncoder().encode("admin"));
     }
 
     /*
-    @Override
+    @Override //database authentication
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.jdbcAuthentication()
