@@ -48,7 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                //.requestMatchers(EndpointRequest.to("actuator", "welcome")).permitAll()
                 .antMatchers(
                         "/actuator/**",
                         "/", "/welcome/**"
