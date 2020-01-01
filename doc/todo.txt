@@ -1,4 +1,3 @@
-- Login für Tests
 - Better SSL Certificate
 - Jasypt
 
