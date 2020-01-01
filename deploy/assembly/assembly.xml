@@ -10,7 +10,6 @@
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/deploy</directory>
-            <outputDirectory>/</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
