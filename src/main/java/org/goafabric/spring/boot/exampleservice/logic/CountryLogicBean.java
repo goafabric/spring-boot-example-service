@@ -8,6 +8,8 @@ import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRe
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,19 +30,19 @@ public class CountryLogicBean {
     @Autowired
     private CountryMapper countryMapper;
 
-    //@Cacheable
+    @Cacheable
     public Country getById(@NonNull final String id) {
         return countryMapper.toDto(
             countryRepository.getOne(id));
     }
 
-    //@Cacheable
+    @Cacheable
     public Country findByIsoCode(@NonNull final String isoCode) {
         return countryMapper.toDto(
             countryRepository.findByIsoCode(isoCode));
     }
 
-    //@Cacheable
+    @Cacheable
     public Country findByName(@NonNull final String name) {
         return countryMapper.toDto(
                 countryRepository.findByName(name));
@@ -51,12 +53,14 @@ public class CountryLogicBean {
                 countryRepository.findAll());
     }
 
+    @CacheEvict(allEntries = true)
     public Country save(@NonNull final Country country) {
         return countryMapper.toDto(
             countryRepository.save(
                     countryMapper.toBo(country)));
     }
 
+    @CacheEvict(allEntries = true)
     public void delete(@NonNull final String id) {
         countryRepository.deleteById(id);
     }
