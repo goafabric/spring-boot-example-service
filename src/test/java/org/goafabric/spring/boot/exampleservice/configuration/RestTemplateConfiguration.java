@@ -1,5 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 
 @Configuration
 @PropertySource("test.properties")
+@Slf4j
 public class RestTemplateConfiguration {
     @Value("${client.user}")
     private String user;
@@ -29,6 +31,19 @@ public class RestTemplateConfiguration {
             request.getHeaders().setBasicAuth(user, password);
             return execution.execute(request, body);
         });
+        /*
+        restTemplate.setErrorHandler(new ResponseErrorHandler() {
+            @Override
+            public boolean hasError(ClientHttpResponse clientHttpResponse) throws IOException {
+                return !HttpStatus.OK.equals(clientHttpResponse.getStatusCode());
+            }
+
+            @Override
+            public void handleError(ClientHttpResponse clientHttpResponse) throws IOException {
+                log.error("Error during REST Call {} {}", clientHttpResponse.getStatusCode(), clientHttpResponse.getBody().toString());
+            }
+        });
+         */
 
         return restTemplate;
     }

@@ -69,11 +69,23 @@ public class CountryServiceClientIT {
     @Test
     public void testSaveAndDelete() {
         countryService.save(createStubCountry());
-
         final Country country = countryService.findByIsoCode("pi");
         assertThat(country).isNotNull();
+        final String id = country.getId();
+        countryService.delete(id);
+    }
+
+    @Test
+    public void testCacheEvict() {
+        countryService.save(createStubCountry());
+        final Country country = countryService.findByIsoCode("pi");
+        final String id = country.getId();
         countryService.delete(country.getId());
-        //countryService.getById(country.getId());
+
+        countryService.save(createStubCountry());
+        final Country country2 = countryService.findByIsoCode("pi");
+        countryService.delete(country2.getId());
+        assertThat(country2.getId()).isNotEqualTo(id);
     }
 
     //does  not work because due to json string is not null but empty

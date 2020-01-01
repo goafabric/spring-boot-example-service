@@ -20,6 +20,8 @@ services:
       - applogs:/app/logs
       - ../config/application.yml:/app/config/application.yml
       - ../config/logback-rollingfile-spring.xml:/app/config/logback-spring.xml
+    #entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-Xms128m","-Xmx256m","-jar","/app.jar"]
+
     networks:
       - example-service-net
 

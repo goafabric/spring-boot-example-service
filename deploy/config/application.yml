@@ -14,7 +14,6 @@ management:
 info:
     status: ok
 
-
 spring:
     datasource:
       url: jdbc:h2:mem:countrydb
@@ -28,3 +27,10 @@ spring:
     flyway:
       locations: classpath:db/migration
 #      schemas: countries
+    jpa:
+      hibernate:
+        ddl-auto: none
+
+security:
+  authentication:
+    enabled: true
