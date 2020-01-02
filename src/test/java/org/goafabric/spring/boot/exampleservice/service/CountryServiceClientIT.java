@@ -5,16 +5,24 @@ import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.keycloak.adapters.spi.KeycloakAccount;
+import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.fail;
@@ -26,6 +34,9 @@ public class CountryServiceClientIT {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @LocalServerPort
     private int port;
 
@@ -35,6 +46,13 @@ public class CountryServiceClientIT {
     private void init() {
         this.countryService
                 = new CountryServiceClient(restTemplate, "http://localhost:" + port);
+        //authenticate("admin", "admin");
+    }
+
+    private void authenticate(final String userName, final String password) {
+        final UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userName, password);
+        final Authentication authenticatedUser = authenticationManager.authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
 
     @Test
