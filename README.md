@@ -29,3 +29,4 @@ See doc folder for more Details
 
 # Links
 - https://www.baeldung.com/spring-boot-keycloak
+- https://www.youtube.com/watch?v=6Z490EMcafs
