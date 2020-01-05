@@ -77,7 +77,7 @@ spec:
             path: /config/application.yml
         - name: logback-volume
           hostPath:
-            path: /config/logback-spring.yml
+            path: /config/logback-spring.xml
 ---
 
 kind: Service
