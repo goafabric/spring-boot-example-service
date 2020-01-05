@@ -1,5 +1,5 @@
 #!/bin/bash
-export STACK_NAME="example-service-stack"
+export STACK_NAME="example-service-stack_1"
 export COMMAND=$1
 
 
