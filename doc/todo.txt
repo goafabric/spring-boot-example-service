@@ -1,10 +1,14 @@
 - Better SSL Certificate
 - Jasypt
-
 - upgrad auf keycloak 8
 - rest client
 
-docker run -d --name=keycloak -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak:8.0.1
-
 keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
 
+Keycloak)
+- https://www.baeldung.com/spring-boot-keycloak
+    - realm: goafabric
+    - client: login-app
+        - valid redirect urls: *
+
+- docker run -d --name=keycloak -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak:8.0.1
