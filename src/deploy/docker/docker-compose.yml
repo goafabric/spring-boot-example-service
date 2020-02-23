@@ -9,7 +9,7 @@ services:
       - "50700:50700"
     environment:
       - spring.config.location=/app/config/application.yml
-      - logging.config=/app/config/logback-spring.xml
+      - logging.config=/app/config/logback-rollingfile-spring.xml
       - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
     healthcheck:
       test: ["CMD", "wget", "-Y", "off", "-O", "/dev/null", "http://localhost:50700/actuator/health"]
@@ -17,9 +17,9 @@ services:
       timeout: 10s
       retries: 10
     volumes:
+      - tmp:/tmp
       - applogs:/app/logs
       - ../config/application.yml:/app/config/application.yml
-      - ../config/logback-rollingfile-spring.xml:/app/config/logback-spring.xml
       - ../config/logback-rollingfile-spring.xml:/app/config/logback-rollingfile-spring.xml
     #entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-Xms128m","-Xmx256m","-jar","/app.jar"]
 
@@ -44,6 +44,7 @@ services:
       - example-service-net
 
 volumes:
+    tmp:
     applogs:
     pgdata:
 
