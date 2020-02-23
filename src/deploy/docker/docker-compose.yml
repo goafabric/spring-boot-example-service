@@ -31,7 +31,7 @@ services:
     image: postgres:9.6.15-alpine
     restart: 'no'
     ports:
-      - 50710:50710
+      - 50710:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
