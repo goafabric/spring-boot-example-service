@@ -7,6 +7,7 @@ services:
     restart: 'no'
     ports:
       - 50700:50700
+#      - 50701:50701
     environment:
       - spring.config.location=/app/config/application.yml
       - logging.config=/app/config/logback-rollingfile-spring.xml
@@ -22,6 +23,7 @@ services:
       - ../config/application.yml:/app/config/application.yml
       - ../config/logback-rollingfile-spring.xml:/app/config/logback-rollingfile-spring.xml
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
+#                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
     networks:
