@@ -23,11 +23,9 @@
         <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-        <!--
         <docker.image.prefix>docker.io/goafabric</docker.image.prefix>
-        -->
-        <docker.image.prefix>registry.hub.docker.com/goafabric</docker.image.prefix>
         <usertype.core.version>7.0.0.CR1</usertype.core.version>
+        <maven-assembly-plugin.version>2.5.4</maven-assembly-plugin.version>
     </properties>
 
 
@@ -227,10 +225,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.4</version>
+                <version>${maven-assembly-plugin.version}</version>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
-                    <descriptor>deploy/assembly/assembly.xml</descriptor>
+                    <descriptor>src/deploy/assembly/assembly.xml</descriptor>
                     <finalName>${project.name}-${project.version}-deploy</finalName>
                 </configuration>
                 <executions>
