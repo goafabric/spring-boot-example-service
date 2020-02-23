@@ -21,14 +21,15 @@ services:
       - applogs:/app/logs
       - ../config/application.yml:/app/config/application.yml
       - ../config/logback-rollingfile-spring.xml:/app/config/logback-rollingfile-spring.xml
-    #entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-Xms128m","-Xmx256m","-jar","/app.jar"]
+    entrypoint: ["java","-Xms256m","-Xmx256m","-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
     networks:
       - example-service-net
 
   postgres:
     container_name: postgres_${STACK_NAME}
-    image: postgres:9.6.15-alpine
+    image: postgres:9.6.17-alpine
+#    image: postgres:12.2-alpine
     restart: 'no'
     ports:
       - 50710:5432
