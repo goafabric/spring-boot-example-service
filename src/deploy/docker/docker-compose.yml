@@ -21,7 +21,7 @@ services:
       - applogs:/app/logs
       - ../config/application.yml:/app/config/application.yml
       - ../config/logback-rollingfile-spring.xml:/app/config/logback-rollingfile-spring.xml
-    entrypoint: ["java","-Xms256m","-Xmx256m","-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
+    entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}","-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
     networks:
       - example-service-net
