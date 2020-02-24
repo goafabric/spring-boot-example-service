@@ -10,5 +10,10 @@ Keycloak)
     - realm: goafabric
     - client: login-app
         - valid redirect urls: *
-
+    - settings/roles
+        - add role STANDARD_ROLE
+    - manage/users
+        - add user admin
+        - add role STANDARD_ROLE
+        
 - docker run -d --name=keycloak -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak:8.0.1
