@@ -27,9 +27,10 @@ spec:
       labels:
         app: example-service
     spec:
+# initcontainers justs acceps a docker image, and uses postgres client to check readyness
       initContainers:
         - name: check-db-ready
-          image: postgres:9.5-alpine
+          image: postgres:9.6.15-alpine
           command: ['sh', '-c',
                     'until pg_isready -h postgres -p 5432;
                      do echo waiting for database; sleep 2; done;']
@@ -53,8 +54,14 @@ spec:
               name: application-volume
             - mountPath: /app/config/logback-spring.xml
               name: logback-volume
-#          readinessProbe:
-# you could use the same params as for livenessprobe, unsure if it makes sense
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 50700
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -72,53 +79,3 @@ spec:
         - name: logback-volume
           hostPath:
             path: /config/logback-spring.xml
----
-
-kind: Service
-apiVersion: v1
-metadata:
-  name: postgres
-spec:
-  selector:
-    app: postgres
-  ports:
-    - protocol: TCP
-      port: 5432
-  type: ClusterIP
-
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: postgres
-spec:
-  selector:
-    matchLabels:
-      app: postgres
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: postgres
-    spec:
-      containers:
-        - name: postgres
-          image: postgres:9.6.15-alpine
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: "countrydb"
-          envFrom:
-            - configMapRef:
-                name: example-config
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: pgdata
-      volumes:
-        - name: pgdata
-
-

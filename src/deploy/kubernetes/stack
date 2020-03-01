@@ -13,6 +13,7 @@ if [ "${COMMAND}" = "up" ]
 then
     kubectl apply -f config.yml
     kubectl apply -f service.yml
+    kubectl apply -f postgres.yml
     minikube service example-service --url
 elif [ "${COMMAND}" = "down" ]
 then
