@@ -1,6 +1,6 @@
 #!/bin/bash
 export COMMAND=$1
-
+export SERVICE_MEM="256m"
 
 function func_delete {
     echo delete $1 ...

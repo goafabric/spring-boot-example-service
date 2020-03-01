@@ -40,6 +40,14 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 50700
+          command:
+            - java
+            - -Xms256m
+            - -Xmx256m
+            - -Djava.security.egd=file:/dev/./urandom
+            - -cp
+            - /app/resources:/app/classes:/app/libs/*
+            - org.goafabric.spring.boot.exampleservice.Application
           env:
 #            - name: spring.config.location
 #              value: /app/config/application.yml
