@@ -27,8 +27,8 @@ then
     kubectl delete configmap application-config-files
     kubectl delete configmap postgres-initdb
 
-    kubectl delete configmap postgres-config
-    kubectl delete configmap example-service-config
+    kubectl delete secret postgres-config
+    kubectl delete secret example-service-config
 
     kubectl delete persistentvolumeclaim postgres-pv-claim
     kubectl delete persistentvolume postgres-pv-volume
