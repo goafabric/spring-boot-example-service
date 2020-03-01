@@ -20,6 +20,8 @@ then
     func_delete example-service
     func_delete postgres
     kubectl delete configmap postgres-config
+    kubectl delete persistentvolumeclaim postgres-pv-claim
+    kubectl delete persistentvolume postgres-pv-volume
 else
     echo Doing nothing !
 fi
