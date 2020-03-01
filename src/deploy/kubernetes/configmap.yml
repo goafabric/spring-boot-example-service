@@ -5,7 +5,7 @@ metadata:
 type: Opaque
 data:
   POSTGRES_USER: cG9zdGdyZXM=
-  POSTGRES_PASSWORD: cG9zdGdyZXM=
+  POSTGRES_PASSWORD: cGFzc3dvcmQ=
   #echo -n 'postgres' | base64
 stringData:
   POSTGRES_DB: countrydb
@@ -18,7 +18,7 @@ metadata:
   name: example-service-config
 data:
   spring.datasource.username: cG9zdGdyZXM=
-  spring.datasource.password: cG9zdGdyZXM=
+  spring.datasource.password: cGFzc3dvcmQ=
 stringData:
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
