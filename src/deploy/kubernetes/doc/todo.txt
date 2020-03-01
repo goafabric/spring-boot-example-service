@@ -1,10 +1,5 @@
-- configmap
-- volumes
+- variables from environment inside yml
 - namespaces
 - update/rollout
-
-
-- Best Practices
-https://severalnines.com/database-blog/using-kubernetes-deploy-postgresql
 
 - microk8s
