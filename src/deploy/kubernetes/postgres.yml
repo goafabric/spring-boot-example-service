@@ -24,7 +24,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: manual
+  storageClassName: manual #if this lines is removed we will get auto managed anonm. volumes
   accessModes:
     - ReadWriteMany
   resources:
