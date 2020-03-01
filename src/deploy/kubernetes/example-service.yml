@@ -48,19 +48,17 @@ spec:
             - /app/resources:/app/classes:/app/libs/*
             - org.goafabric.spring.boot.exampleservice.Application
           env:
-#            - name: spring.config.location
-#              value: /app/config/application.yml
-#            - name: logging.config
-#              value: /app/config/logback-spring.xml
+            - name: spring.config.location
+              value: /usr/share/config/application.yml
+            - name: logging.config
+              value: /usr/share/config/logback-spring.xml
             - name: spring.datasource.url
               value: "jdbc:postgresql://postgres:5432/countrydb"
           volumeMounts:
-            - mountPath: /app/logs
+            - mountPath: /usr/share/logs
               name: applogs
-            - mountPath: /app/config/application.yml
-              name: application-volume
-            - mountPath: /app/config/logback-spring.xml
-              name: logback-volume
+            - mountPath: /usr/share/config/
+              name: application-configs-volume
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -80,9 +78,6 @@ spec:
 
       volumes:
         - name: applogs
-        - name: application-volume
-          hostPath:
-            path: /config/application.yml
-        - name: logback-volume
-          hostPath:
-            path: /config/logback-spring.xml
+        - name: application-configs-volume
+          configMap:
+            name: application-configs
