@@ -1,5 +1,6 @@
-- variables from environment inside yml
+- variables from environment inside yml (for memory ...)
 - namespaces
 - update/rollout
+- better secrets not only bae64
 
 - microk8s
