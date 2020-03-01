@@ -3,28 +3,34 @@ server:
   tomcat.max-threads: 20
 
 management:
-    endpoint:
-      health:
-        show-details: always
-    endpoints:
-      web:
-        exposure:
-          include: "info,health"
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "info,health"
 
 info:
-    status: ok
-
+  status: ok
 
 spring:
-    datasource:
-      url: jdbc:h2:mem:countrydb
-      #url: jdbc:postgresql://localhost:5432/countrydb
-      username: postgres
-      password: postgres
+  datasource:
+    url: jdbc:h2:mem:countrydb
+    #url: jdbc:postgresql://localhost:5432/countrydb
+    username: postgres
+    password: postgres
 
-      hikari:
-        maximum-pool-size: 10
+    hikari:
+      maximum-pool-size: 10
 
-    flyway:
-      locations: classpath:db/migration
-#      schemas: countries
+  flyway:
+    locations: classpath:db/migration
+  #      schemas: countries
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+security:
+  authentication:
+    enabled: false
