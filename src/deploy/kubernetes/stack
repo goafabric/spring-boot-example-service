@@ -14,9 +14,9 @@ then
     kubectl create configmap application-config-files --from-file=../config/
     kubectl create configmap postgres-initdb --from-file=../initdb/
 
-    kubectl apply -f config.yml
+    kubectl apply -f configmap.yml
     kubectl apply -f postgres.yml
-    kubectl apply -f example-service.yml
+    kubectl apply -f application.yml
 
     minikube service example-service --url
 elif [ "${COMMAND}" = "down" ]
