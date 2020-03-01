@@ -15,8 +15,8 @@ then
     kubectl create configmap postgres-initdb --from-file=../initdb/
 
     kubectl apply -f config.yml
-    kubectl apply -f example-service.yml
     kubectl apply -f postgres.yml
+    kubectl apply -f example-service.yml
 
     minikube service example-service --url
 elif [ "${COMMAND}" = "down" ]
@@ -26,12 +26,12 @@ then
 
     kubectl delete configmap application-configs
     kubectl delete configmap postgres-initdb
+
     kubectl delete configmap postgres-config
+    kubectl delete configmap example-service-config
 
     kubectl delete persistentvolumeclaim postgres-pv-claim
     kubectl delete persistentvolume postgres-pv-volume
 else
     echo Doing nothing !
 fi
-
-#CleanUp: docker volume prune

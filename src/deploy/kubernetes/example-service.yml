@@ -47,13 +47,9 @@ spec:
             - -cp
             - /app/resources:/app/classes:/app/libs/*
             - org.goafabric.spring.boot.exampleservice.Application
-          env:
-            - name: spring.config.location
-              value: /usr/share/config/application.yml
-            - name: logging.config
-              value: /usr/share/config/logback-rollingfile-spring.xml
-            - name: spring.datasource.url
-              value: "jdbc:postgresql://postgres:5432/countrydb"
+          envFrom:
+            - configMapRef:
+                name: example-service-config
           volumeMounts:
             - mountPath: /usr/share/logs
               name: applogs
