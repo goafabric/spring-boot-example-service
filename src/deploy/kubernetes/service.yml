@@ -54,13 +54,7 @@ spec:
             - mountPath: /app/config/logback-spring.xml
               name: logback-volume
 #          readinessProbe:
-#            httpGet:
-#              path: /actuator/health
-#              port: 50700
-#            initialDelaySeconds: 30 #takes 20 seconds per pod on my machine
-#            periodSeconds: 5
-#            timeoutSeconds: 2
-#            failureThreshold: 3
+# you could use the same params as for livenessprobe, unsure if it makes sense
           livenessProbe:
             httpGet:
               path: /actuator/health
