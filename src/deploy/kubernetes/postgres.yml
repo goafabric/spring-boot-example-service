@@ -11,7 +11,7 @@ spec:
   capacity:
     storage: 100Mi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
     path: "/mnt/data"
     
@@ -26,7 +26,7 @@ metadata:
 spec:
   storageClassName: manual #if this lines is removed we will get auto managed anonm. volumes
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 100Mi
