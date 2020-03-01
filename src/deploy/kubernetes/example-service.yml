@@ -26,7 +26,7 @@ spec:
       labels:
         app: example-service
     spec:
-# initcontainers justs acceps a docker image, and uses postgres client to check readyness
+      # initcontainers justs accepts a docker image, and uses postgres client to check readyness
       initContainers:
         - name: check-db-ready
           image: postgres:9.6.15-alpine
@@ -78,6 +78,7 @@ spec:
 
       volumes:
         - name: applogs
+        # generated from local file system via "kubectl create configmap" inside stack
         - name: application-configs-volume
           configMap:
             name: application-configs
