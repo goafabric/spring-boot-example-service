@@ -33,4 +33,4 @@ spring:
 
 security:
   authentication:
-    enabled: true
+    enabled: false

@@ -11,7 +11,8 @@ function func_delete {
 
 if [ "${COMMAND}" = "up" ]
 then
-    kubectl create configmap application-configs --from-file=./config/
+    kubectl create configmap application-configs --from-file=../config/
+    kubectl create configmap postgres-initdb --from-file=../initdb/
 
     kubectl apply -f config.yml
     kubectl apply -f example-service.yml
@@ -24,6 +25,7 @@ then
     func_delete postgres
 
     kubectl delete configmap application-configs
+    kubectl delete configmap postgres-initdb
     kubectl delete configmap postgres-config
 
     kubectl delete persistentvolumeclaim postgres-pv-claim
