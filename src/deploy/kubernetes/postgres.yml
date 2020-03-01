@@ -32,12 +32,12 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: "countrydb"
+#          env:
+#            - name: POSTGRES_DB
+#              value: "countrydb"
           envFrom:
             - configMapRef:
-                name: example-config
+                name: postgres-config
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pgdata
