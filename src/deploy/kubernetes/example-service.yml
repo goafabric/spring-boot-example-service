@@ -51,7 +51,7 @@ spec:
             - name: spring.config.location
               value: /usr/share/config/application.yml
             - name: logging.config
-              value: /usr/share/config/logback-spring.xml
+              value: /usr/share/config/logback-rollingfile-spring.xml
             - name: spring.datasource.url
               value: "jdbc:postgresql://postgres:5432/countrydb"
           volumeMounts:
