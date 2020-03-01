@@ -13,12 +13,13 @@ stringData:
 ---
 
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: example-service-config
 data:
+  spring.datasource.username: cG9zdGdyZXM=
+  spring.datasource.password: cG9zdGdyZXM=
+stringData:
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://postgres:5432/countrydb"
-  spring.datasource.username: postgres
-  spring.datasource.password: postgres
