@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: my-elasticsearch
+  name: my-elasticsearch
+spec:
+  ports:
+    - name: "9200"
+      port: 9200
+      targetPort: 9200
+  selector:
+    io.kompose.service: my-elasticsearch
+status:
+  loadBalancer: {}
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: my-elasticsearch
+  name: my-elasticsearch
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: my-elasticsearch
+    spec:
+      containers:
+      - env:
+        - name: ES_JAVA_OPTS
+          value: -Xms1g -Xmx1g
+        - name: TZ
+          value: Europe/Berlin
+        - name: cluster.name
+          value: elasticsearch
+        - name: discovery.type
+          value: single-node
+        - name: http.enabled
+          value: "true"
+        - name: transport.tcp.port
+          value: "9300"
+        - name: xpack.graph.enabled
+          value: "false"
+        - name: xpack.ml.enabled
+          value: "false"
+        - name: xpack.monitoring.enabled
+          value: "false"
+        - name: xpack.security.enabled
+          value: "false"
+        - name: xpack.watcher.enabled
+          value: "false"
+        image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - --fail
+            - --noproxy
+            - localhost
+            - http://localhost:9200/
+          failureThreshold: 3
+          periodSeconds: 60
+          timeoutSeconds: 10
+        name: my-elasticsearch
+        ports:
+        - containerPort: 9200
+        resources: {}
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: esdata
+        - mountPath: /usr/share/elasticsearch/config
+          name: esconfig
+        - mountPath: /usr/share/elasticsearch/logs
+          name: eslogs
+      restartPolicy: Always
+      volumes:
+      - name: esdata
+        persistentVolumeClaim:
+          claimName: esdata
+      - name: esconfig
+#        persistentVolumeClaim:
+#          claimName: esconfig
+      - name: eslogs
+#        persistentVolumeClaim:
+#          claimName: eslogs
+status: {}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: esdata
+  name: esdata
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1000Mi
+status: {}
