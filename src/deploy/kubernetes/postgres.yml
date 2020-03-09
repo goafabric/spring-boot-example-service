@@ -1,36 +1,3 @@
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: postgres-pv-volume
-  labels:
-    type: local
-    app: postgres
-spec:
-  storageClassName: manual
-  persistentVolumeReclaimPolicy: Recycle # default is Retain for manual
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
-    
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pv-claim
-  labels:
-    app: postgres
-spec:
-  storageClassName: manual #if this lines is removed we will get auto managed anonm. volumes
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-
 ---
 
 kind: Service
@@ -96,3 +63,35 @@ spec:
 
 ---
 
+#kind: PersistentVolume
+#apiVersion: v1
+#metadata:
+#  name: postgres-pv-volume
+#  labels:
+#    type: local
+#    app: postgres
+#spec:
+#  storageClassName: manual
+#  persistentVolumeReclaimPolicy: Recycle # default is Retain for manual
+#  capacity:
+#    storage: 100Mi
+#  accessModes:
+#    - ReadWriteOnce
+#  hostPath:
+#    path: "/mnt/data"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+  labels:
+    app: postgres
+spec:
+  #  storageClassName: manual #if this lines is removed we will get auto managed anonm. volumes
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
