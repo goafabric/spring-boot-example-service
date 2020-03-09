@@ -8,6 +8,10 @@ spec:
   ports:
     - protocol: TCP
       port: 9200
+      name: "9200"
+    - protocol: TCP
+      port: 9300
+      name: "9300"
   type: ClusterIP
 
 
@@ -33,6 +37,7 @@ spec:
       containers:
       - name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
+        restartPolicy: Always
         livenessProbe:
           httpGet:
             path: /
@@ -46,6 +51,7 @@ spec:
               name: elasticsearch-config
         ports:
         - containerPort: 9200
+        - containerPort: 9300
         resources: {}
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
@@ -58,7 +64,6 @@ spec:
           subPath: jvm.options
           name: elasticsearch-config-files-volume
 
-      restartPolicy: Always
       volumes:
       - name: esdata
         persistentVolumeClaim:
