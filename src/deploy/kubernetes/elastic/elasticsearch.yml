@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: elasticsearch
 spec:
+  selector:
+    app: elasticsearch
   ports:
     - name: "9200"
       port: 9200
       targetPort: 9200
-  selector:
-    app: elasticsearch
 status:
   loadBalancer: {}
 
@@ -32,29 +32,7 @@ spec:
         app: elasticsearch
     spec:
       containers:
-      - env:
-        - name: ES_JAVA_OPTS
-          value: -Xms1g -Xmx1g
-        - name: TZ
-          value: Europe/Berlin
-        - name: cluster.name
-          value: elasticsearch
-        - name: discovery.type
-          value: single-node
-        - name: http.enabled
-          value: "true"
-        - name: transport.tcp.port
-          value: "9300"
-        - name: xpack.graph.enabled
-          value: "false"
-        - name: xpack.ml.enabled
-          value: "false"
-        - name: xpack.monitoring.enabled
-          value: "false"
-        - name: xpack.security.enabled
-          value: "false"
-        - name: xpack.watcher.enabled
-          value: "false"
+      - name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
         livenessProbe:
           httpGet:
@@ -64,7 +42,9 @@ spec:
           periodSeconds: 5
           timeoutSeconds: 10
           failureThreshold: 3
-        name: elasticsearch
+        envFrom:
+          - configMapRef:
+              name: elasticsearch-config
         ports:
         - containerPort: 9200
         resources: {}
@@ -93,6 +73,24 @@ spec:
           name: elasticsearch-config-files
 
 status: {}
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-config
+data:
+  ES_JAVA_OPTS: -Xms1g -Xmx1g
+  TZ: Europe/Berlin
+  cluster.name: elasticsearch
+  discovery.type: single-node
+  http.enabled: "true"
+  transport.tcp.port: "9300"
+  xpack.graph.enabled: "false"
+  xpack.ml.enabled: "false"
+  xpack.security.enabled: "false"
+  xpack.watcher.enabled: "false"
 
 ---
 

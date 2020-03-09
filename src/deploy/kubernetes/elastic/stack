@@ -15,9 +15,11 @@ then
     kubectl apply -f elasticsearch.yml
 elif [ "${COMMAND}" = "down" ]
 then
-    func_delete my-elasticsearch
-    kubectl delete persistentvolumeclaim esdata
+    func_delete elasticsearch
     kubectl delete configmap elasticsearch-config-files
+    kubectl delete configmap elasticsearch-config
+    kubectl delete persistentvolumeclaim esdata
+
 else
     echo Doing nothing !
 fi
