@@ -6,11 +6,10 @@ spec:
   selector:
     app: elasticsearch
   ports:
-    - name: "9200"
+    - protocol: TCP
       port: 9200
-      targetPort: 9200
-status:
-  loadBalancer: {}
+  type: ClusterIP
+
 
 ---
 
