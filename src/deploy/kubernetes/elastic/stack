@@ -1,0 +1,23 @@
+#!/bin/bash
+export COMMAND=$1
+export SERVICE_MEM="256m"
+
+function func_delete {
+    echo delete $1 ...
+    kubectl delete services $1
+    kubectl delete deployment $1
+}
+
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl create configmap elasticsearch-config-files --from-file=./conf/jvm.options
+    kubectl apply -f elasticsearch.yml
+elif [ "${COMMAND}" = "down" ]
+then
+    func_delete my-elasticsearch
+    kubectl delete persistentvolumeclaim esdata
+    kubectl delete configmap elasticsearch-config-files
+else
+    echo Doing nothing !
+fi

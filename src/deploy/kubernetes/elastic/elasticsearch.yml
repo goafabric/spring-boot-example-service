@@ -1,8 +1,6 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    io.kompose.service: my-elasticsearch
   name: my-elasticsearch
 spec:
   ports:
@@ -10,19 +8,20 @@ spec:
       port: 9200
       targetPort: 9200
   selector:
-    io.kompose.service: my-elasticsearch
+    app: my-elasticsearch
 status:
   loadBalancer: {}
 
 ---
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    io.kompose.service: my-elasticsearch
   name: my-elasticsearch
 spec:
+  selector:
+    matchLabels:
+      app: my-elasticsearch
   replicas: 1
   strategy:
     type: Recreate
@@ -30,7 +29,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: my-elasticsearch
+        app: my-elasticsearch
     spec:
       containers:
       - env:
@@ -58,16 +57,13 @@ spec:
           value: "false"
         image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
         livenessProbe:
-          exec:
-            command:
-            - curl
-            - --fail
-            - --noproxy
-            - localhost
-            - http://localhost:9200/
-          failureThreshold: 3
-          periodSeconds: 60
+          httpGet:
+            path: /
+            port: 9200
+          initialDelaySeconds: 30
+          periodSeconds: 5
           timeoutSeconds: 10
+          failureThreshold: 3
         name: my-elasticsearch
         ports:
         - containerPort: 9200
@@ -79,17 +75,23 @@ spec:
           name: esconfig
         - mountPath: /usr/share/elasticsearch/logs
           name: eslogs
+        - mountPath: /usr/share/elasticsearch/config/jvm.options
+          subPath: jvm.options
+          name: elasticsearch-config-files-volume
+
       restartPolicy: Always
       volumes:
       - name: esdata
         persistentVolumeClaim:
           claimName: esdata
       - name: esconfig
-#        persistentVolumeClaim:
-#          claimName: esconfig
+        emptyDir: {}
       - name: eslogs
-#        persistentVolumeClaim:
-#          claimName: eslogs
+        emptyDir: {}
+      - name: elasticsearch-config-files-volume
+        configMap:
+          name: elasticsearch-config-files
+
 status: {}
 
 ---
@@ -99,7 +101,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: esdata
+    app: esdata
   name: esdata
 spec:
   accessModes:
