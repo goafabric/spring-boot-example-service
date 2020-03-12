@@ -6,3 +6,7 @@
 - dynamic volume sizes instead of fixed sizes
 
 - microk8s
+
+Kubernetes Docs:
+https://www.cncf.io/wp-content/uploads/2019/07/The-Illustrated-Childrens-Guide-to-Kubernetes.pdf
+https://www.cncf.io/wp-content/uploads/2018/12/Phippy-Goes-To-The-Zoo.pdf
