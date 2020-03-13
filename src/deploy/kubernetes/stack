@@ -30,8 +30,8 @@ then
     kubectl delete secret postgres-config
     kubectl delete secret example-service-config
 
-    kubectl delete persistentvolumeclaim postgres-pv-claim
-    kubectl delete persistentvolume postgres-pv-volume
+    kubectl delete persistentvolumeclaim postgres-example-pv-claim
+    kubectl delete persistentvolume postgres-example-pv-volume
 else
     echo Doing nothing !
 fi
