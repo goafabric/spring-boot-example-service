@@ -23,3 +23,6 @@
 
 # Stop
 - ./stack down
+
+#lb test
+curl http://192.168.99.102:30100/actuator/info
