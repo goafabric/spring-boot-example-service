@@ -59,7 +59,7 @@ spec:
             name: postgres-initdb
         - name: pgdata
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: postgres-example-pv-claim
 
 ---
 
@@ -85,7 +85,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-pv-claim
+  name: postgres-example-pv-claim
   labels:
     app: postgres
 spec:
