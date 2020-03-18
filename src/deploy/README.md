@@ -26,3 +26,7 @@
 
 #lb test
 curl http://192.168.99.102:30100/actuator/info
+
+Kubernetes Docs:
+https://www.cncf.io/wp-content/uploads/2019/07/The-Illustrated-Childrens-Guide-to-Kubernetes.pdf
+https://www.cncf.io/wp-content/uploads/2018/12/Phippy-Goes-To-The-Zoo.pdf
