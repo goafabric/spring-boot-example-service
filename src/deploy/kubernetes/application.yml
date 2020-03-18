@@ -48,6 +48,10 @@ spec:
             - -cp
             - /app/resources:/app/classes:/app/libs/*
             - org.goafabric.spring.boot.exampleservice.Application
+#          resources:
+#            limits:
+#              cpu: 1
+#              memory: 250Mi
           envFrom:
             - secretRef:
                 name: example-service-config
