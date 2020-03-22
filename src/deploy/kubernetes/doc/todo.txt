@@ -1,7 +1,5 @@
-- namespaces
 - update/rollout
 - better secrets not only bae64
-- dynamic volume sizes instead of fixed sizes
 - better way for setting memory
 
 - microk8s
