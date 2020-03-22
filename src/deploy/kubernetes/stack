@@ -12,6 +12,9 @@ function func_delete {
 
 if [ "${COMMAND}" = "up" ]
 then
+    kubectl create namespace ${NAMESPACE}
+    kubectl config set-context --current --namespace=${NAMESPACE}
+
     kubectl create configmap application-config-files --from-file=../config/
     kubectl create configmap postgres-initdb --from-file=../initdb/
 
@@ -19,9 +22,11 @@ then
     kubectl apply -f postgres.yml
     kubectl apply -f exampleservice.yml
 
-    minikube service example-service --url
+    minikube service example-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
+    kubectl config set-context --current --namespace=${NAMESPACE}
+
     func_delete example-service
     func_delete postgres
 
@@ -32,8 +37,7 @@ then
     kubectl delete secret example-service-secret
     kubectl delete configmap example-service-config
 
-#    kubectl delete persistentvolumeclaim postgres-example-pv-claim
-#    kubectl delete persistentvolume postgres-example-pv-volume
+    kubectl delete persistentvolumeclaim postgres-example-pv-claim
 else
     echo Doing nothing !
 fi
