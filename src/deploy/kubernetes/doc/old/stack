@@ -12,12 +12,14 @@ function func_delete {
 
 if [ "${COMMAND}" = "up" ]
 then
+    kubectl create namespace ${NAMESPACE}
+
     kubectl create configmap application-config-files --from-file=../config/
     kubectl create configmap postgres-initdb --from-file=../initdb/
 
-    kubectl apply -f configmap.yml
-    kubectl apply -f postgres.yml
-    kubectl apply -f exampleservice.yml
+    kubectl apply -f configmap.yml -n ${NAMESPACE}
+    kubectl apply -f postgres.yml -n ${NAMESPACE}
+    kubectl apply -f exampleservice.yml -n ${NAMESPACE}
 
     minikube service example-service --url
 elif [ "${COMMAND}" = "down" ]
