@@ -16,7 +16,7 @@ then
 
     kubectl apply -f configmap.yml
     kubectl apply -f postgres.yml
-    kubectl apply -f application.yml
+    kubectl apply -f exampleservice.yml
 
     minikube service example-service --url
 elif [ "${COMMAND}" = "down" ]
