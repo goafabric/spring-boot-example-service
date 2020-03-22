@@ -64,6 +64,22 @@ spec:
 
 ---
 
+#kind: PersistentVolume
+#apiVersion: v1
+#metadata:
+#  name: postgres-example-pv-volume
+#spec:
+#  storageClassName: manual
+#  persistentVolumeReclaimPolicy: Recycle # default is Retain for manual
+#  capacity:
+#    storage: 100Mi
+#  accessModes:
+#    - ReadWriteOnce
+#  hostPath:
+#    path: "/mnt/data"
+
+---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

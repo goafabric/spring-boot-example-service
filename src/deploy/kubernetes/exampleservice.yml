@@ -37,7 +37,8 @@ spec:
       containers:
         - name: example-service
           image: goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT
-          imagePullPolicy: Always
+#          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 50700
           command:
