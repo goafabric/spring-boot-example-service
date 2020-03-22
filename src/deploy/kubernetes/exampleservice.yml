@@ -54,8 +54,10 @@ spec:
 #              cpu: 1
 #              memory: 250Mi
           envFrom:
-            - secretRef:
+            - configMapRef:
                 name: example-service-config
+            - secretRef:
+                name: example-service-secret
           volumeMounts:
             - mountPath: /usr/share/logs
               name: applogs

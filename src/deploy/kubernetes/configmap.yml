@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: postgres-config
+  name: postgres-secret
 type: Opaque
 data:
   POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
@@ -16,11 +16,18 @@ stringData:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-service-config
+  name: example-service-secret
 data:
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
   spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
-stringData:
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-service-config
+data:
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://postgres:5432/countrydb"
