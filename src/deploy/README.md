@@ -42,5 +42,7 @@ select * from country
 --
 update country set name = 'updated' where id = '1'
 
-##
+#Deployment
 kubectl set image deployment example-service example-service=goafabric/spring-boot-exampleservice:1.0.1-SNAPSHOT
+kubectl rollout status deployment example-service
+kubectl rollout undo deployment example-service
