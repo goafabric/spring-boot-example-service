@@ -36,3 +36,8 @@ https://www.cncf.io/wp-content/uploads/2018/12/Phippy-Goes-To-The-Zoo.pdf
 - docker login
 - sudo cp /root/.docker/config.json /var/lib/kubelet/config.json
 => note "root" does not seem to be the right folder .. can find the post anymore
+
+#Check Sql
+select * from country
+--
+update country set name = 'updated' where id = '1'
