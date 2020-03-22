@@ -29,7 +29,7 @@ then
 
     kubectl delete secret postgres-secret
     kubectl delete secret example-service-secret
-    kubectl delete secret example-service-config
+    kubectl delete configmap example-service-config
 
 #    kubectl delete persistentvolumeclaim postgres-example-pv-claim
 #    kubectl delete persistentvolume postgres-example-pv-volume

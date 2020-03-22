@@ -51,18 +51,13 @@ spec:
             - org.goafabric.spring.boot.exampleservice.Application
 #          resources:
 #            limits:
-#              cpu: 1
-#              memory: 250Mi
+#              cpu: "1000m"
+#              memory: "256Mi"
           envFrom:
             - configMapRef:
                 name: example-service-config
             - secretRef:
                 name: example-service-secret
-          volumeMounts:
-            - mountPath: /usr/share/logs
-              name: applogs
-            - mountPath: /usr/share/config/
-              name: application-config-files-volume
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -79,6 +74,11 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 3
+          volumeMounts:
+            - mountPath: /usr/share/logs
+              name: applogs
+            - mountPath: /usr/share/config/
+              name: application-config-files-volume
 
       volumes:
         - name: applogs
