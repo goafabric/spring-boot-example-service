@@ -22,6 +22,9 @@ spec:
     matchLabels:
       app: example-service
   replicas: 1
+  strategy:
+    type: Recreate
+#    type: RollingUpdate
   template:
     metadata:
       labels:

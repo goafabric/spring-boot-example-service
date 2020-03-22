@@ -41,3 +41,6 @@ https://www.cncf.io/wp-content/uploads/2018/12/Phippy-Goes-To-The-Zoo.pdf
 select * from country
 --
 update country set name = 'updated' where id = '1'
+
+##
+kubectl set image deployment example-service example-service=goafabric/spring-boot-exampleservice:1.0.1-SNAPSHOT
