@@ -65,16 +65,16 @@ spec:
               path: /actuator/health
               port: 50700
             initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 2
+            periodSeconds: 10
+            timeoutSeconds: 10
             failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 50700
             initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 2
+            periodSeconds: 10
+            timeoutSeconds: 10
             failureThreshold: 3
 
       volumes:

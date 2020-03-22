@@ -4,9 +4,10 @@ metadata:
   name: postgres-config
 type: Opaque
 data:
-  POSTGRES_USER: cG9zdGdyZXM=
-  POSTGRES_PASSWORD: cGFzc3dvcmQ=
-  #echo -n 'postgres' | base64
+  POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
+  #echo -n 'example-service' | base64
+  POSTGRES_PASSWORD: Y3JOYjJaNm12QnlTUkt3dQ==
+  #echo -n 'crNb2Z6mvBySRKwu' | base64
 stringData:
   POSTGRES_DB: countrydb
 
@@ -17,8 +18,8 @@ kind: Secret
 metadata:
   name: example-service-config
 data:
-  spring.datasource.username: cG9zdGdyZXM=
-  spring.datasource.password: cGFzc3dvcmQ=
+  spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
+  spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
 stringData:
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
