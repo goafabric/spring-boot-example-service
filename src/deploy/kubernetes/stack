@@ -9,6 +9,22 @@ function func_delete {
     kubectl delete deployment $1
 }
 
+function func_delete_all {
+    kubectl config set-context --current --namespace=${NAMESPACE}
+
+    func_delete example-service
+    func_delete postgres
+
+    kubectl delete configmap application-config-files
+    kubectl delete configmap postgres-initdb
+
+    kubectl delete secret postgres-secret
+    kubectl delete secret example-service-secret
+    kubectl delete configmap example-service-config
+
+    kubectl delete persistentvolumeclaim postgres-example-pv-claim
+}
+
 
 if [ "${COMMAND}" = "up" ]
 then
@@ -25,19 +41,9 @@ then
     minikube service example-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    kubectl config set-context --current --namespace=${NAMESPACE}
-
-    func_delete example-service
-    func_delete postgres
-
-    kubectl delete configmap application-config-files
-    kubectl delete configmap postgres-initdb
-
-    kubectl delete secret postgres-secret
-    kubectl delete secret example-service-secret
-    kubectl delete configmap example-service-config
-
-    kubectl delete persistentvolumeclaim postgres-example-pv-claim
+#    func_delete_all
+    kubectl delete namespace ${NAMESPACE}
+    kubectl config set-context --current --namespace=default
 else
     echo Doing nothing !
 fi
