@@ -67,9 +67,6 @@ spec:
 #apiVersion: v1
 #metadata:
 #  name: postgres-example-pv-volume
-#  labels:
-#    type: local
-#    app: postgres
 #spec:
 #  storageClassName: manual
 #  persistentVolumeReclaimPolicy: Recycle # default is Retain for manual
@@ -86,8 +83,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-example-pv-claim
-  labels:
-    app: postgres
 spec:
   #  storageClassName: manual #if this lines is removed we will get auto managed anonm. volumes
   accessModes:
