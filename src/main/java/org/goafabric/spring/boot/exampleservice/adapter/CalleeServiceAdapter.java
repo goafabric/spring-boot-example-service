@@ -4,8 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CalleeServiceAdapter {
+    //@Autowired
+    //private CalleService calleService;
 
     public void doMagic() {
-        //TODO: implement service call here
+        //calleService.doMagic()
     }
 }
