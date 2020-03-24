@@ -1,6 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
-import org.goafabric.spring.boot.exampleservice.logic.CountryLogicBean;
+import org.goafabric.spring.boot.exampleservice.logic.CountryLogic;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,36 +20,36 @@ import java.util.List;
 @PreAuthorize("hasRole('STANDARD_ROLE')")
 public class CountryServiceBean implements CountryService {
     @Autowired
-    private CountryLogicBean countryLogicBean;
+    private CountryLogic countryLogic;
 
     @GetMapping("getById")
     public Country getById(@RequestParam String id) {
-        return countryLogicBean.getById(id);
+        return countryLogic.getById(id);
     }
 
     @GetMapping("findAll")
     public List<Country> findAll() {
-        return countryLogicBean.findAll();
+        return countryLogic.findAll();
     }
 
     @GetMapping("findByIsoCode")
     public Country findByIsoCode(@RequestParam String isoCode) {
-        return countryLogicBean.findByIsoCode(isoCode);
+        return countryLogic.findByIsoCode(isoCode);
     }
 
     @GetMapping("findByName")
     public Country findByName(@RequestParam String name) {
-        return countryLogicBean.findByName(name);
+        return countryLogic.findByName(name);
     }
 
     @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Country save(@RequestBody Country country) {
-        return countryLogicBean.save(country);
+        return countryLogic.save(country);
     }
 
     @DeleteMapping("delete")
     public void delete(@RequestParam String id) {
-        countryLogicBean.delete(id);
+        countryLogic.delete(id);
     }
 
 }

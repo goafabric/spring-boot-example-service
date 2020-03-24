@@ -1,6 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
-import org.goafabric.spring.boot.exampleservice.logic.CountryLogicBean;
+import org.goafabric.spring.boot.exampleservice.logic.CountryLogic;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 @RunWith(SpringRunner.class)
 public class CountryLogicIT {
     @Autowired
-    private CountryLogicBean countryLogic;
+    private CountryLogic countryLogic;
 
     @Test
     public void testGetAllCountries() {

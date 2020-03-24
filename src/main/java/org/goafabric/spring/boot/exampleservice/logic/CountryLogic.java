@@ -23,7 +23,7 @@ import java.util.List;
 @Component
 @Transactional
 @CacheConfig(cacheNames = {CacheConfiguration.COUNTRIES})
-public class CountryLogicBean {
+public class CountryLogic {
     @Autowired
     private CountryRepository countryRepository;
 
