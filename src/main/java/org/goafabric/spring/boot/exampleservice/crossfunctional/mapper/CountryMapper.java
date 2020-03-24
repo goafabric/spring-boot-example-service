@@ -1,4 +1,4 @@
-package org.goafabric.spring.boot.exampleservice.mapper;
+package org.goafabric.spring.boot.exampleservice.crossfunctional.mapper;
 
 import org.goafabric.spring.boot.exampleservice.persistence.domain.CountryBo;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
