@@ -7,7 +7,7 @@ public class CalleeServiceAdapter {
     //@Autowired
     //private CalleService calleService;
 
-    public void doMagic() {
-        //calleService.doMagic()
+    public void isAlive() {
+        //calleService.isAlive()
     }
 }
