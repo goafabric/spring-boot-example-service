@@ -21,6 +21,8 @@ See doc folder for more Details
 - login is admin:admin on localhost:8080
 - Basically you can follow the Baeldung link below
 - As Realm choose 'goafabric'
+
+- Create a client "login-app" with redirection URLS '*'
 - Create a User
 - Create a Role 'STANDARD_ROLE' and set it for the User
  
