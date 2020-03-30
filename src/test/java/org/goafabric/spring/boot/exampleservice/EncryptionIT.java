@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Base64Utils;
 
@@ -14,18 +15,35 @@ import org.springframework.util.Base64Utils;
 @Slf4j
 public class EncryptionIT {
     @Autowired
-    private StringEncryptor encryptor;
+    private PasswordEncoder passwordHash;
 
+    @Autowired
+    private StringEncryptor aesEncryptor;
+
+    //1-way hash, cannot be converted back, only matchin possible
     @Test
-    public void testEncryption() {
-        log.info(encryptor.encrypt("secret"));
+    public void testPasswordHashEncode() {
+        log.info(passwordHash.encode("secret"));
     }
 
     @Test
-    public void testDecryption() {
-        log.info(encryptor.decrypt("g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby"));
+    public void testPasswordHashMatch() {
+        log.info("" + passwordHash.matches("secret",
+                "$2a$10$q1qtofwdHL7gcJeHiKSVx.I6lImNQVWzO01S13bajJu2USH9JCRX6"));
     }
 
+    //2-way encryption and decryption
+    @Test
+    public void testAES256Encryption() {
+        log.info(aesEncryptor.encrypt("secret"));
+    }
+
+    @Test
+    public void testAES256Decryption() {
+        log.info(aesEncryptor.decrypt("g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby"));
+    }
+
+    //2-way base64 encoding
     @Test
     public void testBase64Encode() {
         log.info(new String(Base64Utils.encode("cdKBo95xcTVVH3dh".getBytes())));
