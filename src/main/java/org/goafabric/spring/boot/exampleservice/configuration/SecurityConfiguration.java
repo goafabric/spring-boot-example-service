@@ -3,7 +3,9 @@ package org.goafabric.spring.boot.exampleservice.configuration;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.jasypt.iv.RandomIvGenerator;
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,12 +75,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public StringEncryptor passwordEncryptor(@Value("${encryption.passphrase}") String passPhrase) {
-        final PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
-        final SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword(new String(Base64Utils.decodeFromString(passPhrase)));
-        config.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
-        config.setPoolSize("1");
-        encryptor.setConfig(config);
+        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase)));;                        // we HAVE TO set a password
+        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
+        encryptor.setIvGenerator(new RandomIvGenerator());
         return encryptor;
     }
 }

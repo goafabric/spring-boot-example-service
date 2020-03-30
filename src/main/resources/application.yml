@@ -41,4 +41,4 @@ encryption:
 adapter:
   calleeserviceadapter:
     user: exampleuser
-    password: ENC(qqiIgzkMYRm+s5IhjWKyVqKQwE4mQ7Xwjb+n1libqz4JaHUuHtdC4Jhz5fhQFmpaTGq0v2/zp7E1J6uNNSJpCw==)
+    password: ENC(g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby)

@@ -22,6 +22,11 @@ public class EncryptionIT {
     }
 
     @Test
+    public void testDecryption() {
+        log.info(encryptor.decrypt("g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby"));
+    }
+
+    @Test
     public void testBase64Encode() {
         log.info(new String(Base64Utils.encode("cdKBo95xcTVVH3dh".getBytes())));
     }
