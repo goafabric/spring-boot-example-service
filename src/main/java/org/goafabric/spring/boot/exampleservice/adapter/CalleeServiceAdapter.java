@@ -17,7 +17,7 @@ public class CalleeServiceAdapter {
     //private CalleService calleService;
 
     @Autowired
-    private RestTemplate adapterestTemplate;
+    private RestTemplate adapterRestTemplate;
 
     public void isAlive() {
         //restTemplate.getForObject("http://localhost:8080/isAlive")
