@@ -12,10 +12,10 @@ import java.util.Arrays;
 
 @Configuration
 public class AdapterConfiguration {
-    @Value("${adapter.calleeservice.username")
+    //@Value("${adapter.calleeserviceadapter.user}")
     private String user;
 
-    @Value("${adapter.calleeservice.password")
+    //@Value("${adapter.calleeserviceadapter.password}")
     private String password;
 
     @Bean

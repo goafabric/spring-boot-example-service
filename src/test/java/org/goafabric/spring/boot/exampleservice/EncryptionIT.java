@@ -18,7 +18,7 @@ public class EncryptionIT {
     private PasswordEncoder passwordHash;
 
     @Autowired
-    private StringEncryptor aesEncryptor;
+    private StringEncryptor passwordEncryptor;
 
     //1-way hash, cannot be converted back, only matchin possible
     @Test
@@ -35,12 +35,12 @@ public class EncryptionIT {
     //2-way encryption and decryption
     @Test
     public void testAES256Encryption() {
-        log.info(aesEncryptor.encrypt("secret"));
+        log.info(passwordEncryptor.encrypt("secret"));
     }
 
     @Test
     public void testAES256Decryption() {
-        log.info(aesEncryptor.decrypt("g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby"));
+        log.info(passwordEncryptor.decrypt("g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby"));
     }
 
     //2-way base64 encoding
