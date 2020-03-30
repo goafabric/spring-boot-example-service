@@ -5,6 +5,7 @@ import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,6 +20,10 @@ public class EncryptionIT {
 
     @Autowired
     private StringEncryptor passwordEncryptor;
+
+    @Value("${adapter.calleeserviceadapter.password}")
+    private String password;
+
 
     //1-way hash, cannot be converted back, only matchin possible
     @Test
@@ -40,7 +45,12 @@ public class EncryptionIT {
 
     @Test
     public void testAES256Decryption() {
-        log.info(passwordEncryptor.decrypt("g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby"));
+        log.info(passwordEncryptor.decrypt("2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv"));
+    }
+
+    @Test
+    public void testShowEncryptedPassword() {
+        log.info(password);
     }
 
     //2-way base64 encoding

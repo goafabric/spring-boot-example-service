@@ -71,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public StringEncryptor passwordEncryptor(@Value("${encryption.passphrase}") String passPhrase) {
+    public StringEncryptor passwordEncryptor(@Value("${jasypt.encryptor.passphrase}") String passPhrase) {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase)));;                        // we HAVE TO set a password
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");

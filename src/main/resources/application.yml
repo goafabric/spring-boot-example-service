@@ -35,10 +35,12 @@ security:
   authentication:
     enabled: true
 
-encryption:
-  passphrase: Y2RLQm85NXhjVFZWSDNkaA==
+jasypt:
+  encryptor:
+    bean: passwordEncryptor
+    passphrase: Y2RLQm85NXhjVFZWSDNkaA==
 
 adapter:
   calleeserviceadapter:
     user: exampleuser
-    password: ENC(g2DWwx+uQYLX9vEOVUkb2fFu5ApHt/jXVADJVVmqjlvn0OEiA6rgv9Yz3DfiNJby)
+    password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
