@@ -36,7 +36,7 @@ security:
     enabled: true
 
 encryption:
-  passphrase: cdKBo95xcTVVH3dh
+  passphrase: Y2RLQm85NXhjVFZWSDNkaA==
 
 adapter:
   calleeserviceadapter:

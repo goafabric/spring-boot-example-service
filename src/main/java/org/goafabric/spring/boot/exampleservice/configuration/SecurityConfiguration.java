@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.Base64Utils;
 
 import javax.sql.DataSource;
 
@@ -74,7 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public StringEncryptor passwordEncryptor(@Value("${encryption.passphrase}") String passPhrase) {
         final PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         final SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword(passPhrase);
+        config.setPassword(new String(Base64Utils.decodeFromString(passPhrase)));
         config.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
         config.setPoolSize("1");
         encryptor.setConfig(config);
