@@ -34,3 +34,11 @@ spring:
 security:
   authentication:
     enabled: true
+
+encryption:
+  passphrase: cdKBo95xcTVVH3dh
+
+adapter:
+  calleeserviceadapter:
+    user: exampleuser
+    password: ENC(qqiIgzkMYRm+s5IhjWKyVqKQwE4mQ7Xwjb+n1libqz4JaHUuHtdC4Jhz5fhQFmpaTGq0v2/zp7E1J6uNNSJpCw==)

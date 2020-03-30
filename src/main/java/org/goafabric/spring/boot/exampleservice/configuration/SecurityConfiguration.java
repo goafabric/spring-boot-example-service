@@ -1,7 +1,12 @@
 
 package org.goafabric.spring.boot.exampleservice.configuration;
 
+import org.jasypt.encryption.StringEncryptor;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,5 +68,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public StringEncryptor passwordEncryptor(@Value("${encryption.passphrase}") String passPhrase) {
+        final PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
+        final SimpleStringPBEConfig config = new SimpleStringPBEConfig();
+        config.setPassword(passPhrase);
+        config.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
+        config.setPoolSize("1");
+        encryptor.setConfig(config);
+        return encryptor;
     }
 }
