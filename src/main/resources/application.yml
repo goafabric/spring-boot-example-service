@@ -46,4 +46,6 @@ adapter:
   calleeserviceadapter:
     user: exampleuser
     password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
+    timeout: 10
+
     # by using the ENC() spring-boot-jasypt internally decodes the password
