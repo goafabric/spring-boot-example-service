@@ -21,11 +21,11 @@ public class EncryptionIT {
     @Autowired
     private StringEncryptor passwordEncryptor;
 
-    @Value("${adapter.calleeserviceadapter.password}")
+    @Value("${adapter.calleeservice.password}")
     private String password;
 
 
-    //1-way hash, cannot be converted back, only matchin possible
+    //1-way hash, cannot be converted back, only matching possible
     @Test
     public void testPasswordHashEncode() {
         log.info(passwordHash.encode("secret"));

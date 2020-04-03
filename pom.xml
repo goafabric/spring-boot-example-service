@@ -275,7 +275,7 @@
                         <version>1.7.0</version>
                         <configuration>
                             <from>
-                                <image>adoptopenjdk/openjdk11:alpine</image>
+                                <image>adoptopenjdk/openjdk11:debian-slim</image>
                             </from>
                             <to>
                                 <image>${docker.image.prefix}/${project.artifactId}</image>
