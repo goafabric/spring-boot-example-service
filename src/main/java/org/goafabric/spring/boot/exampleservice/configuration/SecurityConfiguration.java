@@ -1,7 +1,11 @@
 
 package org.goafabric.spring.boot.exampleservice.configuration;
 
+import org.jasypt.encryption.StringEncryptor;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.salt.RandomIVGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.Base64Utils;
 
 import javax.sql.DataSource;
 
@@ -63,5 +68,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public StringEncryptor passwordEncryptor(@Value("${jasypt.encryptor.passphrase}") String passPhrase) {
+        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase)));;                        // we HAVE TO set a password
+        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
+        encryptor.setIVGenerator(new RandomIVGenerator());
+        return encryptor;
     }
 }
