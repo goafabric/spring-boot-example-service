@@ -1,0 +1,76 @@
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+#      nodePort: 30110 #this is the external port
+  type: ClusterIP
+  #type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:9.6.15-alpine
+#          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          args:
+            - postgres
+            - -c
+            - shared_buffers=128MB
+            - -c
+            - max_connections=30
+            - -c
+            - shared_preload_libraries=pg_stat_statements
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d/
+              name: initdb
+            - mountPath: /var/lib/postgresql/data
+              name: pgdata
+
+      volumes:
+        - name: initdb
+          configMap:
+            name: postgres-initdb
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: postgres-example-pv-claim
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-example-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi

@@ -1,6 +1,7 @@
 #!/bin/bash
 export COMMAND=$1
-
+export SERVICE_MEM="256m"
+export NAMESPACE="example-namespace"
 
 function func_delete {
     echo delete $1 ...
@@ -8,19 +9,41 @@ function func_delete {
     kubectl delete deployment $1
 }
 
+function func_delete_all {
+    kubectl config set-context --current --namespace=${NAMESPACE}
+
+    func_delete example-service
+    func_delete postgres
+
+    kubectl delete configmap application-config-files
+    kubectl delete configmap postgres-initdb
+
+    kubectl delete secret postgres-secret
+    kubectl delete secret example-service-secret
+    kubectl delete configmap example-service-config
+
+    kubectl delete persistentvolumeclaim postgres-example-pv-claim
+}
+
 
 if [ "${COMMAND}" = "up" ]
 then
-    kubectl apply -f config.yml
-    kubectl apply -f service.yml
-    minikube service example-service --url
+    kubectl create namespace ${NAMESPACE}
+    kubectl config set-context --current --namespace=${NAMESPACE}
+
+    kubectl create configmap application-config-files --from-file=../config/
+    kubectl create configmap postgres-initdb --from-file=../initdb/
+
+    kubectl apply -f configmap.yml
+    kubectl apply -f postgres.yml
+    kubectl apply -f exampleservice.yml
+
+    minikube service example-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    func_delete example-service
-    func_delete postgres
-    kubectl delete configmap example-config
+#    func_delete_all
+    kubectl delete namespace ${NAMESPACE}
+    kubectl config set-context --current --namespace=default
 else
     echo Doing nothing !
 fi
-
-#CleanUp: docker volume prune

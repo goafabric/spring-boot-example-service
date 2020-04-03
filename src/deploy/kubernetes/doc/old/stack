@@ -1,0 +1,41 @@
+#!/bin/bash
+export COMMAND=$1
+export SERVICE_MEM="256m"
+export NAMESPACE="example-namespace"
+
+function func_delete {
+    echo delete $1 ...
+    kubectl delete services $1
+    kubectl delete deployment $1
+}
+
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl create namespace ${NAMESPACE}
+
+    kubectl create configmap application-config-files --from-file=../config/
+    kubectl create configmap postgres-initdb --from-file=../initdb/
+
+    kubectl apply -f configmap.yml -n ${NAMESPACE}
+    kubectl apply -f postgres.yml -n ${NAMESPACE}
+    kubectl apply -f exampleservice.yml -n ${NAMESPACE}
+
+    minikube service example-service --url
+elif [ "${COMMAND}" = "down" ]
+then
+    func_delete example-service
+    func_delete postgres
+
+    kubectl delete configmap application-config-files
+    kubectl delete configmap postgres-initdb
+
+    kubectl delete secret postgres-secret
+    kubectl delete secret example-service-secret
+    kubectl delete configmap example-service-config
+
+#    kubectl delete persistentvolumeclaim postgres-example-pv-claim
+#    kubectl delete persistentvolume postgres-example-pv-volume
+else
+    echo Doing nothing !
+fi

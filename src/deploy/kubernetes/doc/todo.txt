@@ -1,10 +1,7 @@
-- configmap
-- volumes
-- namespaces
 - update/rollout
-
-
-- Best Practices
-https://severalnines.com/database-blog/using-kubernetes-deploy-postgresql
+- better secrets not only bae64
+- better way for setting memory
 
 - microk8s
+- helm
+
