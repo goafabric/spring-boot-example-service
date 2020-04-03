@@ -29,16 +29,9 @@ public class CountryLogic {
 
     @Autowired
     private CountryMapper countryMapper;
-
-    private String magicId;
-
-    public void setMagicId(String magicId) {
-        this.magicId = magicId;
-    }
     
     @Cacheable
     public Country getById(@NonNull final String id) {
-        log.info("magic id is: {}", magicId);
         return countryMapper.toDto(
             countryRepository.getOne(id));
     }
