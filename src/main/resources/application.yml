@@ -18,24 +18,19 @@ spring:
     datasource:
       url: jdbc:h2:mem:countrydb
       #url: jdbc:postgresql://localhost:5432/countrydb
-      username: postgres
-      password: postgres
+      username: example-service
+      password: example-service
 
       hikari:
         maximum-pool-size: 10
+        connection-timeout: 10000
 
     flyway:
       locations: classpath:db/migration
-#      schemas: countries
-    jpa:
-      hibernate:
-        ddl-auto: none
 
 security:
   authentication:
     enabled: true
-
-# these sections are relevant for everything encryption
 
 jasypt:
   encryptor:
