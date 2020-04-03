@@ -35,6 +35,8 @@ security:
   authentication:
     enabled: true
 
+# these sections are relevant for everything encryption
+
 jasypt:
   encryptor:
     bean: passwordEncryptor
@@ -44,3 +46,4 @@ adapter:
   calleeserviceadapter:
     user: exampleuser
     password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
+    # by using the ENC() spring-boot-jasypt internally decodes the password
