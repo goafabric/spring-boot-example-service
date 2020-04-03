@@ -3,16 +3,16 @@ server:
   tomcat.max-threads: 20
 
 management:
-    endpoint:
-      health:
-        show-details: always
     endpoints:
       web:
         exposure:
           include: "info,health"
-
-info:
-    status: ok
+    endpoint:
+      health:
+        show-details: always
+    health:
+      circuitbreakers:
+        enabled: true
 
 spring:
     datasource:
@@ -43,9 +43,25 @@ jasypt:
     passphrase: Y2RLQm85NXhjVFZWSDNkaA==
 
 adapter:
-  calleeserviceadapter:
+  timeout: 10
+  calleeservice:
     user: exampleuser
-    password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
-    timeout: 10
-
     # by using the ENC() spring-boot-jasypt internally decodes the password
+    password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      #see for more informations under: https://resilience4j.readme.io/docs/circuitbreaker
+      registerHealthIndicator: true
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      waitDurationInOpenState: 2s
+      failureRateThreshold: 50
+      slowCallDurationThreshold: ${adapter.timeout}s
+      slowCallRateThreshold: 100.0
+      writableStackTraceEnabled: false
+  instances:
+    calleservice:
+      baseConfig: default
+

@@ -16,13 +16,13 @@ import java.util.Arrays;
 
 @Configuration
 public class AdapterConfiguration {
-    @Value("${adapter.calleeserviceadapter.user}")
+    @Value("${adapter.calleeservice.user}")
     private String user;
 
-    @Value("${adapter.calleeserviceadapter.password}")
+    @Value("${adapter.calleeservice.password}")
     private String password;
 
-    @Value("${adapter.calleeserviceadapter.timeout}")
+    @Value("${adapter.timeout}")
     private Integer timeout;
 
     @Bean
@@ -41,14 +41,11 @@ public class AdapterConfiguration {
 
     private static HttpComponentsClientHttpRequestFactory createClientHttpRequestFactory(final int timeout) {
         final RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(timeout)
-                .setConnectionRequestTimeout(timeout)
+                .setConnectTimeout(timeout).setConnectionRequestTimeout(timeout)
                 .setSocketTimeout(timeout)
                 .build();
         final CloseableHttpClient client = HttpClientBuilder
-                .create()
-                .setDefaultRequestConfig(config)
-                .build();
+                .create().setDefaultRequestConfig(config).build();
         return new HttpComponentsClientHttpRequestFactory(client);
     }
 
