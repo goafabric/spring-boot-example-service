@@ -61,6 +61,6 @@ resilience4j.circuitbreaker:
       minimumNumberOfCalls: 10 #The minimum number of calls which are required before the CircuitBreaker can calculate the error rate.
       permittedNumberOfCallsInHalfOpenState: 10 #Number of permitted calls when the CircuitBreaker is half open.
   instances:
-    calleservice:
+    calleeservice:
       baseConfig: default
 
