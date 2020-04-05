@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @Slf4j
-@CircuitBreaker(name = "calleeService")
+@CircuitBreaker(name = "calleeservice")
 public class CalleeServiceAdapter {
     @Autowired
     private RestTemplate calleeServiceAdapterRestTemplate;
