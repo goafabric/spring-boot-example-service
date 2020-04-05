@@ -28,6 +28,8 @@
         <maven-assembly-plugin.version>2.5.4</maven-assembly-plugin.version>
 
         <resilience4j.version>1.2.0</resilience4j.version>
+        <springfox-swagger.version>2.9.2</springfox-swagger.version>
+        <jasypt-spring-boot-starter.version>2.1.1</jasypt-spring-boot-starter.version>
     </properties>
 
 
@@ -108,7 +110,19 @@
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>2.1.1</version>
+            <version>${jasypt-spring-boot-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger.version}</version>
         </dependency>
 
         <!-- Persistence -->

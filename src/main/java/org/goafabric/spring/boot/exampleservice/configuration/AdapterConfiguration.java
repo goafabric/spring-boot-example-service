@@ -1,8 +1,9 @@
-package org.goafabric.spring.boot.exampleservice.adapter;
+package org.goafabric.spring.boot.exampleservice.configuration;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.goafabric.spring.boot.exampleservice.adapter.RestTemplateFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
