@@ -1,5 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
+import lombok.experimental.Delegate;
 import org.goafabric.spring.boot.exampleservice.logic.CountryLogic;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,41 +22,6 @@ import java.util.List;
 @PreAuthorize("hasRole('STANDARD_ROLE')")
 public class CountryServiceBean implements CountryService {
     @Autowired
+    @Delegate
     private CountryLogic countryLogic;
-
-    @GetMapping("getById")
-    public Country getById(@RequestParam String id) {
-        return countryLogic.getById(id);
-    }
-
-    @GetMapping("findAll")
-    public List<Country> findAll() {
-        return countryLogic.findAll();
-    }
-
-    @GetMapping("findByIsoCode")
-    public Country findByIsoCode(@RequestParam String isoCode) {
-        return countryLogic.findByIsoCode(isoCode);
-    }
-
-    @GetMapping("findByName")
-    public Country findByName(@RequestParam String name) {
-        return countryLogic.findByName(name);
-    }
-
-    @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Country save(@Valid @RequestBody Country country) {
-        return countryLogic.save(country);
-    }
-
-    @DeleteMapping("delete")
-    public void delete(@RequestParam String id) {
-        countryLogic.delete(id);
-    }
-
-    @GetMapping("isAlive")
-    public Boolean isAlive() {
-        return countryLogic.isAlive();
-    }
-
 }
