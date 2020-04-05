@@ -28,7 +28,7 @@ public class AdapterConfiguration {
     @Bean
     public RestTemplate adapterRestTemplate() {
         final RestTemplate restTemplate = new RestTemplate(
-                createClientHttpRequestFactory(timeout));
+                createClientHttpRequestFactory(timeout * 1000));
 
         restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
         restTemplate.getInterceptors().add((request, body, execution) -> {

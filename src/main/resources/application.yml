@@ -40,7 +40,7 @@ jasypt:
 ## adapter section
 
 adapter:
-  timeout: 1000
+  timeout: 10
   calleeservice:
     url: http://localhost:50900
     user: exampleuser
@@ -52,13 +52,13 @@ resilience4j.circuitbreaker:
     default:
       #see for more informations under: https://resilience4j.readme.io/docs/circuitbreaker
       registerHealthIndicator: true
-      minimumNumberOfCalls: 5
-      permittedNumberOfCallsInHalfOpenState: 3
-      waitDurationInOpenState: 2s
-      failureRateThreshold: 50
-      slowCallDurationThreshold: ${adapter.timeout}
-      slowCallRateThreshold: 100.0
-      writableStackTraceEnabled: false
+      slowCallDurationThreshold: ${adapter.timeout}s #Configures the duration threshold above which calls are considered as slow and increase the rate of slow calls.
+      slowCallRateThreshold: 100 #Configures a threshold in percentage. The CircuitBreaker considers a call as slow when the call duration is greater than slowCallDurationThreshold
+      failureRateThreshold: 50 #Configures the failure rate threshold in percentage. When the failure rate is equal or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls.
+      waitDurationInOpenState: 60s #he time that the CircuitBreaker should wait before transitioning from open to half-open.
+
+      minimumNumberOfCalls: 10 #Configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate.
+      permittedNumberOfCallsInHalfOpenState: 10 #Configures the number of permitted calls when the CircuitBreaker is half open.
   instances:
     calleservice:
       baseConfig: default
