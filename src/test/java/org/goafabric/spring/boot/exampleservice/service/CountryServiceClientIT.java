@@ -94,6 +94,26 @@ public class CountryServiceClientIT {
         assertThat(country2.getId()).isNotEqualTo(id);
     }
 
+    @Test
+    public void testNegativeSaveValidationFailed() {
+        try {
+            final Country country = createStubCountry();
+            country.setName(null);
+            countryService.save(country);
+        } catch (HttpClientErrorException e) {
+            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.PRECONDITION_FAILED);
+        }
+
+        try {
+            final Country country = createStubCountry();
+            country.setIsoCode("too long");
+            countryService.save(country);
+        } catch (HttpClientErrorException e) {
+            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.PRECONDITION_FAILED);
+        }
+
+    }
+
     //does  not work because due to json string is not null but empty
     @Test
     @Ignore
