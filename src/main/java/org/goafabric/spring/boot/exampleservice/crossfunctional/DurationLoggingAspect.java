@@ -1,4 +1,4 @@
-package org.goafabric.spring.boot.exampleservice.crossfunctional.aspect;
+package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

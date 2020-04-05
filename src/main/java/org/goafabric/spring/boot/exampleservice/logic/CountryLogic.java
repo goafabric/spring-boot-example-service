@@ -4,7 +4,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceAdapter;
 import org.goafabric.spring.boot.exampleservice.configuration.CacheConfiguration;
-import org.goafabric.spring.boot.exampleservice.crossfunctional.mapper.CountryMapper;
+import org.goafabric.spring.boot.exampleservice.crossfunctional.CountryMapper;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
