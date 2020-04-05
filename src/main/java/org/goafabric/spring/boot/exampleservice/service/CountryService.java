@@ -35,7 +35,7 @@ public interface CountryService {
     @DeleteMapping("delete")
     void delete(@RequestParam String id);
 
-    @ApiOperation("Isalive that connects to another Service")
+    @ApiOperation("isAlive that connects to another Service")
     @GetMapping("isAlive")
     Boolean isAlive();
 }
