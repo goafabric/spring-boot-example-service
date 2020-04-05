@@ -16,37 +16,13 @@ import java.util.Arrays;
 
 @Configuration
 public class AdapterConfiguration {
-    @Value("${adapter.calleeservice.user}")
-    private String user;
-
-    @Value("${adapter.calleeservice.password}")
-    private String password;
-
-    @Value("${adapter.timeout}")
-    private Integer timeout;
-
     @Bean
-    public RestTemplate adapterRestTemplate() {
-        final RestTemplate restTemplate = new RestTemplate(
-                createClientHttpRequestFactory(timeout * 1000));
-
-        restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
-        restTemplate.getInterceptors().add((request, body, execution) -> {
-            request.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-            request.getHeaders().setBasicAuth(user, password);
-            return execution.execute(request, body);
-        });
-        return restTemplate;
+    public RestTemplate adapterRestTemplate(
+            @Value("${adapter.calleeservice.user}") String user,
+            @Value("${adapter.calleeservice.password}") String password,
+            @Value("${adapter.timeout}") Integer timeout) {
+        return RestTemplateFactory.createRestTemplate(timeout, user, password);
     }
 
-    private static HttpComponentsClientHttpRequestFactory createClientHttpRequestFactory(final int timeout) {
-        final RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(timeout).setConnectionRequestTimeout(timeout)
-                .setSocketTimeout(timeout)
-                .build();
-        final CloseableHttpClient client = HttpClientBuilder
-                .create().setDefaultRequestConfig(config).build();
-        return new HttpComponentsClientHttpRequestFactory(client);
-    }
 
 }
