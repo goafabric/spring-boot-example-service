@@ -107,6 +107,11 @@ public class CountryServiceClientIT {
         }
     }
 
+    @Test
+    public void testIsAlive() {
+        assertThat(countryService.isAlive()).isTrue();
+    }
+
     private Country createStubCountry() {
         final Country country = Country.builder()
                 .isoCode("pi")

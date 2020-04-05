@@ -18,4 +18,6 @@ public interface CountryService {
     Country save(Country country);
 
     void delete(String id);
+
+    Boolean isAlive();
 }

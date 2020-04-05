@@ -2,6 +2,7 @@ package org.goafabric.spring.boot.exampleservice.logic;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceAdapter;
 import org.goafabric.spring.boot.exampleservice.configuration.CacheConfiguration;
 import org.goafabric.spring.boot.exampleservice.crossfunctional.mapper.CountryMapper;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
@@ -29,7 +30,10 @@ public class CountryLogic {
 
     @Autowired
     private CountryMapper countryMapper;
-    
+
+    @Autowired
+    private CalleeServiceAdapter calleeServiceAdapter;
+
     @Cacheable
     public Country getById(@NonNull final String id) {
         return countryMapper.toDto(
@@ -65,5 +69,8 @@ public class CountryLogic {
         countryRepository.deleteById(id);
     }
 
+    public Boolean isAlive() {
+        return calleeServiceAdapter.isAlive();
+    }
 }
 

@@ -37,9 +37,12 @@ jasypt:
     bean: passwordEncryptor
     passphrase: Y2RLQm85NXhjVFZWSDNkaA==
 
+## adapter section
+
 adapter:
-  timeout: 10
+  timeout: 1000
   calleeservice:
+    url: http://localhost:50900
     user: exampleuser
     # by using the ENC() spring-boot-jasypt internally decodes the password
     password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
@@ -53,7 +56,7 @@ resilience4j.circuitbreaker:
       permittedNumberOfCallsInHalfOpenState: 3
       waitDurationInOpenState: 2s
       failureRateThreshold: 50
-      slowCallDurationThreshold: ${adapter.timeout}s
+      slowCallDurationThreshold: ${adapter.timeout}
       slowCallRateThreshold: 100.0
       writableStackTraceEnabled: false
   instances:

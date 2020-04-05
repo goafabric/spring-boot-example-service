@@ -52,4 +52,9 @@ public class CountryServiceBean implements CountryService {
         countryLogic.delete(id);
     }
 
+    @GetMapping("isAlive")
+    public Boolean isAlive() {
+        return countryLogic.isAlive();
+    }
+
 }
