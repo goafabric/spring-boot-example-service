@@ -2,6 +2,7 @@ server:
   port: 50700
   tomcat.max-threads: 20
 
+## actuactor section
 management:
     endpoints:
       web:
@@ -14,20 +15,21 @@ management:
       circuitbreakers:
         enabled: true
 
+## persistence section
 spring:
     datasource:
       url: jdbc:h2:mem:countrydb
-      #url: jdbc:postgresql://localhost:5432/countrydb
       username: example-service
       password: example-service
 
       hikari:
         maximum-pool-size: 10
-        connection-timeout: 10000
+        connection-timeout: 10000 #timeout in ms
 
     flyway:
       locations: classpath:db/migration
 
+## encryption section
 security:
   authentication:
     enabled: true
@@ -37,25 +39,27 @@ jasypt:
     bean: passwordEncryptor
     passphrase: Y2RLQm85NXhjVFZWSDNkaA==
 
+## adapter section
+
 adapter:
-  timeout: 10
+  timeout: 10 #timeout in seconds
   calleeservice:
+    url: http://localhost:50900
     user: exampleuser
-    # by using the ENC() spring-boot-jasypt internally decodes the password
-    password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
+    password: ENC(2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw==)
 
 resilience4j.circuitbreaker:
   configs:
     default:
       #see for more informations under: https://resilience4j.readme.io/docs/circuitbreaker
       registerHealthIndicator: true
-      minimumNumberOfCalls: 5
-      permittedNumberOfCallsInHalfOpenState: 3
-      waitDurationInOpenState: 2s
-      failureRateThreshold: 50
-      slowCallDurationThreshold: ${adapter.timeout}s
-      slowCallRateThreshold: 100.0
-      writableStackTraceEnabled: false
+      slowCallDurationThreshold: ${adapter.timeout}s #Effectively the timeout
+      slowCallRateThreshold: 100 #Percentage of calls that that need be registered a slow for the CB to transitions from close to open
+      failureRateThreshold: 50 #Failure rate when the Circuit Breaker transitions from closed to open
+      waitDurationInOpenState: 60s #Time the CircuitBreaker should wait before transitioning back from open to half-open.
+
+      minimumNumberOfCalls: 10 #The minimum number of calls which are required before the CircuitBreaker can calculate the error rate.
+      permittedNumberOfCallsInHalfOpenState: 10 #Number of permitted calls when the CircuitBreaker is half open.
   instances:
     calleservice:
       baseConfig: default
