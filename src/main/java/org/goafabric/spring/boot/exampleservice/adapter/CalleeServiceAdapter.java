@@ -12,15 +12,14 @@ import org.springframework.web.client.RestTemplate;
 @CircuitBreaker(name = "calleeService")
 public class CalleeServiceAdapter {
     @Autowired
-    private RestTemplate adapterRestTemplate;
+    private RestTemplate calleeServiceAdapterRestTemplate;
 
     @Value("${adapter.calleeservice.url}")
     private String url;
 
-
     public Boolean isAlive() {
         log.info("Calling CalleService ...");
-        final Boolean isAlive = adapterRestTemplate.getForObject(url + "callees/isAlive", Boolean.class);
+        final Boolean isAlive = calleeServiceAdapterRestTemplate.getForObject(url + "callees/isAlive", Boolean.class);
         log.info("got: " + isAlive);
         return isAlive;
     }

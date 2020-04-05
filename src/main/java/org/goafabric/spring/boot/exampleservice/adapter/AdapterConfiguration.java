@@ -17,7 +17,7 @@ import java.util.Arrays;
 @Configuration
 public class AdapterConfiguration {
     @Bean
-    public RestTemplate adapterRestTemplate(
+    public RestTemplate calleeServiceAdapterRestTemplate(
             @Value("${adapter.calleeservice.user}") String user,
             @Value("${adapter.calleeservice.password}") String password,
             @Value("${adapter.timeout}") Integer timeout) {

@@ -38,6 +38,7 @@ public class CountryServiceClientIT {
     }
 
     @Test
+    @Ignore
     public void testIsAlive() {
         assertThat(countryService.isAlive()).isTrue();
     }
