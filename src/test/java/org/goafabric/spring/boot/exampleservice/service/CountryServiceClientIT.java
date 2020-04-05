@@ -38,6 +38,11 @@ public class CountryServiceClientIT {
     }
 
     @Test
+    public void testIsAlive() {
+        assertThat(countryService.isAlive()).isTrue();
+    }
+
+    @Test
     public void testGetById() {
         final Country country = countryService.getById("1");
         assertThat(country).isNotNull();
@@ -105,11 +110,6 @@ public class CountryServiceClientIT {
             assertThat(e.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
             assertThat(e.getResponseBodyAsString()).isNotNull();
         }
-    }
-
-    @Test
-    public void testIsAlive() {
-        assertThat(countryService.isAlive()).isTrue();
     }
 
     private Country createStubCountry() {

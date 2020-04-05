@@ -2,6 +2,7 @@ server:
   port: 50700
   tomcat.max-threads: 20
 
+## actuactor section
 management:
     endpoints:
       web:
@@ -14,20 +15,21 @@ management:
       circuitbreakers:
         enabled: true
 
+## persistence section
 spring:
     datasource:
       url: jdbc:h2:mem:countrydb
-      #url: jdbc:postgresql://localhost:5432/countrydb
       username: example-service
       password: example-service
 
       hikari:
         maximum-pool-size: 10
-        connection-timeout: 10000
+        connection-timeout: 10000 #timeout in ms
 
     flyway:
       locations: classpath:db/migration
 
+## encryption section
 security:
   authentication:
     enabled: true
@@ -40,12 +42,11 @@ jasypt:
 ## adapter section
 
 adapter:
-  timeout: 10
+  timeout: 10 #timeout in seconds
   calleeservice:
     url: http://localhost:50900
     user: exampleuser
-    # by using the ENC() spring-boot-jasypt internally decodes the password
-    password: ENC(2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv)
+    password: ENC(2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw==)
 
 resilience4j.circuitbreaker:
   configs:

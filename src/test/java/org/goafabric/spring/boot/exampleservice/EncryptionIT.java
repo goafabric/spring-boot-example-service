@@ -40,12 +40,12 @@ public class EncryptionIT {
     //2-way encryption and decryption
     @Test
     public void testAES256Encryption() {
-        log.info(passwordEncryptor.encrypt("secret"));
+        log.info(passwordEncryptor.encrypt("cdKBo95xcTVVH3dh"));
     }
 
     @Test
     public void testAES256Decryption() {
-        log.info(passwordEncryptor.decrypt("2UeQbdtDOZZRxoaMXFjM3PC+UsvtauSVVyYfvhrqjw/NnH+zYpdtvWt771L+cUfv"));
+        log.info(passwordEncryptor.decrypt("2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw=="));
     }
 
     @Test
