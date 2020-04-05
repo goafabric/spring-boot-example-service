@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@RequestMapping(value = CountryService.RESOURCE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public interface CountryService {
     String RESOURCE = "/countries";
 

@@ -15,9 +15,6 @@ import java.util.List;
  * Created by andreas.mautsch on 08.06.2018.
  */
 
-@RequestMapping(value = CountryService.RESOURCE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-
 @RestController
 @PreAuthorize("hasRole('STANDARD_ROLE')")
 public class CountryServiceBean implements CountryService {
