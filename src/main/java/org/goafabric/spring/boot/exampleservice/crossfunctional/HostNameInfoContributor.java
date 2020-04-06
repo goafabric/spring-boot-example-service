@@ -1,4 +1,4 @@
-package org.goafabric.spring.boot.exampleservice.configuration;
+package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.info.Info;

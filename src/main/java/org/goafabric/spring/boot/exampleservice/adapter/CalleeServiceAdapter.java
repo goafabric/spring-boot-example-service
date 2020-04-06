@@ -4,6 +4,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,6 +25,13 @@ public class CalleeServiceAdapter {
         return isAlive;
     }
 
+    @Bean
+    public RestTemplate calleeServiceAdapterRestTemplate(
+            @Value("${adapter.calleeservice.user}") String user,
+            @Value("${adapter.calleeservice.password}") String password,
+            @Value("${adapter.timeout}") Integer timeout) {
+        return RestTemplateFactory.createRestTemplate(timeout, user, password);
+    }
 
 
 }

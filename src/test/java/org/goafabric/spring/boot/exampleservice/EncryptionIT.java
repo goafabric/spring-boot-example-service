@@ -28,13 +28,13 @@ public class EncryptionIT {
     //1-way hash, cannot be converted back, only matching possible
     @Test
     public void testPasswordHashEncode() {
-        log.info(passwordHash.encode("secret"));
+        log.info(passwordHash.encode("admin"));
     }
 
     @Test
     public void testPasswordHashMatch() {
-        log.info("" + passwordHash.matches("secret",
-                "$2a$10$q1qtofwdHL7gcJeHiKSVx.I6lImNQVWzO01S13bajJu2USH9JCRX6"));
+        log.info("" + passwordHash.matches("admin",
+                "$2a$10$onJqryBEk9ToQSVPMBHTOO5PaXZXvkztWXDQqzkC4d.ORlMpt8Y4G"));
     }
 
     //2-way encryption and decryption
