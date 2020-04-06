@@ -12,3 +12,6 @@ Updated
 
 #1.0.0 
 - initial release
+- Security
+    - Password Encryption with Jaspyt
+    - Password Hashing with Bcrypt
