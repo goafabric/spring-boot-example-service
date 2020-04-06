@@ -1,10 +1,11 @@
 #1.0.1-SNAPSHPT
-added
+Added
 - Swagger
 - Bean Validation
-- CalleeServiceAdapter
+- Resilience4j
+- CalleeServiceAdapter to call an external Service
 
-updated
+Updated
 - Update to Spring Boot 2.2.6
 - Update to Jib 2.1.0
 
