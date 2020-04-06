@@ -1,7 +1,7 @@
-#1.0.1-SNAPSHPT
+#1.0.1-SNAPSHOT
 Added
 - Swagger
-- Bean Validation
+- Bean Validation for API
 - Resilience4j
 - CalleeServiceAdapter to call an external Service
 
