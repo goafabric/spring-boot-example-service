@@ -25,6 +25,9 @@ spec:
     matchLabels:
       app: postgres
   replicas: 1
+  strategy:
+    type: Recreate
+#    type: RollingUpdate
   template:
     metadata:
       labels:

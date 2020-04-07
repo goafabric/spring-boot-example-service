@@ -1,4 +1,5 @@
 #1.0.1-SNAPSHOT
+
 ##Added
 
 API
@@ -24,6 +25,7 @@ Security
     - @see: SecurityConfiguration, Application.yml + EncryptionIT
 
 ##Updated
+
 POM
 - Update to Spring Boot 2.2.6
 - Update to Jib 2.1.0
