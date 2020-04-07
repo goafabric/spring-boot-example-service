@@ -32,7 +32,7 @@ spring:
 database:
   provisioning:
     goals: -migrate
-#    goals: -migrate -import -terminate
+#    goals: -migrate -import-catalog-data -terminate
 
 ## encryption section
 security:
