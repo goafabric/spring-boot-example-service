@@ -6,7 +6,7 @@
 
     <groupId>org.goafabric</groupId>
     <artifactId>spring-boot-exampleservice</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <description>Demo project for Spring Boot</description>
 
