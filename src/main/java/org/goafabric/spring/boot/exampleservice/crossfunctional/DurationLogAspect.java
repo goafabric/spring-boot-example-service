@@ -28,7 +28,7 @@ public class DurationLogAspect {
         } finally {
             final Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
             log.info("{} took {}ms for user {}", toString(method), System.currentTimeMillis() - startTime,
-                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+                SecurityContextHolder.getContext().getAuthentication().getName());
         }
     }
 

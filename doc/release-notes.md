@@ -1,5 +1,11 @@
 #1.0.2-SNAPSHOT
 
+##Added
+
+CrossFunctional
+- @DurationLog annotation,
+- DurationLogAsecpt now also logs the logged in user
+
 #1.0.1
 
 ##Added
