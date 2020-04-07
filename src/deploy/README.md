@@ -50,4 +50,4 @@ kubectl rollout undo deployment example-service
 # Database Provisioning
 docker pull goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
 docker run --rm -p 50700:50700 goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-docker run --rm -e database.provisioning.goal='-migrate -import -terminate' -e spring.datasource.url='jdbc:h2:mem:countrydb' goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
+docker run --rm -e database.provisioning.goals='-migrate -import -terminate' -e spring.datasource.url='jdbc:h2:mem:countrydb' goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT

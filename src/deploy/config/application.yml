@@ -31,8 +31,8 @@ spring:
 
 database:
   provisioning:
-    goal: -migrate
-#    goal: -migrate -import -terminate
+    goals: -migrate
+#    goals: -migrate -import -terminate
 
 ## encryption section
 security:
