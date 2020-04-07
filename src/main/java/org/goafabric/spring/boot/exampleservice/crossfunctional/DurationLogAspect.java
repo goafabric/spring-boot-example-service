@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 @Component
 @Aspect
 @Slf4j
-public class DurationLoggingAspect {
+public class DurationLogAspect {
 
-    @Around("execution(* org.goafabric.spring.boot.exampleservice.service..*(..)) )")
+    @Around("execution(public * *(..)) && within(@org.goafabric.spring.boot.exampleservice.crossfunctional.DurationLog *)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         final long startTime = System.currentTimeMillis();
         try {
