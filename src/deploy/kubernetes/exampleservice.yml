@@ -39,7 +39,7 @@ spec:
                      do echo waiting for database; sleep 2; done;']
       containers:
         - name: example-service
-          image: goafabric/spring-boot-exampleservice:1.0.1-SNAPSHOT
+          image: goafabric/spring-boot-exampleservice:1.0.1
           imagePullPolicy: Always
 #          imagePullPolicy: IfNotPresent
           ports:

@@ -7,7 +7,7 @@ minikube addons enable metrics-server
 
 -- deployment barebone
 
-kubectl run example-service --image=goafabric/spring-boot-exampleservice:1.0.0-SNAPSHOT --port=50700
+kubectl run example-service --image=goafabric/spring-boot-exampleservice:1.0.1 --port=50700
 kubectl expose deployment example-service --type=NodePort
 minikube service example-service --url
 
