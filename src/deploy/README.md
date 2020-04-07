@@ -46,3 +46,8 @@ update country set name = 'updated' where id = '1'
 kubectl set image deployment example-service example-service=goafabric/spring-boot-exampleservice:1.0.1-SNAPSHOT
 kubectl rollout status deployment example-service
 kubectl rollout undo deployment example-service
+
+# Database Provisioning
+docker pull goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
+docker run --rm -p 50700:50700 goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
+docker run --rm -e database.provisioning.goal='-migrate -import -terminate' -e spring.datasource.url='jdbc:h2:mem:countrydb' goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
