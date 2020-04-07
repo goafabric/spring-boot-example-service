@@ -2,6 +2,7 @@ package org.goafabric.spring.boot.exampleservice.persistence.provisioning;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,13 +25,13 @@ public class DatabaseProvisioning implements CommandLineRunner {
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
         return flyway -> {
-            final String parameters = getGoals();
-            if (parameters.contains("-migrate")) {
+            final String goals = getGoals();
+            if (goals.contains("-migrate")) {
                 log.info("calling flyway migration");
                 flyway.migrate();
             }
 
-            if (parameters.contains("-clean")) {
+            if (goals.contains("-clean")) {
                 log.info("calling flyway clean");
                 flyway.clean();
             }
@@ -39,16 +40,18 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        final String parameters = getGoals();
-        if (parameters.contains("-import")) {
-            log.info("calling catalog import");
-            databaseImport.run();
+        final String goals = getGoals();
+        if (goals.contains("-import-catalog-data")) {
+            log.info("calling catalog data import");
+            databaseImport.importCatalogData();
         }
 
-        //TODO: also for Demodata
+        if (goals.contains("-import-demo-data")) {
+            log.info("calling demo data import");
+            databaseImport.importDemoData();
+        }
 
-        //if an exception is thrown, application will terminate anyway
-        if (parameters.contains("-terminate")) {
+        if (goals.contains("-terminate")) {
             log.info("terminating app");
             initiateShutdown(0);
         }
@@ -56,7 +59,8 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private String getGoals() {
         final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goal");
-        return goals;
+        return (StringUtils.isNullOrEmpty(goals) == true)
+                ? "-dddf" : goals;
     }
 
     public void initiateShutdown(int exitCode){

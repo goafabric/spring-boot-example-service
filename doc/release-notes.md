@@ -10,6 +10,7 @@ Added
     - @see @CircuitBreaker inside CalleServiceAdapter, application.yml
     - Dependencies: resilience4j
 - CalleeServiceAdapter to call an external Service
+- DatabaseProvisoning added
 
 Updated
 - Update to Spring Boot 2.2.6

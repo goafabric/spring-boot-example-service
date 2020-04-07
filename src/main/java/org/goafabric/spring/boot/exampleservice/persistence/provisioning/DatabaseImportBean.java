@@ -6,8 +6,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class DatabaseImportBean implements DatabaseImport {
+
     @Override
-    public void run(String... args) {
-        log.info("dummy implementation for import");
+    public void importCatalogData(String... args) {
+        log.info("dummy implementation for catalog import");
+    }
+
+    @Override
+    public void importDemoData(String... args) {
+        log.info("dummy implementation for demodata import");
     }
 }
