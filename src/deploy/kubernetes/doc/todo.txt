@@ -1,7 +1,0 @@
-- update/rollout
-- better secrets not only bae64
-- better way for setting memory
-
-- microk8s
-- helm
-
