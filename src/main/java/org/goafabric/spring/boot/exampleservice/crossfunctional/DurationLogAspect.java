@@ -5,6 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -26,7 +27,8 @@ public class DurationLogAspect {
             return joinPoint.proceed();
         } finally {
             final Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-            log.info("{} took {}ms", toString(method), System.currentTimeMillis() - startTime);
+            log.info("{} took {}ms for user {}", toString(method), System.currentTimeMillis() - startTime,
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         }
     }
 

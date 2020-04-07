@@ -1,4 +1,6 @@
-#1.0.1-SNAPSHOT
+#1.0.2-SNAPSHOT
+
+#1.0.1
 
 ##Added
 
