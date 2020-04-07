@@ -60,7 +60,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
     private String getGoals() {
         final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goals");
         return (StringUtils.isNullOrEmpty(goals) == true)
-                ? "-dddf" : goals;
+                ? "-migrate" : goals;
     }
 
     public void initiateShutdown(int exitCode){
