@@ -6,8 +6,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
@@ -21,10 +23,14 @@ import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@PropertySource("test.properties")
 @RunWith(SpringRunner.class)
 public class CountryServiceClientIT {
     @Autowired
     private RestTemplate restTemplate;
+
+    @Value("${service.baseurl}")
+    private String baseUrl;
 
     @LocalServerPort
     private int port;
@@ -34,7 +40,7 @@ public class CountryServiceClientIT {
     @PostConstruct
     private void init() {
         this.countryService
-                = new CountryServiceClient(restTemplate, "http://localhost:" + port);
+                = new CountryServiceClient(restTemplate, baseUrl + ":" + port);
     }
 
     @Test

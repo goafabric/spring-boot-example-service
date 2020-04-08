@@ -12,9 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
+@Slf4j
 @Configuration
 @PropertySource("test.properties")
-@Slf4j
 public class RestTemplateConfiguration {
     @Value("${client.user}")
     private String user;
