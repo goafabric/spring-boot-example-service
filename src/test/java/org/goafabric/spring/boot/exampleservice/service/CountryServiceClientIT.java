@@ -29,8 +29,8 @@ public class CountryServiceClientIT {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${service.baseurl}")
-    private String baseUrl;
+    @Autowired
+    private String serviceBaseUrl;
 
     @LocalServerPort
     private int port;
@@ -40,7 +40,7 @@ public class CountryServiceClientIT {
     @PostConstruct
     private void init() {
         this.countryService
-                = new CountryServiceClient(restTemplate, baseUrl + ":" + port);
+                = new CountryServiceClient(restTemplate, serviceBaseUrl + ":" + port);
     }
 
     @Test

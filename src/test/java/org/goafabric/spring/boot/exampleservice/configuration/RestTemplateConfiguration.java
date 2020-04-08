@@ -47,4 +47,9 @@ public class RestTemplateConfiguration {
 
         return restTemplate;
     }
+
+    @Bean
+    public String serviceBaseUrl(@Value("${service.baseurl}") String serviceBaseUrl) {
+        return serviceBaseUrl;
+    }
 }
