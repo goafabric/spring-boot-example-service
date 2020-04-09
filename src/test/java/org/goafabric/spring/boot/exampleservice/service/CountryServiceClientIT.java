@@ -23,7 +23,6 @@ import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@PropertySource("test.properties")
 @RunWith(SpringRunner.class)
 public class CountryServiceClientIT {
     @Autowired
