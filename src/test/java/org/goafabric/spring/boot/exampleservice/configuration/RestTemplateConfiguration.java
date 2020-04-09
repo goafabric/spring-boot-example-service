@@ -23,6 +23,11 @@ public class RestTemplateConfiguration {
     private String password;
 
     @Bean
+    public String serviceBaseUrl(@Value("${service.baseurl}") String serviceBaseUrl) {
+        return serviceBaseUrl;
+    }
+
+    @Bean
     public RestTemplate restTemplate() {
         final RestTemplate restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
@@ -46,10 +51,5 @@ public class RestTemplateConfiguration {
          */
 
         return restTemplate;
-    }
-
-    @Bean
-    public String serviceBaseUrl(@Value("${service.baseurl}") String serviceBaseUrl) {
-        return serviceBaseUrl;
     }
 }
