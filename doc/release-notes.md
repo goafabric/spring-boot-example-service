@@ -4,7 +4,7 @@
 
 CrossFunctional
 - @DurationLog annotation,
-- DurationLogAsecpt now also logs the logged in user
+- DurationLogAspect now also logs the logged in user
 
 #1.0.1
 
