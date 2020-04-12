@@ -7,6 +7,11 @@ CrossFunctional
 - DurationLogAspect now also logs the logged in user
 - AuditListener added
 
+##Modified
+
+CrossFunctional
+- Small refactorings and moving classes around
+
 #1.0.1
 
 ##Added

@@ -11,9 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.PostPersist;
-import javax.persistence.PostRemove;
-import javax.persistence.PostUpdate;
 import java.util.Date;
 
 @Component
@@ -40,17 +37,14 @@ public class AuditBean {
         private String value;
     }
 
-    @PostPersist
     public void afterInsert(Object person) {
         logAudit(person, DbOperation.INSERT);
     }
 
-    @PostUpdate
     public void afterUpdate(Object person) {
         logAudit(person, DbOperation.UPDATE);
     }
 
-    @PostRemove
     public void afterDelete(Object person) {
         logAudit(person, DbOperation.DELETE);
     }
