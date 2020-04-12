@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 
 @Component
 @Slf4j
-public class HostNameInfoContributor implements InfoContributor {
+public class HostNameInfoActuator implements InfoContributor {
 
     @Override
     public void contribute(Info.Builder builder) {
