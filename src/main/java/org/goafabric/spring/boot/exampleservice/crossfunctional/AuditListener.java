@@ -4,7 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.goafabric.spring.boot.exampleservice.logic.CountryLogic;
 import org.joda.time.LocalDateTime;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
@@ -17,6 +22,18 @@ import java.util.Date;
 
 @Slf4j
 public class AuditListener {
+    @Service
+    private static class BeanUtil implements ApplicationContextAware {
+        private static ApplicationContext context;
+        @Override
+        public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+            context = applicationContext;
+        }
+        public static <T> T getBean(Class<T> beanClass) {
+            return context.getBean(beanClass);
+        }
+    }
+
     private enum DbOperation {
         INSERT,
         UPDATE,
@@ -62,6 +79,7 @@ public class AuditListener {
                 auditEvent = createUpdateDeleteEvent(object, operation, value);
             }
 
+            CountryLogic logic = BeanUtil.getBean(CountryLogic.class);
             log.info("New audit event : {}", auditEvent.toString());
         } catch (Exception e) {
             log.error("Error during audit: {}", e.getMessage(), e);
