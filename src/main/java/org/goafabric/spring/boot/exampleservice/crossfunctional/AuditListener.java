@@ -30,18 +30,18 @@ public class AuditListener {
     }
 
     @PostPersist
-    public void postPersist(Object person) {
-        BeanUtil.getBean(AuditBean.class).postPersist(person);
+    public void afterInsert(Object person) {
+        BeanUtil.getBean(AuditBean.class).afterInsert(person);
     }
 
     @PostUpdate
-    public void postUpdate(Object person) {
-        BeanUtil.getBean(AuditBean.class).postUpdate(person);
+    public void afterUpdate(Object person) {
+        BeanUtil.getBean(AuditBean.class).afterUpdate(person);
     }
 
     @PostRemove
-    public void postRemove(Object person) {
-        BeanUtil.getBean(AuditBean.class).postRemove(person);
+    public void afterDelete(Object person) {
+        BeanUtil.getBean(AuditBean.class).afterDelete(person);
     }
 
 }

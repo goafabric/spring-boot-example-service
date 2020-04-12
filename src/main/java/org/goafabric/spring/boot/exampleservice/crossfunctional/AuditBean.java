@@ -41,17 +41,17 @@ public class AuditBean {
     }
 
     @PostPersist
-    public void postPersist(Object person) {
+    public void afterInsert(Object person) {
         logAudit(person, DbOperation.INSERT);
     }
 
     @PostUpdate
-    public void postUpdate(Object person) {
+    public void afterUpdate(Object person) {
         logAudit(person, DbOperation.UPDATE);
     }
 
     @PostRemove
-    public void postRemove(Object person) {
+    public void afterDelete(Object person) {
         logAudit(person, DbOperation.DELETE);
     }
 
