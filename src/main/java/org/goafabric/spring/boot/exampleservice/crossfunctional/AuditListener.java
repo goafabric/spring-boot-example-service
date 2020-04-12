@@ -16,6 +16,7 @@ import javax.persistence.PostUpdate;
 
 @Slf4j
 public class AuditListener {
+
     @Service
     private static class BeanUtil implements ApplicationContextAware {
         private static ApplicationContext context;
