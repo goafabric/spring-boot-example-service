@@ -29,7 +29,8 @@ public class AuditBean {
         private Date createdAt;
         private String modifiedBy;
         private Date   modifiedAt;
-        private String value;
+        private String oldValue;
+        private String newValue;
     }
 
     public void afterInsert(Object person) {
@@ -50,37 +51,56 @@ public class AuditBean {
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);
 
             final AuditEvent auditEvent;
+            final String type = object.getClass().getSimpleName();
             if (operation == DbOperation.INSERT) {
-                auditEvent = createInsertEvent(object, operation, value);
+                auditEvent = createInsertEvent(type, value);
+            } else if (operation == DbOperation.UPDATE) {
+                auditEvent = createUpdateEvent(type, "", value);
+            } else if (operation == DbOperation.DELETE) {
+                auditEvent = createDeleteEvent(type, value);
             } else {
-                auditEvent = createUpdateDeleteEvent(object, operation, value);
+                throw new IllegalStateException("Unsupported Operation: ");
             }
 
-            log.info("New audit event : {}", auditEvent.toString());
+            log.info("New audit event :\n{}", auditEvent.toString());
         } catch (Exception e) {
-            log.error("Error during audit: {}", e.getMessage(), e);
+            log.error("Error during audit:\n{}", e.getMessage(), e);
         }
     }
 
-    private AuditEvent createUpdateDeleteEvent(
-            final Object object, final DbOperation operation, final  String value) {
+    private AuditEvent createInsertEvent(
+            final String type, final String newValue) {
         return AuditEvent.builder()
-                .operation(operation)
-                .type(object.getClass().getSimpleName())
-                .modifiedBy(getUserName())
-                .modifiedAt(LocalDateTime.now().toDate())
-                .value(value)
+                .operation(DbOperation.INSERT)
+                .type(type)
+                .createdBy(getUserName())
+                .createdAt(LocalDateTime.now().toDate())
+                .oldValue(null)
+                .newValue(newValue)
                 .build();
     }
 
-    private AuditEvent createInsertEvent(
-            final Object object, final DbOperation operation, final String value) {
+    private AuditEvent createUpdateEvent(
+            final String type, final String oldValue, final String newValue) {
         return AuditEvent.builder()
-                .operation(operation)
-                .type(object.getClass().getSimpleName())
-                .createdBy(getUserName())
-                .createdAt(LocalDateTime.now().toDate())
-                .value(value)
+                .operation(DbOperation.UPDATE)
+                .type(type)
+                .modifiedBy(getUserName())
+                .modifiedAt(LocalDateTime.now().toDate())
+                .oldValue(null)
+                .newValue(newValue)
+                .build();
+    }
+
+    private AuditEvent createDeleteEvent(
+            final String type, final String oldValue) {
+        return AuditEvent.builder()
+                .operation(DbOperation.DELETE)
+                .type(type)
+                .modifiedBy(getUserName())
+                .modifiedAt(LocalDateTime.now().toDate())
+                .oldValue(oldValue)
+                .newValue(null)
                 .build();
     }
 
