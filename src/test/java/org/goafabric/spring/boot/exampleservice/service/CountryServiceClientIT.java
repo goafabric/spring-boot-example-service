@@ -1,5 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.goafabric.spring.boot.exampleservice.client.CountryServiceClient;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Ignore;
@@ -84,20 +85,20 @@ public class CountryServiceClientIT {
         countryService.delete(id);
     }
 
-    /*
     @Test
     public void testUpdate() {
         final Country country  = countryService.save(createStubCountry());
 
         country.setIsoCode("hw");
         country.setName("Hawaii");;
-        countryService.save(country);
+
+        AssertionsForClassTypes.assertThat(countryService.save(country).getId())
+                .isEqualTo(country.getId());
 
         final Country updatedCountry = countryService.getById(country.getId());
         assertThat(updatedCountry).isNotNull();
         assertThat(updatedCountry.getName()).isEqualTo("Hawaii");
     }
-     */
 
     @Test
     public void testCacheEvict() {
