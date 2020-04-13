@@ -1,7 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.adapter;
 
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -28,11 +27,9 @@ public class RestTemplateFactory {
     private static HttpComponentsClientHttpRequestFactory createClientHttpRequestFactory(final int timeout) {
         final RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(timeout).setConnectionRequestTimeout(timeout)
-                .setSocketTimeout(timeout)
-                .build();
-        final CloseableHttpClient client = HttpClientBuilder
-                .create().setDefaultRequestConfig(config).build();
-        return new HttpComponentsClientHttpRequestFactory(client);
+                .setSocketTimeout(timeout).build();
+        return new HttpComponentsClientHttpRequestFactory(HttpClientBuilder
+                .create().setDefaultRequestConfig(config).build());
     }
 
 }
