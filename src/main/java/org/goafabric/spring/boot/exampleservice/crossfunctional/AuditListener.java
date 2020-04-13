@@ -1,5 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
+import java.lang.reflect.Field;
 
 /**
  * Created by andreas.mautsch on 31.01.2018.
@@ -30,18 +32,29 @@ public class AuditListener {
     }
 
     @PostPersist
-    public void afterInsert(Object person) {
-        BeanUtil.getBean(AuditBean.class).afterInsert(person);
+    public void afterInsert(Object object) throws NoSuchFieldException, IllegalAccessException {
+        getId(object);
+        BeanUtil.getBean(AuditBean.class).afterInsert(getId(object), object);
     }
-
+    
     @PostUpdate
-    public void afterUpdate(Object person) {
-        BeanUtil.getBean(AuditBean.class).afterUpdate(person);
+    public void afterUpdate(Object object) {
+        BeanUtil.getBean(AuditBean.class).afterUpdate(getId(object), object);
     }
 
     @PostRemove
-    public void afterDelete(Object person) {
-        BeanUtil.getBean(AuditBean.class).afterDelete(person);
+    public void afterDelete(Object object) {
+        BeanUtil.getBean(AuditBean.class).afterDelete(getId(object), object);
+    }
+
+    private String getId(@NonNull Object object) {
+        try {
+            final Field field = object.getClass().getDeclaredField("id");
+            field.setAccessible(true);
+            return (String) field.get(object);
+        } catch (ReflectiveOperationException e) {
+           throw new IllegalStateException("could not retrieve id of: " + object.toString());
+        }
     }
 
 }

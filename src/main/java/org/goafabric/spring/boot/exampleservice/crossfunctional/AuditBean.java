@@ -26,6 +26,7 @@ public class AuditBean {
     @Builder
     private static class AuditEvent {
         private String id;
+        private String referenceId;
         private String type;
         private DbOperation operation;
         private String createdBy;
@@ -36,31 +37,30 @@ public class AuditBean {
         private String newValue;
     }
 
-    public void afterInsert(Object person) {
-        logAudit(person, DbOperation.INSERT);
+    public void afterInsert(String id, Object object) {
+        logAudit(id, object, DbOperation.INSERT);
     }
 
-    public void afterUpdate(Object person) {
-        logAudit(person, DbOperation.UPDATE);
+    public void afterUpdate(String id, Object object) {
+        logAudit(id, object, DbOperation.UPDATE);
     }
 
-    public void afterDelete(Object person) {
-        logAudit(person, DbOperation.DELETE);
+    public void afterDelete(String id, Object object) {
+        logAudit(id, object, DbOperation.DELETE);
     }
 
-    private void logAudit(final Object object, final DbOperation operation) {
+    private void logAudit(String referenceId, final Object object, final DbOperation operation) {
         try {
             final String value =
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);
 
             final AuditEvent auditEvent;
-            final String type = object.getClass().getSimpleName();
             if (operation == DbOperation.INSERT) {
-                auditEvent = createInsertEvent(type, value);
+                auditEvent = createInsertEvent(referenceId, object, value);
             } else if (operation == DbOperation.UPDATE) {
-                auditEvent = createUpdateEvent(type, "", value); //TODO: we nee the oldvalue here
+                auditEvent = createUpdateEvent(referenceId, object, "", value); //TODO: we nee the oldvalue here
             } else if (operation == DbOperation.DELETE) {
-                auditEvent = createDeleteEvent(type, value);
+                auditEvent = createDeleteEvent(referenceId, object, value);
             } else {
                 throw new IllegalStateException("Unsupported Operation: ");
             }
@@ -72,10 +72,11 @@ public class AuditBean {
     }
 
     private AuditEvent createInsertEvent(
-            final String type, final String newValue) {
+            String referenceId, final Object object, final String newValue) {
         return AuditEvent.builder()
+                .referenceId(referenceId)
                 .operation(DbOperation.INSERT)
-                .type(type)
+                .type(object.getClass().getSimpleName())
                 .createdBy(getUserName())
                 .createdAt(LocalDateTime.now().toDate())
                 .oldValue(null)
@@ -84,10 +85,11 @@ public class AuditBean {
     }
 
     private AuditEvent createUpdateEvent(
-            final String type, final String oldValue, final String newValue) {
+            String referenceId, final Object object, final String oldValue, final String newValue) {
         return AuditEvent.builder()
+                .referenceId(referenceId)
                 .operation(DbOperation.UPDATE)
-                .type(type)
+                .type(object.getClass().getSimpleName())
                 .modifiedBy(getUserName())
                 .modifiedAt(LocalDateTime.now().toDate())
                 .oldValue(null)
@@ -96,10 +98,11 @@ public class AuditBean {
     }
 
     private AuditEvent createDeleteEvent(
-            final String type, final String oldValue) {
+            String referenceId, final Object object, final String oldValue) {
         return AuditEvent.builder()
+                .referenceId(referenceId)
                 .operation(DbOperation.DELETE)
-                .type(type)
+                .type(object.getClass().getSimpleName())
                 .modifiedBy(getUserName())
                 .modifiedAt(LocalDateTime.now().toDate())
                 .oldValue(oldValue)
