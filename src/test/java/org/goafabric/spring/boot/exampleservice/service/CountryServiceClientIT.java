@@ -6,10 +6,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
@@ -84,6 +82,18 @@ public class CountryServiceClientIT {
         assertThat(country).isNotNull();
         final String id = country.getId();
         countryService.delete(id);
+    }
+
+    @Test
+    public void testUpdate() {
+        final Country country  = countryService.save(createStubCountry());
+        country.setIsoCode("hw");
+        country.setName("Hawaii");;
+        countryService.save(country);
+
+        final Country updatedCountry = countryService.findByIsoCode("hw");
+        assertThat(country).isNotNull();
+        assertThat(country.getName()).isEqualTo("Hawaii");
     }
 
     @Test
