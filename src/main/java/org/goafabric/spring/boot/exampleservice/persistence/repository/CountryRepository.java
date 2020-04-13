@@ -1,12 +1,9 @@
 package org.goafabric.spring.boot.exampleservice.persistence.repository;
 
-import org.goafabric.spring.boot.exampleservice.crossfunctional.AuditListener;
 import org.goafabric.spring.boot.exampleservice.persistence.domain.CountryBo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import javax.persistence.EntityListeners;
 
 /**
  * Created by andreas.mautsch on 11.06.2018.

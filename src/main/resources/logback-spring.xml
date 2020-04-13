@@ -30,6 +30,14 @@
         <appender-ref ref="Console"/>
     </logger>
 
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
+    <logger name="org.hibernate.type.descriptor.sql" level="DEBUG" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
     <logger name="org.goafabric" level="INFO" additivity="false">
         <appender-ref ref="Console"/>
     </logger>

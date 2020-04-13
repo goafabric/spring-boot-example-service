@@ -1,5 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
@@ -51,8 +52,7 @@ public class AuditBean {
 
     private void logAudit(String referenceId, final Object object, final DbOperation operation) {
         try {
-            final String value =
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);
+            final String value = getJsonValue(object);
 
             final AuditEvent auditEvent;
             if (operation == DbOperation.INSERT) {
@@ -113,5 +113,9 @@ public class AuditBean {
     private String getUserName() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (authentication == null) ? "" : authentication.getName();
+    }
+
+    private String getJsonValue(final Object object) throws JsonProcessingException {
+        return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);
     }
 }

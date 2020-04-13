@@ -87,13 +87,14 @@ public class CountryServiceClientIT {
     @Test
     public void testUpdate() {
         final Country country  = countryService.save(createStubCountry());
+
         country.setIsoCode("hw");
         country.setName("Hawaii");;
         countryService.save(country);
 
-        final Country updatedCountry = countryService.findByIsoCode("hw");
-        assertThat(country).isNotNull();
-        assertThat(country.getName()).isEqualTo("Hawaii");
+        final Country updatedCountry = countryService.getById(country.getId());
+        assertThat(updatedCountry).isNotNull();
+        assertThat(updatedCountry.getName()).isEqualTo("Hawaii");
     }
 
     @Test

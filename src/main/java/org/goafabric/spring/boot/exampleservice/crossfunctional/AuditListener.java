@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
+import javax.persistence.PreUpdate;
 import java.lang.reflect.Field;
 
 /**
@@ -36,7 +37,13 @@ public class AuditListener {
         getId(object);
         BeanUtil.getBean(AuditBean.class).afterInsert(getId(object), object);
     }
-    
+
+    @PreUpdate
+    public void beforeUpdate(Object object) {
+        System.out.println(object);
+        //BeanUtil.getBean(AuditBean.class).afterUpdate(getId(object), object);
+    }
+
     @PostUpdate
     public void afterUpdate(Object object) {
         BeanUtil.getBean(AuditBean.class).afterUpdate(getId(object), object);
