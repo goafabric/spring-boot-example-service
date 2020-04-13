@@ -1,7 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.persistence.domain;
 
 import lombok.Data;
-import org.goafabric.spring.boot.exampleservice.crossfunctional.AuditListener;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,7 +9,6 @@ import javax.persistence.*;
  * Created by andreas.mautsch on 11.06.2018.
  */
 @Entity
-@EntityListeners(AuditListener.class)
 @Table(name="country") //, schema = "countries")
 @Data
 public class CountryBo {
