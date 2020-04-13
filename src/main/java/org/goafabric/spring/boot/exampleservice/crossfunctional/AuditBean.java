@@ -13,6 +13,8 @@ import java.util.Date;
 
 @Component
 @Slf4j
+//TODO: should also be stored in database
+//There are also standard frameworks (tightly coupled with JPA): https://www.baeldung.com/database-auditing-jpa
 public class AuditBean {
     private enum DbOperation {
         INSERT,
@@ -23,6 +25,7 @@ public class AuditBean {
     @Data
     @Builder
     private static class AuditEvent {
+        private String id;
         private String type;
         private DbOperation operation;
         private String createdBy;
@@ -55,7 +58,7 @@ public class AuditBean {
             if (operation == DbOperation.INSERT) {
                 auditEvent = createInsertEvent(type, value);
             } else if (operation == DbOperation.UPDATE) {
-                auditEvent = createUpdateEvent(type, "", value);
+                auditEvent = createUpdateEvent(type, "", value); //TODO: we nee the oldvalue here
             } else if (operation == DbOperation.DELETE) {
                 auditEvent = createDeleteEvent(type, value);
             } else {
