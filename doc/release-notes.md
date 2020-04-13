@@ -5,7 +5,6 @@
 CrossFunctional
 - @DurationLog annotation,
 - DurationLogAspect now also logs the logged in user
-- AuditListener added
 
 ##Modified
 
