@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.goafabric.spring.boot.exampleservice.logic.CountryLogic;
 import org.joda.time.LocalDateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -16,9 +14,6 @@ import java.util.Date;
 @Component
 @Slf4j
 public class AuditBean {
-    @Autowired
-    private CountryLogic countryLogic;
-
     private enum DbOperation {
         INSERT,
         UPDATE,
