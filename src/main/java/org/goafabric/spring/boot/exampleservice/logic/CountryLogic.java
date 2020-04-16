@@ -4,7 +4,6 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceAdapter;
 import org.goafabric.spring.boot.exampleservice.configuration.CacheConfiguration;
-import org.goafabric.spring.boot.exampleservice.crossfunctional.CountryMapper;
 import org.goafabric.spring.boot.exampleservice.crossfunctional.DurationLog;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,32 +37,32 @@ public class CountryLogic {
 
     @Cacheable
     public Country getById(@NonNull final String id) {
-        return countryMapper.toDto(
+        return countryMapper.map(
             countryRepository.getOne(id));
     }
 
     @Cacheable
     public Country findByIsoCode(@NonNull final String isoCode) {
-        return countryMapper.toDto(
+        return countryMapper.map(
             countryRepository.findByIsoCode(isoCode));
     }
 
     @Cacheable
     public Country findByName(@NonNull final String name) {
-        return countryMapper.toDto(
+        return countryMapper.map(
                 countryRepository.findByName(name));
     }
 
     public List<Country> findAll() {
-        return countryMapper.toDtos(
+        return countryMapper.map(
                 countryRepository.findAll());
     }
 
     @CacheEvict(allEntries = true)
     public Country save(@NonNull final Country country) {
-        return countryMapper.toDto(
+        return countryMapper.map(
             countryRepository.save(
-                    countryMapper.toBo(country)));
+                    countryMapper.map(country)));
     }
 
     @CacheEvict(allEntries = true)

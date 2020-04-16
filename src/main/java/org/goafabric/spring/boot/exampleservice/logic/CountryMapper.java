@@ -1,4 +1,4 @@
-package org.goafabric.spring.boot.exampleservice.crossfunctional;
+package org.goafabric.spring.boot.exampleservice.logic;
 
 import org.goafabric.spring.boot.exampleservice.persistence.domain.CountryBo;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
@@ -14,11 +14,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CountryMapper {
     @Mapping(source = "description", target = "information")
-    CountryBo toBo(Country country);
+    CountryBo map(Country country);
 
     @Mapping(source = "information", target = "description")
-    Country   toDto(CountryBo country);
+    Country map(CountryBo country);
 
-    List<CountryBo> toBo(List<Country> countries);
-    List<Country> toDtos(List<CountryBo> countries);
+    List<Country> map(List<CountryBo> countries);
 }

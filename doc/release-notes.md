@@ -6,6 +6,14 @@ CrossFunctional
 - @DurationLog annotation,
 - DurationLogAspect now also logs the logged in user
 
+##Modified
+
+CrossFunctional
+- Small refactorings and moving classes around
+
+Persistence
+- Fixed a bug that caused all updates to cause inserts (version prop was missing in dto)
+
 #1.0.1
 
 ##Added

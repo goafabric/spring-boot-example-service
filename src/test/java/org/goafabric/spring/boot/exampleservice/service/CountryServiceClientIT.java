@@ -1,15 +1,14 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.goafabric.spring.boot.exampleservice.client.CountryServiceClient;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
@@ -84,6 +83,21 @@ public class CountryServiceClientIT {
         assertThat(country).isNotNull();
         final String id = country.getId();
         countryService.delete(id);
+    }
+
+    @Test
+    public void testUpdate() {
+        final Country country  = countryService.save(createStubCountry());
+
+        country.setIsoCode("hw");
+        country.setName("Hawaii");;
+
+        AssertionsForClassTypes.assertThat(countryService.save(country).getId())
+                .isEqualTo(country.getId());
+
+        final Country updatedCountry = countryService.getById(country.getId());
+        assertThat(updatedCountry).isNotNull();
+        assertThat(updatedCountry.getName()).isEqualTo("Hawaii");
     }
 
     @Test

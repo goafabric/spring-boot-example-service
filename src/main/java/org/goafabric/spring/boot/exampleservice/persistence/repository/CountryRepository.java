@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 /**
  * Created by andreas.mautsch on 11.06.2018.
  */
+
 public interface CountryRepository extends JpaRepository<CountryBo, String> {
     CountryBo findByIsoCode(String isoCode);
 
