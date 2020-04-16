@@ -9,6 +9,7 @@ data:
   POSTGRES_PASSWORD: Y3JOYjJaNm12QnlTUkt3dQ==
   #echo -n 'crNb2Z6mvBySRKwu' | base64
 stringData:
+  TZ: Europe/Berlin
   POSTGRES_DB: countrydb
 
 ---
@@ -28,6 +29,7 @@ kind: ConfigMap
 metadata:
   name: example-service-config
 data:
+  TZ: Europe/Berlin
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://postgres:5432/countrydb"

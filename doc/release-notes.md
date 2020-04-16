@@ -39,6 +39,9 @@ POM
 - Update to Jib 2.1.0
     - seems to fix build Problems with Jenkins inside OpenStack
 
+Docker
+- Timezone added to Compose File and Kubernetes yml
+
 #1.0.0 
 - initial release, with all the good stuff inside like REST, Spring DATA JPA, Mapstruct...
 
