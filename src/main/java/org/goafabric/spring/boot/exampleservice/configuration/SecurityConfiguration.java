@@ -4,6 +4,7 @@ package org.goafabric.spring.boot.exampleservice.configuration;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
 import org.jasypt.salt.RandomIVGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,26 +70,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
-
-    @Value("${jasypt.encryptor.passphrase}")
-    private String passPhrase;
-
-    @Bean
-    public PBEStringEncryptor passwordEncryptor() {
-        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase)));;                        // we HAVE TO set a password
-        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        encryptor.setIVGenerator(new RandomIVGenerator());
-        return encryptor;
-    }
-
-    @Bean
-    public org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor hibernateEncryptor() {
-
-        org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor encryptor = new org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor();
-        encryptor.setEncryptor(passwordEncryptor());
-        encryptor.setRegisteredName("hibernateEncryptor");
-        return encryptor;
     }
 }
