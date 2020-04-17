@@ -43,7 +43,7 @@ security:
 jasypt:
   encryptor:
     bean: passwordEncryptor
-    passphrase: Y2RLQm85NXhjVFZWSDNkaA==
+    passphrase: Y2RLQm85NXhjVFZWSDNkaA== #Base64 encrypted, generated Strong Password
 
 ## adapter section
 
