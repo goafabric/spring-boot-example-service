@@ -39,7 +39,7 @@ Persistence
 Security
 - Password Encryption with Jaspyt, Password Hashing with Bcrypt
     - @see: SecurityConfiguration, EncryptionConfiguration, Application.yml + EncryptionIT
-- Database Encrypton with Jasypt
+- Database Encryption with Jasypt
     - @see: EncryptionConfiguration and @TypeDef in CountryBo
 
 ##Updated
