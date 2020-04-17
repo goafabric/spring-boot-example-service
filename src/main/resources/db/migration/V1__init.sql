@@ -8,7 +8,7 @@ create table country
 	isocode varchar(2),
 	name varchar(255),
 	information varchar(255),
-	secret varchar(255),
+	secret varchar(2048), -- The field has to be much bigger because it has to hold encrypted info
 	version bigint default 0
 );
 
