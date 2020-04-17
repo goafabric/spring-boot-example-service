@@ -157,6 +157,7 @@ public class CountryServiceClientIT {
                 .isoCode("pi")
                 .name("Phantasy Island")
                 .description("The Island where magic happens")
+                .secret("Top Secret Information")
                 .build();
         country.setName("Phantasy Star");
         return country;

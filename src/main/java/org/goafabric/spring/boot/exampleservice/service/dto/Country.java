@@ -33,6 +33,9 @@ public class Country {
     @Size(max = 255)
     private String description;
 
+    @Size(max = 255)
+    private String secret;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
 

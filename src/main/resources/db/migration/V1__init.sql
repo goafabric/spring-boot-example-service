@@ -6,8 +6,9 @@ create table country
 		constraint pk_country
 			primary key,
 	isocode varchar(2),
-	name varchar(100),
-	information varchar(100),
+	name varchar(255),
+	information varchar(255),
+	secret varchar(255),
 	version bigint default 0
 );
 

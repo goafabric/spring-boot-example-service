@@ -2,6 +2,7 @@ package org.goafabric.spring.boot.exampleservice.persistence.domain;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.jasypt.hibernate5.type.EncryptedStringType;
 
@@ -13,18 +14,16 @@ import javax.persistence.*;
 @Entity
 @Table(name="country") //, schema = "countries")
 @Data
+@TypeDef(
+        name="encryptedString",
+        typeClass= EncryptedStringType.class,
+        parameters= {
+                @org.hibernate.annotations.Parameter(name="encryptorRegisteredName", value="hibernateEncryptor")
+        }
+)
+
 public class CountryBo {
     private static final long serialVersionUID = 1L;
-
-    /*
-    @TypeDef(
-            name="encryptedString",
-            typeClass= EncryptedStringType.class,
-            parameters= {
-                    @Parameter(name="encryptorRegisteredName", value="myHibernateStringEncryptor")
-            }
-    )
-     */
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -36,6 +35,9 @@ public class CountryBo {
 
     private String name;
     private String information;
+
+    @Type(type="encryptedString")
+    private String secret;
 
     //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     //private LocalDateTime date;
