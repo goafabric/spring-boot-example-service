@@ -17,9 +17,6 @@ import java.util.Optional;
 
 @Configuration
 public class EncryptionConfiguration {
-    //@Value("${jasypt.encryptor.passphrase}")
-    //private String passPhrase;
-
     @Autowired
     ConfigurationRepository configurationRepository;
 
@@ -43,10 +40,12 @@ public class EncryptionConfiguration {
     @Bean
     @Transactional
     public String passPhrase() {
-        configurationRepository.save(ConfigurationBo.builder()
-                        .config_key("passphrase").config_value(
-                            "Y2RLQm85NXhjVFZWSDNkaA==").build());
-        Optional<ConfigurationBo> configurationBo = configurationRepository.findById("passphrase");
-        return configurationBo.get().getConfig_value();
+        final String passphrase = "Y2RLQm85NXhjVFZWSDNkaA==";
+        final Optional<ConfigurationBo> configuration
+                = configurationRepository.findById("passphrase");
+        return configuration.isPresent()
+                ? configuration.get().getConfigValue()
+                : configurationRepository.save(ConfigurationBo.builder()
+                    .configKey("passphrase").configValue(passphrase).build()).getConfigValue();
     }
 }

@@ -17,6 +17,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class ConfigurationBo {
     @Id
-    private String config_key;
-    private String config_value;
+    private String configKey;
+    private String configValue;
 }
