@@ -19,7 +19,7 @@ public class EncryptionIT {
     private PasswordEncoder passwordHash;
 
     @Autowired
-    private StringEncryptor passwordEncryptor;
+    private StringEncryptor jasyptStringEncryptor;
 
     @Value("${adapter.calleeservice.password}")
     private String password;
@@ -40,12 +40,12 @@ public class EncryptionIT {
     //2-way encryption and decryption
     @Test
     public void testAES256Encryption() {
-        log.info(passwordEncryptor.encrypt("cdKBo95xcTVVH3dh"));
+        log.info(jasyptStringEncryptor.encrypt("cdKBo95xcTVVH3dh"));
     }
 
     @Test
     public void testAES256Decryption() {
-        log.info(passwordEncryptor.decrypt("2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw=="));
+        log.info(jasyptStringEncryptor.decrypt("2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw=="));
     }
 
     @Test
