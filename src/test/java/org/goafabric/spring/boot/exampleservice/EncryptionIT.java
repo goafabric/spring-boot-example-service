@@ -19,7 +19,7 @@ public class EncryptionIT {
     private PasswordEncoder passwordHash;
 
     @Autowired
-    private StringEncryptor jasyptStringEncryptor;
+    private StringEncryptor stringEncryptor;
 
     //1-way hash, cannot be converted back, only matching possible
     @Test
@@ -36,12 +36,12 @@ public class EncryptionIT {
     //2-way encryption and decryption
     @Test
     public void testAES256Encryption() {
-        log.info(jasyptStringEncryptor.encrypt("cdKBo95xcTVVH3dh"));
+        log.info(stringEncryptor.encrypt("cdKBo95xcTVVH3dh"));
     }
 
     @Test
     public void testAES256Decryption() {
-        log.info(jasyptStringEncryptor.decrypt("LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ=="));
+        log.info(stringEncryptor.decrypt("LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ=="));
     }
 
 

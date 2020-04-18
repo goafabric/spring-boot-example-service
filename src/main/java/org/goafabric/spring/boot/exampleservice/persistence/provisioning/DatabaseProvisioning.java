@@ -1,10 +1,9 @@
 package org.goafabric.spring.boot.exampleservice.persistence.provisioning;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.h2.util.StringUtils;
-import org.jasypt.encryption.pbe.PBEStringEncryptor;
+import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +25,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     @Autowired
     @Lazy
-    private PBEStringEncryptor jasyptStringEncryptor;
+    private StringEncryptor stringEncryptor;
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
@@ -77,7 +76,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
     private void doEncrypt(String goals) {
         if (goals.contains("-encrypt=")) {
             final String string = goals.split("-encrypt=")[1].split("-terminate")[0];
-            log.info(jasyptStringEncryptor.encrypt("encrypted string will be:" + string));
+            log.info(stringEncryptor.encrypt("encrypted string will be:" + string));
         }
     }
 
