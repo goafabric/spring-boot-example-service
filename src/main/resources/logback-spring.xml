@@ -34,7 +34,7 @@
         <appender-ref ref="Console"/>
     </logger>
 
-    <logger name="org.hibernate.type.descriptor.sql" level="DEBUG" additivity="false">
+    <logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
         <appender-ref ref="Console"/>
     </logger>
 

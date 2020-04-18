@@ -33,6 +33,7 @@ public class EncryptionConfiguration {
         return encryptor;
     }
 
+
     @Bean
     public PBEStringEncryptor jasyptStringEncryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
@@ -45,6 +46,18 @@ public class EncryptionConfiguration {
 
         return encryptor;
     }
+
+
+    /*
+    @Bean
+    public PBEStringEncryptor jasyptStringEncryptor() {
+        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));;                        // we HAVE TO set a password
+        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
+        encryptor.setIVGenerator(new RandomIVGenerator());
+        return encryptor;
+    }
+     */
 
     @Bean
     @Transactional
