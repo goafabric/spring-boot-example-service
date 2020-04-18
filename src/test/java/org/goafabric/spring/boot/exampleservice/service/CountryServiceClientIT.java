@@ -53,7 +53,6 @@ public class CountryServiceClientIT {
         assertThat(country).isNotNull();
         assertThat(country.getIsoCode()).isEqualTo("de");
         assertThat(country.getName()).isEqualTo("Germany");
-        assertThat(country.getSecret()).isEqualTo("Top Secret Information");
     }
 
     @Test
@@ -68,7 +67,6 @@ public class CountryServiceClientIT {
         assertThat(country).isNotNull();
         assertThat(country.getIsoCode()).isEqualTo("de");
         assertThat(country.getName()).isEqualTo("Germany");
-        assertThat(country.getSecret()).isEqualTo("Top Secret Information");
     }
 
     @Test
@@ -76,13 +74,14 @@ public class CountryServiceClientIT {
         final Country country = countryService.findByName("Germany");
         assertThat(country.getIsoCode()).isEqualTo("de");
         assertThat(country.getName()).isEqualTo("Germany");
-        assertThat(country.getSecret()).isEqualTo("Top Secret Information");
     }
 
     @Test
     public void testSaveAndDelete() {
         countryService.save(createStubCountry());
         final Country country = countryService.findByIsoCode("pi");
+        assertThat(country.getSecret()).isEqualTo("Top Secret Information");
+
         assertThat(country).isNotNull();
         final String id = country.getId();
         countryService.delete(id);

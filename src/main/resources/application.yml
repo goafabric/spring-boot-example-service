@@ -40,11 +40,6 @@ security:
   authentication:
     enabled: true
 
-jasypt:
-  encryptor:
-#    bean: stringEncryptor
-    passphrase: Y2RLQm85NXhjVFZWSDNkaA== #Base64 encrypted, generated Strong Password
-
 ## adapter section
 
 adapter:
