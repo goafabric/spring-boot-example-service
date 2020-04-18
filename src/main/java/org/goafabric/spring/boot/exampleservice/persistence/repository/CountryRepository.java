@@ -14,4 +14,6 @@ public interface CountryRepository extends JpaRepository<CountryBo, String> {
 
     @Query("SELECT c from CountryBo c WHERE name = :name")
     CountryBo findByName(@Param("name") String name);
+
+    CountryBo findBySecret(String secret);
 }

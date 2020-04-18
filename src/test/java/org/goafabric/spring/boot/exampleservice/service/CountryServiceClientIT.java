@@ -77,6 +77,15 @@ public class CountryServiceClientIT {
     }
 
     @Test
+    public void testFindCountryBySecret() {
+        final String id = countryService.save(createStubCountry()).getId();
+        Country country = countryService.getById(id);
+
+        assertThat(country.getIsoCode()).isEqualTo("pi");
+        assertThat(country.getSecret()).isEqualTo("Top Secret Information");
+    }
+
+    @Test
     public void testSaveAndDelete() {
         countryService.save(createStubCountry());
         final Country country = countryService.findByIsoCode("pi");
