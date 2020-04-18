@@ -4,7 +4,8 @@ import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
-import org.jasypt.salt.RandomIVGenerator;
+import org.jasypt.salt.StringFixedIVGenerator;
+import org.jasypt.salt.StringFixedSaltGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,9 +36,13 @@ public class EncryptionConfiguration {
     @Bean
     public PBEStringEncryptor jasyptStringEncryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setAlgorithm("PBEWithMD5AndDES");
+        String iv = "0Yo6wn3UNyszXrAtV9KOl0SWEKYf8feYjv7dwWIobCXEuMz8t88xahe2IujJsjrWcZXjs6RNAUYh1FmKn3p3wMFWGy6MmK1YWWGCGv7jxaZVr2hXhuOohEdr823aaad4";
+        StringFixedIVGenerator stringFixedIVGenerator = new StringFixedIVGenerator(iv);
+        encryptor.setIVGenerator(stringFixedIVGenerator);
+        encryptor.setSaltGenerator(new StringFixedSaltGenerator(iv));
         encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));;                        // we HAVE TO set a password
-        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        encryptor.setIVGenerator(new RandomIVGenerator());
+
         return encryptor;
     }
 
