@@ -19,6 +19,7 @@ management:
 spring:
     datasource:
       url: jdbc:h2:mem:countrydb
+#      url: jdbc:postgresql://localhost:50710/countrydb
       username: example-service
       password: example-service
 
@@ -32,17 +33,13 @@ spring:
 database:
   provisioning:
     goals: -migrate
+#    goals: -migrate -encrypt=secret -terminate
 #    goals: -migrate -import-catalog-data -terminate
 
 ## encryption section
 security:
   authentication:
     enabled: true
-
-jasypt:
-  encryptor:
-    bean: passwordEncryptor
-    passphrase: Y2RLQm85NXhjVFZWSDNkaA==
 
 ## adapter section
 
@@ -51,7 +48,7 @@ adapter:
   calleeservice:
     url: http://localhost:50900
     user: exampleuser
-    password: ENC(2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw==)
+    password: ENC(LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ==)
 
 resilience4j.circuitbreaker:
   configs:
