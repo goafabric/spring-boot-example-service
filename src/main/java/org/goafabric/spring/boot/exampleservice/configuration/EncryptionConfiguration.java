@@ -2,12 +2,12 @@ package org.goafabric.spring.boot.exampleservice.configuration;
 
 import org.goafabric.spring.boot.exampleservice.persistence.domain.ConfigurationBo;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.ConfigurationRepository;
+import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
 import org.jasypt.salt.RandomIVGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +20,11 @@ import java.util.UUID;
 public class EncryptionConfiguration {
     @Autowired
     ConfigurationRepository configurationRepository;
+
+    @Bean
+    public StringEncryptor stringEncryptor() {
+        return jasyptStringEncryptor();
+    }
 
     @Bean
     public PBEStringEncryptor jasyptStringEncryptor() {
