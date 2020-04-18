@@ -1,7 +1,5 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
-import org.goafabric.spring.boot.exampleservice.persistence.domain.ConfigurationBo;
-import org.goafabric.spring.boot.exampleservice.persistence.repository.ConfigurationRepository;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
@@ -48,11 +46,11 @@ public class EncryptionConfiguration {
     public String passPhrase() {
         final String passphrase =
                 new String(Base64Utils.encode(UUID.randomUUID().toString().getBytes()));
-        final Optional<ConfigurationBo> configuration
+        final Optional<ConfigurationRepository.ConfigurationBo> configuration
                 = configurationRepository.findById("passphrase");
         return configuration.isPresent()
                 ? configuration.get().getConfigValue()
-                : configurationRepository.save(ConfigurationBo.builder()
+                : configurationRepository.save(ConfigurationRepository.ConfigurationBo.builder()
                     .configKey("passphrase").configValue(passphrase).build()).getConfigValue();
     }
 
