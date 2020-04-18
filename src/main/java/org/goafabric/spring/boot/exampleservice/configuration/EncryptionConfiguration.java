@@ -40,7 +40,7 @@ public class EncryptionConfiguration {
 
     @Bean
     @Transactional
-    public String passPhrase() {
+    public String passPhrase() { //we could also opt for a simple property from application.yml here, but this would be less secure
         final String passphrase =
                 new String(Base64Utils.encode(UUID.randomUUID().toString().getBytes()));
         final Optional<ConfigurationBo> configuration
