@@ -6,7 +6,13 @@ CrossFunctional
 - @DurationLog annotation,
 - DurationLogAspect now also logs the logged in user
 
-##Modified
+Security
+- Database Encryption with Jasypt
+    - @see: EncryptionConfiguration and @TypeDef in CountryBo
+- Passphrase now gets stored inside Database
+    - @see: EncryptionConfiguration 
+
+##Updated
 
 CrossFunctional
 - Small refactorings and moving classes around
@@ -14,12 +20,9 @@ CrossFunctional
 Persistence
 - Fixed a bug that caused all updates to cause inserts (version prop was missing in dto)
 
-##Added
-Security
-- Database Encryption with Jasypt
-    - @see: EncryptionConfiguration and @TypeDef in CountryBo
-- Passphrase now gets stored inside Database
-    - @see: EncryptionConfiguration 
+Docker
+- Timezone added to Compose File and Kubernetes yml
+
 
 #1.0.1
 
@@ -53,9 +56,6 @@ POM
 - Update to Spring Boot 2.2.6
 - Update to Jib 2.1.0
     - seems to fix build Problems with Jenkins inside OpenStack
-
-Docker
-- Timezone added to Compose File and Kubernetes yml
 
 #1.0.0 
 - initial release, with all the good stuff inside like REST, Spring DATA JPA, Mapstruct...
