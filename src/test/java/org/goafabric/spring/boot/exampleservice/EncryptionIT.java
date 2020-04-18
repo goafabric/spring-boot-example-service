@@ -36,7 +36,9 @@ public class EncryptionIT {
     //2-way encryption and decryption
     @Test
     public void testAES256Encryption() {
-        log.info(stringEncryptor.encrypt("cdKBo95xcTVVH3dh"));
+        log.info(stringEncryptor.encrypt("topsecret"));
+        log.info(stringEncryptor.encrypt("topsecret"));
+        log.info(stringEncryptor.encrypt("topsecret"));
     }
 
     @Test
