@@ -45,7 +45,7 @@ public class EncryptionConfiguration {
 
     @Bean
     @Transactional
-    public String passPhrase() { //we could also opt for a simple property from application.yml here, but this would be less secure
+    public String passPhrase() {
         final String passphrase =
                 new String(Base64Utils.encode(UUID.randomUUID().toString().getBytes()));
         final Optional<ConfigurationBo> configuration
@@ -55,4 +55,11 @@ public class EncryptionConfiguration {
                 : configurationRepository.save(ConfigurationBo.builder()
                     .configKey("passphrase").configValue(passphrase).build()).getConfigValue();
     }
+
+    /* Alternative if reading from a database is not an option
+    @Bean
+    public String passPhrase(@Value("${security.encryption.passphrase}") String passPhrase) {
+        return passPhrase;
+    }
+    */
 }
