@@ -83,6 +83,9 @@ public class CountryServiceClientIT {
 
         assertThat(country.getIsoCode()).isEqualTo("pi");
         assertThat(country.getSecret()).isEqualTo("Top Secret Information");
+
+        Country foundCountry = countryService.findBySecret("Top Secret Information");
+        assertThat(foundCountry).isNotNull();
     }
 
     @Test

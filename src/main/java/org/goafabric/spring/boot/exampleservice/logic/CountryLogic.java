@@ -53,6 +53,12 @@ public class CountryLogic {
                 countryRepository.findByName(name));
     }
 
+    @Cacheable
+    public Country findBySecret(@NonNull final String secret) {
+        return countryMapper.map(
+                countryRepository.findBySecret(secret));
+    }
+
     public List<Country> findAll() {
         return countryMapper.map(
                 countryRepository.findAll());
