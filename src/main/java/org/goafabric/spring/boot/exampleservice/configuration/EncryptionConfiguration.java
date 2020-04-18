@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Configuration
 public class EncryptionConfiguration {
@@ -40,7 +41,8 @@ public class EncryptionConfiguration {
     @Bean
     @Transactional
     public String passPhrase() {
-        final String passphrase = "Y2RLQm85NXhjVFZWSDNkaA==";
+        final String passphrase =
+                new String(Base64Utils.encode(UUID.randomUUID().toString().getBytes()));
         final Optional<ConfigurationBo> configuration
                 = configurationRepository.findById("passphrase");
         return configuration.isPresent()

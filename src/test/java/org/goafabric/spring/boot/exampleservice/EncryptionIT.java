@@ -21,10 +21,6 @@ public class EncryptionIT {
     @Autowired
     private StringEncryptor jasyptStringEncryptor;
 
-    @Value("${adapter.calleeservice.password}")
-    private String password;
-
-
     //1-way hash, cannot be converted back, only matching possible
     @Test
     public void testPasswordHashEncode() {
@@ -45,13 +41,9 @@ public class EncryptionIT {
 
     @Test
     public void testAES256Decryption() {
-        log.info(jasyptStringEncryptor.decrypt("2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw=="));
+        log.info(jasyptStringEncryptor.decrypt("LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ=="));
     }
 
-    @Test
-    public void testShowEncryptedPassword() {
-        log.info(password);
-    }
 
     //2-way base64 encoding
     @Test
@@ -64,5 +56,12 @@ public class EncryptionIT {
         log.info(new String(Base64Utils.decodeFromString("Y2RLQm85NXhjVFZWSDNkaA==")));
     }
 
+    @Value("${adapter.calleeservice.password}")
+    private String password;
+
+    @Test
+    public void testShowEncryptedPassword() {
+        log.info(password);
+    }
 
 }

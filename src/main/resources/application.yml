@@ -47,7 +47,7 @@ adapter:
   calleeservice:
     url: http://localhost:50900
     user: exampleuser
-    password: ENC(2XJaW2PKQakdhhxXx+poWgWJSX6wEgRjw6/0lV1/iezv+0AkxPMG/4oppxuwtltT6XCEX2gjrDb/xzQ13+agUw==)
+    password: ENC(LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ==)
 
 resilience4j.circuitbreaker:
   configs:

@@ -4,4 +4,5 @@ CREATE TABLE configuration (
   PRIMARY KEY (config_key)
 );
 
-INSERT INTO configuration (config_key, config_value) values('passphrase', 'Y2RLQm85NXhjVFZWSDNkaA==');
+INSERT INTO configuration (config_key, config_value)
+values('passphrase', 'ZDU2YjIyMjctMTRiYy00MmQ5LTgwZjctMGU2YzcyNzE2NjYy');
