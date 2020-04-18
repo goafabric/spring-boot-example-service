@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.h2.util.StringUtils;
+import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -22,6 +24,10 @@ public class DatabaseProvisioning implements CommandLineRunner {
     @Autowired(required = false)
     private DatabaseImport      databaseImport;
 
+    @Autowired
+    @Lazy
+    private PBEStringEncryptor jasyptStringEncryptor;
+
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
         return flyway -> {
@@ -33,6 +39,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
     public void run(String... args) throws Exception {
         final String goals = getGoals();
         doImport(goals);
+        doEncrypt(goals);
 
         if (goals.contains("-terminate")) {
             log.info("terminating app");
@@ -64,6 +71,13 @@ public class DatabaseProvisioning implements CommandLineRunner {
                 log.info("calling demo data import");
                 databaseImport.importDemoData();
             }
+        }
+    }
+
+    private void doEncrypt(String goals) {
+        if (goals.contains("-encrypt=")) {
+            final String string = goals.split("-encrypt=")[1].split("-terminate")[0];
+            log.info(jasyptStringEncryptor.encrypt("encrypted string will be:" + string));
         }
     }
 
