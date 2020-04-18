@@ -14,6 +14,13 @@ CrossFunctional
 Persistence
 - Fixed a bug that caused all updates to cause inserts (version prop was missing in dto)
 
+##Added
+Security
+- Database Encryption with Jasypt
+    - @see: EncryptionConfiguration and @TypeDef in CountryBo
+- Passphrase now gets stored inside Database
+    - @see: EncryptionConfiguration 
+
 #1.0.1
 
 ##Added
@@ -39,8 +46,6 @@ Persistence
 Security
 - Password Encryption with Jaspyt, Password Hashing with Bcrypt
     - @see: SecurityConfiguration, EncryptionConfiguration, Application.yml + EncryptionIT
-- Database Encryption with Jasypt
-    - @see: EncryptionConfiguration and @TypeDef in CountryBo
 
 ##Updated
 
