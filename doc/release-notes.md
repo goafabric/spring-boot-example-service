@@ -7,7 +7,6 @@ CrossFunctional
     - @see InfoActuator
 
 #1.0.2
-
 ##Added
 
 CrossFunctional
@@ -31,9 +30,7 @@ Persistence
 Docker
 - Timezone added to Compose File and Kubernetes yml
 
-
 #1.0.1
-
 ##Added
 
 API
@@ -66,5 +63,6 @@ POM
     - seems to fix build Problems with Jenkins inside OpenStack
 
 #1.0.0 
+##Initial
 - initial release, with all the good stuff inside like REST, Spring DATA JPA, Mapstruct...
 
