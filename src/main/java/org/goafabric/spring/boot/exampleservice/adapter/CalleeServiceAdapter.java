@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@Lazy //Lazy init, in case we need to reencrypt the password (cylic problem during startup)
 @Slf4j
 @CircuitBreaker(name = "calleeservice")
-@Lazy
 public class CalleeServiceAdapter {
     @Autowired
     private RestTemplate calleeServiceAdapterRestTemplate;
