@@ -15,9 +15,9 @@ import javax.validation.constraints.Size;
  */
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Country {
     private String id;
 

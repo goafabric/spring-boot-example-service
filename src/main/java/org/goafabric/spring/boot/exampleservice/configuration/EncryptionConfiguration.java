@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class EncryptionConfiguration {
     @Transactional
     public String passPhrase() {
         final String passphrase =
-                new String(Base64Utils.encode(UUID.randomUUID().toString().getBytes()));
+                Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
         final Optional<ConfigurationRepository.ConfigurationBo> configuration
                 = configurationRepository.findById("passphrase");
         return configuration.isPresent()
