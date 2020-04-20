@@ -29,19 +29,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
-        return this::doFlyway;
-    }
-
-    @Override
-    public void run(String... args) {
-        final String goals = getGoals();
-        doImport(goals);
-        doEncrypt(goals);
-
-        if (goals.contains("-terminate")) {
-            log.info("terminating app");
-            initiateShutdown(0);
-        }
+        return this::doFlyway; //flyway always needs to run this way, otherwise we end up with a fucked up application
     }
 
     private void doFlyway(Flyway flyway) {
@@ -55,6 +43,19 @@ public class DatabaseProvisioning implements CommandLineRunner {
             log.info("calling flyway clean");
             flyway.clean();
         }
+    }
+
+    @Override
+    public void run(String... args) {
+        final String goals = getGoals();
+        doImport(goals);
+        doEncrypt(goals);
+        doTerminate(goals);
+    }
+
+    private String getGoals() {
+        final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goals");
+        return (StringUtils.isNullOrEmpty(goals))  ? "-migrate" : goals;
     }
 
     private void doImport(String goals) {
@@ -78,10 +79,11 @@ public class DatabaseProvisioning implements CommandLineRunner {
         }
     }
 
-    private String getGoals() {
-        final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goals");
-        return (StringUtils.isNullOrEmpty(goals))
-                ? "-migrate" : goals;
+    private void doTerminate(String goals) {
+        if (goals.contains("-terminate")) {
+            log.info("terminating app");
+            initiateShutdown(0);
+        }
     }
 
     public void initiateShutdown(int exitCode){
