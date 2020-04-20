@@ -44,7 +44,7 @@ security:
 ## adapter section
 
 adapter:
-  timeout: 10 #timeout in seconds
+  timeout: 10000 #timeout in ms
   calleeservice:
     url: http://localhost:50900
     user: exampleuser
@@ -55,7 +55,7 @@ resilience4j.circuitbreaker:
     default:
       #see for more informations under: https://resilience4j.readme.io/docs/circuitbreaker
       registerHealthIndicator: true
-      slowCallDurationThreshold: ${adapter.timeout}s #Effectively the timeout
+      slowCallDurationThreshold: ${adapter.timeout} #Effectively the timeout
       slowCallRateThreshold: 100 #Percentage of calls that that need be registered a slow for the CB to transitions from close to open
       failureRateThreshold: 50 #Failure rate when the Circuit Breaker transitions from closed to open
       waitDurationInOpenState: 60s #Time the CircuitBreaker should wait before transitioning back from open to half-open.

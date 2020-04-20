@@ -13,8 +13,7 @@ import java.util.Arrays;
 public class RestTemplateFactory {
     public static RestTemplate createRestTemplate(final int timeout, final String user, final String password) {
         final RestTemplate restTemplate = new RestTemplate(
-                createClientHttpRequestFactory(timeout * 1000));
-
+                createClientHttpRequestFactory(timeout));
         restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
         restTemplate.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
