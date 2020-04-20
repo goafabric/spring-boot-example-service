@@ -22,9 +22,6 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ConditionalOnProperty(value = "security.authentication.enabled", matchIfMissing = false)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private DataSource dataSource;
-
     @Override //in memory authentication
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
