@@ -15,6 +15,6 @@ public class DbIT {
 
     @Test
     public void getStatStements() {
-        System.out.println(hostNameInfoActuator.getStatSatements());
+        System.out.println(hostNameInfoActuator.getStatStatements());
     }
 }
