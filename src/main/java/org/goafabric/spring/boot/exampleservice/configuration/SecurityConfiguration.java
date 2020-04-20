@@ -1,7 +1,6 @@
 
 package org.goafabric.spring.boot.exampleservice.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +13,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
-
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ConditionalOnProperty(value = "security.authentication.enabled", matchIfMissing = false)
+@ConditionalOnProperty(value = "security.authentication.enabled")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override //in memory authentication
     protected void configure(AuthenticationManagerBuilder auth)

@@ -86,7 +86,7 @@ public class CountryServiceClientIT {
         final Country country  = countryService.save(createStubCountry());
 
         country.setIsoCode("hw");
-        country.setName("Hawaii");;
+        country.setName("Hawaii");
 
         AssertionsForClassTypes.assertThat(countryService.save(country).getId())
                 .isEqualTo(country.getId());

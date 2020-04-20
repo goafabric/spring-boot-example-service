@@ -7,7 +7,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.ConstraintViolationException;
 
 @Slf4j
 @ControllerAdvice

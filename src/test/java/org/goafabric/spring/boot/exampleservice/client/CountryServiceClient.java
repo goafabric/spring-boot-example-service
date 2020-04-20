@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 public class CountryServiceClient implements CountryService {
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     private final String serviceUrl;
 

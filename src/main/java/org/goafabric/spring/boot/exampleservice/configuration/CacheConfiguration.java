@@ -26,7 +26,7 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     @Bean
     @Override
     public CacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager(COUNTRIES);
+        final CaffeineCacheManager cacheManager = new CaffeineCacheManager(COUNTRIES);
         cacheManager.setCaffeine(Caffeine.newBuilder()
                 .maximumSize(cacheMaxSize)
                 .expireAfterAccess(cacheExpiry, TimeUnit.MINUTES));

@@ -3,8 +3,6 @@ package org.goafabric.spring.boot.exampleservice.persistence.domain;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.jasypt.hibernate5.type.EncryptedStringType;
 
 import javax.persistence.*;
 

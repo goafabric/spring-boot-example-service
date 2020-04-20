@@ -29,13 +29,11 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
-        return flyway -> {
-            doFlyway(flyway);
-        };
+        return this::doFlyway;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         final String goals = getGoals();
         doImport(goals);
         doEncrypt(goals);
@@ -82,7 +80,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private String getGoals() {
         final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goals");
-        return (StringUtils.isNullOrEmpty(goals) == true)
+        return (StringUtils.isNullOrEmpty(goals))
                 ? "-migrate" : goals;
     }
 

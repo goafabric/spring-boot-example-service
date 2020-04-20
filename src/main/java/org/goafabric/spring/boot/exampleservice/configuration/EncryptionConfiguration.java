@@ -27,7 +27,7 @@ public class EncryptionConfiguration {
 
     @Bean
     public HibernatePBEStringEncryptor hibernateEncryptor() {
-        HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
+        final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
         encryptor.setEncryptor(jasyptStringEncryptor());
         encryptor.setRegisteredName("hibernateEncryptor");
         return encryptor;
@@ -36,7 +36,7 @@ public class EncryptionConfiguration {
     @Bean
     public PBEStringEncryptor jasyptStringEncryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));;
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
         encryptor.setSaltGenerator(new RandomSaltGenerator());
         encryptor.setIVGenerator(new RandomIVGenerator());

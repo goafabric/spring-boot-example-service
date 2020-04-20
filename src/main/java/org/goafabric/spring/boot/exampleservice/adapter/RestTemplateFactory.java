@@ -9,12 +9,13 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class RestTemplateFactory {
     public static RestTemplate createRestTemplate(final int timeout, final String user, final String password) {
         final RestTemplate restTemplate = new RestTemplate(
                 createClientHttpRequestFactory(timeout));
-        restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
+        restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
         restTemplate.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
             request.getHeaders().setBasicAuth(user, password);
