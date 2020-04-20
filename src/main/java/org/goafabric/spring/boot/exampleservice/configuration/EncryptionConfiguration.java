@@ -5,6 +5,7 @@ import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
 import org.jasypt.salt.RandomIVGenerator;
+import org.jasypt.salt.RandomSaltGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +38,7 @@ public class EncryptionConfiguration {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));;                        // we HAVE TO set a password
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
+        encryptor.setSaltGenerator(new RandomSaltGenerator());
         encryptor.setIVGenerator(new RandomIVGenerator());
         return encryptor;
     }
