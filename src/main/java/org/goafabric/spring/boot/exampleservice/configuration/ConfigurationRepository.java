@@ -16,8 +16,8 @@ public interface ConfigurationRepository extends CrudRepository<ConfigurationRep
     @Table(name="configuration")
     @Data
     @Builder
-    @AllArgsConstructor
     @NoArgsConstructor
+    @AllArgsConstructor
     class ConfigurationBo {
         @Id
         private String configKey;
