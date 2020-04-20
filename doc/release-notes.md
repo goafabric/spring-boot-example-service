@@ -39,7 +39,7 @@ API
     - @see SwaggerConfiguration and @ApiOperation inside CountryService
     - Dependencies: io.springfox*
 - Bean Validation for API
-    - @see @NotNull and @Size inside Country DTO, ExceptionHandler
+    - @see @NotNull and @Size inside Country DTO, @Valid inside CountryService, ExceptionHandler
     - Dependencies: spring-boot-starter-validation 
 
 Adapter
