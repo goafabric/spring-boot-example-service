@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Component
 @Slf4j
-public class HostNameInfoActuator implements InfoContributor {
+public class InfoActuator implements InfoContributor {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

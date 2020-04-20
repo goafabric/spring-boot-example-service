@@ -4,7 +4,7 @@
 
 CrossFunctional
 - Postgres Database Monitoring
-    - @see HostNameInfoActuator
+    - @see InfoActuator
 
 #1.0.2
 
