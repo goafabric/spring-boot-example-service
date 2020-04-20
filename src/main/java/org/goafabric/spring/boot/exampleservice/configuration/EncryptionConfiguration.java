@@ -44,7 +44,7 @@ public class EncryptionConfiguration {
         return encryptor;
     }
 
-    //reads the passphrase from the database or inits with a new one
+    //reads the passphrase from the database configuration table or inits with a new one
     //if this is somehow not possible, you could just read from application yml, which is less secure ( @Value("${security.encryption.passphrase}" )
     @Bean
     @Transactional
