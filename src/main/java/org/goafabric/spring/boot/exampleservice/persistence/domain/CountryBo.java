@@ -14,14 +14,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="country") //, schema = "countries")
 @Data
-@TypeDef(
-        name="encryptedString",
-        typeClass= EncryptedStringType.class,
-        parameters= {
-                @org.hibernate.annotations.Parameter(name="encryptorRegisteredName", value="hibernateEncryptor")
-        }
-)
-
 public class CountryBo {
     private static final long serialVersionUID = 1L;
 
