@@ -3,6 +3,7 @@ package org.goafabric.spring.boot.exampleservice.logic;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceAdapter;
+import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceClient;
 import org.goafabric.spring.boot.exampleservice.configuration.CacheConfiguration;
 import org.goafabric.spring.boot.exampleservice.crossfunctional.DurationLog;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
@@ -34,8 +35,7 @@ public class CountryLogic {
     private CountryMapper countryMapper;
 
     @Autowired
-    @Lazy
-    private CalleeServiceAdapter calleeServiceAdapter;
+    private CalleeServiceAdapter calleeServiceClient;
 
     @Cacheable
     public Country getById(@NonNull final String id) {
@@ -73,7 +73,7 @@ public class CountryLogic {
     }
 
     public Boolean isAlive() {
-        return calleeServiceAdapter.isAlive();
+        return calleeServiceClient.isAlive();
     }
 }
 
