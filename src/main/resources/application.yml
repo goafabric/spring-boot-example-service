@@ -18,8 +18,8 @@ management:
 ## persistence section
 spring:
     datasource:
-      url: jdbc:h2:mem:countrydb
-#      url: jdbc:postgresql://localhost:50710/countrydb
+#      url: jdbc:h2:mem:countrydb
+      url: jdbc:postgresql://localhost:50710/countrydb
       username: example-service
       password: example-service
 
