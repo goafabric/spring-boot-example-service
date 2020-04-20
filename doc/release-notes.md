@@ -1,4 +1,4 @@
-#1.0.3-SNAPSHOT
+#1.0.3
 
 ##Updated
 
