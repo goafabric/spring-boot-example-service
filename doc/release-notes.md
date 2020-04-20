@@ -1,8 +1,10 @@
 #1.0.3
 
-##Updated
+##Added
 
-- Refactoring
+CrossFunctional
+- Postgres Database Monitoring
+    - @see HostNameInfoActuator
 
 #1.0.2
 
