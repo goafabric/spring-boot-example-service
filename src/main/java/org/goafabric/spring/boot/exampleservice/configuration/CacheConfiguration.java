@@ -1,6 +1,7 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -16,9 +17,11 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     //names of the different caches, at least one per Resource
     public static final String COUNTRIES = "countries";
 
-    private static final int INITIAL_CACHE_CAPACITY = 100;
-    private static final long MAX_CACHE_CAPACITY = 100L;
-    private static final long CACHE_EXPIRY = 10L;
+    @Value("${cache.maxsize}")
+    private Long cacheMaxSize;
+
+    @Value("${cache.expiry}")
+    private Long cacheExpiry;
 
     @Bean
     @Override
@@ -30,8 +33,7 @@ public class CacheConfiguration extends CachingConfigurerSupport {
 
     private Caffeine<Object, Object> caffeineCacheBuilder() {
         return Caffeine.newBuilder()
-                .initialCapacity(INITIAL_CACHE_CAPACITY)
-                .maximumSize(MAX_CACHE_CAPACITY)
-                .expireAfterAccess(CACHE_EXPIRY, TimeUnit.MINUTES);
+                .maximumSize(cacheMaxSize)
+                .expireAfterAccess(cacheExpiry, TimeUnit.MINUTES);
     }
 }

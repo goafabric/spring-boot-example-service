@@ -41,8 +41,12 @@ security:
   authentication:
     enabled: true
 
-## adapter section
+# cache
+cache:
+  maxsize: 1000
+  expiry: 15
 
+## adapter section
 adapter:
   timeout: 10000 #timeout in ms
   calleeservice:
