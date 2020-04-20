@@ -34,6 +34,4 @@ public class CalleeServiceAdapter {
             @Value("${adapter.timeout}") Integer timeout) {
         return RestTemplateFactory.createRestTemplate(timeout, user, password);
     }
-
-
 }
