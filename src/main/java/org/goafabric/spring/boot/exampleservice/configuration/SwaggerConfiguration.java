@@ -24,7 +24,7 @@ public class SwaggerConfiguration {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.goafabric1"))
+                .apis(RequestHandlerSelectors.basePackage("org.goafabric"))
                 .paths(PathSelectors.any())
                 .build();
     }

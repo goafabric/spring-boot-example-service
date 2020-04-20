@@ -27,13 +27,9 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     @Override
     public CacheManager cacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager(COUNTRIES);
-        cacheManager.setCaffeine(caffeineCacheBuilder());
-        return cacheManager;
-    }
-
-    private Caffeine<Object, Object> caffeineCacheBuilder() {
-        return Caffeine.newBuilder()
+        cacheManager.setCaffeine(Caffeine.newBuilder()
                 .maximumSize(cacheMaxSize)
-                .expireAfterAccess(cacheExpiry, TimeUnit.MINUTES);
+                .expireAfterAccess(cacheExpiry, TimeUnit.MINUTES));
+        return cacheManager;
     }
 }
