@@ -18,7 +18,7 @@ import java.util.UUID;
 @Configuration
 public class EncryptionConfiguration {
     @Autowired
-    ConfigurationRepository configurationRepository;
+    private ConfigurationRepository configurationRepository;
 
     @Bean
     public StringEncryptor stringEncryptor() {
@@ -36,13 +36,15 @@ public class EncryptionConfiguration {
     @Bean
     public PBEStringEncryptor jasyptStringEncryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));;                        // we HAVE TO set a password
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));;
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
         encryptor.setSaltGenerator(new RandomSaltGenerator());
         encryptor.setIVGenerator(new RandomIVGenerator());
         return encryptor;
     }
 
+    //reads the passphrase from the database or inits with a new one
+    //if this is somehow not possible, you could just read from application yml, which is less secure ( @Value("${security.encryption.passphrase}" )
     @Bean
     @Transactional
     public String passPhrase() {
@@ -55,11 +57,4 @@ public class EncryptionConfiguration {
                 : configurationRepository.save(ConfigurationRepository.ConfigurationBo.builder()
                     .configKey("passphrase").configValue(passphrase).build()).getConfigValue();
     }
-
-    /* Alternative if reading from a database is not an option
-    @Bean
-    public String passPhrase(@Value("${security.encryption.passphrase}") String passPhrase) {
-        return passPhrase;
-    }
-    */
 }
