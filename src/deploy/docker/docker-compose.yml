@@ -16,7 +16,7 @@ services:
       - spring.datasource.username=example-service
       - spring.datasource.password=example-service
       - adapter.calleeservice.url=http://host.docker.internal:50900
-      - database.monitoring.enabled=true
+      - management.database.monitoring.enabled=true
 
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
