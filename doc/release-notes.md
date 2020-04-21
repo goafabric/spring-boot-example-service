@@ -5,6 +5,10 @@
 CrossFunctional
 - Postgres Database Monitoring
     - @see InfoActuator
+##Updated
+
+Security
+- Upgrade to Spring-Boot-Jasypt 3.0.2 which otherwised clashed badly with jasyppt-hibernate during classloading
 
 #1.0.2
 ##Added
