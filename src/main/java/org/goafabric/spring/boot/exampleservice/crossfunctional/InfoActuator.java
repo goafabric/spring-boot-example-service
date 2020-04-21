@@ -42,8 +42,7 @@ public class InfoActuator implements InfoContributor {
 
     private void addDatabaseInfo(Info.Builder builder) {
         if (databaseMonitoringEnabled) {
-            builder.withDetail("pg_stat_statements", "")
-                    .withDetail("total    average    calls    query", "")
+            builder.withDetail("queries", "total    average    calls    query")
                     .withDetails(getStatStatements());
         }
     }
