@@ -26,11 +26,8 @@ public class CountryBo {
     private String name;
     private String information;
 
-    @Type(type="encryptedString") //@see package-info.java
+    @Type(type="encryptedString")
     private String secret;
-
-    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
-    //private LocalDateTime date;
 
     @Version //optimistic locking
     private Long version;
