@@ -29,7 +29,7 @@
 
         <resilience4j.version>1.2.0</resilience4j.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
-        <jasypt-spring-boot-starter.version>2.1.1</jasypt-spring-boot-starter.version>
+        <jasypt-spring-boot-starter.version>3.0.2</jasypt-spring-boot-starter.version>
     </properties>
 
 
