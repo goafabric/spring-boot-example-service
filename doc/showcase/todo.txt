@@ -2,5 +2,3 @@
 - ssl via nginx
 - csrf
 - gdpr deletion
-
-- depployment automation
