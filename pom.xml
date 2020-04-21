@@ -30,6 +30,7 @@
         <resilience4j.version>1.2.0</resilience4j.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <jasypt-spring-boot-starter.version>3.0.2</jasypt-spring-boot-starter.version>
+        <jasypt-hibernate5.version>1.9.3</jasypt-hibernate5.version>
     </properties>
 
 
@@ -121,7 +122,7 @@
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt-hibernate5</artifactId>
-            <version>1.9.3</version>
+            <version>${jasypt-hibernate5.version}</version>
         </dependency>
 
         <dependency>
