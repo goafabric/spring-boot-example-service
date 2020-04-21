@@ -59,7 +59,7 @@ public class CountryServiceLoadRemoteNRIT {
 
         countryService.save(country);
 
-        Country countryNew = countryService.findByName(country.getName());
+        final Country countryNew = countryService.findByName(country.getName());
         assertThat(country.getName()).isEqualTo(countryNew.getName());
     }
 

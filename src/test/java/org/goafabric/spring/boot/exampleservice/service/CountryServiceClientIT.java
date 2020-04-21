@@ -42,12 +42,6 @@ public class CountryServiceClientIT {
     }
 
     @Test
-    @Ignore
-    public void testIsAlive() {
-        assertThat(countryService.isAlive()).isTrue();
-    }
-
-    @Test
     public void testGetById() {
         final Country country = countryService.getById("1");
         assertThat(country).isNotNull();
@@ -104,7 +98,7 @@ public class CountryServiceClientIT {
         final Country country  = countryService.save(createStubCountry());
 
         country.setIsoCode("hw");
-        country.setName("Hawaii");;
+        country.setName("Hawaii");
 
         AssertionsForClassTypes.assertThat(countryService.save(country).getId())
                 .isEqualTo(country.getId());
@@ -162,6 +156,17 @@ public class CountryServiceClientIT {
             fail("should net get here");
         } catch (HttpClientErrorException e) {
             assertThat(e.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+            assertThat(e.getResponseBodyAsString()).isNotNull();
+        }
+    }
+
+    @Test
+    public void testIsAlive() {
+        try {
+            countryService.isAlive();
+            fail("should net get here");
+        } catch (HttpClientErrorException e) {
+            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
             assertThat(e.getResponseBodyAsString()).isNotNull();
         }
     }

@@ -1,11 +1,12 @@
-#1.0.3-SNAPSHOT
+#1.0.3
 
-##Updated
+##Added
 
-- Refactoring
+CrossFunctional
+- Postgres Database Monitoring
+    - @see InfoActuator
 
 #1.0.2
-
 ##Added
 
 CrossFunctional
@@ -29,9 +30,7 @@ Persistence
 Docker
 - Timezone added to Compose File and Kubernetes yml
 
-
 #1.0.1
-
 ##Added
 
 API
@@ -39,7 +38,7 @@ API
     - @see SwaggerConfiguration and @ApiOperation inside CountryService
     - Dependencies: io.springfox*
 - Bean Validation for API
-    - @see @NotNull and @Size inside Country DTO, ExceptionHandler
+    - @see @NotNull and @Size inside Country DTO, @Valid inside CountryService, ExceptionHandler
     - Dependencies: spring-boot-starter-validation 
 
 Adapter
@@ -64,5 +63,6 @@ POM
     - seems to fix build Problems with Jenkins inside OpenStack
 
 #1.0.0 
+##Initial
 - initial release, with all the good stuff inside like REST, Spring DATA JPA, Mapstruct...
 

@@ -1,0 +1,6 @@
+- transparent multi tenancy and orgunit
+- ssl via nginx
+- csrf
+- gdpr deletion
+
+- depployment automation
