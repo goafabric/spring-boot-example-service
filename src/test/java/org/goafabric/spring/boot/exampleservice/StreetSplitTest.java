@@ -27,9 +27,9 @@ public class StreetSplitTest {
     }
 
 
+    private static final Pattern STREET_PATTERN = Pattern.compile("^((?:\\p{L}| |\\d|\\.|-)+?) (\\d+(?: ?- ?\\d+)? *[a-zA-Z]?)"); //Pattern.compile"([ a-zA-zäöüß]+) ([\\w]+)"); https://stackoverflow.com/questions/9863630/regex-for-splitting-a-german-address-into-its-parts
     private Matcher splitStreet(final String street) {
-        final Pattern pattern = Pattern.compile("^((?:\\p{L}| |\\d|\\.|-)+?) (\\d+(?: ?- ?\\d+)? *[a-zA-Z]?)");
-        final Matcher matcher = pattern.matcher(street);
+        final Matcher matcher = STREET_PATTERN.matcher(street);
         if (!matcher.find() || matcher.groupCount() != 2) throw new IllegalStateException("street could not be split: " + street);
         log.info(matcher.group(1));log.info(matcher.group(2));
         return matcher;
