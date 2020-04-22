@@ -1,0 +1,30 @@
+package org.goafabric.spring.boot.exampleservice;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+@Slf4j
+public class StreetSplitTest {
+    @Test
+    public void test() {
+        assertThat(splitStreet("Fichtenstraße 10a").group(1)).isEqualTo("Fichtenstraße");
+        assertThat(splitStreet("Fichtenstraße 10a").group(2)).isEqualTo("10a");
+
+        assertThat(splitStreet("am Kürchen 5").group(1)).isEqualTo("am Kürchen");
+        assertThat(splitStreet("am Kürchen 5").group(2)).isEqualTo("5");
+    }
+
+
+    private Matcher splitStreet(final String street) {
+        final Pattern pattern = Pattern.compile("([ a-zA-zäöüß]+) ([\\w]+)");
+        final Matcher matcher = pattern.matcher(street);
+        if (!matcher.find() || matcher.groupCount() != 2) throw new IllegalStateException("street could not be split: " + street);
+        return matcher;
+    }
+}
