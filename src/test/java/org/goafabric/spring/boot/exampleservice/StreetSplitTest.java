@@ -26,8 +26,8 @@ public class StreetSplitTest {
         //assertThat(splitStreet("Straße des 17. Juni 23a").group(1)).isEqualTo("23a");
     }
 
-
-    private static final Pattern STREET_PATTERN = Pattern.compile("^((?:\\p{L}| |\\d|\\.|-)+?) (\\d+(?: ?- ?\\d+)? *[a-zA-Z]?)"); //Pattern.compile"([ a-zA-zäöüß]+) ([\\w]+)"); https://stackoverflow.com/questions/9863630/regex-for-splitting-a-german-address-into-its-parts
+    //Pattern.compile"([ a-zA-zäöüß]+) ([\\w]+)"); https://stackoverflow.com/questions/9863630/regex-for-splitting-a-german-address-into-its-parts
+    private static final Pattern STREET_PATTERN = Pattern.compile("^((?:\\p{L}| |\\d|\\.|-)+?) (\\d+(?: ?- ?\\d+)? *[a-zA-Z]?)");
     private Matcher splitStreet(final String street) {
         final Matcher matcher = STREET_PATTERN.matcher(street);
         if (!matcher.find() || matcher.groupCount() != 2) throw new IllegalStateException("street could not be split: " + street);
