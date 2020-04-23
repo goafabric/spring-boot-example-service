@@ -7,6 +7,7 @@ import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
 import org.jasypt.iv.RandomIvGenerator;
 import org.jasypt.salt.RandomSaltGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,21 +22,21 @@ public class EncryptionConfiguration {
     @Autowired
     private ConfigurationRepository configurationRepository;
 
-    @Bean
-    public StringEncryptor stringEncryptor() {
-        return jasyptStringEncryptor();
+    @Bean //just so we don't have to put the bean name inside application.yml
+    public StringEncryptor jasyptStringEncryptor() {
+        return stringEncryptor();
     }
 
     @Bean
     public HibernatePBEStringEncryptor hibernateEncryptor() {
         final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
-        encryptor.setEncryptor(jasyptStringEncryptor());
+        encryptor.setEncryptor(stringEncryptor());
         encryptor.setRegisteredName("hibernateEncryptor");
         return encryptor;
     }
 
     @Bean
-    public PBEStringEncryptor jasyptStringEncryptor() {
+    public PBEStringEncryptor stringEncryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
@@ -58,4 +59,6 @@ public class EncryptionConfiguration {
                 : configurationRepository.save(ConfigurationRepository.ConfigurationBo.builder()
                     .configKey("passphrase").configValue(passphrase).build()).getConfigValue();
     }
+
+    //public String passPhrase(@Value("${security.encryption.passphrase}") String passPhrase) { return passPhrase; }
 }
