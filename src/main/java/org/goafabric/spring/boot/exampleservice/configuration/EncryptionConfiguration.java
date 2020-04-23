@@ -7,7 +7,6 @@ import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
 import org.jasypt.iv.RandomIvGenerator;
 import org.jasypt.salt.RandomSaltGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,21 +23,30 @@ public class EncryptionConfiguration {
 
     @Bean //just so we don't have to put the bean name inside application.yml
     public StringEncryptor jasyptStringEncryptor() {
-        return stringEncryptor();
+        return propertyEncryptor();
     }
 
     @Bean
     public HibernatePBEStringEncryptor hibernateEncryptor() {
         final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
-        encryptor.setEncryptor(stringEncryptor());
+        encryptor.setEncryptor(databaseEncryptor());
         encryptor.setRegisteredName("hibernateEncryptor");
         return encryptor;
     }
 
     @Bean
-    public PBEStringEncryptor stringEncryptor() {
+    public PBEStringEncryptor propertyEncryptor() {
+        return createEncryptor("property_passphrase");
+    }
+
+    @Bean
+    public PBEStringEncryptor databaseEncryptor() {
+        return createEncryptor("database_passphrase");
+    }
+
+    private StandardPBEStringEncryptor createEncryptor(String key) {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase(key))));
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
         encryptor.setSaltGenerator(new RandomSaltGenerator());
         encryptor.setIvGenerator(new RandomIvGenerator());
@@ -49,11 +57,11 @@ public class EncryptionConfiguration {
     //if this is somehow not possible, you could just read from application yml, which is less secure ( @Value("${security.encryption.passphrase}" )
     @Bean
     @Transactional
-    public String passPhrase() {
+    public String passPhrase(String key) {
         final String passphrase =
                 Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
         final Optional<ConfigurationRepository.ConfigurationBo> configuration
-                = configurationRepository.findById("passphrase");
+                = configurationRepository.findById(key);
         return configuration.isPresent()
                 ? configuration.get().getConfigValue()
                 : configurationRepository.save(ConfigurationRepository.ConfigurationBo.builder()

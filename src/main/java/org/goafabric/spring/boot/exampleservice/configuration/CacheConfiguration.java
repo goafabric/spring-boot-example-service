@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 public class CacheConfiguration extends CachingConfigurerSupport {
     //names of the different caches, at least one per Resource
-    public static final String COUNTRIES = "countries";
+    public static final String COUNTRIES = "patients";
 
     @Value("${cache.maxsize}")
     private Long cacheMaxSize;
