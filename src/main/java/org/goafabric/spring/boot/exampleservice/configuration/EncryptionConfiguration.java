@@ -35,18 +35,20 @@ public class EncryptionConfiguration {
     }
 
     @Bean
+    @Transactional
     public PBEStringEncryptor propertyEncryptor() {
         return createEncryptor("property_passphrase");
     }
 
     @Bean
+    @Transactional
     public PBEStringEncryptor databaseEncryptor() {
         return createEncryptor("database_passphrase");
     }
 
     private StandardPBEStringEncryptor createEncryptor(String key) {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase(key))));
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(getPassPhrase(key))));
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
         encryptor.setSaltGenerator(new RandomSaltGenerator());
         encryptor.setIvGenerator(new RandomIvGenerator());
@@ -55,9 +57,7 @@ public class EncryptionConfiguration {
 
     //reads the passphrase from the database configuration table or inits with a new one
     //if this is somehow not possible, you could just read from application yml, which is less secure ( @Value("${security.encryption.passphrase}" )
-    @Bean
-    @Transactional
-    public String passPhrase(String key) {
+    public String getPassPhrase(String key) {
         final String passphrase =
                 Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
         final Optional<ConfigurationRepository.ConfigurationBo> configuration
@@ -67,6 +67,4 @@ public class EncryptionConfiguration {
                 : configurationRepository.save(ConfigurationRepository.ConfigurationBo.builder()
                     .configKey("passphrase").configValue(passphrase).build()).getConfigValue();
     }
-
-    //public String passPhrase(@Value("${security.encryption.passphrase}") String passPhrase) { return passPhrase; }
 }
