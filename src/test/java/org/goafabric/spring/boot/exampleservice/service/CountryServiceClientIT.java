@@ -71,6 +71,7 @@ public class CountryServiceClientIT {
     }
 
     @Test
+    @Ignore
     public void testFindCountryBySecret() {
         final String id = countryService.save(createStubCountry()).getId();
         Country country = countryService.getById(id);
