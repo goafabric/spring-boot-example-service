@@ -32,7 +32,7 @@ public class EncryptionConfiguration {
     public HibernatePBEStringEncryptor hibernateEncryptor() {
         final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
         encryptor.setEncryptor(databaseEncryptor());
-        encryptor.setRegisteredName("hibernateEncryptor");
+        encryptor.setRegisteredName("hibernateStringEncryptor");
         return encryptor;
     }
 
@@ -57,20 +57,25 @@ public class EncryptionConfiguration {
         return encryptor;
     }
 
-    /*
     @Bean
-    public PBEStringEncryptor jasyptStringEncryptor() {
-        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setAlgorithm("PBEWithMD5AndDES");
-        String iv = "0Yo6wn3UNyszXrAtV9KOl0SWEKYf8feYjv7dwWIobCXEuMz8t88xahe2IujJsjrWcZXjs6RNAUYh1FmKn3p3wMFWGy6MmK1YWWGCGv7jxaZVr2hXhuOohEdr823aaad4";
-        StringFixedIvGenerator stringFixedIVGenerator = new StringFixedIvGenerator(iv);
-        encryptor.setIvGenerator(stringFixedIVGenerator);
-        encryptor.setSaltGenerator(new StringFixedSaltGenerator(iv));
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(passPhrase())));;                        // we HAVE TO set a password
-
+    public HibernatePBEStringEncryptor hibernateSearchableEncryptor() {
+        final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
+        encryptor.setEncryptor(databaseSearchableEncryptor());
+        encryptor.setRegisteredName("hibernateSearchableEncryptor");
         return encryptor;
     }
-    */
+
+    @Bean
+    public PBEStringEncryptor databaseSearchableEncryptor() {
+        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setAlgorithm("PBEWithMD5AndDES");
+        final String iv = "0Yo6wn3UNyszXrAtV9KOl0SWEKYf8feYjv7dwWIobCXEuMz8t88xahe2IujJsjrWcZXjs6RNAUYh1FmKn3p3wMFWGy6MmK1YWWGCGv7jxaZVr2hXhuOohEdr823aaad4";
+        final StringFixedIvGenerator stringFixedIVGenerator = new StringFixedIvGenerator(iv);
+        encryptor.setIvGenerator(stringFixedIVGenerator);
+        encryptor.setSaltGenerator(new StringFixedSaltGenerator(iv));
+        encryptor.setPassword(new String(Base64Utils.decodeFromString(getPassPhrase("database_passphrase"))));;                        // we HAVE TO set a password
+        return encryptor;
+    }
 
 
     //reads the passphrase from the database configuration table or inits with a new one
