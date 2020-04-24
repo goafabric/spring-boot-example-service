@@ -68,7 +68,7 @@ public class EncryptionConfiguration {
     @Bean
     public PBEStringEncryptor databaseSearchableEncryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setAlgorithm("PBEWithMD5AndDES");
+        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
         final String iv = "0Yo6wn3UNyszXrAtV9KOl0SWEKYf8feYjv7dwWIobCXEuMz8t88xahe2IujJsjrWcZXjs6RNAUYh1FmKn3p3wMFWGy6MmK1YWWGCGv7jxaZVr2hXhuOohEdr823aaad4";
         final StringFixedIvGenerator stringFixedIVGenerator = new StringFixedIvGenerator(iv);
         encryptor.setIvGenerator(stringFixedIVGenerator);
