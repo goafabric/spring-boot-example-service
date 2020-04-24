@@ -25,7 +25,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     @Autowired
     @Lazy
-    private StringEncryptor stringEncryptor;
+    private StringEncryptor propertyEncryptor;
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
@@ -73,9 +73,9 @@ public class DatabaseProvisioning implements CommandLineRunner {
     }
 
     private void doEncrypt(String goals) {
-        if (goals.contains("-encrypt=")) {
-            final String string = goals.split("-encrypt=")[1].split("-terminate")[0];
-            log.info(stringEncryptor.encrypt("encrypted string will be:" + string));
+        if (goals.contains("-encryptproperty=")) {
+            final String string = goals.split("-encryptproperty=")[1].split("-terminate")[0];
+            log.info(propertyEncryptor.encrypt("encrypted string will be:" + string));
         }
     }
 

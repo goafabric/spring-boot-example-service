@@ -1,6 +1,7 @@
 package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +12,12 @@ import javax.persistence.EntityNotFoundException;
 @Slf4j
 @ControllerAdvice
 public class ExceptionHandler {
+    @org.springframework.web.bind.annotation.ExceptionHandler(EncryptionOperationNotPossibleException.class)
+    public ResponseEntity<String> handleDecryptionException(EncryptionOperationNotPossibleException ex) {
+        log.warn(ex.getMessage(), ex);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
     @org.springframework.web.bind.annotation.ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handleDataRetrievalException(EntityNotFoundException ex) {
         log.warn(ex.getMessage(), ex);

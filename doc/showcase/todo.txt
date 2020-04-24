@@ -1,6 +1,10 @@
-- transparent multi tenancy and orgunit
-- ssl via nginx
+- transparent multi tenancy and orgunit handling
+- generic field encryption for pojos (without jpa)
 - csrf
+- catalog import via spring batch
+
+- authentication and multi tenancy inside fhir facade
+- ssl via nginx
 - gdpr deletion
 
-- depployment automation
+- spring reactor with r2dbc or mongodb, graal native binaries
