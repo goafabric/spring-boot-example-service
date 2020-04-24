@@ -61,7 +61,7 @@ public class EncryptionConfiguration {
     public HibernatePBEStringEncryptor hibernateSearchableEncryptor() {
         final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
         encryptor.setEncryptor(databaseSearchableEncryptor());
-        encryptor.setRegisteredName("hibernateSearchableEncryptor");
+        encryptor.setRegisteredName("hibernateSearchableStringEncryptor");
         return encryptor;
     }
 

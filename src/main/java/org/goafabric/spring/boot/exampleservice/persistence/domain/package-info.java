@@ -11,7 +11,7 @@
                         name="encryptedSearchableString",
                         typeClass= EncryptedStringType.class,
                         parameters= {
-                                @Parameter(name="encryptorRegisteredName", value="hibernateSearchableEncryptor")
+                                @Parameter(name="encryptorRegisteredName", value="hibernateSearchableStringEncryptor")
                         }
                 )
 
