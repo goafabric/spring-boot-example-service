@@ -52,5 +52,5 @@ docker run --rm -e database.provisioning.goals='-migrate -import-catalog-data -t
 
 #SSL
 #https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx.crt -subj '/CN=www.mydom.com/O=Goafabric Ltd./C=DE'
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nginx.key -out nginx.crt -subj '/CN=www.mydom.com/O=Goafabric Ltd./C=DE'
 
