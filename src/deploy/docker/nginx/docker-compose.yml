@@ -17,7 +17,7 @@ services:
       - nginxlogs:/var/log/nginx/logs/
     ports:
       - 8090:80
-      - 443:443
+      - 8043:443
     networks:
       - example-service-net
 
