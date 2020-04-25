@@ -7,7 +7,6 @@ services:
     restart: 'no'
     ports:
       - 50700:50700
-#      - 50701:50701
     environment:
       - TZ=Europe/Berlin
       - spring.config.location=/app/config/application.yml
