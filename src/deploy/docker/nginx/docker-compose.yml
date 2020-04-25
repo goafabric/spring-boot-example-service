@@ -5,9 +5,8 @@
 version: '3.7'
 services:
   nginx:
-    image: nginx:1.15.12-alpine
+    image: nginx:1.17.10
     container_name: nginx
-    #    read_only: true
     restart: always
     environment:
       - TZ=Europe/Berlin
