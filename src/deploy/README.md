@@ -49,3 +49,7 @@ kubectl rollout undo deployment example-service
 
 # Database Provisioning
 docker run --rm -e database.provisioning.goals='-migrate -import-catalog-data -terminate' -e spring.datasource.url='jdbc:h2:mem:countrydb' goafabric/spring-boot-exampleservice:1.0.2
+
+#SSL
+#https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx.crt
