@@ -13,4 +13,5 @@ https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309
 https://www.bytebee.de/certificate-authority-erstellung/
 
 ##Gen
-openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.crt -subj '/CN=Goafabric CA/O=Goafabric Ltd./C=DE'
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.crt -subj '/CN=Goafabric End Entity/O=Goafabric Ltd./C=DE'
+#openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.crt -subj '/CN=Goafabric End Entity/O=Goafabric Ltd./C=DE' -reqexts SAN -config <(cat /etc/ssl/openssl.cnf <(printf "\n[SAN]\nsubjectAltName=DNS:localhost")) 
