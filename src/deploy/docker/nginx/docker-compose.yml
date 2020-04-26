@@ -11,8 +11,8 @@ services:
     environment:
       - TZ=Europe/Berlin
     volumes:
-      - ./conf/nginx-ssl.conf:/etc/nginx/nginx.conf
-      - ./conf/goafabric-endentity.crt:/etc/nginx/ssl/nginx.crt
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./conf/goafabric-endentity.pem:/etc/nginx/ssl/nginx.crt
       - ./conf/goafabric-endentity.key:/etc/nginx/ssl/nginx.key
       - nginxlogs:/var/log/nginx/logs/
     ports:
