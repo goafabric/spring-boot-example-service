@@ -3,3 +3,6 @@
 openssl genrsa -aes256 -out root/goafabric-root.key 4096
 #create root certificate
 openssl req -x509 -new -nodes -sha512 -days 3650 -key root/goafabric-root.key -out root/goafabric-root.pem -subj '/CN=Goafabric Root/O=Goafabric Ltd./C=DE'
+
+##links
+https://www.bytebee.de/certificate-authority-erstellung/

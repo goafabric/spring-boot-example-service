@@ -7,3 +7,6 @@ openssl req -new -sha512 -key end-entity/goafabric-endentity.key -out end-entity
 openssl x509 -req -sha512 -days 3650 -in end-entity/goafabric-endentity.csr -CA root/goafabric-root.pem -CAkey root/goafabric-root.key -CAcreateserial -out end-entity/goafabric-endentity.pem
 # remove csr
 rm end-entity/goafabric-endentity.csr
+
+# direct generation without root ca
+#openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.pem -subj '/CN=goafabric/O=Goafabric Ltd./C=DE'

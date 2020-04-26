@@ -8,9 +8,3 @@ https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificat
 https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-with-ssl-as-a-reverse-proxy-for-jenkins
 https://geekflare.com/san-ssl-certificate/
 
-##RootCa
-https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309
-https://www.bytebee.de/certificate-authority-erstellung/
-
-##Gen Direct
-openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.pem -subj '/CN=goafabric/O=Goafabric Ltd./C=DE'
