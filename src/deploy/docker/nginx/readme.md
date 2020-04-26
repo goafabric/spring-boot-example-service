@@ -18,6 +18,16 @@ openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout goafabric-endentity
 
 ..
 cd ssl
-## root ca
-openssl genrsa -aes256 -out goafabric-root.key 4096 
-openssl req -x509 -new -nodes -sha512 -key goafabric-root.key -days 3650 -out goafabric-root.pem -subj '/CN=Goafabric Root/O=Goafabric Ltd./C=DE'
+## Root CA
+## create key, asks for password because of ae256
+openssl genrsa -aes256 -out root/goafabric-root.key 4096
+## create root certificate
+openssl req -x509 -new -nodes -sha512 -days 3650 -key root/goafabric-root.key -out root/goafabric-root.pem -subj '/CN=Goafabric Root/O=Goafabric Ltd./C=DE'
+
+# End Entity
+## create key, won't ask for password because no encryption applied 
+openssl genrsa -out goafabric-endentity.key 4096
+## create signing request (csr)
+openssl req -new -sha512 -key goafabric-endentity.key -out goafabric-endentity.csr -subj '/CN=goafabric.org/O=Goafabric Ltd./C=DE'
+## create end entity certificate
+openssl x509 -req -sha512 -days 3650 -in goafabric-endentity.csr -CA root/goafabric-root.pem -CAkey root/goafabric-root.key -CAcreateserial -out goafabric-endentity.pem
