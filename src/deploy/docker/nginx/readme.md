@@ -30,4 +30,4 @@ openssl genrsa -out goafabric-endentity.key 4096
 ## create signing request (csr)
 openssl req -new -sha512 -key goafabric-endentity.key -out goafabric-endentity.csr -subj '/CN=goafabric.org/O=Goafabric Ltd./C=DE'
 ## create end entity certificate
-openssl x509 -req -sha512 -days 3650 -in goafabric-endentity.csr -CA root/goafabric-root.pem -CAkey root/goafabric-root.key -CAcreateserial -out goafabric-endentity.pem
+openssl x509 -req -sha512 -days 3650 -in goafabric-endentity.csr -CA root/goafabric-root.pem -CAkey root/goafabric-root.key -CAcreateserial -out goafabric-endentity.crt
