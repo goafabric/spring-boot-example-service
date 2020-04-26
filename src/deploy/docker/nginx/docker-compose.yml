@@ -16,8 +16,8 @@ services:
       - ./conf/nginx.key:/etc/nginx/ssl/nginx.key
       - nginxlogs:/var/log/nginx/logs/
     ports:
-      - 8090:80
-      - 8043:443
+      - 8080:8080
+      - 443:443
     networks:
       - example-service-net
 
