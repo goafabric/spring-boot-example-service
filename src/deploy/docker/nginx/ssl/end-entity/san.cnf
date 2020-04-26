@@ -12,3 +12,5 @@ commonName                 = goafabric.org
 subjectAltName = @alt_names
 [alt_names]
 DNS.1   = localhost
+
+#https://geekflare.com/san-ssl-certificate/
