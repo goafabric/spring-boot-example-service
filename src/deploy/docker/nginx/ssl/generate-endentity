@@ -1,12 +1,26 @@
 #!/bin/bash
 # create key, won't ask for password because no encryption applied
-openssl genrsa -out end-entity/goafabric-endentity.key 4096
+openssl genrsa\
+        -out end-entity/goafabric-endentity.key\
+        4096
+
 # create signing request (csr)
-#openssl req -new -sha512 -key end-entity/goafabric-endentity.key -out end-entity/goafabric-endentity.csr -subj '/CN=goafabric.org/O=Goafabric Ltd./C=DE'
-openssl req -new -sha512 -key end-entity/goafabric-endentity.key -out end-entity/goafabric-endentity.csr -config end-entity/san.cnf -extensions SAN
+openssl req -new -sha512\
+        -key end-entity/goafabric-endentity.key\
+        -out end-entity/goafabric-endentity.csr\
+        -config end-entity/san.cnf\
+        -extensions SAN
 
 # create end entity certificate
-openssl x509 -req -sha512 -days 720 -in end-entity/goafabric-endentity.csr -CA root/goafabric-root.pem -CAkey root/goafabric-root.key -CAcreateserial -out end-entity/goafabric-endentity.pem -extfile end-entity/san.cnf -extensions SAN
+openssl x509 -req -sha512 -days 720\
+        -in end-entity/goafabric-endentity.csr\
+        -CA root/goafabric-root.pem\
+        -CAkey root/goafabric-root.key\
+        -CAcreateserial -out end-entity/goafabric-endentity.pem\
+        -extfile end-entity/san.cnf\
+        -extensions SAN
+
+
 # remove csr
 rm end-entity/goafabric-endentity.csr
 
