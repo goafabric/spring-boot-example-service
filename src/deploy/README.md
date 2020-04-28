@@ -8,7 +8,7 @@
 # Run (inside kubernetes folder)
 - minikube dashboard
 - stack up
-- Kubernetes will display the Adress of the service that can than be accessed
+- Kubernetes will display the address of the service that can than be accessed
 
 # Stop
 - ./stack down
@@ -43,11 +43,14 @@ select * from country
 update country set name = 'updated' where id = '1'
 
 #Deployment
-kubectl set image deployment example-service example-service=goafabric/spring-boot-exampleservice:1.0.3-SNAPSHOT
+kubectl set image deployment example-service example-service=goafabric/spring-boot-exampleservice:1.0.2
 kubectl rollout status deployment example-service
 kubectl rollout undo deployment example-service
 
 # Database Provisioning
-docker pull goafabric/spring-boot-exampleservice:1.0.3-SNAPSHOT
-docker run --rm -p 50700:50700 goafabric/spring-boot-exampleservice:1.0.3-SNAPSHOT
-docker run --rm -e database.provisioning.goals='-migrate -import-catalog-data -terminate' -e spring.datasource.url='jdbc:h2:mem:countrydb' goafabric/spring-boot-exampleservice:1.0.3-SNAPSHOT
+docker run --rm -e database.provisioning.goals='-migrate -import-catalog-data -terminate' -e spring.datasource.url='jdbc:h2:mem:countrydb' goafabric/spring-boot-exampleservice:1.0.2
+
+#SSL
+#https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nginx.key -out nginx.crt -subj '/CN=www.mydom.com/O=Goafabric Ltd./C=DE'
+

@@ -33,7 +33,7 @@ public class CountryLogic {
     private CountryMapper countryMapper;
 
     @Autowired
-    private CalleeServiceAdapter calleeServiceAdapter;
+    private CalleeServiceAdapter calleeServiceClient;
 
     @Cacheable
     public Country getById(@NonNull final String id) {
@@ -71,7 +71,7 @@ public class CountryLogic {
     }
 
     public Boolean isAlive() {
-        return calleeServiceAdapter.isAlive();
+        return calleeServiceClient.isAlive();
     }
 }
 

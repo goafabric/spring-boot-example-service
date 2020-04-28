@@ -1,13 +1,6 @@
 
 package org.goafabric.spring.boot.exampleservice.configuration;
 
-import org.jasypt.encryption.StringEncryptor;
-import org.jasypt.encryption.pbe.PBEStringEncryptor;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
-import org.jasypt.salt.RandomIVGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,38 +12,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.Base64Utils;
-
-import javax.sql.DataSource;
 
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ConditionalOnProperty(value = "security.authentication.enabled", matchIfMissing = false)
+@ConditionalOnProperty(value = "security.authentication.enabled")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private DataSource dataSource;
-
     @Override //in memory authentication
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
+        //in memory authentication
         auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder())
+                .passwordEncoder(passwordHashEncoder())
                 .withUser("admin")
                 .password("$2a$10$onJqryBEk9ToQSVPMBHTOO5PaXZXvkztWXDQqzkC4d.ORlMpt8Y4G")
                 .roles("STANDARD_ROLE");
-    }
 
-    /*
-    @Override //database authentication
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder());
+        //database authentication
+        //auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordHashEncoder());
     }
-    */
 
     @Override
     protected void configure(final HttpSecurity httpSecurity) throws Exception {
@@ -68,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordHashEncoder(){
         return new BCryptPasswordEncoder();
     }
 }

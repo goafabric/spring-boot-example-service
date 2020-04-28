@@ -2,7 +2,7 @@ server:
   port: 50700
   tomcat.max-threads: 20
 
-## actuactor section
+## actuator section
 management:
     endpoints:
       web:
@@ -14,6 +14,9 @@ management:
     health:
       circuitbreakers:
         enabled: true
+    database:
+      monitoring:
+        enabled: false
 
 ## persistence section
 spring:
@@ -33,7 +36,7 @@ spring:
 database:
   provisioning:
     goals: -migrate
-#    goals: -migrate -encrypt=secret -terminate
+#    goals: -migrate -encryptproperty=secret -terminate
 #    goals: -migrate -import-catalog-data -terminate
 
 ## encryption section
@@ -41,13 +44,19 @@ security:
   authentication:
     enabled: true
 
-## adapter section
+# cache
+cache:
+  maxsize: 1000
+  expiry: 15
 
+## adapter section
 adapter:
-  timeout: 10 #timeout in seconds
+  timeout: 10000 #timeout in ms
   calleeservice:
     url: http://localhost:50900
     user: exampleuser
+    #Please note this password gets encoded with the existing key inside the config database table, .i.e. changing the key results in an invalid password here
+    #In this case you have to update the passphrase inside the database, put an empty password here, and start the application with -encryptproperty to encrypt the prop with the new passphrase
     password: ENC(LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ==)
 
 resilience4j.circuitbreaker:
@@ -55,7 +64,7 @@ resilience4j.circuitbreaker:
     default:
       #see for more informations under: https://resilience4j.readme.io/docs/circuitbreaker
       registerHealthIndicator: true
-      slowCallDurationThreshold: ${adapter.timeout}s #Effectively the timeout
+      slowCallDurationThreshold: ${adapter.timeout} #Effectively the timeout
       slowCallRateThreshold: 100 #Percentage of calls that that need be registered a slow for the CB to transitions from close to open
       failureRateThreshold: 50 #Failure rate when the Circuit Breaker transitions from closed to open
       waitDurationInOpenState: 60s #Time the CircuitBreaker should wait before transitioning back from open to half-open.

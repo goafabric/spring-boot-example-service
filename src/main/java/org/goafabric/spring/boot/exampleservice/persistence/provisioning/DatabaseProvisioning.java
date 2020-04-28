@@ -1,10 +1,9 @@
 package org.goafabric.spring.boot.exampleservice.persistence.provisioning;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.h2.util.StringUtils;
-import org.jasypt.encryption.pbe.PBEStringEncryptor;
+import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,25 +25,11 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     @Autowired
     @Lazy
-    private PBEStringEncryptor jasyptStringEncryptor;
+    private StringEncryptor propertyEncryptor;
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
-        return flyway -> {
-            doFlyway(flyway);
-        };
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        final String goals = getGoals();
-        doImport(goals);
-        doEncrypt(goals);
-
-        if (goals.contains("-terminate")) {
-            log.info("terminating app");
-            initiateShutdown(0);
-        }
+        return this::doFlyway; //flyway always needs to run this way, otherwise we end up with a fucked up application
     }
 
     private void doFlyway(Flyway flyway) {
@@ -58,6 +43,19 @@ public class DatabaseProvisioning implements CommandLineRunner {
             log.info("calling flyway clean");
             flyway.clean();
         }
+    }
+
+    @Override
+    public void run(String... args) {
+        final String goals = getGoals();
+        doImport(goals);
+        doEncrypt(goals);
+        doTerminate(goals);
+    }
+
+    private String getGoals() {
+        final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goals");
+        return (StringUtils.isNullOrEmpty(goals))  ? "-migrate" : goals;
     }
 
     private void doImport(String goals) {
@@ -75,16 +73,17 @@ public class DatabaseProvisioning implements CommandLineRunner {
     }
 
     private void doEncrypt(String goals) {
-        if (goals.contains("-encrypt=")) {
-            final String string = goals.split("-encrypt=")[1].split("-terminate")[0];
-            log.info(jasyptStringEncryptor.encrypt("encrypted string will be:" + string));
+        if (goals.contains("-encryptproperty=")) {
+            final String string = goals.split("-encryptproperty=")[1].split("-terminate")[0];
+            log.info(propertyEncryptor.encrypt("encrypted string will be:" + string));
         }
     }
 
-    private String getGoals() {
-        final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goals");
-        return (StringUtils.isNullOrEmpty(goals) == true)
-                ? "-migrate" : goals;
+    private void doTerminate(String goals) {
+        if (goals.contains("-terminate")) {
+            log.info("terminating app");
+            initiateShutdown(0);
+        }
     }
 
     public void initiateShutdown(int exitCode){

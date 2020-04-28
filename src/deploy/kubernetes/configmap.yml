@@ -33,3 +33,4 @@ data:
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://postgres:5432/countrydb"
+  management.database.monitoring.enabled: "true"

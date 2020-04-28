@@ -5,5 +5,5 @@ CREATE TABLE configuration (
 );
 
 INSERT INTO configuration (config_key, config_value)
-values('passphrase', 'ZDU2YjIyMjctMTRiYy00MmQ5LTgwZjctMGU2YzcyNzE2NjYy');
+values('property_passphrase', 'ZDU2YjIyMjctMTRiYy00MmQ5LTgwZjctMGU2YzcyNzE2NjYy');
 -- If the passphrase gets changed, all passwords have to be reencrypted !

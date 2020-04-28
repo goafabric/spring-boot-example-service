@@ -1,4 +1,4 @@
 #!/bin/bash
-export STACK_NAME="example-service-stack_1"
+export STACK_NAME="example-service-stack-1"
 export SERVICE_MEM="256m"
 ./stack_util ${STACK_NAME} $1

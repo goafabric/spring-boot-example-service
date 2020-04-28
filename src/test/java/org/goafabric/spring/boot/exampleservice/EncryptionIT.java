@@ -16,32 +16,32 @@ import org.springframework.util.Base64Utils;
 @Slf4j
 public class EncryptionIT {
     @Autowired
-    private PasswordEncoder passwordHash;
+    private PasswordEncoder passwordHashEncoder;
 
     @Autowired
-    private StringEncryptor jasyptStringEncryptor;
+    private StringEncryptor propertyEncryptor;
 
     //1-way hash, cannot be converted back, only matching possible
     @Test
     public void testPasswordHashEncode() {
-        log.info(passwordHash.encode("admin"));
+        log.info(passwordHashEncoder.encode("admin"));
     }
 
     @Test
     public void testPasswordHashMatch() {
-        log.info("" + passwordHash.matches("admin",
+        log.info("" + passwordHashEncoder.matches("admin",
                 "$2a$10$onJqryBEk9ToQSVPMBHTOO5PaXZXvkztWXDQqzkC4d.ORlMpt8Y4G"));
     }
 
     //2-way encryption and decryption
     @Test
     public void testAES256Encryption() {
-        log.info(jasyptStringEncryptor.encrypt("cdKBo95xcTVVH3dh"));
+        log.info(propertyEncryptor.encrypt("cdKBo95xcTVVH3dh"));
     }
 
     @Test
     public void testAES256Decryption() {
-        log.info(jasyptStringEncryptor.decrypt("LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ=="));
+        log.info(propertyEncryptor.decrypt("LgCT4krW5NDrQkfGPPEYw7XOvzufvIANWFq3vHow+Sphd6ACtavahW8aL28NDnmZex5+Pnz14NEeDuR+ZI90sQ=="));
     }
 
 
