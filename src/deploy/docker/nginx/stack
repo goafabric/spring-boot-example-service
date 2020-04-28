@@ -1,0 +1,3 @@
+#!/bin/bash
+export STACK_NAME="nginx-stack"
+./stack_util ${STACK_NAME} $1
