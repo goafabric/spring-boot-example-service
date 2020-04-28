@@ -9,9 +9,9 @@ stateOrProvinceName         = RP
 localityName               = Berlin
 organizationName           = Goafabric
 commonName                 = goafabric.org
+
 [ req_ext ]
-subjectAltName = @alt_names
-[alt_names]
-DNS.1   = goafabric.org
+subjectAltName = DNS:goafabric.org
+
 
 #https://geekflare.com/san-ssl-certificate/
