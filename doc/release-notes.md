@@ -5,10 +5,17 @@
 CrossFunctional
 - Postgres Database Monitoring
     - @see InfoActuator
+- Fixed Web endpoints inside static\index.html not beeing relative
+    
+Docker
+- Nginx Reverse Proxy for HTTP and HTTPS
+
 ##Updated
 
 Security
 - Upgrade to Spring-Boot-Jasypt 3.0.2 which otherwised clashed badly with jasyppt-hibernate during classloading
+
+Refactoring
 
 #1.0.2
 ##Added
