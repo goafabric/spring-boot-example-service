@@ -1,8 +1,7 @@
 #!/bin/bash
 
-export ROOT_FILE="root/goafabric-root"
-
 export DAYS_VALID="3650"
+export ROOT_FILE="root/goafabric-root"
 
 #create key, asks for password because of ae256
 openssl genrsa -aes256 -out root/goafabric-root.key 4096
