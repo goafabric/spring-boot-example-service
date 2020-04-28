@@ -5,10 +5,9 @@ req_extensions     = SAN
 prompt             = no
 [ req_distinguished_name ]
 countryName                 = DE
-stateOrProvinceName         = RP
 localityName               = Berlin
 organizationName           = Goafabric
-commonName                 = goafabric.org
+commonName                 = Goafabric EndEntity
 [ SAN ]
 subjectAltName = @alt_names
 [alt_names]
