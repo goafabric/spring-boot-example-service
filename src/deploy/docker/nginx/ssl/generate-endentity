@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#variables
 export DAYS_VALID="720"
 export ROOT_FILE="root/goafabric-root"
 export END_FILE="end-entity/goafabric-endentity"
