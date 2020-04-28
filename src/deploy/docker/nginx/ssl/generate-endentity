@@ -6,9 +6,9 @@ openssl genrsa -out end-entity/goafabric-endentity.key 4096
 openssl req -new -sha512 -key end-entity/goafabric-endentity.key -out end-entity/goafabric-endentity.csr -config end-entity/san.cnf -extensions req_ext
 
 # create end entity certificate
-openssl x509 -req -sha512 -days 3650 -in end-entity/goafabric-endentity.csr -CA root/goafabric-root.pem -CAkey root/goafabric-root.key -CAcreateserial -out end-entity/goafabric-endentity.pem -extfile end-entity/san.cnf -extensions req_ext
+openssl x509 -req -sha512 -days 720 -in end-entity/goafabric-endentity.csr -CA root/goafabric-root.pem -CAkey root/goafabric-root.key -CAcreateserial -out end-entity/goafabric-endentity.pem -extfile end-entity/san.cnf -extensions req_ext
 # remove csr
 rm end-entity/goafabric-endentity.csr
 
 # direct generation without root ca
-#openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.pem -subj '/CN=goafabric/O=Goafabric Ltd./C=DE'
+#openssl req -x509 -nodes -days 720 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.pem -subj '/CN=goafabric/O=Goafabric Ltd./C=DE'
