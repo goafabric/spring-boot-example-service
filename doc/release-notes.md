@@ -6,6 +6,10 @@ CrossFunctional
 - Postgres Database Monitoring
     - @see InfoActuator
 - Fixed Web endpoints inside static\index.html not beeing relative
+
+Security
+- Encrypted Searchable Fields in Database (less secure)
+    - @See: EncryptionConfiguration + @encryptedSearchableString
     
 Docker
 - Nginx Reverse Proxy for HTTP and HTTPS
