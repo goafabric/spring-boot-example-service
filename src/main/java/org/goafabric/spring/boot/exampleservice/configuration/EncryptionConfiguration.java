@@ -4,9 +4,11 @@ import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.hibernate5.encryptor.HibernatePBEStringEncryptor;
+import org.jasypt.iv.IvGenerator;
 import org.jasypt.iv.RandomIvGenerator;
 import org.jasypt.iv.StringFixedIvGenerator;
 import org.jasypt.salt.RandomSaltGenerator;
+import org.jasypt.salt.SaltGenerator;
 import org.jasypt.salt.StringFixedSaltGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,34 +33,31 @@ public class EncryptionConfiguration {
     @Bean
     @Transactional
     public PBEStringEncryptor propertyEncryptor() {
-        return createEncryptor("property_passphrase");
+        return getAES256Encryptor("property_passphrase",
+                new RandomIvGenerator(), new RandomSaltGenerator());
     }
 
     @Bean
     @Transactional
     public PBEStringEncryptor databaseEncryptor() {
-        return createEncryptor("database_passphrase");
-    }
-
-    private StandardPBEStringEncryptor createEncryptor(String key) {
-        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(getConfigValue(key));
-        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        encryptor.setSaltGenerator(new RandomSaltGenerator());
-        encryptor.setIvGenerator(new RandomIvGenerator());
-        return encryptor;
+        return getAES256Encryptor("database_passphrase",
+                new RandomIvGenerator(), new RandomSaltGenerator());
     }
 
     @Bean
     public PBEStringEncryptor databaseSearchableEncryptor() {
+        final String iv = getConfigValue("database_iv");
+        final String salt = getConfigValue("database_salt");
+        return getAES256Encryptor("database_passphrase",
+                new StringFixedIvGenerator(iv), new StringFixedSaltGenerator(salt));
+    }
+
+    private StandardPBEStringEncryptor getAES256Encryptor(String configKey, IvGenerator ivGenerator, SaltGenerator saltGenerator) {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        final String iv = getConfigValue("database_initvector");
-        final String salt = getConfigValue("database_salt");
-        final StringFixedIvGenerator stringFixedIVGenerator = new StringFixedIvGenerator(iv);
-        encryptor.setIvGenerator(stringFixedIVGenerator);
-        encryptor.setSaltGenerator(new StringFixedSaltGenerator(salt));
-        encryptor.setPassword(getConfigValue("database_passphrase"));
+        encryptor.setIvGenerator(ivGenerator);
+        encryptor.setSaltGenerator(saltGenerator);
+        encryptor.setPassword(getConfigValue(configKey));
         return encryptor;
     }
 
