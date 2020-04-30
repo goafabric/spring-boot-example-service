@@ -48,8 +48,8 @@ public class EncryptionConfiguration {
 
     @Bean
     public PBEStringEncryptor databaseSearchableEncryptor() {
-        final String iv = getConfigValue("database_iv");
-        final String salt = getConfigValue("database_salt");
+        final String iv = getConfigValue("database_searchable_iv");
+        final String salt = getConfigValue("database_searchable_salt");
         return getAES256Encryptor("database_passphrase",
                 new StringFixedIvGenerator(iv), new StringFixedSaltGenerator(salt));
     }
