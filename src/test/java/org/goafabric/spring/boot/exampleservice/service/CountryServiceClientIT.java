@@ -80,6 +80,19 @@ public class CountryServiceClientIT {
 
         Country foundCountry = countryService.findBySecret("Top Secret Information");
         assertThat(foundCountry).isNotNull();
+
+        final Country countryNo = Country.builder()
+                .isoCode("no").description("description").name("name")
+                .secret("another secret").build();
+
+        Country country3 = countryService.getById(
+                countryService.save(countryNo).getId());
+
+        assertThat(country3.getIsoCode()).isEqualTo("no");
+        assertThat(country3.getSecret()).isEqualTo("another secret");
+
+        assertThat(countryService.findBySecret("another secret")).isNotNull();
+
     }
 
     @Test

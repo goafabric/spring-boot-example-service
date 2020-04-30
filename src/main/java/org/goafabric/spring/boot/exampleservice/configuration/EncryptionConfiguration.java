@@ -69,10 +69,12 @@ public class EncryptionConfiguration {
     public PBEStringEncryptor databaseSearchableEncryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        final String iv = "0Yo6wn3UNyszXrAtV9KOl0SWEKYf8feYjv7dwWIobCXEuMz8t88xahe2IujJsjrWcZXjs6RNAUYh1FmKn3p3wMFWGy6MmK1YWWGCGv7jxaZVr2hXhuOohEdr823aaad4";
+        final String iv = "d56b2227-14bc-42d9-80f7-0e6c72716662";
+        final String salt = "x77b2227-14bc-42d9-80f7-0e6c72716662";
+        //final String iv = "0Yo6wn3UNyszXrAtV9KOl0SWEKYf8feYjv7dwWIobCXEuMz8t88xahe2IujJsjrWcZXjs6RNAUYh1FmKn3p3wMFWGy6MmK1YWWGCGv7jxaZVr2hXhuOohEdr823aaad4";
         final StringFixedIvGenerator stringFixedIVGenerator = new StringFixedIvGenerator(iv);
         encryptor.setIvGenerator(stringFixedIVGenerator);
-        encryptor.setSaltGenerator(new StringFixedSaltGenerator(iv));
+        encryptor.setSaltGenerator(new StringFixedSaltGenerator(salt));
         encryptor.setPassword(new String(Base64Utils.decodeFromString(getPassPhrase("database_passphrase"))));;                        // we HAVE TO set a password
         return encryptor;
     }
@@ -88,6 +90,6 @@ public class EncryptionConfiguration {
         return configuration.isPresent()
                 ? configuration.get().getConfigValue()
                 : configurationRepository.save(ConfigurationRepository.ConfigurationBo.builder()
-                    .configKey("passphrase").configValue(passphrase).build()).getConfigValue();
+                    .configKey(key).configValue(passphrase).build()).getConfigValue();
     }
 }
