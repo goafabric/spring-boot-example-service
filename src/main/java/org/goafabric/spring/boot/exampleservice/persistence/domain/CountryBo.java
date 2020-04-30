@@ -26,7 +26,7 @@ public class CountryBo {
     private String name;
     private String information;
 
-    @Type(type="encryptedString")
+    @Type(type="encryptedSearchableString")
     private String secret;
 
     @Version //optimistic locking

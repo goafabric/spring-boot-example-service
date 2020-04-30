@@ -4,9 +4,17 @@
                         name="encryptedString",
                         typeClass= EncryptedStringType.class,
                         parameters= {
-                                @Parameter(name="encryptorRegisteredName", value="hibernateEncryptor")
+                                @Parameter(name="encryptorRegisteredName", value="hibernateStringEncryptor")
+                        }
+                ),
+                @TypeDef(
+                        name="encryptedSearchableString",
+                        typeClass= EncryptedStringType.class,
+                        parameters= {
+                                @Parameter(name="encryptorRegisteredName", value="hibernateSearchableStringEncryptor")
                         }
                 )
+
         })
 
 package org.goafabric.spring.boot.exampleservice.persistence.domain;
