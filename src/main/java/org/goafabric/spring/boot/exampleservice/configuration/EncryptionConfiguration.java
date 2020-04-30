@@ -29,14 +29,6 @@ public class EncryptionConfiguration {
     }
 
     @Bean
-    public HibernatePBEStringEncryptor hibernateEncryptor() {
-        final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
-        encryptor.setEncryptor(databaseEncryptor());
-        encryptor.setRegisteredName("hibernateStringEncryptor");
-        return encryptor;
-    }
-
-    @Bean
     @Transactional
     public PBEStringEncryptor propertyEncryptor() {
         return createEncryptor("property_passphrase");
@@ -50,10 +42,31 @@ public class EncryptionConfiguration {
 
     private StandardPBEStringEncryptor createEncryptor(String key) {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(getPassPhrase(key))));
+        encryptor.setPassword(getConfigValue(key));
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
         encryptor.setSaltGenerator(new RandomSaltGenerator());
         encryptor.setIvGenerator(new RandomIvGenerator());
+        return encryptor;
+    }
+
+    @Bean
+    public PBEStringEncryptor databaseSearchableEncryptor() {
+        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
+        final String iv = getConfigValue("database_initvector");
+        final String salt = getConfigValue("database_salt");
+        final StringFixedIvGenerator stringFixedIVGenerator = new StringFixedIvGenerator(iv);
+        encryptor.setIvGenerator(stringFixedIVGenerator);
+        encryptor.setSaltGenerator(new StringFixedSaltGenerator(salt));
+        encryptor.setPassword(getConfigValue("database_passphrase"));
+        return encryptor;
+    }
+
+    @Bean
+    public HibernatePBEStringEncryptor hibernateEncryptor() {
+        final HibernatePBEStringEncryptor encryptor = new HibernatePBEStringEncryptor();
+        encryptor.setEncryptor(databaseEncryptor());
+        encryptor.setRegisteredName("hibernateStringEncryptor");
         return encryptor;
     }
 
@@ -65,31 +78,19 @@ public class EncryptionConfiguration {
         return encryptor;
     }
 
-    @Bean
-    public PBEStringEncryptor databaseSearchableEncryptor() {
-        final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        final String iv = "d56b2227-14bc-42d9-80f7-0e6c72716662";
-        final String salt = "x77b2227-14bc-42d9-80f7-0e6c72716662";
-        //final String iv = "0Yo6wn3UNyszXrAtV9KOl0SWEKYf8feYjv7dwWIobCXEuMz8t88xahe2IujJsjrWcZXjs6RNAUYh1FmKn3p3wMFWGy6MmK1YWWGCGv7jxaZVr2hXhuOohEdr823aaad4";
-        final StringFixedIvGenerator stringFixedIVGenerator = new StringFixedIvGenerator(iv);
-        encryptor.setIvGenerator(stringFixedIVGenerator);
-        encryptor.setSaltGenerator(new StringFixedSaltGenerator(salt));
-        encryptor.setPassword(new String(Base64Utils.decodeFromString(getPassPhrase("database_passphrase"))));;                        // we HAVE TO set a password
-        return encryptor;
-    }
-
-
     //reads the passphrase from the database configuration table or inits with a new one
     //if this is somehow not possible, you could just read from application yml, which is less secure ( @Value("${security.encryption.passphrase}" )
-    public String getPassPhrase(String key) {
-        final String passphrase =
-                Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
+    public String getConfigValue(String configKey) {
         final Optional<ConfigurationRepository.ConfigurationBo> configuration
-                = configurationRepository.findById(key);
+                = configurationRepository.findById(configKey);
+
         return configuration.isPresent()
-                ? configuration.get().getConfigValue()
+                ? new String (Base64Utils.decodeFromString(configuration.get().getConfigValue()))
                 : configurationRepository.save(ConfigurationRepository.ConfigurationBo.builder()
-                    .configKey(key).configValue(passphrase).build()).getConfigValue();
+                    .configKey(configKey).configValue(generateUniqueId()).build()).getConfigValue();
+    }
+
+    private String generateUniqueId() {
+        return Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
     }
 }
