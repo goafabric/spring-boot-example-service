@@ -1,5 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
@@ -21,6 +22,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Configuration
+@Slf4j
 public class EncryptionConfiguration {
     @Autowired
     private ConfigurationRepository configurationRepository;
@@ -80,6 +82,7 @@ public class EncryptionConfiguration {
     //reads the passphrase from the database configuration table or inits with a new one
     //if this is somehow not possible, you could just read from application yml, which is less secure ( @Value("${security.encryption.passphrase}" )
     public String getConfigValue(String configKey) {
+        log.info("##asking for key:" + configKey);
         final Optional<ConfigurationRepository.ConfigurationBo> configuration
                 = configurationRepository.findById(configKey);
 
@@ -90,6 +93,8 @@ public class EncryptionConfiguration {
     }
 
     private String generateUniqueId() {
-        return Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
+        final String id =  Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
+        log.info("##generating id:" + id);
+        return id;
     }
 }
