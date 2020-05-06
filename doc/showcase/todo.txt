@@ -3,7 +3,6 @@
 - csrf
 - catalog import via spring batch
 
-- authentication and multi tenancy inside fhir facade
 - ssl via nginx
 - gdpr deletion
 
