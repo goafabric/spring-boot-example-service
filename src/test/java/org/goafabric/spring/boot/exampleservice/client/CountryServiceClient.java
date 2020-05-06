@@ -41,6 +41,12 @@ public class CountryServiceClient implements CountryService {
     }
 
     @Override
+    public Country findBySecret(String secret) {
+        return restTemplate.getForObject(serviceUrl + "/findBySecret?secret={secret}",
+                Country.class, secret);
+    }
+
+    @Override
     public Country save(Country country) {
         return restTemplate.postForObject(serviceUrl + "/save",
                 country, Country.class);

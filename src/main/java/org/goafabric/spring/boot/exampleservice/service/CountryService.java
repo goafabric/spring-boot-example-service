@@ -29,6 +29,10 @@ public interface CountryService {
     @GetMapping("findByName")
     Country findByName(@RequestParam String name);
 
+    @ApiOperation("Retrieve the secret")
+    @GetMapping("findBySecret")
+    Country findBySecret(@RequestParam String secret);
+
     @ApiOperation("Store the country")
     @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
     Country save(@RequestBody @Valid Country country);

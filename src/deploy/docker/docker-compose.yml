@@ -9,8 +9,8 @@ services:
       - 50700:50700
     environment:
       - TZ=Europe/Berlin
-      - spring.config.location=/app/config/application.yml
-      - logging.config=/app/config/logback-rollingfile-spring.xml
+      - spring.config.location=/usr/share/config/application.yml
+      - logging.config=/usr/share/config/logback-rollingfile-spring.xml
       - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
       - spring.datasource.username=example-service
       - spring.datasource.password=example-service
@@ -24,9 +24,9 @@ services:
       retries: 10
     volumes:
       - tmp:/tmp
-      - applogs:/app/logs
-      - ../config/application.yml:/app/config/application.yml
-      - ../config/logback-rollingfile-spring.xml:/app/config/logback-rollingfile-spring.xml
+      - applogs:/usr/share/logs
+      - ../config/application.yml:/usr/share/config/application.yml
+      - ../config/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
 #                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
