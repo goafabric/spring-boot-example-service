@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TenantAspect {
     @Around("execution(* org.springframework.data.repository.CrudRepository.save(..))")
-    public Object activateTenantFilter(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object onSave(ProceedingJoinPoint joinPoint) throws Throwable {
         final Object object = joinPoint.getArgs()[0];
         if (object instanceof TenantAware) {
             ((TenantAware) object).setTenantId(TenantIdStorage.getTenantId());
