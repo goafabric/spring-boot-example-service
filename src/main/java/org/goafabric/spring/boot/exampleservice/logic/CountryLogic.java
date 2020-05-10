@@ -27,6 +27,7 @@ import static org.goafabric.spring.boot.exampleservice.persistence.multitenancy.
 @Slf4j
 @Component
 @Transactional
+@CacheConfig(cacheNames = {CacheConfiguration.COUNTRIES})
 public class CountryLogic {
     @Autowired
     private CountryRepository countryRepository;
@@ -37,21 +38,25 @@ public class CountryLogic {
     @Autowired
     private CalleeServiceAdapter calleeServiceClient;
 
+    @Cacheable
     public Country getById(@NonNull final String id) {
         return countryMapper.map(
             countryRepository.findByIdAndTenantId(id, getTenantId()));
     }
 
+    @Cacheable
     public Country findByIsoCode(@NonNull final String isoCode) {
         return countryMapper.map(
             countryRepository.findByIsoCodeAndTenantId(isoCode, getTenantId()));
     }
 
+    @Cacheable
     public Country findByName(@NonNull final String name) {
         return countryMapper.map(
                 countryRepository.findByNameAndTenantId(name, getTenantId()));
     }
 
+    @Cacheable
     public Country findBySecret(@NonNull final String secret) {
         return countryMapper.map(
                 countryRepository.findBySecretAndTenantId(secret, getTenantId()));
@@ -59,9 +64,10 @@ public class CountryLogic {
 
     public List<Country> findAll() {
         return countryMapper.map(
-                countryRepository.findAllByTenantId(getTenantId()));
+                countryRepository.findAll());
     }
 
+    @CacheEvict(allEntries = true)
     public Country save(@NonNull final Country country) {
         final CountryBo countryBo = countryMapper.map(country);
         return countryMapper.map(
@@ -69,6 +75,7 @@ public class CountryLogic {
                     countryBo));
     }
 
+    @CacheEvict(allEntries = true)
     public void delete(@NonNull final String id) {
         countryRepository.deleteByIdAndTenantId(id, getTenantId());
     }
