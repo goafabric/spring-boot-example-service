@@ -12,10 +12,10 @@ import org.springframework.data.repository.query.Param;
 public interface CountryRepository extends JpaRepository<CountryBo, String> {
     CountryBo findByIdAndTenantId(String id, String tenantId);
 
-    CountryBo findByIsoCode(String isoCode);
+    CountryBo findByIsoCodeAndTenantId(String isoCode, String tenantId);
 
-    @Query("SELECT c from CountryBo c WHERE name = :name")
-    CountryBo findByName(@Param("name") String name);
+    @Query("SELECT c from CountryBo c WHERE name = :name and tenantId = :tenantId")
+    CountryBo findByNameAndTenantId(@Param("name") String name, @Param("tenantId") String tenantId);
 
-    CountryBo findBySecret(String secret);
+    CountryBo findBySecretAndTenantId(String secret, String tenantId);
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceAdapter;
 import org.goafabric.spring.boot.exampleservice.configuration.CacheConfiguration;
 import org.goafabric.spring.boot.exampleservice.crossfunctional.DurationLog;
+import org.goafabric.spring.boot.exampleservice.persistence.domain.CountryBo;
 import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
@@ -47,19 +48,19 @@ public class CountryLogic {
     @Cacheable
     public Country findByIsoCode(@NonNull final String isoCode) {
         return countryMapper.map(
-            countryRepository.findByIsoCode(isoCode));
+            countryRepository.findByIsoCodeAndTenantId(isoCode, getTenantId()));
     }
 
     @Cacheable
     public Country findByName(@NonNull final String name) {
         return countryMapper.map(
-                countryRepository.findByName(name));
+                countryRepository.findByNameAndTenantId(name, getTenantId()));
     }
 
     @Cacheable
     public Country findBySecret(@NonNull final String secret) {
         return countryMapper.map(
-                countryRepository.findBySecret(secret));
+                countryRepository.findBySecretAndTenantId(secret, getTenantId()));
     }
 
     public List<Country> findAll() {
@@ -69,9 +70,11 @@ public class CountryLogic {
 
     @CacheEvict(allEntries = true)
     public Country save(@NonNull final Country country) {
+        final CountryBo countryBo = countryMapper.map(country);
+        countryBo.setTenantId(getTenantId());
         return countryMapper.map(
             countryRepository.save(
-                    countryMapper.map(country)));
+                    countryBo));
     }
 
     @CacheEvict(allEntries = true)
