@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceAdapter;
 import org.goafabric.spring.boot.exampleservice.configuration.CacheConfiguration;
 import org.goafabric.spring.boot.exampleservice.crossfunctional.DurationLog;
+import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class CountryLogic {
 
     @Cacheable
     public Country getById(@NonNull final String id) {
+        TenantIdStorage.getTenantId();
         return countryMapper.map(
             countryRepository.getOne(id));
     }
