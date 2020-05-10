@@ -1,14 +1,18 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
+import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.cache.interceptor.SimpleKey;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -31,5 +35,16 @@ public class CacheConfiguration extends CachingConfigurerSupport {
                 .maximumSize(cacheMaxSize)
                 .expireAfterAccess(cacheExpiry, TimeUnit.MINUTES));
         return cacheManager;
+    }
+
+    @Bean
+    @Override
+    public KeyGenerator keyGenerator() {
+        return new KeyGenerator() {
+            @Override
+            public Object generate(Object target, Method method, Object... params) {
+                return new SimpleKey(TenantIdStorage.getTenantId(), params);
+            }
+        };
     }
 }
