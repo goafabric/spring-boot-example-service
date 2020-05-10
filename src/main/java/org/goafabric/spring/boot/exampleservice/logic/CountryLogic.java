@@ -78,7 +78,7 @@ public class CountryLogic {
 
     @CacheEvict(allEntries = true)
     public void delete(@NonNull final String id) {
-        countryRepository.deleteById(id);
+        countryRepository.deleteByIdAndTenantId(id, getTenantId());
     }
 
     public Boolean isAlive() {

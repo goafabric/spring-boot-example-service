@@ -18,4 +18,6 @@ public interface CountryRepository extends JpaRepository<CountryBo, String> {
     CountryBo findByNameAndTenantId(@Param("name") String name, @Param("tenantId") String tenantId);
 
     CountryBo findBySecretAndTenantId(String secret, String tenantId);
+
+    void deleteByIdAndTenantId(String id, String tenantId);
 }
