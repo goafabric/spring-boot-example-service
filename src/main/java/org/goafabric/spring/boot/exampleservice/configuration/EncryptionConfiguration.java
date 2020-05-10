@@ -84,7 +84,6 @@ public class EncryptionConfiguration {
     //reads the passphrase from the database configuration table or inits with a new one
     //if this is somehow not possible, you could just read from application yml, which is less secure ( @Value("${security.encryption.passphrase}" )
     public String getConfigValue(String configKey) {
-        log.info("##asking for key:" + configKey);
         final Optional<ConfigurationRepository.ConfigurationBo> configuration
                 = configurationRepository.findById(configKey);
 
