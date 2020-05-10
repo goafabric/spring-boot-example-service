@@ -71,7 +71,6 @@ public class CountryLogic {
     @CacheEvict(allEntries = true)
     public Country save(@NonNull final Country country) {
         final CountryBo countryBo = countryMapper.map(country);
-        countryBo.setTenantId(getTenantId());
         return countryMapper.map(
             countryRepository.save(
                     countryBo));
