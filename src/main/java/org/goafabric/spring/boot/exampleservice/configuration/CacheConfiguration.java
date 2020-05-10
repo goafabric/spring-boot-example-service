@@ -40,11 +40,6 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     @Bean
     @Override
     public KeyGenerator keyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                return new SimpleKey(TenantIdStorage.getTenantId(), params);
-            }
-        };
+        return (target, method, params) -> new SimpleKey(TenantIdStorage.getTenantId(), params);
     }
 }
