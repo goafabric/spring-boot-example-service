@@ -6,8 +6,7 @@ public class TenantIdStorage {
     private static ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();
 
     public static String getTenantId() {
-        //final String tenantId = tenantIdThreadLocal.get();
-        final String tenantId = "11";
+        final String tenantId = tenantIdThreadLocal.get();
         if (tenantId == null) throw new IllegalStateException("tenantId is null");
         return tenantId;
     }
