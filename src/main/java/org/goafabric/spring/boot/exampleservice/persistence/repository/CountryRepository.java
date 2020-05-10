@@ -10,6 +10,8 @@ import org.springframework.data.repository.query.Param;
  */
 
 public interface CountryRepository extends JpaRepository<CountryBo, String> {
+    CountryBo findByIdAndTenantId(String id, String tenantId);
+
     CountryBo findByIsoCode(String isoCode);
 
     @Query("SELECT c from CountryBo c WHERE name = :name")

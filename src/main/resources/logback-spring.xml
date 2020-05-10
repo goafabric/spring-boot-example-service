@@ -30,11 +30,11 @@
         <appender-ref ref="Console"/>
     </logger>
 
-    <logger name="org.hibernate.SQL" level="WARN" additivity="false">
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
         <appender-ref ref="Console"/>
     </logger>
 
-    <logger name="org.hibernate.type.descriptor.sql" level="WARN" additivity="false">
+    <logger name="org.hibernate.type.descriptor.sql" level="DEBUG" additivity="false">
         <appender-ref ref="Console"/>
     </logger>
 

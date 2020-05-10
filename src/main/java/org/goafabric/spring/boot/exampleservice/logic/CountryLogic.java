@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage.getTenantId;
+
 /**
  * Created by andreas.mautsch on 08.06.2018.
  */
@@ -39,7 +41,7 @@ public class CountryLogic {
     @Cacheable
     public Country getById(@NonNull final String id) {
         return countryMapper.map(
-            countryRepository.findById(id).get());
+            countryRepository.findByIdAndTenantId(id, getTenantId()));
     }
 
     @Cacheable
