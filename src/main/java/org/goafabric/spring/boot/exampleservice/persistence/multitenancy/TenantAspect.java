@@ -17,4 +17,14 @@ public class TenantAspect {
         return joinPoint.proceed();
     }
 
+    /*
+    @Around("execution(* org.springframework.data.repository.CrudRepository.delete(..))")
+    public Object onDelete(ProceedingJoinPoint joinPoint) throws Throwable {
+        final Object object = joinPoint.getArgs()[0];
+        if (object instanceof TenantAware) {
+            ((TenantAware) object).setTenantId(TenantIdStorage.getTenantId());
+        }
+        return joinPoint.proceed();
+    }
+    */
 }
