@@ -64,15 +64,14 @@ public class CountryLogic {
 
     public List<Country> findAll() {
         return countryMapper.map(
-                countryRepository.findAll());
+                countryRepository.findAllByTenantId(getTenantId()));
     }
 
     @CacheEvict(allEntries = true)
     public Country save(@NonNull final Country country) {
-        final CountryBo countryBo = countryMapper.map(country);
         return countryMapper.map(
             countryRepository.save(
-                    countryBo));
+                    countryMapper.map(country)));
     }
 
     @CacheEvict(allEntries = true)

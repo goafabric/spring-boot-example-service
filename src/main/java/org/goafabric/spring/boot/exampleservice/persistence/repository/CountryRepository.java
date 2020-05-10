@@ -5,11 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 /**
  * Created by andreas.mautsch on 11.06.2018.
  */
 
 public interface CountryRepository extends JpaRepository<CountryBo, String> {
+    List<CountryBo> findAllByTenantId(String tenantId);
+
     CountryBo findByIdAndTenantId(String id, String tenantId);
 
     CountryBo findByIsoCodeAndTenantId(String isoCode, String tenantId);
