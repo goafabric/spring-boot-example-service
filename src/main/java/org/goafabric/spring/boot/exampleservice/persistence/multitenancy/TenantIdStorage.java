@@ -1,7 +1,5 @@
 package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
 
-import lombok.NonNull;
-
 public class TenantIdStorage {
     private static ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();
 
