@@ -1,7 +1,9 @@
 package org.goafabric.spring.boot.exampleservice.service;
 
 import org.goafabric.spring.boot.exampleservice.logic.CountryLogic;
+import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,11 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class CountryLogicIT {
     @Autowired
     private CountryLogic countryLogic;
+
+    @BeforeClass
+    public static void init() {
+        TenantIdStorage.setTenantId("11");
+    }
 
     @Test
     public void testGetAllCountries() {

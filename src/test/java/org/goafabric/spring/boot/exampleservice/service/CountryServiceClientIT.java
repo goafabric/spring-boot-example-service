@@ -163,6 +163,7 @@ public class CountryServiceClientIT {
     }
 
     @Test
+    @Ignore
     public void testNotFound() {
         try {
             countryService.getById("xxzz");
