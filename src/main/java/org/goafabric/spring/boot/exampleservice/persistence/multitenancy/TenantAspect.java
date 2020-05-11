@@ -1,3 +1,4 @@
+/*
 package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,3 +18,4 @@ public class TenantAspect {
         return joinPoint.proceed();
     }
 }
+ */
