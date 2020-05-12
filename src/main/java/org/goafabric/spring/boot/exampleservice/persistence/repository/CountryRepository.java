@@ -12,16 +12,11 @@ import java.util.List;
  */
 
 public interface CountryRepository extends JpaRepository<CountryBo, String> {
-    List<CountryBo> findAllByTenantId(String tenantId);
-
-    CountryBo findByIdAndTenantId(String id, String tenantId);
 
     CountryBo findByIsoCode(String isoCode);
 
-    @Query("SELECT c from CountryBo c WHERE name = :name and tenantId = :tenantId")
-    CountryBo findByNameAndTenantId(@Param("name") String name, @Param("tenantId") String tenantId);
+    @Query("SELECT c from CountryBo c WHERE name = :name")
+    CountryBo findByName(@Param("name") String name);
 
-    CountryBo findBySecretAndTenantId(String secret, String tenantId);
-
-    void deleteByIdAndTenantId(String id, String tenantId);
+    CountryBo findBySecret(String secret);
 }

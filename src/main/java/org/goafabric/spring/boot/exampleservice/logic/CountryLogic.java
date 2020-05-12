@@ -41,7 +41,7 @@ public class CountryLogic {
     @Cacheable
     public Country getById(@NonNull final String id) {
         return countryMapper.map(
-            countryRepository.findByIdAndTenantId(id, getTenantId()));
+            countryRepository.findById(id).get());
     }
 
     @Cacheable
@@ -53,18 +53,18 @@ public class CountryLogic {
     @Cacheable
     public Country findByName(@NonNull final String name) {
         return countryMapper.map(
-                countryRepository.findByNameAndTenantId(name, getTenantId()));
+                countryRepository.findByName(name));
     }
 
     @Cacheable
     public Country findBySecret(@NonNull final String secret) {
         return countryMapper.map(
-                countryRepository.findBySecretAndTenantId(secret, getTenantId()));
+                countryRepository.findBySecret(secret));
     }
 
     public List<Country> findAll() {
         return countryMapper.map(
-                countryRepository.findAllByTenantId(getTenantId()));
+                countryRepository.findAll());
     }
 
     @CacheEvict(allEntries = true)
@@ -76,7 +76,7 @@ public class CountryLogic {
 
     @CacheEvict(allEntries = true)
     public void delete(@NonNull final String id) {
-        countryRepository.deleteByIdAndTenantId(id, getTenantId());
+        countryRepository.deleteById(id);
     }
 
     public Boolean isAlive() {
