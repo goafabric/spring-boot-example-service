@@ -16,7 +16,7 @@ public interface CountryRepository extends JpaRepository<CountryBo, String> {
 
     CountryBo findByIdAndTenantId(String id, String tenantId);
 
-    CountryBo findByIsoCodeAndTenantId(String isoCode, String tenantId);
+    CountryBo findByIsoCode(String isoCode);
 
     @Query("SELECT c from CountryBo c WHERE name = :name and tenantId = :tenantId")
     CountryBo findByNameAndTenantId(@Param("name") String name, @Param("tenantId") String tenantId);

@@ -47,7 +47,7 @@ public class CountryLogic {
     @Cacheable
     public Country findByIsoCode(@NonNull final String isoCode) {
         return countryMapper.map(
-            countryRepository.findByIsoCodeAndTenantId(isoCode, getTenantId()));
+            countryRepository.findByIsoCode(isoCode));
     }
 
     @Cacheable

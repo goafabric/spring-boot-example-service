@@ -4,6 +4,7 @@ import lombok.Data;
 import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantAware;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="country") //, schema = "countries")
 @Data
+@Where(clause = "tenantId = '%TENANT_ID%'")
 public class CountryBo extends TenantAware {
     private static final long serialVersionUID = 1L;
 

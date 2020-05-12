@@ -7,6 +7,7 @@ import org.hibernate.resource.jdbc.spi.StatementInspector;
 public class TenantInspector implements StatementInspector {
     @Override
     public String inspect(String sql) {
+        sql = sql.replace(".tenantId = '%TENANT_ID%'", ".tenantId = '11'");
         log.info(sql);
         return sql;
     }
