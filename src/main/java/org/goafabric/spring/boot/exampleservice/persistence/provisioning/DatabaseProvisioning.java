@@ -40,7 +40,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
         final String goals = getGoals();
         if (goals.contains("-import-demo-data")) {
             flyway = Flyway.configure().configuration(flyway.getConfiguration())
-                    .locations("classpath:db/migration",demoDataLocation).load();
+                    .locations("classpath:db/migration", demoDataLocation).load();
         }
 
         if (goals.contains("-migrate")) {
@@ -72,11 +72,6 @@ public class DatabaseProvisioning implements CommandLineRunner {
             if (goals.contains("-import-catalog-data")) {
                 log.info("calling catalog data import");
                 databaseImport.importCatalogData();
-            }
-
-            if (goals.contains("-import-demo-data")) {
-                log.info("calling demo data import");
-                databaseImport.importDemoData();
             }
         }
     }
