@@ -27,6 +27,7 @@ services:
       - applogs:/usr/share/logs
       - ../config/application.yml:/usr/share/config/application.yml
       - ../config/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
+      - ../demodata:/src/deploy/demodata
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
 #                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
