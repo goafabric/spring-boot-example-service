@@ -1,4 +1,4 @@
-lserver:
+server:
   port: 50700
   tomcat.max-threads: 20
 
@@ -31,13 +31,15 @@ spring:
         connection-timeout: 10000 #timeout in ms
 
     flyway:
-      locations: classpath:db/migration,filesystem:src/deploy/demodata
+      locations: classpath:db/migration
 
 database:
   provisioning:
-    goals: -migrate
+    goals: -migrate -import-demo-data
 #    goals: -migrate -encryptproperty=secret -terminate
 #    goals: -migrate -import-catalog-data -terminate
+    demo-data-location: filesystem:src/deploy/demodata
+
 
 ## encryption section
 security:

@@ -28,7 +28,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
     @Lazy
     private StringEncryptor propertyEncryptor;
 
-    @Value("${database.provisioning.demodata-location}")
+    @Value("${database.provisioning.demo-data-location}")
     private String demoDataLocation;
 
     @Bean
@@ -38,7 +38,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private void doFlyway(Flyway flyway) {
         final String goals = getGoals();
-        if (goals.contains("-demodata")) {
+        if (goals.contains("-import-demo-data")) {
             flyway = Flyway.configure().configuration(flyway.getConfiguration())
                     .locations("classpath:db/migration",demoDataLocation).load();
         }

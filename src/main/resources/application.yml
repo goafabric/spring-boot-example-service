@@ -35,10 +35,10 @@ spring:
 
 database:
   provisioning:
-    goals: -migrate -demodata
+    goals: -migrate -import-demo-data
 #    goals: -migrate -encryptproperty=secret -terminate
 #    goals: -migrate -import-catalog-data -terminate
-    demodata-location: filesystem:src/deploy/demodata
+    demo-data-location: filesystem:src/deploy/demodata
 
 
 ## encryption section
