@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="country") //, schema = "countries")
 @Data
-@Where(clause = "tenantId = '%TENANT_ID%'")
+@Where(clause = "tenantId = %TENANT_ID%")
 public class CountryBo extends TenantAware {
     private static final long serialVersionUID = 1L;
 

@@ -14,4 +14,8 @@ public class TenantIdStorage {
     public static void setTenantId(String tenantId) {
         tenantIdThreadLocal.set(tenantId);
     }
+
+    public static void remove() {
+        tenantIdThreadLocal.remove();
+    }
 }

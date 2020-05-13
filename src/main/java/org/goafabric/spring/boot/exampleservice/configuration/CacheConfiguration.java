@@ -12,7 +12,6 @@ import org.springframework.cache.interceptor.SimpleKey;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 @Configuration

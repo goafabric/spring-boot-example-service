@@ -26,7 +26,7 @@ public class TenantIdInterceptorConfiguration implements WebMvcConfigurer {
 
             @Override
             public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-                TenantIdStorage.setTenantId(null);
+                TenantIdStorage.remove();
             }
         });
     }
@@ -34,7 +34,7 @@ public class TenantIdInterceptorConfiguration implements WebMvcConfigurer {
     @Bean
     public HibernatePropertiesCustomizer hibernatePropertiesCustomizer() {
         return hibernateProperties -> hibernateProperties.put("hibernate.session_factory.statement_inspector",
-                "org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantInspector");
+                TenantInspector.class.getName());
     }
 
 }
