@@ -2,6 +2,7 @@ package org.goafabric.spring.boot.exampleservice.service;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.goafabric.spring.boot.exampleservice.client.CountryServiceClient;
+import org.goafabric.spring.boot.exampleservice.client.TenantIdClientStorage;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -39,6 +40,7 @@ public class CountryServiceClientIT {
     private void init() {
         this.countryService
                 = new CountryServiceClient(restTemplate, serviceBaseUrl + ":" + port);
+        TenantIdClientStorage.setTenantId("10");
     }
 
     @Test

@@ -2,6 +2,7 @@ package org.goafabric.spring.boot.exampleservice.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.adapter.RestTemplateFactory;
+import org.goafabric.spring.boot.exampleservice.client.TenantIdClientStorage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +36,7 @@ public class RestTemplateConfiguration {
     public RestTemplate restTemplate() {
         final RestTemplate restTemplate = RestTemplateFactory.createRestTemplate(10000, user, password);
         restTemplate.getInterceptors().add((request, body, execution) -> {
-            request.getHeaders().set("X-TenantId", "11");
+            request.getHeaders().set("X-TenantId", TenantIdClientStorage.getTenantId());
             return execution.execute(request, body);
         });
         return restTemplate;
