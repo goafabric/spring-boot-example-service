@@ -6,6 +6,8 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class TenantAware {
+    public static final String WHERE_CLAUSE = "tenant_id = %TENANT_ID%";
+
     @Access(AccessType.PROPERTY)
     public String getTenantId() {
         return TenantIdStorage.getTenantId();
