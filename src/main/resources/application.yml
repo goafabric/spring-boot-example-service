@@ -33,8 +33,6 @@ spring:
     flyway:
       locations: classpath:db/migration
 
-    jpa.properties.hibernate.session_factory.statement_inspector: org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantInspector
-
 database:
   provisioning:
     goals: -migrate -import-demo-data

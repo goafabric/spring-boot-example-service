@@ -5,7 +5,9 @@ public class TenantIdStorage {
 
     public static String getTenantId() {
         final String tenantId = tenantIdThreadLocal.get();
-        if (tenantId == null) throw new IllegalStateException("tenantId is null");
+        if (tenantId == null) {
+            throw new IllegalStateException("tenantId is null");
+        }
         return tenantId;
     }
 

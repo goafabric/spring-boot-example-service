@@ -1,6 +1,8 @@
-package org.goafabric.spring.boot.exampleservice.configuration;
+package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
 
 import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -8,9 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Configuration
-public class TransactionIdInterceptorConfiguration implements WebMvcConfigurer {
+public class TenantIdInterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -26,6 +29,12 @@ public class TransactionIdInterceptorConfiguration implements WebMvcConfigurer {
                 TenantIdStorage.setTenantId(null);
             }
         });
+    }
+
+    @Bean
+    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer() {
+        return hibernateProperties -> hibernateProperties.put("hibernate.session_factory.statement_inspector",
+                "org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantInspector");
     }
 
 }

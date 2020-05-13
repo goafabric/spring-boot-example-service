@@ -40,7 +40,7 @@ public class TenantIT {
     }
 
     @Test
-    public void tenantTestNegative() {
+    public void testTenantNegative() {
         TenantIdClientStorage.setTenantId("20");
         try {
             assertThat(countryService.findAll()).hasSize(0);
@@ -53,7 +53,7 @@ public class TenantIT {
     }
 
     @Test
-    public void tenantTestPositive() {
+    public void testTenantPositive() {
         TenantIdClientStorage.setTenantId("20");
         try {
             Country country = Country.builder().isoCode("nz")
@@ -75,6 +75,32 @@ public class TenantIT {
             assertThatThrownBy(() -> countryService.getById(id))
                     .isInstanceOf(HttpClientErrorException.class)
                     .hasMessageContaining("No value present");
+        } finally {
+            TenantIdClientStorage.setTenantId("10");
+        }
+    }
+
+    @Test
+    public void testTenantCache() {
+        Country country = Country.builder().isoCode("nz")
+                .name("New Zealand 30")
+                .description("Land of the Daredevils")
+                .secret("You should not see this")
+                .build();
+
+        //save value and store to cache
+        TenantIdClientStorage.setTenantId("30");
+        try {
+            countryService.save(country).getId();
+            assertThat(countryService.findByIsoCode("nz").getIsoCode()).isEqualTo("nz");
+        } finally {
+            TenantIdClientStorage.setTenantId("10");
+        }
+
+        //during this access we should get nothing from the cache as it is anotha tenant
+        TenantIdClientStorage.setTenantId("40");
+        try {
+            assertThat(countryService.findByIsoCode("nz")).isNull();
         } finally {
             TenantIdClientStorage.setTenantId("10");
         }
