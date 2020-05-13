@@ -5,8 +5,8 @@ import org.hibernate.resource.jdbc.spi.StatementInspector;
 
 @Slf4j
 public class TenantInspector implements StatementInspector {
-    //inspect sqls from entities annotated with @WHERE(".tenantId = %TENANT_ID%")
-    //we intentionally ommit the ' inside the @WHERE, because if the replacement will not take place, the sql preparation will crash
+    //inspect sqls from entities annotated with @WHERE(".tenant_id = %TENANT_ID%")
+    //we intentionally omit the ' inside the @WHERE, because if the replacement will not take place, the sql preparation will crash
     @Override
     public String inspect(String sql) {
         if (sql.contains(".tenant_id = %TENANT_ID%")) {
