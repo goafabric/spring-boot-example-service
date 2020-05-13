@@ -38,7 +38,7 @@ public class CountryLogic {
     @Cacheable
     public Country getById(@NonNull final String id) {
         return countryMapper.map(
-            countryRepository.getOne(id));
+            countryRepository.findById(id).get());
     }
 
     @Cacheable

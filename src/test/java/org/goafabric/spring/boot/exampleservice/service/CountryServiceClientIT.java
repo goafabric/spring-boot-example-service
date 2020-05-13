@@ -164,13 +164,9 @@ public class CountryServiceClientIT {
 
     @Test
     public void testNotFound() {
-        try {
-            countryService.getById("xxzz");
-            fail("should net get here");
-        } catch (HttpClientErrorException e) {
-            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-            assertThat(e.getResponseBodyAsString()).isNotNull();
-        }
+        assertThatThrownBy(() -> countryService.getById("xxzz"))
+                .isInstanceOf(HttpClientErrorException.class)
+                .hasMessageContaining("No value present");
     }
 
     @Test

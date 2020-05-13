@@ -24,6 +24,14 @@ public class ExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(java.util.NoSuchElementException.class)
+    public ResponseEntity<String> handleDataRetrievalException(java.util.NoSuchElementException ex) {
+        log.warn(ex.getMessage(), ex);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+
+
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         log.warn(ex.getMessage(), ex);
