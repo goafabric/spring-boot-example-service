@@ -16,7 +16,6 @@ import org.jasypt.salt.StringFixedSaltGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import java.nio.charset.StandardCharsets;
@@ -36,7 +35,6 @@ public class EncryptionConfiguration {
 
     //property encryptor, always needed
     @Bean
-    @Transactional
     public PBEStringEncryptor propertyEncryptor() {
         return getAES256Encryptor("property_passphrase",
                 new RandomIvGenerator(), new RandomSaltGenerator());
@@ -52,7 +50,6 @@ public class EncryptionConfiguration {
     }
 
     @Bean
-    @Transactional
     public PBEStringEncryptor databaseEncryptor() {
         return getAES256Encryptor("database_passphrase",
                 new RandomIvGenerator(), new RandomSaltGenerator());
