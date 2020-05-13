@@ -1,6 +1,9 @@
 package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
 
-public class TenantIdStorage {
+public final class TenantIdStorage {
+    private TenantIdStorage() {
+    }
+
     private static ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();
 
     public static String getTenantId() {

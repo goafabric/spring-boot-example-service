@@ -14,5 +14,6 @@ public class TenantAware {
     }
 
     public void setTenantId(String tenantId) {
+        //should never be set because we alway use the ThreadLocal
     }
 }
