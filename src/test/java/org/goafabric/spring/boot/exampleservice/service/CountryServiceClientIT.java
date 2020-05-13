@@ -165,15 +165,10 @@ public class CountryServiceClientIT {
     }
 
     @Test
-    @Ignore
     public void testNotFound() {
-        try {
-            countryService.getById("xxzz");
-            fail("should net get here");
-        } catch (HttpClientErrorException e) {
-            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-            assertThat(e.getResponseBodyAsString()).isNotNull();
-        }
+        assertThatThrownBy(() -> countryService.getById("xxzz"))
+                .isInstanceOf(HttpClientErrorException.class)
+                .hasMessageContaining("No value present");
     }
 
     @Test
@@ -184,6 +179,52 @@ public class CountryServiceClientIT {
         } catch (HttpClientErrorException e) {
             assertThat(e.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
             assertThat(e.getResponseBodyAsString()).isNotNull();
+        }
+    }
+
+    @Test
+    public void tenantTestNegative() {
+        final Country country = Country.builder().isoCode("nz")
+                .name("New Zealand 20")
+                .description("Land of the Daredevils")
+                .secret("You should not see this")
+                .build();
+
+        TenantIdClientStorage.setTenantId("20");
+        try {
+            assertThat(countryService.findAll()).hasSize(0);
+
+            assertThat(countryService.findByIsoCode("de")).isNull();;
+            assertThat(countryService.findByName("Germany")).isNull();;
+        } finally {
+            TenantIdClientStorage.setTenantId("10");
+        }
+    }
+
+    @Test
+    public void tenantTestPositive() {
+        TenantIdClientStorage.setTenantId("20");
+        try {
+            Country country = Country.builder().isoCode("nz")
+                    .name("New Zealand 20")
+                    .description("Land of the Daredevils")
+                    .secret("You should not see this")
+                    .build();
+
+            final String id = countryService.save(country).getId();
+
+            assertThat(countryService.findAll()).hasSize(1);
+
+            assertThat(countryService.getById(id).getId()).isEqualTo(id);
+            assertThat(countryService.findByIsoCode("nz").getIsoCode()).isEqualTo("nz");
+            assertThat(countryService.findByName("New Zealand 20").getName()).isEqualTo("New Zealand 20");
+
+            countryService.delete(id);
+            assertThatThrownBy(() -> countryService.getById(id))
+                    .isInstanceOf(HttpClientErrorException.class)
+                    .hasMessageContaining("No value present");
+        } finally {
+            TenantIdClientStorage.setTenantId("10");
         }
     }
 
