@@ -44,4 +44,8 @@ public interface CountryService {
     @ApiOperation("isAlive that connects to another Service")
     @GetMapping("isAlive")
     Boolean isAlive();
+
+    @ApiOperation("Count the records")
+    @GetMapping("count")
+    Long count();
 }

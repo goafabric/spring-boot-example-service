@@ -62,4 +62,9 @@ public class CountryServiceClient implements CountryService {
     public Boolean isAlive() {
         return restTemplate.getForObject(serviceUrl + "/isAlive", Boolean.class);
     }
+
+    @Override
+    public Long count() {
+        return restTemplate.getForObject(serviceUrl + "/count", Long.class);
+    }
 }

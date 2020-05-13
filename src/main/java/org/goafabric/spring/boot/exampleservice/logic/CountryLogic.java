@@ -76,6 +76,10 @@ public class CountryLogic {
         countryRepository.deleteById(id);
     }
 
+    public Long count() {
+        return countryRepository.count();
+    }
+
     public Boolean isAlive() {
         return calleeServiceClient.isAlive();
     }
