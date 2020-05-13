@@ -4,9 +4,6 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.spring.boot.exampleservice.adapter.CalleeServiceAdapter;
 import org.goafabric.spring.boot.exampleservice.configuration.CacheConfiguration;
-import org.goafabric.spring.boot.exampleservice.crossfunctional.DurationLog;
-import org.goafabric.spring.boot.exampleservice.persistence.domain.CountryBo;
-import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage;
 import org.goafabric.spring.boot.exampleservice.persistence.repository.CountryRepository;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage.getTenantId;
 
 /**
  * Created by andreas.mautsch on 08.06.2018.
@@ -79,6 +74,10 @@ public class CountryLogic {
     @CacheEvict(allEntries = true)
     public void delete(@NonNull final String id) {
         countryRepository.deleteById(id);
+    }
+
+    public Long count() {
+        return countryRepository.count();
     }
 
     public Boolean isAlive() {
