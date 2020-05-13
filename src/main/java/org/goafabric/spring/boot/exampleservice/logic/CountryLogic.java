@@ -22,8 +22,8 @@ import java.util.List;
 
 @Slf4j
 @Component
-@Transactional
 @DurationLog
+@Transactional
 @CacheConfig(cacheNames = {CacheConfiguration.COUNTRIES})
 public class CountryLogic {
     @Autowired
