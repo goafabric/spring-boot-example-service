@@ -8,10 +8,12 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public class RestTemplateFactory {
+    private RestTemplateFactory() {
+    }
+
     public static RestTemplate createRestTemplate(final int timeout, final String user, final String password) {
         final RestTemplate restTemplate = new RestTemplate(
                 createClientHttpRequestFactory(timeout));
@@ -23,6 +25,7 @@ public class RestTemplateFactory {
         });
         return restTemplate;
     }
+
 
     private static HttpComponentsClientHttpRequestFactory createClientHttpRequestFactory(final int timeout) {
         final RequestConfig config = RequestConfig.custom()
