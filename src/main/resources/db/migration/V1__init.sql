@@ -5,7 +5,7 @@ create table country
 	id varchar(36) not null
 		constraint pk_country
 			primary key,
-    tenantid varchar(3) not null,
+    tenant_id varchar(3) not null,
 	isocode varchar(2),
 	name varchar(255),
 	information varchar(255),
