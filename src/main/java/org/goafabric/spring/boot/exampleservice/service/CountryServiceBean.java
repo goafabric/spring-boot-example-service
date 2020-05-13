@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @PreAuthorize("hasRole('STANDARD_ROLE')")
-@DurationLog
 public class CountryServiceBean implements CountryService {
     @Autowired
     @Delegate
