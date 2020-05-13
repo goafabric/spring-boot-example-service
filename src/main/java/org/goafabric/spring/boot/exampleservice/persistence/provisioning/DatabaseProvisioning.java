@@ -5,6 +5,7 @@ import org.flywaydb.core.Flyway;
 import org.h2.util.StringUtils;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
@@ -27,6 +28,9 @@ public class DatabaseProvisioning implements CommandLineRunner {
     @Lazy
     private StringEncryptor propertyEncryptor;
 
+    @Value("${database.provisioning.demo-data-location}")
+    private String demoDataLocation;
+
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
         return this::doFlyway; //flyway always needs to run this way, otherwise we end up with a fucked up application
@@ -34,6 +38,11 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private void doFlyway(Flyway flyway) {
         final String goals = getGoals();
+        if (goals.contains("-import-demo-data")) {
+            flyway = Flyway.configure().configuration(flyway.getConfiguration())
+                    .locations("classpath:db/migration", demoDataLocation).load();
+        }
+
         if (goals.contains("-migrate")) {
             log.info("calling flyway migration");
             flyway.migrate();
@@ -63,11 +72,6 @@ public class DatabaseProvisioning implements CommandLineRunner {
             if (goals.contains("-import-catalog-data")) {
                 log.info("calling catalog data import");
                 databaseImport.importCatalogData();
-            }
-
-            if (goals.contains("-import-demo-data")) {
-                log.info("calling demo data import");
-                databaseImport.importDemoData();
             }
         }
     }

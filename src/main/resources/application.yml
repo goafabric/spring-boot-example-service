@@ -7,7 +7,7 @@ management:
     endpoints:
       web:
         exposure:
-          include: "info,health"
+          include: "info,health,circuitbreakers,circuitbreakerevents"
     endpoint:
       health:
         show-details: always
@@ -37,9 +37,11 @@ spring:
 
 database:
   provisioning:
-    goals: -migrate
+    goals: -migrate -import-demo-data
 #    goals: -migrate -encryptproperty=secret -terminate
 #    goals: -migrate -import-catalog-data -terminate
+    demo-data-location: filesystem:src/deploy/demodata
+
 
 ## encryption section
 security:
