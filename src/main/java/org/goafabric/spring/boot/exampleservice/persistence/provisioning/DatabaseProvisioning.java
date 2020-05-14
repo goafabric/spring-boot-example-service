@@ -86,12 +86,8 @@ public class DatabaseProvisioning implements CommandLineRunner {
     private void doTerminate(String goals) {
         if (goals.contains("-terminate")) {
             log.info("terminating app");
-            initiateShutdown(0);
+            SpringApplication.exit(applicationContext, () -> 0);
         }
-    }
-
-    public void initiateShutdown(int exitCode){
-        SpringApplication.exit(applicationContext, () -> exitCode);
     }
 }
 

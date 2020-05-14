@@ -34,6 +34,7 @@ public class RestTemplateConfiguration {
 
     @Bean
     public RestTemplate restTemplate() {
+        TenantIdClientStorage.setTenantId("10");
         final RestTemplate restTemplate = RestTemplateFactory.createRestTemplate(10000, user, password);
         restTemplate.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().set("X-TenantId", TenantIdClientStorage.getTenantId());

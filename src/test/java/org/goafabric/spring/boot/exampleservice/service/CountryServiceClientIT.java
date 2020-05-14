@@ -40,7 +40,6 @@ public class CountryServiceClientIT {
     private void init() {
         this.countryService
                 = new CountryServiceClient(restTemplate, serviceBaseUrl + ":" + port);
-        TenantIdClientStorage.setTenantId("10");
     }
 
     @Test
