@@ -12,7 +12,7 @@ public class TenantAware {
 
     @Access(AccessType.PROPERTY)
     public String getTenantId() {
-        return TenantRequestContext.getTenantId(); //this is for save operations only
+        return TenantRequestContext.getTenantId(); //this is for save operations only and this should also ensure that setting the wrong tenant is nearly impossible
     }
 
     public void setTenantId(String tenantId) {
