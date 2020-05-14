@@ -17,7 +17,6 @@ public class TenantInspector implements StatementInspector {
         if (sql.contains(TenantAware.TENANT_FILTER)) {
             sql = sql.replace(TenantAware.TENANT_FILTER, "tenant_id = '" + TenantRequestContext.getTenantId() + "'");
         }
-        //log.info(sql);
         return sql;
     }
 
