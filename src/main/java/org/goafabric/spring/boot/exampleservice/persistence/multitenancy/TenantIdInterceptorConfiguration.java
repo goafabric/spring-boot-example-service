@@ -28,11 +28,4 @@ public class TenantIdInterceptorConfiguration implements WebMvcConfigurer {
             }
         });
     }
-
-    @Bean
-    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer() {
-        return hibernateProperties -> hibernateProperties.put("hibernate.session_factory.statement_inspector",
-                TenantInspector.class.getName());
-    }
-
 }
