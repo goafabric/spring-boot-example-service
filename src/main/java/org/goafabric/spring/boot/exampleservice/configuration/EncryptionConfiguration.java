@@ -14,8 +14,12 @@ import org.jasypt.salt.RandomSaltGenerator;
 import org.jasypt.salt.SaltGenerator;
 import org.jasypt.salt.StringFixedSaltGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 
 import java.nio.charset.StandardCharsets;
@@ -95,4 +99,16 @@ public class EncryptionConfiguration {
     private String generateUniqueId() {
         return Base64Utils.encodeToString(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
     }
+
+    @Bean
+    public CommandLineRunner encryptionCommandLineRunner(ApplicationContext applicationContext) {
+        return args -> {
+            if ((args.length > 0) && (args[0].contains("-encryptproperty="))) {
+                final String string = args[0].split("-encryptproperty=")[1].split("-terminate")[0];
+                log.info("encrypted string will be: {}", propertyEncryptor().encrypt(string));
+                SpringApplication.exit(applicationContext, () -> 0);
+            }
+        };
+    }
 }
+

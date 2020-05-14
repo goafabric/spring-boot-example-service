@@ -58,7 +58,6 @@ public class DatabaseProvisioning implements CommandLineRunner {
     public void run(String... args) {
         final String goals = getGoals();
         doImport(goals);
-        doEncrypt(goals);
         doTerminate(goals);
     }
 
@@ -73,13 +72,6 @@ public class DatabaseProvisioning implements CommandLineRunner {
                 log.info("calling catalog data import");
                 databaseImport.importCatalogData();
             }
-        }
-    }
-
-    private void doEncrypt(String goals) {
-        if (goals.contains("-encryptproperty=")) {
-            final String string = goals.split("-encryptproperty=")[1].split("-terminate")[0];
-            log.info(propertyEncryptor.encrypt("encrypted string will be:" + string));
         }
     }
 
