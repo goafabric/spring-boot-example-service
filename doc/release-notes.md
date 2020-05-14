@@ -15,6 +15,9 @@ Security
 Persistence
 - DemoData added to DatabaseProvisioning
 - Discriminator Based Multi Tenancy added, @see all classes prefixed with "Tenant" and CountryBo
+    - Possible Alternatives that do not work
+        https://medium.com/@vivareddy/muti-tenant-with-discriminator-column-hibernate-implementation-a363f03b1d10
+        https://bytefish.de/blog/spring_boot_multitenancy/
     
 Docker
 - Nginx Reverse Proxy for HTTP and HTTPS
