@@ -9,10 +9,10 @@ public class TenantInspector implements StatementInspector {
     //we intentionally omit the ' inside the @WHERE, because if the replacement will not take place, the sql preparation will crash
     @Override
     public String inspect(String sql) {
-        if (sql.contains(".tenant_id = %TENANT_ID%")) {
-            sql = sql.replace(".tenant_id = %TENANT_ID%", ".tenant_id = '" + TenantIdStorage.getTenantId() + "'");
+        if (sql.contains(TenantAware.TENANT_FILTER)) {
+            sql = sql.replace(TenantAware.TENANT_FILTER, "tenant_id = '" + TenantIdStorage.getTenantId() + "'");
         }
-        //log.info(sql);
+        log.info(sql);
         return sql;
     }
 }
