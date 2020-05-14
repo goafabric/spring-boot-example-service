@@ -1,9 +1,0 @@
-- transparent multi tenancy and orgunit handling
-- generic field encryption for pojos (without jpa)
-- csrf
-- catalog import via spring batch
-
-- ssl via nginx
-- gdpr deletion
-
-- spring reactor with r2dbc or mongodb, graal native binaries
