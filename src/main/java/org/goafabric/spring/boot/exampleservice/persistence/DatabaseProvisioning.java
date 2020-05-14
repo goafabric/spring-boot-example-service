@@ -1,4 +1,4 @@
-package org.goafabric.spring.boot.exampleservice.persistence.provisioning;
+package org.goafabric.spring.boot.exampleservice.persistence;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;

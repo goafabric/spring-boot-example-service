@@ -1,7 +1,7 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
-import org.goafabric.spring.boot.exampleservice.persistence.multitenancy.TenantIdStorage;
+import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantStorage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -39,6 +39,6 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     @Bean
     @Override
     public KeyGenerator keyGenerator() {
-        return (target, method, params) -> new SimpleKey(TenantIdStorage.getTenantId(), params);
+        return (target, method, params) -> new SimpleKey(TenantStorage.getTenantId(), params);
     }
 }

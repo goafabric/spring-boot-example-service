@@ -1,7 +1,7 @@
-package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
+package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
-public final class TenantIdStorage {
-    private TenantIdStorage() {
+public final class TenantStorage {
+    private TenantStorage() {
     }
 
     private static ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();

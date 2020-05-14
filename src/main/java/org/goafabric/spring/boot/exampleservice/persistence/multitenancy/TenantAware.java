@@ -1,5 +1,7 @@
 package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
 
+import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantStorage;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
@@ -10,7 +12,7 @@ public class TenantAware {
 
     @Access(AccessType.PROPERTY)
     public String getTenantId() {
-        return TenantIdStorage.getTenantId();
+        return TenantStorage.getTenantId();
     }
 
     public void setTenantId(String tenantId) {
