@@ -12,3 +12,6 @@ create table country
 	secret varchar(2048), -- The field has to be much bigger because it has to hold encrypted info
 	version bigint default 0
 );
+
+
+create index idx_tenant_id on country(tenant_id);

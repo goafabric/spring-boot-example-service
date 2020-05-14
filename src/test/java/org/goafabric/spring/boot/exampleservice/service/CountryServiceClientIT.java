@@ -155,14 +155,6 @@ public class CountryServiceClientIT {
 
     }
 
-    //does  not work because due to json string is not null but empty
-    @Test
-    @Ignore
-    public void testFindCountryByIsoCodeNull() {
-        assertThatThrownBy(() ->
-                countryService.findByIsoCode(null)).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     public void testNotFound() {
         assertThatThrownBy(() -> countryService.getById("xxzz"))
