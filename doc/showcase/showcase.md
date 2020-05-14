@@ -21,7 +21,7 @@
 - Property Encryption
 - Database Field Encryption 
 - Database Searchable Field Encryption
-- SSL Through NGIINX
+- SSL Through NGINX
 
 
 #Todo
