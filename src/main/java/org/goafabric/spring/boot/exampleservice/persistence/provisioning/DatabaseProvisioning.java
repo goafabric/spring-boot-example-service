@@ -2,7 +2,6 @@ package org.goafabric.spring.boot.exampleservice.persistence.provisioning;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
-import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -19,57 +18,49 @@ public class DatabaseProvisioning implements CommandLineRunner {
     @Autowired
     private ApplicationContext  applicationContext;
 
-    @Autowired(required = false)
-    private DatabaseImport      databaseImport;
-
     @Value("${database.provisioning.demo-data-location}")
     private String demoDataLocation;
 
+    @Value("${database.provisioning.goals:-migrate}")
+    private String goals;
+
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
-        return this::doFlyway; //flyway always needs to run this way, otherwise we end up with a fucked up application
-    }
-
-    private void doFlyway(Flyway flyway) {
-        final String goals = getGoals();
-        if (goals.contains("-import-demo-data")) {
-            flyway = Flyway.configure().configuration(flyway.getConfiguration())
-                    .locations("classpath:db/migration", demoDataLocation).load();
-        }
-
-        if (goals.contains("-migrate")) {
-            log.info("calling flyway migration");
-            flyway.migrate();
-        }
-
-        if (goals.contains("-clean")) {
-            log.info("calling flyway clean");
-            flyway.clean();
-        }
+        return flyway -> {
+            flyway = configureDemoDataImport(flyway);
+            migrate(flyway);
+        };
     }
 
     @Override
     public void run(String... args) {
-        final String goals = getGoals();
-        doImport(goals);
-        doTerminate(goals);
+        importCatalogData(goals);
+        terminate(goals);
     }
 
-    private String getGoals() {
-        final String goals = applicationContext.getEnvironment().getProperty("database.provisioning.goals");
-        return (StringUtils.isNullOrEmpty(goals))  ? "-migrate" : goals;
-    }
-
-    private void doImport(String goals) {
-        if (databaseImport != null) {
-            if (goals.contains("-import-catalog-data")) {
-                log.info("calling catalog data import");
-                databaseImport.importCatalogData();
-            }
+    private void migrate(Flyway flyway) {
+        if (goals.contains("-migrate")) {
+            log.info("calling flyway migration");
+            flyway.migrate();
         }
     }
 
-    private void doTerminate(String goals) {
+    private Flyway configureDemoDataImport(Flyway flyway) {
+        if (goals.contains("-import-demo-data")) {
+            flyway = Flyway.configure().configuration(flyway.getConfiguration())
+                    .locations("classpath:db/migration", demoDataLocation).load();
+        }
+        return flyway;
+    }
+
+    private void importCatalogData(String goals) {
+        if (goals.contains("-import-catalog-data")) {
+            log.info("calling catalog data import");
+            //do catalog stuff here
+        }
+    }
+
+    private void terminate(String goals) {
         if (goals.contains("-terminate")) {
             log.info("terminating app");
             SpringApplication.exit(applicationContext, () -> 0);
