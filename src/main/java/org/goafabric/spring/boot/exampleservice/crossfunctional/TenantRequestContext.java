@@ -7,7 +7,10 @@ public final class TenantRequestContext {
     private static ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();
 
     public static String getTenantId() {
-        final String tenantId = tenantIdThreadLocal.get();
+        String tenantId = tenantIdThreadLocal.get();
+        if (tenantId == null) {
+            tenantId = "10"; //TODO: warning this is just a temp hack to make the demo frontend work without http headders
+        }
         if (tenantId == null) {
             throw new IllegalStateException("tenantId is null");
         }
