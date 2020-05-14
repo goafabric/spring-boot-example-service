@@ -3,7 +3,6 @@ package org.goafabric.spring.boot.exampleservice.persistence.provisioning;
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.h2.util.StringUtils;
-import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -11,7 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -23,10 +21,6 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     @Autowired(required = false)
     private DatabaseImport      databaseImport;
-
-    @Autowired
-    @Lazy
-    private StringEncryptor propertyEncryptor;
 
     @Value("${database.provisioning.demo-data-location}")
     private String demoDataLocation;
