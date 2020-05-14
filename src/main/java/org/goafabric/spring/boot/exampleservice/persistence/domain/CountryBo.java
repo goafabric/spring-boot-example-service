@@ -23,7 +23,6 @@ public class CountryBo extends TenantAware {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Column(name = "isocode")
     private String isoCode;
 
     private String name;
