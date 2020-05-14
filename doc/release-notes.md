@@ -14,7 +14,7 @@ Security
 
 Persistence
 - DemoData added to DatabaseProvisioning
-
+- Discriminator Based Multi Tenancy added, @see all classes prefixed with "Tenant" and CountryBo
     
 Docker
 - Nginx Reverse Proxy for HTTP and HTTPS
