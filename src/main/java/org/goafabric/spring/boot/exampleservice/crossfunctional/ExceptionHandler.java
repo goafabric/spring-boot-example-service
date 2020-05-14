@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
-import javax.persistence.EntityNotFoundException;
-
 @Slf4j
 @ControllerAdvice
 public class ExceptionHandler {
@@ -16,12 +14,6 @@ public class ExceptionHandler {
     public ResponseEntity<String> handleDecryptionException(EncryptionOperationNotPossibleException ex) {
         log.warn(ex.getMessage(), ex);
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
-    }
-
-    @org.springframework.web.bind.annotation.ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handleDataRetrievalException(EntityNotFoundException ex) {
-        log.warn(ex.getMessage(), ex);
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(java.util.NoSuchElementException.class)
