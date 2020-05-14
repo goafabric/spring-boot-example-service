@@ -1,7 +1,7 @@
 package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
-public final class TenantStorage {
-    private TenantStorage() {
+public final class TenantRequestContext {
+    private TenantRequestContext() {
     }
 
     private static ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();

@@ -1,6 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.configuration;
 
-import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantStorage;
+import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantRequestContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -17,13 +17,13 @@ public class TenantIdInterceptorConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-                TenantStorage.setTenantId(request.getHeader("X-TenantId"));
+                TenantRequestContext.setTenantId(request.getHeader("X-TenantId"));
                 return true;
             }
 
             @Override
             public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-                TenantStorage.remove();
+                TenantRequestContext.remove();
             }
         });
     }

@@ -1,7 +1,7 @@
 package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
 
 import lombok.extern.slf4j.Slf4j;
-import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantStorage;
+import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantRequestContext;
 import org.hibernate.resource.jdbc.spi.StatementInspector;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ public class TenantInspector implements StatementInspector {
     @Override
     public String inspect(String sql) {
         if (sql.contains(TenantAware.TENANT_FILTER)) {
-            sql = sql.replace(TenantAware.TENANT_FILTER, "tenant_id = '" + TenantStorage.getTenantId() + "'");
+            sql = sql.replace(TenantAware.TENANT_FILTER, "tenant_id = '" + TenantRequestContext.getTenantId() + "'");
         }
         //log.info(sql);
         return sql;
