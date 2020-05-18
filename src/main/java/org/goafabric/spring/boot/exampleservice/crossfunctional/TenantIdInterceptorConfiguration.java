@@ -1,4 +1,4 @@
-package org.goafabric.spring.boot.exampleservice.configuration;
+package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
 import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantRequestContext;
 import org.springframework.context.annotation.Configuration;
