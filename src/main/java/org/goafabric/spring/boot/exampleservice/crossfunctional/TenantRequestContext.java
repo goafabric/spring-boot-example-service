@@ -17,11 +17,11 @@ public final class TenantRequestContext {
         return tenantId;
     }
 
-    public static void setTenantId(String tenantId) {
+    static void setTenantId(String tenantId) {
         tenantIdThreadLocal.set(tenantId);
     }
 
-    public static void remove() {
+    static void remove() {
         tenantIdThreadLocal.remove();
     }
 }
