@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="country") //, schema = "countries")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Where(clause = TenantAware.TENANT_FILTER)
 public class CountryBo extends TenantAware {
     private static final long serialVersionUID = 1L;

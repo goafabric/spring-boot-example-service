@@ -12,7 +12,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
@@ -23,7 +23,7 @@ public class SwaggerConfiguration {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalOperationParameters(
-                        Arrays.asList(new ParameterBuilder()
+                        Collections.singletonList(new ParameterBuilder()
                                 .name("X-TenantId")
                                 .description("TenantId")
                                 .modelRef(new ModelRef("string"))

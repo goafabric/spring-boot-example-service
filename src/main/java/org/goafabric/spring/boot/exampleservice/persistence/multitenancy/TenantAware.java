@@ -1,7 +1,6 @@
 package org.goafabric.spring.boot.exampleservice.persistence.multitenancy;
 
 import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantRequestContext;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;

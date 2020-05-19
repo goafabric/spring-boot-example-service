@@ -4,7 +4,7 @@ public final class TenantRequestContext {
     private TenantRequestContext() {
     }
 
-    private static ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();
 
     public static String getTenantId() {
         String tenantId = tenantIdThreadLocal.get();

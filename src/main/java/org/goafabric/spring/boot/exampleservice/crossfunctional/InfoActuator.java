@@ -50,9 +50,9 @@ public class InfoActuator implements InfoContributor {
 
     private Map<String, Object> getStatStatements() {
         final Map<String, Object> map = new LinkedHashMap<>();
-        jdbcTemplate.queryForList(SQL).stream().forEach(result -> {
+        jdbcTemplate.queryForList(SQL).forEach(result -> {
             final StringBuilder lines = new StringBuilder();
-            result.values().stream().forEach(object -> lines.append(object.toString().replace("\n", " ") + "    "));
+            result.values().forEach(object -> lines.append(object.toString().replace("\n", " ")).append("    "));
             map.put("line " + map.size(), lines.toString());
         });
         return map;
