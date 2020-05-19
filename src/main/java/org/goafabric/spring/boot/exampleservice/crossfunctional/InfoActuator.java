@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 @Slf4j
 public class InfoActuator implements InfoContributor {
-    @Autowired
+    @Autowired(required = false)
     private JdbcTemplate jdbcTemplate;
 
     @Value("${management.database.monitoring.enabled}")
