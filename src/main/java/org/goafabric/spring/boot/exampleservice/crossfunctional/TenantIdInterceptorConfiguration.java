@@ -1,6 +1,5 @@
 package org.goafabric.spring.boot.exampleservice.crossfunctional;
 
-import org.goafabric.spring.boot.exampleservice.crossfunctional.TenantRequestContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

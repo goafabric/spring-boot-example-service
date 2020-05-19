@@ -35,6 +35,7 @@ public class CountryLogic {
     @Autowired
     private CalleeServiceAdapter calleeServiceClient;
 
+    @SuppressWarnings("squid:S3655")
     @Cacheable
     public Country getById(@NonNull final String id) {
         return countryMapper.map(

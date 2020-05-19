@@ -10,6 +10,7 @@ import java.util.List;
 
 @RequestMapping(value = CountryService.RESOURCE,
         produces = MediaType.APPLICATION_JSON_VALUE)
+@SuppressWarnings("squid:S1214")
 public interface CountryService {
     String RESOURCE = "/countries";
 
