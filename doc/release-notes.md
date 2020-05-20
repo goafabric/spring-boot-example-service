@@ -6,7 +6,6 @@ CrossFunctional
 - Postgres Database Monitoring
     - @see InfoActuator
 - Fixed Web endpoints inside static\index.html not beeing relative
--
 
 Security
 - Encrypted Searchable Fields in Database (less secure)
@@ -26,8 +25,8 @@ Docker
 
 Security
 - Upgrade to Spring-Boot-Jasypt 3.0.2 which otherwised clashed badly with jasyppt-hibernate during classloading
+- Upgrade to Spring Boot 2.3.0
 
-Refactoring
 
 #1.0.2
 ##Added
