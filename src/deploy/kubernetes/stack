@@ -16,6 +16,7 @@ function func_delete_all {
     func_delete postgres
 
     kubectl delete configmap application-config-files
+    kubectl delete configmap application-demodata-files
     kubectl delete configmap postgres-initdb
 
     kubectl delete secret postgres-secret
@@ -32,6 +33,7 @@ then
     kubectl config set-context --current --namespace=${NAMESPACE}
 
     kubectl create configmap application-config-files --from-file=../config/
+    kubectl create configmap application-demodata-files --from-file=../demodata/
     kubectl create configmap postgres-initdb --from-file=../initdb/
 
     kubectl apply -f configmap.yml

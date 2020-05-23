@@ -82,6 +82,8 @@ spec:
               name: applogs
             - mountPath: /usr/share/config/
               name: application-config-files-volume
+            - mountPath: /src/deploy/demodata/
+              name: application-demodata-files-volume
 
       volumes:
         - name: applogs
@@ -90,3 +92,6 @@ spec:
         - name: application-config-files-volume
           configMap:
             name: application-config-files
+        - name: application-demodata-files-volume
+          configMap:
+            name: application-demodata-files
