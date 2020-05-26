@@ -51,7 +51,7 @@ kubectl rollout undo deployment example-service
 docker run --rm -e database.provisioning.goals='-migrate -import-demo-data -import-catalog-data -terminate' \
 -e spring.datasource.url='jdbc:h2:mem:countrydb' \
 -v /Users/andreas/Projects/IdeaProjects/myprojects/spring_kubernetes/spring-boot-example-service/src/deploy/demodata:/src/deploy/demodata \
-goafabric/spring-boot-exampleservice:1.0.3-SNAPSHOT
+goafabric/spring-boot-exampleservice:1.0.3
 
 #SSL
 ##direct generation
