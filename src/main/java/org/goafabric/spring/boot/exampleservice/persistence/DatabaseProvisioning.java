@@ -47,6 +47,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private Flyway configureDemoDataImport(Flyway flyway) {
         if (goals.contains("-import-demo-data")) {
+            log.info("importing demo data");
             flyway = Flyway.configure().configuration(flyway.getConfiguration())
                     .locations("classpath:db/migration", demoDataLocation).load();
         }
