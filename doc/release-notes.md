@@ -39,7 +39,7 @@ CrossFunctional
 
 Security
 - Database Encryption with Jasypt
-    - @see: EncryptionConfiguration and @TypeDef in CountryBo
+    - @see: EncryptionConfiguration and @TypeDef in domain\package-info.java
 - Passphrase now gets stored inside Database
     - @see: EncryptionConfiguration 
 
