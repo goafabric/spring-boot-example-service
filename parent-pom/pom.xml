@@ -59,6 +59,7 @@
 
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>2.4.0</jib-maven-plugin.version>
+        <joda-time.version>2.10.6</joda-time.version>
 
         <!-- Sonarqube -->
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
