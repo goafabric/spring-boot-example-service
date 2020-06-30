@@ -47,11 +47,10 @@
         <contiperf.version>2.3.4</contiperf.version>
 
         <!-- Plugins -->
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 
-        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <maven-assembly-plugin.version>2.5.4</maven-assembly-plugin.version>
 
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
@@ -70,16 +69,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
-            </plugin>
-
             <!--
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -133,7 +122,15 @@
                 </dependencies>
             </plugin>
             -->
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
