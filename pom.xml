@@ -18,10 +18,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <resilience4j.version>1.5.0</resilience4j.version>
-        <springfox-swagger.version>2.9.2</springfox-swagger.version>
-        <jasypt-spring-boot-starter.version>3.0.2</jasypt-spring-boot-starter.version>
-        <jasypt-hibernate5.version>1.9.3</jasypt-hibernate5.version>
+        <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
     </properties>
 
     <dependencies>
