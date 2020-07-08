@@ -55,6 +55,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
     @Override
     public void run(String... args) {
         importCatalogData(goals);
+        terminate(goals);
     }
 
     private void importCatalogData(String goals) {
