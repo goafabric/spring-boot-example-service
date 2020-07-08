@@ -25,13 +25,20 @@ public class DatabaseProvisioning implements CommandLineRunner {
     @Value("${database.provisioning.goals:-migrate}")
     private String goals;
 
+    private int exitCode = 0;
+
     @Configuration
     class FlywayConfiguration {
         @Bean
         public FlywayMigrationStrategy flywayMigrationStrategy() {
             return flyway -> {
-                flyway = configureDemoDataImport(flyway);
-                migrate(flyway);
+                try {
+                    flyway = configureDemoDataImport(flyway);
+                    migrate(flyway);
+                } catch (Exception e) {
+                    exitCode = 1;
+                    throw e;
+                }
             };
         }
 
@@ -52,10 +59,14 @@ public class DatabaseProvisioning implements CommandLineRunner {
         }
     }
 
-
     @Override
     public void run(String... args) {
-        importCatalogData(goals);
+        try {
+            importCatalogData(goals);
+        } catch (Exception e) {
+            exitCode = 1;
+            throw e;
+        }
         terminate(goals);
     }
 
@@ -69,7 +80,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
     private void terminate(String goals) {
         if (goals.contains("-terminate")) {
             log.info("terminating app");
-            SpringApplication.exit(applicationContext, () -> 0);
+            SpringApplication.exit(applicationContext, () -> exitCode);
         }
     }
 }
