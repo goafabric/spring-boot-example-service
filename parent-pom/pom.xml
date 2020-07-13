@@ -49,6 +49,11 @@
         <contiperf.version>2.3.4</contiperf.version>
         <joda-time.version>2.10.6</joda-time.version>
 
+        <resilience4j.version>1.5.0</resilience4j.version>
+        <springfox-swagger.version>2.9.2</springfox-swagger.version>
+        <jasypt-spring-boot-starter.version>3.0.2</jasypt-spring-boot-starter.version>
+        <jasypt-hibernate5.version>1.9.3</jasypt-hibernate5.version>
+
         <!-- Basic Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
