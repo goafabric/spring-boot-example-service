@@ -60,3 +60,19 @@ goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
 openssl req -x509 -nodes -days 720 -newkey rsa:2048 -keyout goafabric-endentity.key -out goafabric-endentity.pem -subj '/CN=goafabric/O=Goafabric Ltd./C=DE'
 ##with root ca
 https://www.bytebee.de/certificate-authority-erstellung/
+
+##explanation
+- root certificate is the one one that
+    - generates the server certificate (end entity)
+    - can be valid for 10 years
+    - applied at the client side to fulfill chain of trust
+
+- server certificate (end entity)
+    - is issued with the help of the root certificate
+    - is only valid for 1 or 2 years
+    - applied at the server side (here nginx)
+
+- client certificate
+    - is something totally different
+    - a unique certificate per client
+    - can serve as a second factor
