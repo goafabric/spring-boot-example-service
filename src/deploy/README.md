@@ -2,9 +2,9 @@
 
 # Prerequisites
 - Download Minikube
-- minikube addons enable metrics-server (once)
-- minikube config set memory 4096
 - minikube config set cpus 2
+- minikube config set memory 4096
+- minikube addons enable metrics-server
 - minikube config set vm-driver virtualbox (or hyperkit)
 
 # Run (inside kubernetes folder)
