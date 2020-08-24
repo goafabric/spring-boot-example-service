@@ -6,6 +6,7 @@
 - minikube config set memory 4096
 - minikube addons enable metrics-server
 - minikube config set vm-driver virtualbox (or hyperkit)
+- minikube config view
 
 # Run (inside kubernetes folder)
 - minikube dashboard
