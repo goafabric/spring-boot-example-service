@@ -23,3 +23,20 @@
 because it will expire very fast
 - Additionally a unique domain name is set inside "san.cnf", in this case just goafabric.org
 - This is used as a basis for the generation and MUST Match the URL inside the browser, localhost will not work
+
+##Further Explanation
+- https://www.bytebee.de/certificate-authority-erstellung/
+- root certificate is the one one that
+    - generates the server certificate (end entity)
+    - can be valid for 10 years
+    - applied at the client side to fulfill chain of trust
+
+- server certificate (end entity)
+    - is issued with the help of the root certificate
+    - is only valid for 1 or 2 years
+    - applied at the server side (here nginx)
+
+- client certificate
+    - is something totally different
+    - a unique certificate per client
+    - can serve as a second factor
