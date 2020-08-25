@@ -43,4 +43,7 @@ because it will expire very fast
     
 ##HTTP2
 https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-18-04	
-https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-configure-http2    
+https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-configure-http2
+
+curl -I -L https://goafabric.org:443
+    
