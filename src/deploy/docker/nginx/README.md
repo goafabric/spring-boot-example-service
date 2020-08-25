@@ -40,3 +40,7 @@ because it will expire very fast
     - is something totally different
     - a unique certificate per client
     - can serve as a second factor
+    
+##HTTP2
+https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-18-04	
+https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-configure-http2    
