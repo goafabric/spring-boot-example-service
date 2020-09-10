@@ -31,7 +31,7 @@ https://www.cncf.io/wp-content/uploads/2018/12/Phippy-Goes-To-The-Zoo.pdf
 #Private registry (like artifactory)
 - minikube ssh
 - docker login
-- sudo cp /root/.docker/config.json /var/lib/kubelet/config.json
+- sudo cp .docker/config.json /var/lib/kubelet/config.json
 => note "root" does not seem to be the right folder .. can find the post anymore
 
 #Deployment
