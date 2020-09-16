@@ -3,7 +3,7 @@
 - See doc folder for more Details
 
 # Kubernetes and Docker
-- See Readme inside deploy Folder
+- See Readme inside src/deploy sub folder 
 
 # Release notes
 - See release-notes file in doc folder for more infos
