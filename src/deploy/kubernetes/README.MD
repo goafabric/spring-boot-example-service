@@ -1,38 +1,47 @@
-# Kubernetes
+#Kubernetes
 
-# Prerequisites
-- Download Minikube
-- minikube config set cpus 2
-- minikube config set memory 4096
-- minikube addons enable metrics-server
-- minikube config set vm-driver virtualbox (or hyperkit)
-- minikube config view
+#Minikube Download 
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
-# Run (inside kubernetes folder)
-- minikube dashboard
-- stack up
-- Kubernetes will display the address of the service that can than be accessed
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 
-# Remote Dashboard
+chmod +x minikube && sudo mv minikube /usr/local/bin
+
+chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
+
+#Minikube Config
+
+minikube config set cpus 4
+minikube config set memory 8192
+minikube config set vm-driver virtualbox
+minikube addons enable metrics-server
+
+minikube dashboard
+
+#Minikube Remote Dashboard
+
 kubectl proxy --address='0.0.0.0' --disable-filter=true
 
 http://SERVERNAME:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=default
 
-# Stop
-- ./stack down
+#Minikube Private Registry
+- minikube ssh
+- docker login
+- sudo cp .docker/config.json /var/lib/kubelet/config.json
 
-#lb test
-curl http://192.168.99.102:30100/actuator/info
+#Minikube Mac Download
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
+chmod +x minikube && sudo mv minikube /usr/local/bin
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+
+chmod +x minikube && sudo mv minikube /usr/local/bin
+
+chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
 
 #Kubernetes Docs:
 https://www.cncf.io/wp-content/uploads/2019/07/The-Illustrated-Childrens-Guide-to-Kubernetes.pdf
 https://www.cncf.io/wp-content/uploads/2018/12/Phippy-Goes-To-The-Zoo.pdf
-
-#Private registry (like artifactory)
-- minikube ssh
-- docker login
-- sudo cp .docker/config.json /var/lib/kubelet/config.json
-=> note "root" does not seem to be the right folder .. can find the post anymore
 
 #Deployment
 kubectl set image deployment example-service example-service=goafabric/spring-boot-exampleservice:1.0.2
