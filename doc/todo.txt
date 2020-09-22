@@ -1,0 +1,2 @@
+- use base64 encoding for database pw (check docker and kubi deploy)
+- rename endenitity certificate to server certificate
