@@ -2,4 +2,4 @@
 - rename endenitity certificate to server certificate
 - STANDARD_READ_ROLE + STANDARD_WRITE ROLE
 - Keycloak Upgrades
-- Kubernetes Todos (Restructure YML, Variables for YML, Network Seperation, Minikube IP, PORTS)
+- Kubernetes Todos (Restructure YML, Variables for YML, Network Seperation, Minikube IP, PORTS, kubectl run dbprov)
