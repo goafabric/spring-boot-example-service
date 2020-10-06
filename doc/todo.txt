@@ -3,3 +3,5 @@
 - STANDARD_READ_ROLE + STANDARD_WRITE ROLE
 - Keycloak Upgrades
 - Kubernetes Todos (Restructure YML, Variables for YML, Network Seperation, Minikube IP, PORTS, kubectl run dbprov)
+
+- spring batch integration
