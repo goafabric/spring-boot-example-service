@@ -206,7 +206,7 @@
                         <version>${jib-maven-plugin.version}</version>
                         <configuration>
                             <from>
-                                <image>adoptopenjdk/openjdk11:debian-slim</image>
+                                <image>adoptopenjdk/openjdk11:jdk-11.0.8_10-debian-slim</image>
                             </from>
                             <to>
                                 <image>${docker.registry}/${project.artifactId}</image>

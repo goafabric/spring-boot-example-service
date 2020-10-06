@@ -1,4 +1,8 @@
 #1.0.4
+## Updated
+CrossFunctional
+- Swagger updated to 3.0.0
+- AdoptOpenJDK Baseimage set to a specific version
 
 #1.0.3
 
