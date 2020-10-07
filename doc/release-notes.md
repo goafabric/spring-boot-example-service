@@ -4,6 +4,7 @@ CrossFunctional
 - Swagger updated to 3.0.0
 - AdoptOpenJDK Baseimage set to a specific version
 - Upgrade to Postgres 12.4
+- Prometheus metrics added
 
 #1.0.3
 
