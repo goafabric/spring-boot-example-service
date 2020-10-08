@@ -25,7 +25,7 @@ public class InfoActuator implements InfoContributor {
     @Override
     public void contribute(Info.Builder builder) {
         addHostInfo(builder);
-        addDatabaseInfo(builder);
+        //addDatabaseInfo(builder);
     }
 
     private void addHostInfo(Info.Builder builder) {
@@ -37,6 +37,7 @@ public class InfoActuator implements InfoContributor {
         }
     }
 
+    /*
     private void addDatabaseInfo(Info.Builder builder) {
         if (databaseMonitoringEnabled) {
             builder.withDetail("queries", "total    average    calls    query")
@@ -57,4 +58,5 @@ public class InfoActuator implements InfoContributor {
         });
         return map;
     }
+     */
 }
