@@ -1,16 +1,14 @@
 apiVersion: v1
-kind: Secret
+kind: ConfigMap
 metadata:
-  name: postgres-secret
-type: Opaque
+  name: example-service-config
 data:
-  POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
-  #echo -n 'example-service' | base64
-  POSTGRES_PASSWORD: Y3JOYjJaNm12QnlTUkt3dQ==
-  #echo -n 'crNb2Z6mvBySRKwu' | base64
-stringData:
   TZ: Europe/Berlin
-  POSTGRES_DB: countrydb
+  tomcat.max-threads: "20"
+  spring.config.location: /usr/share/config/application.yml
+  logging.config: /usr/share/config/logback-rollingfile-spring.xml
+  spring.datasource.url: "jdbc:postgresql://postgres:5432/countrydb"
+  management.database.monitoring.enabled: "true"
 
 ---
 
@@ -25,12 +23,15 @@ data:
 ---
 
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: example-service-config
+  name: postgres-secret
+type: Opaque
 data:
+  POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
+  #echo -n 'example-service' | base64
+  POSTGRES_PASSWORD: Y3JOYjJaNm12QnlTUkt3dQ==
+  #echo -n 'crNb2Z6mvBySRKwu' | base64
+stringData:
   TZ: Europe/Berlin
-  spring.config.location: /usr/share/config/application.yml
-  logging.config: /usr/share/config/logback-rollingfile-spring.xml
-  spring.datasource.url: "jdbc:postgresql://postgres:5432/countrydb"
-  management.database.monitoring.enabled: "true"
+  POSTGRES_DB: countrydb
