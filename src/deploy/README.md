@@ -25,7 +25,7 @@
 - ./stack down
 
 #lb test
-curl http://192.168.99.102:30100/actuator/info
+curl http://192.168.99.104:30100/actuator/info | cut -b1-20
 
 #Kubernetes Docs:
 https://www.cncf.io/wp-content/uploads/2019/07/The-Illustrated-Childrens-Guide-to-Kubernetes.pdf
