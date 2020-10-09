@@ -25,8 +25,8 @@ services:
     volumes:
       - tmp:/tmp
       - applogs:/usr/share/logs
-      - ../config/application.yml:/usr/share/config/application.yml
-      - ../config/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
+      - ../config/application/application.yml:/usr/share/config/application.yml
+      - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
       - ../demodata:/src/deploy/demodata
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
 #                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
@@ -50,7 +50,7 @@ services:
     command: postgres -c 'shared_buffers=128MB' -c 'max_connections=30' -c 'shared_preload_libraries=pg_stat_statements'
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ../initdb/00_pg_statements.sql:/docker-entrypoint-initdb.d/00_pg_statements.sql
+      - ../config/initdb/00_pg_statements.sql:/docker-entrypoint-initdb.d/00_pg_statements.sql
     networks:
       - example-service-net
 

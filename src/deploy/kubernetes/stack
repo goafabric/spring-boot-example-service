@@ -25,9 +25,9 @@ function func_delete_all {
 
 if [ "${COMMAND}" = "up" ]
 then
-    kubectl create configmap application-config-files --from-file=../config/
+    kubectl create configmap application-config-files --from-file=../config/application/
     kubectl create configmap application-demodata-files --from-file=../demodata/
-    kubectl create configmap postgres-initdb --from-file=../initdb/
+    kubectl create configmap postgres-initdb --from-file=../config/initdb/
 
     kubectl apply -f ./config/configmap.yml
     kubectl apply -f ./deployment/postgres-pvc.yml
