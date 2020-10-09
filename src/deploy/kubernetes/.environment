@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export NAMESPACE="example-namespace"
+kubectl create namespace ${SATELLITE_NAMESPACE} 2> /dev/null
+kubectl config set-context --current --namespace=${SATELLITE_NAMESPACE}

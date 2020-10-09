@@ -1,7 +1,7 @@
 #!/bin/bash
+source .environment
 export COMMAND=$1
 export SERVICE_MEM="256m"
-export NAMESPACE="example-namespace"
 
 function func_delete {
     echo delete $1 ...
@@ -22,8 +22,6 @@ function func_delete_all {
     kubectl delete secret postgres-secret
     kubectl delete secret example-service-secret
     kubectl delete configmap example-service-config
-
-    kubectl delete persistentvolumeclaim postgres-example-pv-claim
 }
 
 
@@ -37,13 +35,18 @@ then
     kubectl create configmap postgres-initdb --from-file=../initdb/
 
     kubectl apply -f configmap.yml
+    kubectl apply -f postgres-pvc.yml
     kubectl apply -f postgres.yml
     kubectl apply -f exampleservice.yml
 
     minikube service example-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-#    func_delete_all
+    func_delete_all
+elif [ "${COMMAND}" = "prune" ]
+then
+    func_delete_all
+    kubectl delete persistentvolumeclaim postgres-example-pv-claim
     kubectl delete namespace ${NAMESPACE}
     kubectl config set-context --current --namespace=default
 else

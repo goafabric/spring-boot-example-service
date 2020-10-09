@@ -66,15 +66,3 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-example-pv-claim
 
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-example-pv-claim
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
