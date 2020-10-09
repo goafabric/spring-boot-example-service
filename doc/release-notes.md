@@ -1,6 +1,7 @@
 #1.0.4
 ## Updated
 CrossFunctional
+- Spring 2.3.4
 - Swagger updated to 3.0.0
 - AdoptOpenJDK Baseimage set to a specific version
 - Upgrade to Postgres 12.4
