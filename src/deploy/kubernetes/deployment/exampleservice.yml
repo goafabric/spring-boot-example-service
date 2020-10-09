@@ -40,22 +40,11 @@ spec:
       containers:
         - name: example-service
           image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-          imagePullPolicy: Always
-#          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always #IfNotPresent
           ports:
             - containerPort: 50700
-          command:
-            - java
-            - -Xms256m
-            - -Xmx256m
-            - -Djava.security.egd=file:/dev/./urandom
-            - -cp
-            - /app/resources:/app/classes:/app/libs/*
-            - org.goafabric.spring.boot.exampleservice.Application
-#          resources:
-#            limits:
-#              cpu: "1000m"
-#              memory: "256Mi"
+          command: ["java", "-Xms256m", "-Xmx256m",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
           env:
             - name: server.port
               value: "50700"

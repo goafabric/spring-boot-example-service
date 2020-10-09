@@ -3,5 +3,3 @@
 export NAMESPACE="example-namespace"
 kubectl create namespace ${NAMESPACE} 2> /dev/null
 kubectl config set-context --current --namespace=${NAMESPACE}
-
-echo yo !!
