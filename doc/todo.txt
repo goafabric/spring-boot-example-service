@@ -1,6 +1,7 @@
 Kubi Stuff
 - rename endenitity certificate to server certificate
 - Kubernetes Todos (Restructure YML, Variables for YML, Network Seperation, Minikube IP, PORTS, kubectl run dbprov)
+- TIM: SelectorNames, Split Service/Deployment/PVC, Statefullset vs PVC, different Endpoints for Liveness + Readyness
 
 #Links
 ##Dynamic Values
