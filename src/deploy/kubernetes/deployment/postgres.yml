@@ -8,9 +8,7 @@ spec:
   ports:
     - protocol: TCP
       port: 5432
-#      nodePort: 30110 #this is the external port
   type: ClusterIP
-  #type: NodePort
 
 ---
 
@@ -24,8 +22,7 @@ spec:
       app: postgres
   replicas: 1
   strategy:
-    type: Recreate
-#    type: RollingUpdate
+    type: Recreate #RollingUpdate
   template:
     metadata:
       labels:
@@ -34,9 +31,7 @@ spec:
       containers:
         - name: postgres
           image: postgres:12.4
-#          image: postgres:9.6.15-alpine
-#          imagePullPolicy: Always
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 5432
           args:
@@ -63,4 +58,3 @@ spec:
         - name: pgdata
           persistentVolumeClaim:
             claimName: postgres-example-pv-claim
-

@@ -23,8 +23,7 @@ spec:
       app: example-service
   replicas: 1
   strategy:
-    type: Recreate
-#    type: RollingUpdate
+    type: Recreate #RollingUpdate
   template:
     metadata:
       labels:
