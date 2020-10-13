@@ -34,14 +34,14 @@ spec:
               value: "50700"
           envFrom:
             - configMapRef:
-                name: example-service-config
+                name: example-application-configmap
             - secretRef:
-                name: example-service-secret
+                name: example-application-secret
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 50700
-            initialDelaySeconds: 10
+            initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5
@@ -55,19 +55,19 @@ spec:
             failureThreshold: 5
           volumeMounts:
             - mountPath: /usr/share/logs
-              name: applogs
+              name: example-applogs
             - mountPath: /usr/share/config/
-              name: application-config-files-volume
+              name: example-application-config-files-volume
             - mountPath: /src/deploy/demodata/
-              name: application-demodata-files-volume
+              name: example-application-demodata-files-volume
 
       volumes:
-        - name: applogs
+        - name: example-applogs
           emptyDir: {}
         # generated from local file system via "kubectl create configmap" inside stack
-        - name: application-config-files-volume
+        - name: example-application-config-files-volume
           configMap:
-            name: application-config-files
-        - name: application-demodata-files-volume
+            name: example-application-config-files
+        - name: example-application-demodata-files-volume
           configMap:
-            name: application-demodata-files
+            name: example-application-demodata-files

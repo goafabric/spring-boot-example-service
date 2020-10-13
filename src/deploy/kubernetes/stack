@@ -14,21 +14,21 @@ function func_delete_all {
     func_delete example-service
     func_delete postgres
 
-    kubectl delete configmap application-config-files
-    kubectl delete configmap application-demodata-files
-    kubectl delete configmap postgres-initdb
+    kubectl delete configmap example-application-config-files
+    kubectl delete configmap example-application-demodata-files
+    kubectl delete configmap example-postgres-initdb
 
-    kubectl delete secret postgres-secret
+    kubectl delete secret example-postgres-secret
     kubectl delete secret example-service-secret
-    kubectl delete configmap example-service-config
+    kubectl delete configmap example-application-configmap
 }
 
 
 if [ "${COMMAND}" = "up" ]
 then
-    kubectl create configmap application-config-files --from-file=../config/application/
-    kubectl create configmap application-demodata-files --from-file=../demodata/
-    kubectl create configmap postgres-initdb --from-file=../config/initdb/
+    kubectl create configmap example-application-config-files --from-file=../config/application/
+    kubectl create configmap example-application-demodata-files --from-file=../demodata/
+    kubectl create configmap example-postgres-initdb --from-file=../config/initdb/
 
     kubectl apply -f ./config/
     kubectl apply -f ./deployment/
@@ -40,9 +40,7 @@ then
 elif [ "${COMMAND}" = "prune" ]
 then
     func_delete_all
-    kubectl delete persistentvolumeclaim postgres-example-pv-claim
-    kubectl delete namespace ${NAMESPACE}
-    kubectl config set-context --current --namespace=default
+    kubectl delete persistentvolumeclaim example-postgres-pvc
 else
     echo Doing nothing !
 fi

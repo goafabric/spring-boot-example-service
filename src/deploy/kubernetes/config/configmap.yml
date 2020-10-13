@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-service-config
+  name: example-application-configmap
 data:
   TZ: Europe/Berlin
   tomcat.max-threads: "20"
@@ -15,7 +15,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-service-secret
+  name: example-application-secret
 data:
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
   spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
@@ -25,7 +25,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: postgres-secret
+  name: example-postgres-secret
 type: Opaque
 data:
   POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl

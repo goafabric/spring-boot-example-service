@@ -30,7 +30,7 @@ spec:
             - shared_preload_libraries=pg_stat_statements
           envFrom:
             - secretRef:
-                name: postgres-secret
+                name: example-postgres-secret
           volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d/
               name: initdb
@@ -40,7 +40,7 @@ spec:
       volumes:
         - name: initdb
           configMap:
-            name: postgres-initdb
+            name: example-postgres-initdb
         - name: pgdata
           persistentVolumeClaim:
-            claimName: postgres-example-pv-claim
+            claimName: example-postgres-pvc
