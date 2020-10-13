@@ -11,7 +11,7 @@ function func_delete {
 }
 
 function func_delete_all {
-    func_delete example-service
+    func_delete example-country-service
     func_delete postgres
 
     kubectl delete configmap example-application-config-files
