@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: example-service
+spec:
+  selector:
+    app: example-service
+  ports:
+    - protocol: TCP
+      port: 50700
+      nodePort: 30100 #this is the external port
+  type: NodePort

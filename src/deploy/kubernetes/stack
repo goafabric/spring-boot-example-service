@@ -30,10 +30,8 @@ then
     kubectl create configmap application-demodata-files --from-file=../demodata/
     kubectl create configmap postgres-initdb --from-file=../config/initdb/
 
-    kubectl apply -f ./config/configmap.yml
-    kubectl apply -f ./deployment/postgres-pvc.yml
-    kubectl apply -f ./deployment/postgres.yml
-    kubectl apply -f ./deployment/exampleservice.yml
+    kubectl apply -f ./config/
+    kubectl apply -f ./deployment/
 
     minikube service example-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
