@@ -1,36 +1,45 @@
-Kubi Stuff
-- rename endenitity certificate to server certificate
-- Kubernetes Todos (Variables for YML, Network Seperation, Minikube IP, PORTS, kubectl run dbprov)
-- Stack NAME
+Now
+- Dynamic Stack Name via variables
+- Nginx, SSL, Rename Endentity
+- Simpler Logging without Logback.xml
+
+Fun
+- Prometheus, Graphana, Tracing
+- Elk
+- Helm
+- Istio
+
+Later
+
 - Statefulsets vs PVC
+- Database Provisioning
+- Networks Seperation
+
+---
 
 #Links
 ##Dynamic Values
 https://stackoverflow.com/questions/48296082/how-to-set-dynamic-values-with-kubernetes-yaml-file
 
-##Kubernetes from the Outside
-https://cwienczek.com/2017/09/reaching-minikube-from-other-devices/
-https://github.com/kubernetes/minikube/issues/877
-
 ##Ports > 30000
-https://minikube.sigs.k8s.io/docs/handbook/accessing/
 minikube start --extra-config=apiserver.service-node-port-range=1-65535
 
 ##Postgres Kubernetes Links
 https://contentlab.io/postgresql-on-kubernetes/
 https://medium.com/@suyashmohan/setting-up-postgresql-database-on-kubernetes-24a2a192e962
 
+##DB Provsioning
+kubectl run -i --tty db --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT \
+--env="database.provisioning.goals=-migrate -import-demo-data -import-catalog-data -terminate“ \
+--env="spring.datasource.url=jdbc:postgresql://example-postgres:5432/countrydb“ \
+
 ##Logging
 https://howtodoinjava.com/spring-boot2/logging/configure-logging-application-yml/
 https://stackoverflow.com/questions/55580315/how-can-i-specify-a-logback-rolling-appender-in-application-yml
-
 
 Other Stuff
 - spring batch integration
 - STANDARD_READ_ROLE + STANDARD_WRITE ROLE
 - Keycloak Upgrades
-- database provisioning
 
-kubectl run -i --tty db --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT \
---env="database.provisioning.goals=-migrate -import-demo-data -import-catalog-data -terminate“ \
---env="spring.datasource.url=jdbc:postgresql://example-postgres:5432/countrydb“ \
+
