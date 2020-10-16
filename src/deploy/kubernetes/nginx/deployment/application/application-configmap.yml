@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-application-configmap
+data:
+  TZ: Europe/Berlin
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nginx-application-secret
+data:
+
+
