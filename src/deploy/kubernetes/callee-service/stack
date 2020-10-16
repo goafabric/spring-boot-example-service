@@ -1,0 +1,48 @@
+#!/bin/bash
+source .env
+
+export COMMAND=$1
+
+function func_up {
+    func_create_application
+}
+
+function func_create_application {
+    kubectl create configmap example-application-config-files --from-file=./config/application/
+
+    kubectl apply -f ./deployment/application/
+}
+
+function func_down {
+    func_delete_application
+}
+
+function func_delete_application {
+    func_delete example-country-service
+
+    kubectl delete configmap example-application-config-files
+
+    kubectl delete configmap example-application-configmap
+    kubectl delete secret example-application-secret
+}
+
+function func_delete {
+    echo delete $1 ...
+    kubectl delete services $1
+    kubectl delete deployment $1
+}
+
+
+if [ "${COMMAND}" = "up" ]
+then
+    func_up
+    minikube service example-callee-service --url -n ${NAMESPACE}
+elif [ "${COMMAND}" = "down" ]
+then
+    func_down
+elif [ "${COMMAND}" = "prune" ]
+then
+    func_prune
+else
+    echo Doing nothing !
+fi

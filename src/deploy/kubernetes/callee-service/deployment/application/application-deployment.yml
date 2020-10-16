@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-callee-service
+spec:
+  selector:
+    matchLabels:
+      app: example-callee-service
+  replicas: 1
+  strategy:
+    type: Recreate #RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: example-callee-service
+    spec:
+      # initcontainers justs accepts a docker image, and uses postgres client to check readyness
+      containers:
+        - name: example-callee-service
+          image: goafabric/calle-service:1.0.0-SNAPSHOT
+          imagePullPolicy: Always #IfNotPresent
+          ports:
+            - containerPort: 50900
+          command: ["java", "-Xms256m", "-Xmx256m",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
+                    "org.goafabric.calleservice.Application"]
+          env:
+            - name: server.port
+              value: "50900"
+          envFrom:
+            - configMapRef:
+                name: example-application-configmap
+            - secretRef:
+                name: example-application-secret
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 50900
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 50900
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          volumeMounts:
+            - mountPath: /usr/share/logs
+              name: example-applogs
+            - mountPath: /usr/share/config/
+              name: example-application-config-files-volume
+
+      volumes:
+        - name: example-applogs
+          emptyDir: {}
+        # generated from local file system via "kubectl create configmap" inside stack
+        - name: example-application-config-files-volume
+          configMap:
+            name: example-application-config-files
