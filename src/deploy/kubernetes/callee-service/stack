@@ -8,7 +8,7 @@ function func_up {
 }
 
 function func_create_application {
-    kubectl create configmap example-application-config-files --from-file=./config/application/
+    kubectl create configmap callee-application-config-files --from-file=./config/application/
 
     kubectl apply -f ./deployment/application/
 }
@@ -18,12 +18,12 @@ function func_down {
 }
 
 function func_delete_application {
-    func_delete example-callee-service
+    func_delete callee-service
 
-    kubectl delete configmap example-application-config-files
+    kubectl delete configmap callee-application-config-files
 
-    kubectl delete configmap example-application-configmap
-    kubectl delete secret example-application-secret
+    kubectl delete configmap callee-application-configmap
+    kubectl delete secret callee-application-secret
 }
 
 function func_delete {
@@ -36,7 +36,7 @@ function func_delete {
 if [ "${COMMAND}" = "up" ]
 then
     func_up
-    minikube service example-callee-service --url -n ${NAMESPACE}
+    minikube service callee-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     func_down
