@@ -30,10 +30,13 @@ spec:
             - secretRef:
                 name: nginx-application-secret
           volumeMounts:
-            - mountPath: /usr/share/logs
+            - mountPath: /var/log/nginx/logs/
               name: nginx-applogs
-            - mountPath: /usr/share/config/
+            - mountPath: /etc/nginx/
               name: nginx-application-config-files-volume
+            - mountPath: /etc/nginx/ssl/
+              name: nginx-ssl-config-files-volume
+
 
       volumes:
         - name: nginx-applogs
@@ -42,3 +45,6 @@ spec:
         - name: nginx-application-config-files-volume
           configMap:
             name: nginx-application-config-files
+        - name: nginx-ssl-config-files-volume
+          configMap:
+            name: nginx-ssl-config-files
