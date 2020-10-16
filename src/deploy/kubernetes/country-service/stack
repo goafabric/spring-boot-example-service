@@ -4,10 +4,24 @@ source .env
 export COMMAND=$1
 export SERVICE_MEM="256m"
 
-function func_delete {
-    echo delete $1 ...
-    kubectl delete services $1
-    kubectl delete deployment $1
+function func_up {
+    kubectl create configmap example-application-config-files --from-file=../../config/application/
+
+    kubectl create configmap example-application-demodata-files --from-file=../../demodata/
+    kubectl create configmap example-postgres-initdb --from-file=../../config/initdb/
+
+    kubectl apply -f ./config/
+    kubectl apply -f ./deployment/
+}
+
+function func_down {
+    func_delete_application
+    func_delete_postgres
+}
+
+function func_prune {
+    func_down
+    kubectl delete persistentvolumeclaim example-postgres-pvc
 }
 
 function func_delete_application {
@@ -26,27 +40,23 @@ function func_delete_postgres {
     kubectl delete secret example-postgres-secret
 }
 
+function func_delete {
+    echo delete $1 ...
+    kubectl delete services $1
+    kubectl delete deployment $1
+}
+
 
 if [ "${COMMAND}" = "up" ]
 then
-    kubectl create configmap example-application-config-files --from-file=../../config/application/
-
-    kubectl create configmap example-application-demodata-files --from-file=../../demodata/
-    kubectl create configmap example-postgres-initdb --from-file=../../config/initdb/
-
-    kubectl apply -f ./config/
-    kubectl apply -f ./deployment/
-
+    func_up
     minikube service example-country-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    func_delete_application
-    func_delete_postgres
+    func_down
 elif [ "${COMMAND}" = "prune" ]
 then
-    func_delete_application
-    func_delete_postgres
-    kubectl delete persistentvolumeclaim example-postgres-pvc
+    func_prune
 else
     echo Doing nothing !
 fi
