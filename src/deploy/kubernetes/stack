@@ -12,14 +12,14 @@ function func_delete {
 
 function func_delete_all {
     func_delete example-country-service
-    func_delete postgres
+    func_delete example-postgres
 
     kubectl delete configmap example-application-config-files
     kubectl delete configmap example-application-demodata-files
     kubectl delete configmap example-postgres-initdb
 
     kubectl delete secret example-postgres-secret
-    kubectl delete secret example-service-secret
+    kubectl delete secret example-application-secret
     kubectl delete configmap example-application-configmap
 }
 
@@ -33,7 +33,7 @@ then
     kubectl apply -f ./config/
     kubectl apply -f ./deployment/
 
-    minikube service example-service --url -n ${NAMESPACE}
+    minikube service example-country-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     func_delete_all

@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: example-postgres
 spec:
   selector:
     matchLabels:
-      app: postgres
+      app: example-postgres
   replicas: 1
   strategy:
     type: Recreate #RollingUpdate
   template:
     metadata:
       labels:
-        app: postgres
+        app: example-postgres
     spec:
       containers:
-        - name: postgres
+        - name: example-postgres
           image: postgres:12.4
           imagePullPolicy: IfNotPresent #Always
           ports:

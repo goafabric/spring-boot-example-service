@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: example-service
+  name: example-country-service
 spec:
   selector:
-    app: example-service
+    app: example-country-service
   ports:
     - protocol: TCP
       port: 50700

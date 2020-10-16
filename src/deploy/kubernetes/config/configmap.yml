@@ -7,7 +7,7 @@ data:
   tomcat.max-threads: "20"
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
-  spring.datasource.url: "jdbc:postgresql://postgres:5432/countrydb"
+  spring.datasource.url: "jdbc:postgresql://example-postgres:5432/countrydb"
   management.database.monitoring.enabled: "true"
 
 ---

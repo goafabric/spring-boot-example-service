@@ -19,7 +19,7 @@ spec:
         - name: check-db-ready
           image: postgres:9.6.15-alpine
           command: ['sh', '-c',
-                    'until pg_isready -h postgres -p 5432;
+                    'until pg_isready -h example-postgres -p 5432;
                      do echo waiting for database; sleep 2; done;']
       containers:
         - name: example-country-service
@@ -49,7 +49,7 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 50700
-            initialDelaySeconds: 10
+            initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5
