@@ -5,13 +5,21 @@ export COMMAND=$1
 export SERVICE_MEM="256m"
 
 function func_up {
+    func_create_postgres
+    func_create_application
+}
+
+function func_create_application {
     kubectl create configmap example-application-config-files --from-file=../../config/application/
 
-    kubectl create configmap example-application-demodata-files --from-file=../../demodata/
-    kubectl create configmap example-postgres-initdb --from-file=../../config/initdb/
+    kubectl apply -f ./deployment/application/
+}
 
-    kubectl apply -f ./config/
-    kubectl apply -f ./deployment/
+function func_create_postgres {
+    kubectl create configmap example-application-demodata-files --from-file=../../config/postgres/demodata/
+    kubectl create configmap example-postgres-initdb --from-file=../../config/postgres/initdb/
+
+    kubectl apply -f ./deployment/postgres/
 }
 
 function func_down {
