@@ -30,6 +30,7 @@ function func_delete_postgres {
 if [ "${COMMAND}" = "up" ]
 then
     kubectl create configmap example-application-config-files --from-file=../../config/application/
+
     kubectl create configmap example-application-demodata-files --from-file=../../demodata/
     kubectl create configmap example-postgres-initdb --from-file=../../config/initdb/
 
