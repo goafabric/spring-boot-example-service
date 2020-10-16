@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: example-postgres
+  name: country-postgres
 spec:
   selector:
-    app: example-postgres
+    app: country-postgres
   ports:
     - protocol: TCP
       port: 5432

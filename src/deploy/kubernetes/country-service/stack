@@ -9,14 +9,14 @@ function func_up {
 }
 
 function func_create_application {
-    kubectl create configmap example-application-config-files --from-file=../../config/application/
+    kubectl create configmap country-application-config-files --from-file=../../config/application/
 
     kubectl apply -f ./deployment/application/
 }
 
 function func_create_postgres {
-    kubectl create configmap example-application-demodata-files --from-file=../../config/postgres/demodata/
-    kubectl create configmap example-postgres-initdb --from-file=../../config/postgres/initdb/
+    kubectl create configmap country-application-demodata-files --from-file=../../config/postgres/demodata/
+    kubectl create configmap country-postgres-initdb --from-file=../../config/postgres/initdb/
 
     kubectl apply -f ./deployment/postgres/
 }
@@ -28,23 +28,23 @@ function func_down {
 
 function func_prune {
     func_down
-    kubectl delete persistentvolumeclaim example-postgres-pvc
+    kubectl delete persistentvolumeclaim country-postgres-pvc
 }
 
 function func_delete_application {
-    func_delete example-country-service
+    func_delete country-country-service
 
-    kubectl delete configmap example-application-config-files
+    kubectl delete configmap country-application-config-files
 
-    kubectl delete configmap example-application-configmap
-    kubectl delete secret example-application-secret
+    kubectl delete configmap country-application-configmap
+    kubectl delete secret country-application-secret
 }
 
 function func_delete_postgres {
-    func_delete example-postgres
-    kubectl delete configmap example-postgres-initdb
-    kubectl delete configmap example-application-demodata-files
-    kubectl delete secret example-postgres-secret
+    func_delete country-postgres
+    kubectl delete configmap country-postgres-initdb
+    kubectl delete configmap country-application-demodata-files
+    kubectl delete secret country-postgres-secret
 }
 
 function func_delete {
@@ -57,7 +57,7 @@ function func_delete {
 if [ "${COMMAND}" = "up" ]
 then
     func_up
-    minikube service example-country-service --url -n ${NAMESPACE}
+    minikube service country-country-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     func_down

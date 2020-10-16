@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-application-configmap
+  name: country-application-configmap
 data:
   TZ: Europe/Berlin
   tomcat.max-threads: "20"
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
-  spring.datasource.url: "jdbc:postgresql://example-postgres:5432/countrydb"
+  spring.datasource.url: "jdbc:postgresql://country-postgres:5432/countrydb"
   management.database.monitoring.enabled: "true"
 
 ---
@@ -15,7 +15,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-application-secret
+  name: country-application-secret
 data:
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
   spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
