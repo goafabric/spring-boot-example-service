@@ -32,7 +32,7 @@ function func_prune {
 }
 
 function func_delete_application {
-    func_delete country-country-service
+    func_delete country-service
 
     kubectl delete configmap country-application-config-files
 
@@ -57,7 +57,7 @@ function func_delete {
 if [ "${COMMAND}" = "up" ]
 then
     func_up
-    minikube service country-country-service --url -n ${NAMESPACE}
+    minikube service country-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     func_down
