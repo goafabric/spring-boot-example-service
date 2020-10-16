@@ -1,31 +1,31 @@
 #!/bin/bash
 
 #variables
-export DAYS_VALID="720"
+export DAYS_VALID="365"
 export ROOT_FILE="root/goafabric-root"
-export END_FILE="end-entity/goafabric-endentity"
+export SERVER_FILE="server/goafabric-server"
 
 # create key, won't ask for password because no encryption applied
 openssl genrsa\
-        -out end-entity/goafabric-endentity.key\
+        -out server/goafabric-server.key\
         4096
 
 # create signing request (csr)
 openssl req -new -sha512\
-        -key ${END_FILE}.key\
-        -out ${END_FILE}.csr\
-        -config end-entity/san.cnf\
+        -key ${SERVER_FILE}.key\
+        -out ${SERVER_FILE}.csr\
+        -config server/san.cnf\
         -extensions SAN
 
 # create end entity certificate
 openssl x509 -req -sha512 -days ${DAYS_VALID}\
-        -in ${END_FILE}.csr\
+        -in ${SERVER_FILE}.csr\
         -CA ${ROOT_FILE}.pem\
         -CAkey ${ROOT_FILE}.key\
-        -CAcreateserial -out ${END_FILE}.pem\
-        -extfile end-entity/san.cnf\
+        -CAcreateserial -out ${SERVER_FILE}.pem\
+        -extfile server/san.cnf\
         -extensions SAN
 
 
 # remove csr
-rm end-entity/goafabric-endentity.csr
+rm server/goafabric-server.csr
