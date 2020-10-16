@@ -20,6 +20,11 @@ minikube start --extra-config=apiserver.service-node-port-range=1-65535
 https://contentlab.io/postgresql-on-kubernetes/
 https://medium.com/@suyashmohan/setting-up-postgresql-database-on-kubernetes-24a2a192e962
 
+##Logging
+https://howtodoinjava.com/spring-boot2/logging/configure-logging-application-yml/
+https://stackoverflow.com/questions/55580315/how-can-i-specify-a-logback-rolling-appender-in-application-yml
+
+
 Other Stuff
 - spring batch integration
 - STANDARD_READ_ROLE + STANDARD_WRITE ROLE
