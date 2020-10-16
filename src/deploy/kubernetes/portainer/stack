@@ -1,0 +1,13 @@
+#!/bin/bash
+export COMMAND=$1
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl apply -f portainer-nodeport.yaml
+    minikube service portainer --url -n portainer
+elif [ "${COMMAND}" = "down" ]
+then
+    kubectl delete namespace portainer
+else
+    echo Doing nothing !
+fi
