@@ -16,6 +16,10 @@ https://github.com/kubernetes/minikube/issues/877
 https://minikube.sigs.k8s.io/docs/handbook/accessing/
 minikube start --extra-config=apiserver.service-node-port-range=1-65535
 
+##Postgres Kubernetes Links
+https://contentlab.io/postgresql-on-kubernetes/
+https://medium.com/@suyashmohan/setting-up-postgresql-database-on-kubernetes-24a2a192e962
+
 Other Stuff
 - spring batch integration
 - STANDARD_READ_ROLE + STANDARD_WRITE ROLE
