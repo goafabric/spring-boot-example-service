@@ -29,3 +29,8 @@ Other Stuff
 - spring batch integration
 - STANDARD_READ_ROLE + STANDARD_WRITE ROLE
 - Keycloak Upgrades
+- database provisioning
+
+kubectl run -i --tty db --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT \
+--env="database.provisioning.goals=-migrate -import-demo-data -import-catalog-data -terminate“ \
+--env="spring.datasource.url=jdbc:postgresql://example-postgres:5432/countrydb“ \
