@@ -10,17 +10,20 @@ function func_delete {
     kubectl delete deployment $1
 }
 
-function func_delete_all {
+function func_delete_application {
     func_delete example-country-service
-    func_delete example-postgres
 
     kubectl delete configmap example-application-config-files
     kubectl delete configmap example-application-demodata-files
-    kubectl delete configmap example-postgres-initdb
 
-    kubectl delete secret example-postgres-secret
-    kubectl delete secret example-application-secret
     kubectl delete configmap example-application-configmap
+    kubectl delete secret example-application-secret
+}
+
+function func_delete_postgres {
+    func_delete example-postgres
+    kubectl delete configmap example-postgres-initdb
+    kubectl delete secret example-postgres-secret
 }
 
 
@@ -36,10 +39,12 @@ then
     minikube service example-country-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    func_delete_all
+    func_delete_application
+    func_delete_postgres
 elif [ "${COMMAND}" = "prune" ]
 then
-    func_delete_all
+    func_delete_application
+    func_delete_postgres
     kubectl delete persistentvolumeclaim example-postgres-pvc
 else
     echo Doing nothing !
