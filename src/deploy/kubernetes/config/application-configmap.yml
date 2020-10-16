@@ -20,18 +20,4 @@ data:
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
   spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
 
----
 
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-postgres-secret
-type: Opaque
-data:
-  POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
-  #echo -n 'example-service' | base64
-  POSTGRES_PASSWORD: Y3JOYjJaNm12QnlTUkt3dQ==
-  #echo -n 'crNb2Z6mvBySRKwu' | base64
-stringData:
-  TZ: Europe/Berlin
-  POSTGRES_DB: countrydb
