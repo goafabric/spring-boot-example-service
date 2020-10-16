@@ -9,6 +9,7 @@ data:
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://country-postgres:5432/countrydb"
   management.database.monitoring.enabled: "true"
+  adapter.calleeservice.url: "http://callee-service:50900"
 
 ---
 
