@@ -33,14 +33,14 @@ spec:
                 name: example-postgres-secret
           volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d/
-              name: initdb
+              name: example-postgres-initdb-volume
             - mountPath: /var/lib/postgresql/data
-              name: pgdata
+              name: example-postgres-pvc-volume
 
       volumes:
-        - name: initdb
+        - name: example-postgres-initdb-volume
           configMap:
             name: example-postgres-initdb
-        - name: pgdata
+        - name: example-postgres-pvc-volume
           persistentVolumeClaim:
             claimName: example-postgres-pvc
