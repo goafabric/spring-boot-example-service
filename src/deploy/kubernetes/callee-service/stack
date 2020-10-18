@@ -12,7 +12,7 @@ function func_create_application {
 function func_delete_application {
     kubectl delete configmap callee-service-application-config-files
 
-    kubectl delete -f ./deployment/application/
+    kubectl delete --ignore-not-found -f ./deployment/application/
 }
 
 

@@ -19,14 +19,14 @@ function func_create_postgres {
 function func_delete_application {
     kubectl delete configmap country-service-application-config-files
 
-    kubectl delete -f ./deployment/application/
+    kubectl delete --ignore-not-found -f ./deployment/application/
 }
 
 function func_delete_postgres {
     kubectl delete configmap country-service-postgres-initdb
     kubectl delete configmap country-service-application-demodata-files
 
-    kubectl delete -f ./deployment/postgres/
+    kubectl delete --ignore-not-found -f ./deployment/postgres/
 }
 
 if [ "${COMMAND}" = "up" ]
