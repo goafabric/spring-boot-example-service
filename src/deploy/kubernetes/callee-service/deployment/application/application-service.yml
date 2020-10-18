@@ -17,9 +17,14 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: callee-service-ingress
+
 spec:
+  tls:
+    - hosts:
+        - goafabric.org
+      secretName: tls-secret
   rules:
-    - host: example.org
+    - host: goafabric.org
       http:
         paths:
           - path: /
