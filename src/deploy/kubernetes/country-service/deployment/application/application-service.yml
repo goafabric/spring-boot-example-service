@@ -10,3 +10,27 @@ spec:
       port: 50700
       nodePort: 30700 #this is the external port
   type: NodePort
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: country-service-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+spec:
+  tls:
+    - hosts:
+        - goafabric.org
+      secretName: tls-secret
+  rules:
+    - host: goafabric.org
+      http:
+        paths:
+          - path: /country(/|$)(.*)
+            backend:
+              serviceName: country-service-application
+              servicePort: 50700
