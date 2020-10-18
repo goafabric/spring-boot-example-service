@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: country-postgres
+  name: country-service-postgres
 spec:
   selector:
     matchLabels:
-      app: country-postgres
+      app: country-service-postgres
   replicas: 1
   strategy:
     type: Recreate #RollingUpdate
   template:
     metadata:
       labels:
-        app: country-postgres
+        app: country-service-postgres
     spec:
       containers:
-        - name: country-postgres
+        - name: country-service-postgres
           image: postgres:12.4
           imagePullPolicy: IfNotPresent #Always
           ports:
@@ -30,17 +30,17 @@ spec:
             - shared_preload_libraries=pg_stat_statements
           envFrom:
             - secretRef:
-                name: country-postgres-secret
+                name: country-service-postgres-secret
           volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d/
-              name: country-postgres-initdb-volume
+              name: country-service-postgres-initdb-volume
             - mountPath: /var/lib/postgresql/data
-              name: country-postgres-pvc-volume
+              name: country-service-postgres-pvc-volume
 
       volumes:
-        - name: country-postgres-initdb-volume
+        - name: country-service-postgres-initdb-volume
           configMap:
-            name: country-postgres-initdb
-        - name: country-postgres-pvc-volume
+            name: country-service-postgres-initdb
+        - name: country-service-postgres-pvc-volume
           persistentVolumeClaim:
-            claimName: country-postgres-pvc
+            claimName: country-service-postgres-pvc

@@ -3,67 +3,46 @@ source .env
 
 export COMMAND=$1
 
-function func_up {
-    func_create_postgres
-    func_create_application
-}
-
 function func_create_application {
-    kubectl create configmap country-application-config-files --from-file=../../config/application/
+    kubectl create configmap country-service-application-config-files --from-file=../../config/application/
 
     kubectl apply -f ./deployment/application/
 }
 
 function func_create_postgres {
-    kubectl create configmap country-application-demodata-files --from-file=../../config/postgres/demodata/
-    kubectl create configmap country-postgres-initdb --from-file=../../config/postgres/initdb/
+    kubectl create configmap country-service-application-demodata-files --from-file=../../config/postgres/demodata/
+    kubectl create configmap country-service-postgres-initdb --from-file=../../config/postgres/initdb/
 
     kubectl apply -f ./deployment/postgres/
 }
 
-function func_down {
-    func_delete_application
-    func_delete_postgres
-}
-
-function func_prune {
-    func_down
-    kubectl delete persistentvolumeclaim country-postgres-pvc
-}
-
 function func_delete_application {
-    func_delete country-service
+    kubectl delete configmap country-service-application-config-files
 
-    kubectl delete configmap country-application-config-files
-
-    kubectl delete configmap country-application-configmap
-    kubectl delete secret country-application-secret
+    kubectl delete -f ./deployment/application/
 }
 
 function func_delete_postgres {
-    func_delete country-postgres
-    kubectl delete configmap country-postgres-initdb
-    kubectl delete configmap country-application-demodata-files
-    kubectl delete secret country-postgres-secret
-}
+    kubectl delete configmap country-service-postgres-initdb
+    kubectl delete configmap country-service-application-demodata-files
 
-function func_delete {
-    echo delete $1 ...
-    kubectl delete services $1
-    kubectl delete deployment $1
+    kubectl delete -f ./deployment/postgres/
 }
-
 
 if [ "${COMMAND}" = "up" ]
 then
-    func_up
-    minikube service country-service --url -n ${NAMESPACE}
+    func_create_postgres
+    func_create_application
+    minikube service country-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    func_down
+    func_delete_application
+    func_delete_postgres
 elif [ "${COMMAND}" = "prune" ]
 then
-    func_prune
+    func_delete_application
+    func_delete_postgres
+    kubectl delete persistentvolumeclaim country-service-postgres-pvc
 else
     echo Doing nothing !
 fi
