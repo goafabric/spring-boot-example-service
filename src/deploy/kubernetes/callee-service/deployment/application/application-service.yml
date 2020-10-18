@@ -19,7 +19,7 @@ metadata:
   name: callee-service-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 #    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
 spec:
   tls:
@@ -30,7 +30,7 @@ spec:
     - host: goafabric.org
       http:
         paths:
-          - path: /
+          - path: /callee(/|$)(.*)
             backend:
               serviceName: callee-service-application
               servicePort: 50900
