@@ -17,7 +17,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: callee-service-ingress
-
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+#    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
 spec:
   tls:
     - hosts:
