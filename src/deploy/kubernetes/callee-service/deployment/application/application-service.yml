@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: callee-service-service
+  name: callee-service-application
 spec:
   selector:
     app: callee-service-application
