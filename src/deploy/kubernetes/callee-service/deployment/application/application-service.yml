@@ -10,19 +10,3 @@ spec:
       port: 50900
       nodePort: 30900 #this is the external port
   type: NodePort
-
----
-
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: callee-service-ingress
-spec:
-  rules:
-    - host: example.org
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: callee-service-application
-              servicePort: 30900

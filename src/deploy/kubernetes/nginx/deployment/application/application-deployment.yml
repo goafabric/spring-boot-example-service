@@ -20,10 +20,7 @@ spec:
           image: nginx:1.17.10
           imagePullPolicy: Always #IfNotPresent
           ports:
-            - containerPort: 50900
-          env:
-            - name: server.port
-              value: "50900"
+            - containerPort: 8080
           envFrom:
             - configMapRef:
                 name: nginx-application-configmap
