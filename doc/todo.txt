@@ -13,7 +13,7 @@ Later
 
 - Statefulsets vs PVC
 - Database Provisioning
-- Networks Seperation
+- Networks Seperation (https://gardener.cloud/documentation/guides/applications/network-isolation/)
 
 ---
 
