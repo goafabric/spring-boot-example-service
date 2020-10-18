@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: callee-application-configmap
+  name: callee-service-application-configmap
 data:
   TZ: Europe/Berlin
   tomcat.max-threads: "20"
@@ -13,7 +13,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: callee-application-secret
+  name: callee-service-application-secret
 data:
 
 

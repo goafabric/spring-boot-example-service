@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: callee-service
+  name: callee-service-application
 spec:
   selector:
-    app: callee-service
+    app: callee-service-application
   ports:
     - protocol: TCP
       port: 50900
