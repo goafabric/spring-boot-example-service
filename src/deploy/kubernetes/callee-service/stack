@@ -3,43 +3,26 @@ source .env
 
 export COMMAND=$1
 
-function func_up {
-    func_create_application
-}
-
 function func_create_application {
     kubectl create configmap callee-service-application-config-files --from-file=./config/application/
 
     kubectl apply -f ./deployment/application/
 }
 
-function func_down {
-    func_delete_application
-}
-
 function func_delete_application {
-    func_delete callee-service-application
-
     kubectl delete configmap callee-service-application-config-files
 
-    kubectl delete configmap callee-service-application-configmap
-    kubectl delete secret callee-service-application-secret
-}
-
-function func_delete {
-    echo delete $1 ...
-    kubectl delete services $1
-    kubectl delete deployment $1
+    kubectl delete -f ./deployment/application/
 }
 
 
 if [ "${COMMAND}" = "up" ]
 then
-    func_up
-    minikube service callee-service-application --url -n ${NAMESPACE}
+    func_create_application
+    minikube service callee-service-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    func_down
+    func_delete_application
 elif [ "${COMMAND}" = "prune" ]
 then
     func_prune
