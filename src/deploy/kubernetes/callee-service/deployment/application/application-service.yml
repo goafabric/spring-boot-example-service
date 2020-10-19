@@ -21,14 +21,15 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     
-    #Multi Tenancy
+    ##Multi Tenancy
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "x-origin-tenant-id: 40a1cab6";
 
-    #Authentication via Keycloak
+    ##Authentication via Keycloak
     #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     #nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 spec:
+  ## TLS + HTTP2
   tls:
     - hosts:
         - goafabric.org
