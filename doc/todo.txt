@@ -1,6 +1,7 @@
 Now
 - Dynamic Stack Name via variables
 - Simpler Logging without Logback.xml
+- multi tenancy
 
 Fun
 - Prometheus, Graphana, Tracing
