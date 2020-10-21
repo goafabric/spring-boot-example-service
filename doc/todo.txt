@@ -1,6 +1,5 @@
 Now
 - Dynamic Stack Name via variables
-- Nginx, SSL, Rename Endentity
 - Simpler Logging without Logback.xml
 
 Fun
