@@ -1,7 +1,11 @@
 Now
 - Dynamic Stack Name via variables
 - Simpler Logging without Logback.xml
-- multi tenancy
+
+
+Fix
+- Broken HTTPS Urls
+- Cluster IP
 
 Fun
 - Prometheus, Graphana, Tracing
@@ -10,7 +14,7 @@ Fun
 - Istio
 
 Later
-
+- Multi Tenancy
 - Statefulsets vs PVC
 - Database Provisioning
 - Networks Seperation (https://gardener.cloud/documentation/guides/applications/network-isolation/)
