@@ -15,6 +15,7 @@ minikube config set cpus 4
 minikube config set memory 8192
 minikube config set vm-driver virtualbox
 minikube addons enable metrics-server
+minikube addons enable ingress
 
 minikube dashboard
 
