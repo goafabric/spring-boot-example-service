@@ -33,7 +33,7 @@ if [ "${COMMAND}" = "up" ]
 then
     func_create_postgres
     func_create_application
-#    minikube service country-service-application --url -n ${NAMESPACE}
+    minikube service country-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     func_delete_application

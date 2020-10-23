@@ -19,7 +19,7 @@ function func_delete_application {
 if [ "${COMMAND}" = "up" ]
 then
     func_create_application
-#    minikube service callee-service-application --url -n ${NAMESPACE}
+    minikube service callee-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     func_delete_application
