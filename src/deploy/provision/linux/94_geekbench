@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo Installing Geekbench
+(cd /home/admin ; wget http://cdn.geekbench.com/Geekbench-5.2.3-Linux.tar.gz ; tar xvfz Geekbench-5.2.3-Linux.tar.gz)
+

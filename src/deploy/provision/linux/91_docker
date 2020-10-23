@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo Installing Docker ...
+
+sudo apt --assume-yes install docker.io
+
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker admin
+
+echo Installing compose ...
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+echo Installing Portainer
+sudo docker volume create portainer_data
+sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+sudo docker ps

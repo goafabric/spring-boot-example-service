@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo Updating System ...
+sudo apt --assume-yes update
+sudo apt --assume-yes install mc

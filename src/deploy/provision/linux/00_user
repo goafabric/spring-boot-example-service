@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo Add User admin ...
+sudo adduser --ingroup admin admin
+sudo usermod -aG sudo admin
+su admin
