@@ -58,7 +58,7 @@ spec:
               name: country-service-applogs
             - mountPath: /usr/share/config/
               name: country-service-application-config-files-volume
-            - mountPath: /src/deploy/demodata/
+            - mountPath: src/deploy/config/postgres/demodata
               name: country-service-application-demodata-files-volume
 
       volumes:
