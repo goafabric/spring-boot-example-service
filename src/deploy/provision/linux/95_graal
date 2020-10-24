@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo Installing Graal
+(cd /home/admin ; git clone https://github.com/goafabric/spring-boot-example-graal ; cd spring-boot-example-graal ; git checkout console-only ; ./linux-native-build.sh )
+
