@@ -20,6 +20,12 @@ Later
 - Networks Seperation (https://gardener.cloud/documentation/guides/applications/network-isolation/)
 
 ---
+## Ingress
+https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
+
+##Quotas
+https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/
+https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/
 
 #Links
 ##Dynamic Values
