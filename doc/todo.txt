@@ -27,6 +27,14 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
 https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/
 https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/
 
+##External Oauth
+https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/
+
+##Logging
+https://howtodoinjava.com/spring-boot2/logging/configure-logging-application-yml/
+https://stackoverflow.com/questions/55580315/how-can-i-specify-a-logback-rolling-appender-in-application-yml
+
+
 #Links
 ##Dynamic Values
 https://stackoverflow.com/questions/48296082/how-to-set-dynamic-values-with-kubernetes-yaml-file
