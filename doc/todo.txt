@@ -2,9 +2,8 @@ Now
 - Dynamic Stack Name via variables
 - Simpler Logging without Logback.xml
 
-
 Fix
-- Broken HTTPS Urls
+- Ingress, Broken HTTPS Urls
 - Cluster IP
 
 Fun
