@@ -24,7 +24,8 @@ spec:
       containers:
         - name: country-service-application
           image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-          imagePullPolicy: Always #IfNotPresent
+          imagePullPolicy: IfNotPresent
+#          imagePullPolicy: Always
           ports:
             - containerPort: 50700
           command: ["java", "-Xms256m", "-Xmx256m",
