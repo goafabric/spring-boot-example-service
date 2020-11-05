@@ -1,6 +1,7 @@
 Now
 - Dynamic Stack Name via variables
 - Simpler Logging without Logback.xml
+- Namespaces via -n
 
 Fix
 - Ingress, Broken HTTPS Urls
