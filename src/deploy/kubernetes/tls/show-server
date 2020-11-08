@@ -1,2 +1,0 @@
-#!/bin/bash
-openssl x509 -in goafabric-server.pem -text

@@ -1,4 +1,3 @@
 #!/bin/bash
 
-#find . -type d -exec bash -c "cd '{}' && [ -f ./stack ] && echo '{}' && ./stack $1" \;
 find . -type d -exec bash -c "cd '{}' && [ -f ./stack ] && echo '{}' && ./stack $1" \;
