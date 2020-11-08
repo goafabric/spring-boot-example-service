@@ -5,7 +5,7 @@ export COMMAND=$1
 
 if [ "${COMMAND}" = "up" ]
 then
-    kubectl create configmap callee-service-application-config-files --from-file=./templates/config -n ${NAMESPACE}
+    kubectl create configmap callee-service-application-config-files --from-file=./config -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
     minikube service callee-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
