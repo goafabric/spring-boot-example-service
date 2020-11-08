@@ -25,6 +25,13 @@ spec:
           command: ["java", "-Xms128m", "-Xmx128m",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
                     "org.goafabric.calleservice.Application"]
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "500m"
+            limits:
+              memory: "128Mi"
+              cpu: "1000m"
           env:
             - name: server.port
               value: "50900"
