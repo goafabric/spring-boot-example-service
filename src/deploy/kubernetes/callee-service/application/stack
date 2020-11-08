@@ -12,9 +12,6 @@ elif [ "${COMMAND}" = "down" ]
 then
     kubectl delete configmap callee-service-application-config-files -n ${NAMESPACE}
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
-elif [ "${COMMAND}" = "prune" ]
-then
-    func_prune
 else
     echo Doing nothing !
 fi

@@ -1,0 +1,19 @@
+#!/bin/bash
+source .values
+
+export COMMAND=$1
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl create configmap country-service-application-demodata-files --from-file=./config/demodata/ -n ${NAMESPACE}
+    kubectl create configmap country-service-application-config-files --from-file=./config -n ${NAMESPACE}
+    kubectl apply -f ./templates/ -n ${NAMESPACE}
+    minikube service country-service-application --url -n ${NAMESPACE}
+elif [ "${COMMAND}" = "down" ]
+then
+    kubectl delete configmap country-service-application-demodata-files -n ${NAMESPACE}
+    kubectl delete configmap country-service-application-config-files -n ${NAMESPACE}
+    kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
+else
+    echo Doing nothing !
+fi
