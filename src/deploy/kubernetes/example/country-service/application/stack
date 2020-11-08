@@ -8,7 +8,11 @@ function func_provision {
 #    kubectl set env --from=configmap/country-service-application-config-files -n ${NAMESPACE}
 #    todo would be much better if we could take the variables from configmap
     Echo provisioning database ...
-    sleep 5s
+    while ! kubectl get pods -n ${NAMESPACE} | grep country-service-postgres | grep Running
+    do
+        sleep 1
+    done
+
     kubectl run -i --tty db-prov --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT --namespace=example --rm \
     --env="database.provisioning.goals=-migrate -terminate" \
     --env="spring.datasource.url=jdbc:postgresql://country-service-postgres:5432/countrydb" \

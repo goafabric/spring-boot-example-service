@@ -46,16 +46,6 @@ minikube start --extra-config=apiserver.service-node-port-range=1-65535
 https://contentlab.io/postgresql-on-kubernetes/
 https://medium.com/@suyashmohan/setting-up-postgresql-database-on-kubernetes-24a2a192e962
 
-##DB Provsioning
-kubectl run -i --tty db-prov --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT --namespace=example \
---env="database.provisioning.goals=-migrate -terminate" \
---env="spring.datasource.url=jdbc:postgresql://country-service-postgres:5432/countrydb" \
---env="spring.datasource.username=example-service" \
---env="spring.datasource.password=crNb2Z6mvBySRKwu" \
-&& kubectl delete pod db-prov --namespace=example
-
-
-
 ##Logging
 https://howtodoinjava.com/spring-boot2/logging/configure-logging-application-yml/
 https://stackoverflow.com/questions/55580315/how-can-i-specify-a-logback-rolling-appender-in-application-yml
