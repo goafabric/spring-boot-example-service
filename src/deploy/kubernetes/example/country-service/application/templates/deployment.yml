@@ -36,7 +36,7 @@ spec:
               cpu: "500m"
             limits:
               memory: "256Mi"
-              cpu: "1000m"
+              cpu: "2000m" # this is just for startup time
           env:
             - name: server.port
               value: "50700"
