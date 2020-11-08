@@ -1,11 +1,11 @@
 Now
 - Dynamic Stack Name via variables
-- Simpler Logging without Logback.xml
-- Namespaces via -n
+- Stack provisioning
+- Automatic configmaps (with script)
 
-Fix
-- Ingress, Broken HTTPS Urls
-- Cluster IP
+- Simpler Logging without Logback.xml
+
+- Outbound SSL
 
 Fun
 - Prometheus, Graphana, Tracing
