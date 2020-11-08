@@ -4,15 +4,15 @@ source .env
 export COMMAND=$1
 
 function func_create_application {
-    kubectl create configmap callee-service-application-config-files --from-file=./config/application/
+    kubectl create configmap callee-service-application-config-files --from-file=./application/config
 
-    kubectl apply -f ./deployment/application/
+    kubectl apply -f ./application/
 }
 
 function func_delete_application {
     kubectl delete configmap callee-service-application-config-files
 
-    kubectl delete --ignore-not-found -f ./deployment/application/
+    kubectl delete --ignore-not-found -f ./application
 }
 
 
