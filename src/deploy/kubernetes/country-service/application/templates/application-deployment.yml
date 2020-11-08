@@ -30,6 +30,13 @@ spec:
             - containerPort: 50700
           command: ["java", "-Xms256m", "-Xmx256m",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "2000m"
           env:
             - name: server.port
               value: "50700"
