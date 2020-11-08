@@ -3,26 +3,15 @@ source .env
 
 export COMMAND=$1
 
-function func_create_application {
-    kubectl create configmap callee-service-application-config-files --from-file=./application/config -n ${NAMESPACE}
-
-    kubectl apply -f ./application/ -n ${NAMESPACE}
-}
-
-function func_delete_application {
-    kubectl delete configmap callee-service-application-config-files -n ${NAMESPACE}
-
-    kubectl delete --ignore-not-found -f ./application -n ${NAMESPACE}
-}
-
-
 if [ "${COMMAND}" = "up" ]
 then
-    func_create_application
+    kubectl create configmap callee-service-application-config-files --from-file=./application/config -n ${NAMESPACE}
+    kubectl apply -f ./application/ -n ${NAMESPACE}
     minikube service callee-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    func_delete_application
+    kubectl delete configmap callee-service-application-config-files -n ${NAMESPACE}
+    kubectl delete --ignore-not-found -f ./application -n ${NAMESPACE}
 elif [ "${COMMAND}" = "prune" ]
 then
     func_prune
