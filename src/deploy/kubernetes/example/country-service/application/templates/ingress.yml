@@ -1,18 +1,3 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: country-service-application
-spec:
-  selector:
-    app: country-service-application
-  ports:
-    - protocol: TCP
-      port: 50700
-      nodePort: 30700 #this is the external port
-  type: NodePort
-
----
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
