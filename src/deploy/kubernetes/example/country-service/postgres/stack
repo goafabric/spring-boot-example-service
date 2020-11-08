@@ -11,6 +11,10 @@ elif [ "${COMMAND}" = "down" ]
 then
     kubectl delete configmap country-service-postgres-initdb -n ${NAMESPACE}
     kubectl delete --ignore-not-found -f ./templates/ -n ${NAMESPACE}
+elif [ "${COMMAND}" = "prov" ]
+then
+    kubectl create configmap country-service-postgres-initdb --from-file=./config/initdb/ -n ${NAMESPACE}
+    kubectl apply -f ./templates/ -n ${NAMESPACE}
 elif [ "${COMMAND}" = "prune" ]
 then
     echo doing nothing

@@ -4,12 +4,16 @@ source .values
 export COMMAND=$1
 
 function func_provision {
-    kubectl run -i --tty db-prov --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT --namespace=example \
+#    kubectl create configmap country-service-application-config-files --from-file=./config -n ${NAMESPACE}
+#    kubectl set env --from=configmap/country-service-application-config-files -n ${NAMESPACE}
+#    todo would be much better if we could take the variables from configmap
+    echo provisioning database ...
+    sleep 5s
+    kubectl run -i --tty db-prov --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT --namespace=example --rm \
     --env="database.provisioning.goals=-migrate -terminate" \
     --env="spring.datasource.url=jdbc:postgresql://country-service-postgres:5432/countrydb" \
     --env="spring.datasource.username=example-service" \
     --env="spring.datasource.password=crNb2Z6mvBySRKwu" \
-    && kubectl delete pod db-prov --namespace=example
 }
 
 if [ "${COMMAND}" = "up" ]
