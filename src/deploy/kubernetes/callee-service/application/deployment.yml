@@ -18,8 +18,8 @@ spec:
       containers:
         - name: callee-service-application
           image: goafabric/calle-service:1.0.0-SNAPSHOT
-          imagePullPolicy: IfNotPresent
-#          imagePullPolicy: Always
+#          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 50900
           command: ["java", "-Xms128m", "-Xmx128m",
