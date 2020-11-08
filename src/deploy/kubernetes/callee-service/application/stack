@@ -5,13 +5,13 @@ export COMMAND=$1
 
 if [ "${COMMAND}" = "up" ]
 then
-    kubectl create configmap callee-service-application-config-files --from-file=./application/config -n ${NAMESPACE}
-    kubectl apply -f ./application/ -n ${NAMESPACE}
+    kubectl create configmap callee-service-application-config-files --from-file=./templates/config -n ${NAMESPACE}
+    kubectl apply -f ./templates/ -n ${NAMESPACE}
     minikube service callee-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     kubectl delete configmap callee-service-application-config-files -n ${NAMESPACE}
-    kubectl delete --ignore-not-found -f ./application -n ${NAMESPACE}
+    kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 elif [ "${COMMAND}" = "prune" ]
 then
     func_prune
