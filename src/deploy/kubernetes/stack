@@ -15,6 +15,7 @@ elif [ "${COMMAND}" = "prune" ]
 then
     ( cd callee-service ; ./stack prune )
     ( cd country-service ; ./stack prune )
+    kubectl delete namespace example
 else
     echo Doing nothing !
 fi
