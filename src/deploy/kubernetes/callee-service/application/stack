@@ -1,5 +1,5 @@
 #!/bin/bash
-source .env
+source .values
 
 export COMMAND=$1
 
