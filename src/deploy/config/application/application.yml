@@ -1,6 +1,8 @@
 server:
   port: 50700
-  tomcat.max-threads: 20
+  tomcat:
+    threads:
+      max: 20
 
 ## actuator section
 management:
@@ -38,7 +40,7 @@ database:
     goals: -migrate -import-demo-data
 #    goals: -migrate -encryptproperty=secret -terminate
 #    goals: -migrate -import-catalog-data -terminate
-    demo-data-location: filesystem:src/deploy/config/postgres/demodata
+    demo-data-location: filesystem:src/deploy/config/application/demodata
 
 
 ## encryption section
