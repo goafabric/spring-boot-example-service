@@ -22,7 +22,7 @@ spec:
 #          imagePullPolicy: Always
           ports:
             - containerPort: 50900
-          command: ["java", "-Xms128m", "-Xmx128m",
+          command: ["java", "-Xms128M", "-Xmx128M",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
                     "org.goafabric.calleservice.Application"]
           resources:
