@@ -4,7 +4,7 @@ metadata:
   name: country-service-application-configmap
 data:
   TZ: Europe/Berlin
-  tomcat.max-threads: "20"
+  server.tomcat.threads.max: "20"
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
