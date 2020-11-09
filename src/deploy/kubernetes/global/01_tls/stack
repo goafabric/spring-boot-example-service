@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export COMMAND=$1
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl delete secret --ignore-not-found tls-secret -n example
+    kubectl create secret tls tls-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n example
+elif [ "${COMMAND}" = "down" ]
+then
+    kubectl delete --ignore-not-found secret tls-secret -n example
+else
+    echo Doing nothing !
+fi

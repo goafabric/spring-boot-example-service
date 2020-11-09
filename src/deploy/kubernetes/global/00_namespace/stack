@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export COMMAND=$1
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl create namespace example
+elif [ "${COMMAND}" = "down" ]
+then
+    kubectl delete namespace example
+else
+    echo Doing nothing !
+fi
