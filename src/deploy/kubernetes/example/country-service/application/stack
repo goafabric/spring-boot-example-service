@@ -28,8 +28,8 @@ then
     minikube service country-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    kubectl delete configmap country-service-application-demodata-files -n ${NAMESPACE}
-    kubectl delete configmap country-service-application-config-files -n ${NAMESPACE}
+    kubectl delete --ignore-not-found configmap country-service-application-demodata-files -n ${NAMESPACE}
+    kubectl delete --ignore-not-found configmap country-service-application-config-files -n ${NAMESPACE}
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 elif [ "${COMMAND}" = "prov" ]
 then

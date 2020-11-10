@@ -10,7 +10,7 @@ then
     minikube service callee-service-application --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
-    kubectl delete configmap callee-service-application-config-files -n ${NAMESPACE}
+    kubectl delete --ignore-not-found configmap callee-service-application-config-files -n ${NAMESPACE}
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 else
     echo Doing nothing !

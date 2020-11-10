@@ -13,7 +13,7 @@ then
     kubectl delete --ignore-not-found -f ./templates/ -n ${NAMESPACE}
 elif [ "${COMMAND}" = "prov" ]
 then
-    kubectl create configmap country-service-postgres-initdb --from-file=./config/initdb/ -n ${NAMESPACE}
+    kubectl create --ignore-not-found configmap country-service-postgres-initdb --from-file=./config/initdb/ -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
 else
     echo Doing nothing !
