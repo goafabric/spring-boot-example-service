@@ -212,6 +212,9 @@
                         <configuration>
                             <from>
                                 <image>adoptopenjdk/openjdk11-openj9:jdk-11.0.8_10_openj9-0.21.0-debian</image>
+                                <!--
+                                <image>adoptopenjdk/openjdk11-openj9:x86_64-jdk-11.0.9_11_openj9-0.23.0-debian</image>
+                                -->
                             </from>
                             <to>
                                 <image>${docker.registry}/${project.artifactId}</image>
