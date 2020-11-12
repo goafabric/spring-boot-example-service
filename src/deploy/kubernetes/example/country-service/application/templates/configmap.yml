@@ -4,11 +4,18 @@ metadata:
   name: country-service-application-configmap
 data:
   TZ: Europe/Berlin
-  server.tomcat.threads.max: "20"
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
   management.database.monitoring.enabled: "true"
+
+  #stageing
+  server.tomcat.threads.max: "20"
+
+  spring.datasource.hikari.maximum-pool-size: "10"
+  spring.datasource.hikari.connection-timeout: "10000"
+
+  resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
   adapter.calleeservice.url: "http://callee-service-application:50900"
 
 ---

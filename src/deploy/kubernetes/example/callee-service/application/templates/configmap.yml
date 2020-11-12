@@ -4,11 +4,11 @@ metadata:
   name: callee-service-application-configmap
 data:
   TZ: Europe/Berlin
-  server.tomcat.threads.max: "20"
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
 
-
+  #stageing
+  server.tomcat.threads.max: "20"
 
 ---
 
