@@ -21,9 +21,9 @@ minikube delete
 
 echo Configure Minikube
 
-minikube config set cpus 6
+minikube config set cpus 4
 minikube config set memory 8192
-minikube config set vm-driver hyperkit
+minikube config set vm-driver virtual-box
 #minikube config set vm-driver docker
 
 #Minikube Start
