@@ -3,6 +3,9 @@ kind: Secret
 metadata:
   name: country-service-postgres-secret
 type: Opaque
+stringData:
+  TZ: Europe/Berlin
+  POSTGRES_DB: countrydb
 data:
   POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
   #echo -n example-service | base64
@@ -12,6 +15,3 @@ data:
   #echo -n Y3JOYjJaNm12QnlTUkt3dQ== | base64 -d
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
   spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
-stringData:
-  TZ: Europe/Berlin
-  POSTGRES_DB: countrydb
