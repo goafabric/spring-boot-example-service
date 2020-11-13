@@ -5,9 +5,11 @@ metadata:
 type: Opaque
 data:
   POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
-  #echo -n 'example-service' | base64
+  #echo -n example-service | base64
+  #echo -n ZXhhbXBsZS1zZXJ2aWNl | base64 -d
   POSTGRES_PASSWORD: Y3JOYjJaNm12QnlTUkt3dQ==
-  #echo -n 'crNb2Z6mvBySRKwu' | base64
+  #echo -n crNb2Z6mvBySRKwu | base64
+  #echo -n Y3JOYjJaNm12QnlTUkt3dQ== | base64 -d
 stringData:
   TZ: Europe/Berlin
   POSTGRES_DB: countrydb
