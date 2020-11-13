@@ -25,7 +25,6 @@ kind: Secret
 metadata:
   name: country-service-application-secret
 data:
-  spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
-  spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
+
 
 
