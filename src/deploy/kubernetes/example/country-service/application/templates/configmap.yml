@@ -31,5 +31,7 @@ data:
   #exampleuser
   adapter.calleeservice.password: RU5DKExnQ1Q0a3JXNU5EclFrZkdQUEVZdzdYT3Z6dWZ2SUFOV0ZxM3ZIb3crU3BoZDZBQ3RhdmFoVzhhTDI4TkRubVpleDUrUG56MTRORWVEdVIrWkk5MHNRPT0p
   #ENC(LgCT ...) => we should replace jasypt we kubernetes aes256 secrets here
+  spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
+  spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
 
 

@@ -45,8 +45,6 @@ spec:
                 name: country-service-application-configmap
             - secretRef:
                 name: country-service-application-secret
-            - secretRef:
-                name: country-service-postgres-secret
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
