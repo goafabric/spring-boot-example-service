@@ -9,6 +9,9 @@ data:
   spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
   management.database.monitoring.enabled: "true"
 
+  #externals
+  adapter.calleeservice.url: "http://callee-service-application:50900"
+
   #stageing
   server.tomcat.threads.max: "20"
 
@@ -16,7 +19,6 @@ data:
   spring.datasource.hikari.connection-timeout: "10000"
 
   resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
-  adapter.calleeservice.url: "http://callee-service-application:50900"
 
 ---
 
