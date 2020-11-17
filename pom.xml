@@ -210,6 +210,7 @@
                         <artifactId>jib-maven-plugin</artifactId>
                         <version>${jib-maven-plugin.version}</version>
                         <configuration>
+                            <extraDirectories>srd/deploy/stammmdaten</extraDirectories>
                             <from>
                                 <image>adoptopenjdk/openjdk11-openj9:x86_64-debian-jre-11.0.9_11_openj9-0.23.0</image>
                             </from>
