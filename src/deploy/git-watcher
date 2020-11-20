@@ -1,0 +1,24 @@
+#!/bin/bash
+
+function func_pull() {
+  while :
+  do
+    git pull > /dev/null
+    #echo yo > /dev/null
+    sleep 5
+  done
+}
+
+export COMMAND=$1
+
+if [ "${COMMAND}" = "up" ]
+then
+    echo starting ...
+    func_pull &
+elif [ "${COMMAND}" = "down" ]
+then
+    echo stopping ...
+    pkill -f git-watcher
+else
+    echo Doing nothing !
+fi
