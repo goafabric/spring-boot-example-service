@@ -2,6 +2,7 @@ Now
 - Stack provisioning
 - PVCs löschen oder nicht löschen
 - Zeug von Tim (Prometheus, Stateful)
+- globals (namespaces, secrets ...)
 
 - Simpler Logging without Logback.xml
 - Outbound SSL

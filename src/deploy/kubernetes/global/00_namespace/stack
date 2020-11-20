@@ -2,10 +2,10 @@
 
 export COMMAND=$1
 
-if [ "${COMMAND}" = "up" ]
+if [ "${COMMAND}" = "prov" ]
 then
     kubectl create namespace example
-elif [ "${COMMAND}" = "down" ]
+elif [ "${COMMAND}" = "prune" ]
 then
     kubectl delete namespace example
 else
