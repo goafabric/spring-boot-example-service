@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#variables
+export DAYS_VALID="3650"
+export ROOT_FILE="root/goafabric-root"
+
+#create key, asks for password because of ae256
+openssl genrsa -aes256 -out root/goafabric-root.key 4096
+
+#create root certificate
+openssl req -x509 -new -nodes -sha512 -days ${DAYS_VALID}\
+        -key ${ROOT_FILE}.key\
+        -out ${ROOT_FILE}.pem\
+        -subj '/CN=Goafabric Root/O=Goafabric Ltd./C=DE'

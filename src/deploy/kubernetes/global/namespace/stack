@@ -4,10 +4,10 @@ export COMMAND=$1
 
 if [ "${COMMAND}" = "prov" ]
 then
-    kubectl create namespace example
+    kubectl apply -f ./templates/
 elif [ "${COMMAND}" = "prune" ]
 then
-    kubectl delete namespace example
+    kubectl delete -f ./templates/
 else
     echo Doing nothing !
 fi

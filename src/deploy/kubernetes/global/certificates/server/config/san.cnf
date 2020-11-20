@@ -1,0 +1,16 @@
+[ req ]
+default_bits       = 4096
+distinguished_name = req_distinguished_name
+req_extensions     = SAN
+prompt             = no
+[ req_distinguished_name ]
+countryName                 = DE
+localityName               = Berlin
+organizationName           = Goafabric
+commonName                 = Goafabric EndEntity
+[ SAN ]
+subjectAltName = @alt_names
+[alt_names]
+DNS.1   = goafabric.org
+
+#https://geekflare.com/san-ssl-certificate/
