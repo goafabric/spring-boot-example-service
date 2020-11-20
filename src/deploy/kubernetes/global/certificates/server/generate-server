@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#variables
+export DAYS_VALID="365"
+export ROOT_FILE="../root/config/goafabric-root"
+export SERVER_FILE="config/goafabric-server"
+
+# create key, won't ask for password because no encryption applied
+openssl genrsa\
+        -out config/goafabric-server.key\
+        4096
+
+# create signing request (csr)
+openssl req -new -sha512\
+        -key ${SERVER_FILE}.key\
+        -out ${SERVER_FILE}.csr\
+        -config config/san.cnf\
+        -extensions SAN
+
+# create end entity certificate
+openssl x509 -req -sha512 -days ${DAYS_VALID}\
+        -in ${SERVER_FILE}.csr\
+        -CA ${ROOT_FILE}.pem\
+        -CAkey ${ROOT_FILE}.key\
+        -CAcreateserial -out ${SERVER_FILE}.pem\
+        -extfile config/san.cnf\
+        -extensions SAN
+
+
+# remove csr
+rm config/goafabric-server.csr

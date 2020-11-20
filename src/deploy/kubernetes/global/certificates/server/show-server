@@ -1,0 +1,3 @@
+#!/bin/bash
+export END_FILE="config/goafabric-server"
+openssl x509 -in ${END_FILE}.pem -text
