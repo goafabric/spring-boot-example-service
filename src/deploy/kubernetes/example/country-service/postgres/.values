@@ -2,4 +2,4 @@
 
 export NAMESPACE="example"
 
-kubectl create namespace ${NAMESPACE} 2> /dev/null
+#kubectl create namespace ${NAMESPACE} 2> /dev/null
