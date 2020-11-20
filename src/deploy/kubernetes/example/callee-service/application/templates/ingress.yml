@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
         - goafabric.org
-      secretName: tls-secret
+      secretName: server-certificate-secret
   rules:
     - host: goafabric.org
       http:
