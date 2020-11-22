@@ -18,8 +18,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
-        <springfox-swagger.version>3.0.0</springfox-swagger.version>
+        <spring.boot.version>2.4.0</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -65,15 +64,16 @@
         </dependency>
 
         <!-- 3rd party -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
+        <!-- mapstruct before lombok -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <dependency>
