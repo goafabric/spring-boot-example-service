@@ -33,7 +33,10 @@ then
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 elif [ "${COMMAND}" = "prov" ]
 then
-    func_provision
+    ./stack up
+    echo provisioning ...
+    kubectl wait --timeout=-1s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
+    kubectl logs --selector app=country-service-application -n ${NAMESPACE}
 else
     echo Doing nothing !
 fi
