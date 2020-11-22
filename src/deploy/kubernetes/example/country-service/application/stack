@@ -8,10 +8,7 @@ function func_provision {
 #    kubectl set env --from=configmap/country-service-application-config-files -n ${NAMESPACE}
 #    todo would be much better if we could take the variables from configmap
     Echo provisioning database ...
-    while ! kubectl get pods -n ${NAMESPACE} | grep country-service-postgres | grep Running
-    do
-        sleep 1
-    done
+    kubectl wait --timeout=-1s --for=condition=ready pod --selector app=country-service-postgres -n ${NAMESPACE}
 
     kubectl run -i --tty db-prov --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT --namespace=example --rm \
     --env="database.provisioning.goals=-migrate -terminate" \
@@ -36,7 +33,7 @@ then
     ./stack up
     echo provisioning ...
     kubectl wait --timeout=-1s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
-    kubectl logs --selector app=country-service-application -n ${NAMESPACE}
+#    kubectl logs --selector app=country-service-application -n ${NAMESPACE}
 else
     echo Doing nothing !
 fi
