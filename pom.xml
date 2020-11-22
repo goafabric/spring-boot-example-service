@@ -64,7 +64,7 @@
         </dependency>
 
         <!-- 3rd party -->
-        <!-- mapstruct before lombok -->
+        <!-- mapstruct before lombok and processer part of plugin management in parent pom-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -74,13 +74,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>${mapstruct.version}</version>
-            <optional>true</optional>
         </dependency>
 
         <dependency>

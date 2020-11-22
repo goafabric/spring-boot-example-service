@@ -52,7 +52,7 @@
         <jasypt-spring-boot-starter.version>3.0.2</jasypt-spring-boot-starter.version>
         <jasypt-hibernate5.version>1.9.3</jasypt-hibernate5.version>
 
-        <!-- Basic Plugins -->
+        <!-- Build Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>  <!-- warning tests crash with strange noclassdeffound when upgrading to failsafe 2.22.1 -->
@@ -65,8 +65,8 @@
         <dependency-check-maven.version>4.0.2</dependency-check-maven.version>
 
         <!-- Further Plugins -->
-        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
-        <jib-maven-plugin.version>2.4.0</jib-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+        <jib-maven-plugin.version>2.6.0</jib-maven-plugin.version>
 
         <!-- Sonarqube -->
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
