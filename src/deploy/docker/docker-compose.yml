@@ -20,7 +20,7 @@ services:
 
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
-      interval: 30s
+      interval: 20s
       timeout: 10s
       retries: 10
     volumes:
@@ -28,7 +28,7 @@ services:
       - applogs:/usr/share/logs
       - ../config/application/application.yml:/usr/share/config/application.yml
       - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
-      - ../config/postgres/demodata:/src/deploy/config/application/demodata
+      - ../config/application/demodata:/src/deploy/config/application/demodata
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
 #                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=10.0.130.178","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
