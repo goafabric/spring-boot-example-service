@@ -28,6 +28,12 @@ spec:
 #          imagePullPolicy: Always
           ports:
             - containerPort: 50700
+          command: ["java", "-Xms256M", "-Xmx256M",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
+          resources:
+            requests:
+              memory: "256M"
+              cpu: "250m"
           env:
             - name: server.port
               value: "50700"
@@ -36,12 +42,6 @@ spec:
                 name: country-service-application-configmap
             - secretRef:
                 name: country-service-application-secret
-          command: ["java", "-Xms256M", "-Xmx256M",
-                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
-          resources:
-            requests:
-              memory: "256M"
-              cpu: "250m"
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
