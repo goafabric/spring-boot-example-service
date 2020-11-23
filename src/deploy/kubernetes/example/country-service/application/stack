@@ -15,11 +15,6 @@ function down() {
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 }
 
-function configmap_dynamic() {
-    kubectl delete --ignore-not-found configmap country-service-application-config-dynamic -n ${NAMESPACE}
-    kubectl create configmap country-service-application-config-dynamic \
-    --from-literal=database.provisioning.goals="-migrate -import-demo-data -terminate" -n ${NAMESPACE}
-}
 
 if [ "${COMMAND}" = "up" ]
 then
@@ -29,11 +24,9 @@ then
     down
 elif [ "${COMMAND}" = "prov" ]
 then
-    configmap_dynamic
     up
     echo provisioning ...
     kubectl wait --timeout=60s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
-#    kubectl logs --selector app=country-service-application -n ${NAMESPACE}
     echo done provisioning
 else
     echo Doing nothing !
