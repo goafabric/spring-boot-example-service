@@ -22,6 +22,9 @@ then
 elif [ "${COMMAND}" = "down" ]
 then
     down
+elif [ "${COMMAND}" = "prune" ]
+then
+    down
 elif [ "${COMMAND}" = "prov" ]
 then
     up
