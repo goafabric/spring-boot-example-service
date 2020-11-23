@@ -3,21 +3,29 @@ source .values
 
 export COMMAND=$1
 
-if [ "${COMMAND}" = "up" ]
-then
+function up() {
     kubectl create configmap country-service-postgres-initdb --from-file=./config/initdb/ -n ${NAMESPACE}
-    kubectl apply -f ./templates/ -n ${NAMESPACE}
     kubectl apply -f ./templates/pvc -n ${NAMESPACE}
-elif [ "${COMMAND}" = "down" ]
-then
+    kubectl apply -f ./templates/ -n ${NAMESPACE}
+}
+
+function down() {
     kubectl delete --ignore-not-found configmap country-service-postgres-initdb -n ${NAMESPACE}
     kubectl delete --ignore-not-found -f ./templates/ -n ${NAMESPACE}
+}
+
+if [ "${COMMAND}" = "up" ]
+then
+    up
+elif [ "${COMMAND}" = "down" ]
+then
+    down
 elif [ "${COMMAND}" = "prov" ]
 then
-    ./stack up
+    up
 elif [ "${COMMAND}" = "prune" ]
 then
-    ./stack down
+    down
     kubectl delete --ignore-not-found -f ./templates/pvc -n ${NAMESPACE}
 else
     echo Doing nothing !

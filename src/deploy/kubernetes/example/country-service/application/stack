@@ -1,39 +1,33 @@
 #!/bin/bash
 source .values
-
 export COMMAND=$1
 
-function func_provision {
-#    kubectl create configmap country-service-application-config-files --from-file=./config -n ${NAMESPACE}
-#    kubectl set env --from=configmap/country-service-application-config-files -n ${NAMESPACE}
-#    todo would be much better if we could take the variables from configmap
-    Echo provisioning database ...
-    kubectl wait --timeout=-1s --for=condition=ready pod --selector app=country-service-postgres -n ${NAMESPACE}
-
-    kubectl run -i --tty db-prov --image goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT --namespace=example --rm \
-    --env="database.provisioning.goals=-migrate -terminate" \
-    --env="spring.datasource.url=jdbc:postgresql://country-service-postgres:5432/countrydb" \
-    --env="spring.datasource.username=example-service" \
-    --env="spring.datasource.password=crNb2Z6mvBySRKwu"
-}
-
-if [ "${COMMAND}" = "up" ]
-then
+function up() {
     kubectl create configmap country-service-application-demodata-files --from-file=./config/demodata/ -n ${NAMESPACE}
     kubectl create configmap country-service-application-config-files --from-file=./config -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
     minikube service country-service-application --url -n ${NAMESPACE}
-elif [ "${COMMAND}" = "down" ]
-then
+}
+
+function down() {
     kubectl delete --ignore-not-found configmap country-service-application-demodata-files -n ${NAMESPACE}
     kubectl delete --ignore-not-found configmap country-service-application-config-files -n ${NAMESPACE}
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
+}
+
+
+if [ "${COMMAND}" = "up" ]
+then
+    up
+elif [ "${COMMAND}" = "down" ]
+then
+    down
 elif [ "${COMMAND}" = "prov" ]
 then
-    ./stack up
+    up
     echo provisioning ...
     kubectl wait --timeout=-1s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
-#    kubectl logs --selector app=country-service-application -n ${NAMESPACE}
 else
     echo Doing nothing !
 fi
+
