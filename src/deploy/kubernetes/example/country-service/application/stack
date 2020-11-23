@@ -15,6 +15,9 @@ function down() {
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 }
 
+function dynamic() {
+
+}
 
 if [ "${COMMAND}" = "up" ]
 then
@@ -26,7 +29,9 @@ elif [ "${COMMAND}" = "prov" ]
 then
     up
     echo provisioning ...
-    kubectl wait --timeout=-1s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
+    kubectl wait --timeout=60s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
+#    kubectl logs --selector app=country-service-application -n ${NAMESPACE}
+    echo done provisioning
 else
     echo Doing nothing !
 fi
