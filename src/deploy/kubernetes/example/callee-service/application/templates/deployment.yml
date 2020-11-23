@@ -27,11 +27,8 @@ spec:
                     "org.goafabric.calleservice.Application"]
           resources:
             requests:
-              memory: "64Mi"
-              cpu: "500m"
-            limits:
-              memory: "128Mi"
-              cpu: "1000m"
+              memory: "128M"
+              cpu: "250m"
           env:
             - name: server.port
               value: "50900"

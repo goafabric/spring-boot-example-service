@@ -30,11 +30,8 @@ spec:
             - shared_preload_libraries=pg_stat_statements
           resources:
             requests:
-              memory: "64Mi"
+              memory: "128Mi"
               cpu: "500m"
-            limits:
-              memory: "256Mi"
-              cpu: "1000m"
           envFrom:
             - secretRef:
                 name: country-service-postgres-secret
