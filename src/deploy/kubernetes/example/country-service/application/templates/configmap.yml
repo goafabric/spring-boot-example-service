@@ -20,6 +20,7 @@ data:
 
   resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
 
+  database.provisioning.goals: -migrate -import-demo-data
 ---
 
 apiVersion: v1
