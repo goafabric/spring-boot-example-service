@@ -223,5 +223,48 @@
                 </plugins>
             </build>
         </profile>
+        <!--
+        <profile>
+            <id>docker-image-aarch64</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>${jib-maven-plugin.version}</version>
+                        <configuration>
+                            <from>
+                                <image>adoptopenjdk/openjdk11-openj9:aarch64-debian-jdk-11.0.9_11_openj9-0.23.0</image>
+                            </from>
+                            <to>
+                                <image>${docker.registry}/${project.artifactId}-aarch64</image>
+                                <tags>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                            </to>
+                            <container>
+                                <jvmFlags>
+                                    <jvmFlag>-Xms256m</jvmFlag>
+                                    <jvmFlag>-Xmx256m</jvmFlag>
+                                    <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+                                </jvmFlags>
+                                <volumes>
+                                    <volume>/tmp</volume>
+                                </volumes>
+                            </container>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        -->
     </profiles>
 </project>
