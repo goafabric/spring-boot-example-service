@@ -1,4 +1,0 @@
-#!/bin/bash
-
-export NAMESPACE="monitoring"
-#kubectl create namespace ${NAMESPACE} 2> /dev/null
