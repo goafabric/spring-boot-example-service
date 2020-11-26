@@ -17,12 +17,12 @@ function down() {
 if [ "${COMMAND}" = "up" ]
 then
     up
-elif [ "${COMMAND}" = "down" ]
-then
-    down
 elif [ "${COMMAND}" = "prov" ]
 then
     up
+elif [ "${COMMAND}" = "down" ]
+then
+    down
 elif [ "${COMMAND}" = "prune" ]
 then
     down

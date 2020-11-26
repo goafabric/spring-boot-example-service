@@ -19,18 +19,18 @@ function down() {
 if [ "${COMMAND}" = "up" ]
 then
     up
-elif [ "${COMMAND}" = "down" ]
-then
-    down
-elif [ "${COMMAND}" = "prune" ]
-then
-    down
 elif [ "${COMMAND}" = "prov" ]
 then
     up
     echo provisioning ...
     kubectl wait --timeout=60s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
     echo done provisioning
+elif [ "${COMMAND}" = "down" ]
+then
+    down
+elif [ "${COMMAND}" = "prune" ]
+then
+    down
 else
     echo Doing nothing !
 fi
