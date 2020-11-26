@@ -1,16 +1,18 @@
 Now
 - jobs
-
+- private registry
 - Statefulsets
-- globals (namespaces, secrets ...)
-- Simpler Logging without Logback.xml
-- Outbound SSL
+
 
 Fun
 - Prometheus, Graphana, Tracing
 - Elk
 - Helm
 - Istio
+
+Code
+- Simpler Logging without Logback.xml
+- Outbound SSL
 
 Later
 - Multi Tenancy
