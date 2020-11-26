@@ -1,9 +1,8 @@
 Now
-- Stack provisioning
-- PVCs löschen oder nicht löschen
+- jobs
+
 - Statefulsets
 - globals (namespaces, secrets ...)
-
 - Simpler Logging without Logback.xml
 - Outbound SSL
 
