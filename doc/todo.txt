@@ -2,7 +2,8 @@ Now
 - jobs
 - private registry
 - Statefulsets
-
+- profiler per jmx
+- monitoring
 
 Fun
 - Prometheus, Graphana, Tracing
