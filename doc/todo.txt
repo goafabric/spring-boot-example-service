@@ -4,6 +4,8 @@ Now
 - Statefulsets
 - profiler per jmx
 - monitoring
+- ingresses
+
 
 Fun
 - Prometheus, Graphana, Tracing
