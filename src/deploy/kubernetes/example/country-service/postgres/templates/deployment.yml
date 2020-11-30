@@ -20,6 +20,10 @@ spec:
           imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: country-service-postgres-secret
+
           args:
             - postgres
             - -c
@@ -30,11 +34,11 @@ spec:
             - shared_preload_libraries=pg_stat_statements
           resources:
             requests:
-              memory: "128Mi"
+              memory: "128M"
+              cpu: "250m"
+            limits:
               cpu: "500m"
-          envFrom:
-            - secretRef:
-                name: country-service-postgres-secret
+
           volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d/
               name: country-service-postgres-initdb-volume
