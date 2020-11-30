@@ -24,16 +24,9 @@ spec:
       containers:
         - name: country-service-application
           image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-          imagePullPolicy: IfNotPresent
-#          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 50700
-          command: ["java", "-Xms256M", "-Xmx256M",
-                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
-          resources:
-            requests:
-              memory: "256M"
-              cpu: "250m"
           env:
             - name: server.port
               value: "50700"
@@ -42,11 +35,19 @@ spec:
                 name: country-service-application-configmap
             - secretRef:
                 name: country-service-application-secret
+
+          command: ["java", "-Xms256M", "-Xmx256M",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
+          resources:
+            requests:
+              memory: "256M"
+              cpu: "250m"
+
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 50700
-            initialDelaySeconds: 20
+            initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5
@@ -54,10 +55,11 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 50700
-            initialDelaySeconds: 20
+            initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5
+
           volumeMounts:
             - mountPath: /usr/share/logs
               name: country-service-applogs
@@ -69,7 +71,6 @@ spec:
       volumes:
         - name: country-service-applogs
           emptyDir: {}
-        # generated from local file system via "kubectl create configmap" inside stack
         - name: country-service-application-config-files-volume
           configMap:
             name: country-service-application-config-files

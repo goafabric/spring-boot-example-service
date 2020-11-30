@@ -22,13 +22,6 @@ spec:
 #          imagePullPolicy: Always
           ports:
             - containerPort: 50900
-          command: ["java", "-Xms128M", "-Xmx128M",
-                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
-                    "org.goafabric.calleservice.Application"]
-          resources:
-            requests:
-              memory: "128M"
-              cpu: "250m"
           env:
             - name: server.port
               value: "50900"
@@ -37,6 +30,15 @@ spec:
                 name: callee-service-application-configmap
             - secretRef:
                 name: callee-service-application-secret
+
+          command: ["java", "-Xms128M", "-Xmx128M",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
+                    "org.goafabric.calleservice.Application"]
+          resources:
+            requests:
+              memory: "128M"
+              cpu: "250m"
+
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
@@ -53,6 +55,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5
+
           volumeMounts:
             - mountPath: /usr/share/logs
               name: callee-service-applogs
