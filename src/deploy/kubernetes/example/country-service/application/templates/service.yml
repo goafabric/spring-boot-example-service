@@ -8,5 +8,5 @@ spec:
   ports:
     - protocol: TCP
       port: 50700
-      nodePort: 30970 #this is the external port
+      nodePort: 30950 #this is the external port
   type: NodePort
