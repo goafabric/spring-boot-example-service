@@ -2,9 +2,11 @@
 
 #init
 - configure minikube yourself or use provision/minikube-download-mac script
+=> be sure to configure accordingly to your system
 - do "stack prov" once inside kubernetes/infra/global"
 - do "stack up/down" inside example or sub folders 
-
+- minikube dashboard brings up the dashboard inside your browser
+- that's it, the following sections are only for more details
 
 
 #Minikube Config
