@@ -1,5 +1,12 @@
 #Kubernetes
 
+#init
+- configure minikube yourself or use provision/minikube-download-mac script
+- do "stack prov" once inside kubernetes/infra/global"
+- do "stack up/down" inside example or sub folders 
+
+
+
 #Minikube Config
 
 minikube config set cpus 4
