@@ -3,7 +3,7 @@ Apple Silicon Fun
 Multi Profile Container Upload
 https://stackoverflow.com/questions/8252107/is-it-possible-to-execute-two-different-maven-exec-maven-plugin-in-a-single-pom
 https://github.com/spotify/dockerfile-maven/issues/326
-Jib Projekt das fertig Release Artifakte mit AArch64 baut
+Jib Projekt das fertig Release Artifakt runterlaed mit AArch64 baut
 
 Virtualisirung
 https://finestructure.co/blog/2020/11/27/running-docker-on-apple-silicon-m1
