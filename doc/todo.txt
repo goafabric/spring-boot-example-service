@@ -5,10 +5,6 @@ https://stackoverflow.com/questions/8252107/is-it-possible-to-execute-two-differ
 https://github.com/spotify/dockerfile-maven/issues/326
 Jib Projekt das fertig Release Artifakt runterlaed mit AArch64 baut
 
-Virtualisirung
-https://finestructure.co/blog/2020/11/27/running-docker-on-apple-silicon-m1
-https://www.mactechnews.de/news/article/Kostenlose-Linux-Virtualisierung-ARM-Windows-mittels-QEMU-auf-M1-176537.html
-
 
 Now
 - jobs
@@ -58,4 +54,7 @@ Other Stuff
 - STANDARD_READ_ROLE + STANDARD_WRITE ROLE
 - Keycloak Upgrades
 
+#Virtualisirung
+https://finestructure.co/blog/2020/11/27/running-docker-on-apple-silicon-m1
+https://www.mactechnews.de/news/article/Kostenlose-Linux-Virtualisierung-ARM-Windows-mittels-QEMU-auf-M1-176537.html
 
