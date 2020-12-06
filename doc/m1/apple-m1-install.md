@@ -1,6 +1,7 @@
 #Download Links
 Vftool and Ready Ubuntu images
 https://www.mactechnews.de/forum/discussion/Ubuntu-auf-Apple-Silicon-342450.html
+https://github.com/evansm7/vftool
 
 #Boot
 ./vftool -k vmlinuz -i initrd -d image -p 2 -m 4096 -a "root=/dev/vda console=hvc0"
