@@ -245,9 +245,7 @@
                                 </goals>
                                 <configuration>
                                     <from>
-                                        <image>
-                                            adoptopenjdk/openjdk11-openj9:aarch64-debian-jdk-11.0.9_11_openj9-0.23.0
-                                        </image>
+                                        <image>adoptopenjdk/openjdk11-openj9:aarch64-debian-jdk-11.0.9_11_openj9-0.23.0</image>
                                     </from>
                                     <to>
                                         <image>${docker.registry}/${project.artifactId}-arm64v8</image>
