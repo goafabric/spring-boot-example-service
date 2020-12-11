@@ -11,4 +11,6 @@ minikube addons enable metrics-server && minikube addons enable ingress
 sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none
 minikube dashboard
 
+#Quemu for Amd64 Software, not recommended
+sudo apt --assume-yes install qemu-system-x86 qemu-user qemu-user-static
 
