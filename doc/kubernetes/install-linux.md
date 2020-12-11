@@ -21,6 +21,5 @@ sudo usermod -aG sudo admin && sudo usermod -aG docker admin
 sudo docker run --rm goafabric/spring-boot-exampleservice(-arm64v8):1.0.4-SNAPSHOT
 
 #Maven
-sudo apt --assume-yes install maven
-echo export JAVA_HOME=/usr/lib/jvm/default-java > .bash_profile
+sudo apt --assume-yes install maven && echo export JAVA_HOME=/usr/lib/jvm/default-java > .bash_profile
 (cd /home/admin ; mkdir projects ; cd projects ; git clone https://github.com/goafabric/spring-boot-example-service ; cd spring-boot-example-service ; mvn package)
