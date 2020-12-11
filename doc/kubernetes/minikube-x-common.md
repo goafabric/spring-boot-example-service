@@ -1,5 +1,5 @@
 #Minikube Remote Dashboard
-kubectl proxy --address='0.0.0.0' --disable-filter=true
+&& sudo kubectl proxy --address='0.0.0.0' --disable-filter=true
 http://SERVERNAME:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=default
 
 ## Minikube Debug

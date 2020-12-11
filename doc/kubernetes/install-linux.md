@@ -1,3 +1,6 @@
+#resize images for vms if needed
+dd if=/dev/zero of=./image seek=20000000 obs=1024 count=0
+
 #system
 sudo apt --assume-yes update  
 sudo apt --assume-yes install mc && sudo apt --assume-yes install net-tools
