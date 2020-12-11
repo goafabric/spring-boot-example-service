@@ -1,5 +1,5 @@
 #example-service docker
-docker run -p50700:50700 --rm goafabric/spring-boot-exampleservice-arm64v8:1.0.4-SNAPSHOT
+docker run -p50700:50700 --rm goafabric/spring-boot-exampleservice-(arm64v8):1.0.4-SNAPSHOT
 
 #Maven
 sudo apt --assume-yes install maven
