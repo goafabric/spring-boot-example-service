@@ -9,8 +9,10 @@ minikube config set cpus 4
 minikube config set memory 8192
 minikube config set vm-driver virtual-box
 
-#Minikube Run
 minikube start
 minikube addons enable metrics-server && minikube addons enable ingress
+
+#Minikube Run
+minikube start
 minikube dashboard
 

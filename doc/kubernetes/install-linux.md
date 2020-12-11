@@ -16,18 +16,3 @@ sudo sed -i '/PasswordAuthentication no/c PasswordAuthentication yes' /etc/ssh/s
 #user
 sudo adduser --ingroup admin admin
 sudo usermod -aG sudo admin && sudo usermod -aG docker admin
-
-#kubernetes install
-sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64
-sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/arm64/kubectl
-
-sudo chmod +x minikube && sudo mv minikube /usr/local/bin && sudo chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
-
-#kubernetes run
-sudo sysctl fs.protected_regular=0
-sudo minikube start --driver=none
-
-sudo kubectl proxy --address='0.0.0.0' --disable-filter=true
-http://SERVERNAME:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=default
-
-sudo kubectl run -i --tty example-service --image=goafabric/spring-boot-exampleservice-aarch64:1.0.4-SNAPSHOT
