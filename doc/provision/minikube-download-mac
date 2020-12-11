@@ -29,7 +29,5 @@ minikube config set vm-driver virtual-box #virtualbox for mac
 #Minikube Start
 
 minikube start
-minikube addons enable metrics-server
-minikube addons enable ingress
-
+minikube addons enable metrics-server && minikube addons enable ingress
 minikube dashboard
