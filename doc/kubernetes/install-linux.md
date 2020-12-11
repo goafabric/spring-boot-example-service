@@ -13,6 +13,3 @@ sudo sed -i '/PasswordAuthentication no/c PasswordAuthentication yes' /etc/ssh/s
 #user
 sudo adduser --ingroup admin admin
 sudo usermod -aG sudo admin && sudo usermod -aG docker admin
-
-#Maven
-sudo apt --assume-yes install maven
