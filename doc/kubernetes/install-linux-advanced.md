@@ -11,4 +11,3 @@ sudo apt --assume-yes install maven
 #Quemu for Amd64 Software, not recommended
 sudo apt --assume-yes install qemu-system-x86 qemu-user qemu-user-static
 
-sudo sed -Ei '' 's/^([0-9]+\.){3}[0-9]+ kubernetes/192.168.64.82 kubernetes/' /etc/hosts
