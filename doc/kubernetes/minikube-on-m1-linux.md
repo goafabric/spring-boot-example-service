@@ -12,8 +12,8 @@ sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none
 sudo minikube dashboard
 
 #Div
-ssh -o StrictHostKeyChecking=no -l admin 192.168.64.89
+ssh -o StrictHostKeyChecking=no -l admin 192.168.64.89 
 
 sudo sed -Ei '' 's/^([0-9]+\.){3}[0-9]+ kubernetes/192.168.64.82 kubernetes/' /etc/hosts
-
+x
 
