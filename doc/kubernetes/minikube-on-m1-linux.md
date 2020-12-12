@@ -16,5 +16,4 @@ ssh -o StrictHostKeyChecking=no -l admin 192.168.64.90
 
 sudo sed -Ei '' 's/^([0-9]+\.){3}[0-9]+ kubernetes/192.168.64.82 kubernetes/' /etc/hosts
 
-xxx
 
