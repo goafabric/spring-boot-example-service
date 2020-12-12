@@ -10,7 +10,7 @@ minikube config set memory 8192
 minikube config set vm-driver docker
 
 minikube start
-minikube addons enable metrics-server && minikube addons enable ingress
+minikube addons enable metrics-server && minikube addons enable dashboard && minikube addons enable ingress
 
 #Minikube Run
 minikube start
