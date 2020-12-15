@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: country-service-postgres
-          image: postgres:12.4
+          image: " "
+#          image: postgres:12.4
           imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 5432

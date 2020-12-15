@@ -6,6 +6,7 @@ function up() {
     kubectl create configmap country-service-application-demodata-files --from-file=./config/demodata/ -n ${NAMESPACE}
     kubectl create configmap country-service-application-config-files --from-file=./config -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
+    kubectl set image deployment country-service-application country-service-application=${IMAGE_NAME} -n ${NAMESPACE}
     minikube service country-service-application --url -n ${NAMESPACE}
 }
 

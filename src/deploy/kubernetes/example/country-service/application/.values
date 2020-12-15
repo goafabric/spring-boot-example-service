@@ -1,5 +1,4 @@
 #!/bin/bash
 
 export NAMESPACE="example"
-
-#kubectl create namespace ${NAMESPACE} 2> /dev/null
+export IMAGE_NAME="goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT"

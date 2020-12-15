@@ -1,4 +1,4 @@
 #!/bin/bash
 
 export NAMESPACE="example"
-#kubectl create namespace ${NAMESPACE} 2> /dev/null
+export IMAGE_NAME="goafabric/calle-service:1.0.0-SNAPSHOT"
