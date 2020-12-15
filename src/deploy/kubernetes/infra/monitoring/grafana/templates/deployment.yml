@@ -20,7 +20,7 @@ spec:
           claimName: grafana-claim
       containers:
       - name: grafana
-        image: pharosproduction/grafana:6
+        image: grafana/grafana:7.3.5
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
