@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo hello from values
+#export ARCH_PREFIX="arm64v8/"
+#export ARCH_SUFFIX="-arm64v8"

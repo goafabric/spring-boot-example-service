@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../../../.values
 
 export NAMESPACE="example"
-export IMAGE_NAME="postgres:12.4"
+export IMAGE_NAME="${ARCH_PREFIX}postgres:12.4"

@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../../../.values
 
 export NAMESPACE="example"
-export IMAGE_NAME="goafabric/calle-service:1.0.0-SNAPSHOT"
+export IMAGE_NAME="goafabric/calle-service${ARCH_SUFFIX}:1.0.0-SNAPSHOT"

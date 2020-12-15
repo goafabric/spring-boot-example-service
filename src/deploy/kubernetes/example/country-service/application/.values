@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../../../.values
 
 export NAMESPACE="example"
-export IMAGE_NAME="goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT"
+export IMAGE_NAME="goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4-SNAPSHOT"
