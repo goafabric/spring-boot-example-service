@@ -8,12 +8,14 @@ sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none && sudo 
 sudo minikube addons enable metrics-server && sudo minikube addons enable dashboard && sudo minikube addons enable ingress
 
 #Minikube Run
-sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none && sudo kubectl proxy --address='0.0.0.0' --disable-filter=true &
+sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none 
+sudo kubectl proxy --address='0.0.0.0' --disable-filter=true &
 
 
 #Div
 ssh -o StrictHostKeyChecking=no -l admin 192.168.64.90 
 
 sudo sed -Ei '' 's/^([0-9]+\.){3}[0-9]+ kubernetes/192.168.64.82 kubernetes/' /etc/hosts
+kube_ip="$(cat log | grep 'enp0s1' | grep 'global'  | egrep -o '192.168.[0-9]{1,3}\.[0-9]{1,3}') "
 
 
