@@ -6,7 +6,7 @@ sudo chmod +x minikube && sudo mv minikube /usr/local/bin && sudo chmod +x ./kub
 
 #Minikube Configure
 minikube config set cpus 4
-minikube config set memory 8192
+minikube config set memory 4096
 minikube config set vm-driver docker
 
 minikube start

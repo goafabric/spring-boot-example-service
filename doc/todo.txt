@@ -2,7 +2,6 @@ Virtualisation Todos
 - remote docker
 - remote Kubernetes
 - port forwarding
-- private registry access from  vm
 
 Now
 - jobs

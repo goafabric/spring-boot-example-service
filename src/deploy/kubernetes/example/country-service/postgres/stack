@@ -7,6 +7,7 @@ function up() {
     kubectl create configmap country-service-postgres-initdb --from-file=./config/initdb/ -n ${NAMESPACE}
     kubectl apply -f ./templates/pvc -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
+    kubectl set image deployment country-service-postgres country-service-postgres=${IMAGE_NAME} -n ${NAMESPACE}
 }
 
 function down() {

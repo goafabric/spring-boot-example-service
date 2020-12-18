@@ -17,7 +17,8 @@ spec:
       # initcontainers justs accepts a docker image, and uses postgres client to check readyness
       containers:
         - name: callee-service-application
-          image: goafabric/calle-service:1.0.0-SNAPSHOT
+          image: " "
+#          image: goafabric/calle-service:1.0.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
 #          imagePullPolicy: Always
           ports:
