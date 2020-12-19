@@ -5,13 +5,12 @@ sudo chmod +x minikube && sudo mv minikube /usr/local/bin && sudo chmod +x ./kub
 
 #Minikube Configure
 sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none 
-<f>
 sudo minikube addons enable metrics-server && sudo minikube addons enable dashboard && sudo minikube addons enable ingress
 
 #Minikube Run
 sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none 
 sudo kubectl proxy --address='0.0.0.0' --disable-filter=true &
-cd projects/spring-boot-example-service/src/deploy/kubernetes/example/
+cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
 
 
 
