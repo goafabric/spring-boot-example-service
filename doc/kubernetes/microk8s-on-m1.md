@@ -8,16 +8,19 @@ su - admin
 
 #Microk8s Configure
 microk8s start
-microk8s enable dashboard ingress
+microk8s enable dns dashboard ingress
 
 #Microk8s Run
 microk8s start
-
-#Dashboard
+microk8s status --wait-ready
 kubectl proxy --address='0.0.0.0' --disable-filter=true &
-http://kubernetes:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#/login
-           
 
+cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
+         
+#Hack the dashboard
+microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
+- args:
+- --enable-skip-login
 
 #kubectl fuck
 echo "alias kubectl='microk8s kubectl'" >> ~/.bash_profile
