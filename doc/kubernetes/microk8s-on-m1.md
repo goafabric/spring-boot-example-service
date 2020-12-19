@@ -6,17 +6,24 @@ sudo snap install microk8s --classic --channel=1.19
 sudo usermod -a -G microk8s admin && sudo chown -f -R admin ~/.kube
 su - admin
 
+sudo iptables -P FORWARD ACCEPT
+sudo apt-get install iptables-persistent
+
+
 #Microk8s Configure
 microk8s start
 microk8s enable dns dashboard ingress
 
 #Microk8s Run
-microk8s start
+microk8s start && sudo iptables -P FORWARD ACCEPT
 microk8s status --wait-ready
 kubectl proxy --address='0.0.0.0' --disable-filter=true &
 
 cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
-         
+    
+
+
+     
 #Hack the dashboard
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 - args:
