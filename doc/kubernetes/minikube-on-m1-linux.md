@@ -4,13 +4,15 @@ sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -
 sudo chmod +x minikube && sudo mv minikube /usr/local/bin && sudo chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
 
 #Minikube Configure
-sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none && sudo kubectl proxy --address='0.0.0.0' --disable-filter=true &
+sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none 
+<f>
 sudo minikube addons enable metrics-server && sudo minikube addons enable dashboard && sudo minikube addons enable ingress
 
 #Minikube Run
 sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none 
 sudo kubectl proxy --address='0.0.0.0' --disable-filter=true &
-
+cd projects/spring-boot-example-service/src/deploy/kubernetes/example/
+                                                                   
 
 #Div
 ssh -o StrictHostKeyChecking=no -l admin 192.168.64.90 
