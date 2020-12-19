@@ -8,10 +8,14 @@ su - admin
 
 #Microk8s Configure
 microk8s start
-microk8s enable dashboard
+microk8s enable dashboard ingress
 
 #Microk8s Run
 microk8s start
+
+#Dashboard
+kubectl proxy --address='0.0.0.0' --disable-filter=true &
+http://kubernetes:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#/login
            
 
 
