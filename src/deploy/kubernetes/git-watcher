@@ -5,7 +5,7 @@ function func_pull() {
   do
     git pull > /dev/null 2>&1 &
     #echo yo > /dev/null
-    sleep 5
+    sleep 2
   done
 }
 
