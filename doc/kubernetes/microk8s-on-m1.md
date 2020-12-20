@@ -18,6 +18,9 @@ sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-read
 kubectl proxy --address='0.0.0.0' --disable-filter=true &
 cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
 
+#Client Kubectl
+https://microk8s.io/docs/working-with-kubectl
+
 
 #Hack the dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
