@@ -11,7 +11,7 @@ sudo sh -c 'echo "#!/bin/bash \n microk8s kubectl "\$1" "\$2" "\$3" "\$4" "\$5" 
 
 #Microk8s Configure
 microk8s start
-microk8s enable dns dashboard ingress
+microk8s enable dns dashboard ingress storage
 
 #Microk8s Run
 sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready 

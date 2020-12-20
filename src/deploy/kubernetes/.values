@@ -1,4 +1,2 @@
 #!/bin/bash
-
-export ARCH_PREFIX="arm64v8/"
-export ARCH_SUFFIX="-arm64v8"
+#noting here
