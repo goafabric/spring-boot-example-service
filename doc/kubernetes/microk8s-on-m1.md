@@ -6,9 +6,8 @@ sudo snap install microk8s --classic --channel=1.19
 sudo usermod -a -G microk8s admin && sudo chown -f -R admin ~/.kube
 su - admin
 
-sudo iptables -P FORWARD ACCEPT
-sudo apt-get install iptables-persistent
-
+#Kubectl Alias
+sudo sh -c 'echo "#!/bin/bash \n microk8s kubectl "\$1" "\$2" "\$3" "\$4" "\$5" "\$6" "\$7" "\$8" "\$9" " > /usr/local/bin/kubectl' && sudo chmod +x /usr/local/bin/kubectl
 
 #Microk8s Configure
 microk8s start
@@ -22,15 +21,16 @@ cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
 
 
      
-#Hack the dashboard
+
+
+
+
+
+#Hack the dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 - args:
 - --enable-skip-login
 
-#kubectl fuck
-echo "alias kubectl='microk8s kubectl'" >> ~/.bash_profile
-sudo nano /usr/local/bin/kubectl
----
-#!/bin/bash
-microk8s kubectl $1 $2 $3 $4 $5 $6 $7 $8 $9
----
+#iptables fuck
+sudo apt-get install iptables-persistent
+sudo iptables -P FORWARD ACCEPT && sudo sh -c 'iptables-save > /etc/iptables/rules.v4' && sudo sh -c 'ip6tables-save > /etc/iptables/rules.v6'
