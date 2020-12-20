@@ -17,20 +17,9 @@ microk8s enable dns dashboard ingress storage
 sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready 
 kubectl proxy --address='0.0.0.0' --disable-filter=true &
 cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
-    
-
-
-     
-
-
-
 
 
 #Hack the dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 - args:
 - --enable-skip-login
-
-#iptables fuck
-sudo apt-get install iptables-persistent
-sudo iptables -P FORWARD ACCEPT && sudo sh -c 'iptables-save > /etc/iptables/rules.v4' && sudo sh -c 'ip6tables-save > /etc/iptables/rules.v6'
