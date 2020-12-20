@@ -15,10 +15,8 @@ microk8s start
 microk8s enable dns dashboard ingress
 
 #Microk8s Run
-microk8s start && sudo iptables -P FORWARD ACCEPT
-microk8s status --wait-ready
+sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready 
 kubectl proxy --address='0.0.0.0' --disable-filter=true &
-
 cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
     
 
