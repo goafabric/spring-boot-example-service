@@ -6,7 +6,6 @@ export COMMAND=$1
 function up() {
     kubectl create configmap callee-service-application-config-files --from-file=./config -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
-    kubectl set image deployment callee-service-application callee-service-application=${IMAGE_NAME} -n ${NAMESPACE}
 #    minikube service callee-service-application --url -n ${NAMESPACE}
 }
 
