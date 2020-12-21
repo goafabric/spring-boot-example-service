@@ -25,4 +25,5 @@ kubectl proxy --address='0.0.0.0' --disable-filter=true &
 #Client Kubectl
 microk8s config > config (should be put to ~/.kube on client machine) 
 
-
+#Quemu for Amd64 Software, not recommended
+sudo apt --assume-yes install qemu-system-x86 qemu-user qemu-user-static

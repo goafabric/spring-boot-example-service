@@ -16,3 +16,5 @@ sudo docker volume create portainer_data && sudo docker run -d -p 8000:8000 -p 9
 
 sudo usermod -aG sudo admin && sudo usermod -aG docker admin
 
+#Maven
+sudo apt --assume-yes install maven
