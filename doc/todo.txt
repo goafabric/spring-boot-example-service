@@ -1,15 +1,13 @@
-Virtualisation Todos
-- remote docker
-- remote Kubernetes
-- port forwarding
-
 Now
+- directory recursion and structure
+
 - jobs
-- private registry
 - Statefulsets
 - profiler per jmx
 - monitoring
 - ingresses
+
+- private registry
 
 Fun
 - Prometheus, Graphana, Tracing
