@@ -13,16 +13,16 @@ sudo sh -c 'echo "#!/bin/bash \n microk8s kubectl "\$1" "\$2" "\$3" "\$4" "\$5" 
 microk8s start
 microk8s enable dns dashboard ingress storage
 
-#Microk8s Run
-sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready 
-kubectl proxy --address='0.0.0.0' --disable-filter=true &
-cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
-
-#Client Kubectl
-https://microk8s.io/docs/working-with-kubectl
-
-
 #Hack the dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 - args:
 - --enable-skip-login
+
+#Microk8s Run
+sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready 
+kubectl proxy --address='0.0.0.0' --disable-filter=true &
+
+#Client Kubectl
+microk8s config > config (should be put to ~/.kube on client machine) 
+
+
