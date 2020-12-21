@@ -18,3 +18,4 @@ sudo usermod -aG sudo admin && sudo usermod -aG docker admin
 
 #Maven
 sudo apt --assume-yes install maven
+(cd /home/admin ; mkdir projects ; cd projects ; git clone https://github.com/goafabric/spring-boot-example-service ; cd spring-boot-example-service ; mvn package)
