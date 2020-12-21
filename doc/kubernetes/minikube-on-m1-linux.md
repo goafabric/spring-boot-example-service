@@ -9,7 +9,7 @@ sudo minikube addons enable metrics-server && sudo minikube addons enable dashbo
 
 #Minikube Run
 sudo sysctl fs.protected_regular=0 && sudo minikube start --driver=none 
-sudo kubectl proxy --address='0.0.0.0' --disable-filter=true &
+kubectl proxy --address='0.0.0.0' --disable-filter=true &
 cd ~/projects/spring-boot-example-service/src/deploy/kubernetes/example/
 
 #Quemu for Amd64 Software, not recommended

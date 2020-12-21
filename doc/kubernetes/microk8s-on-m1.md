@@ -10,8 +10,7 @@ su - admin
 sudo sh -c 'echo "#!/bin/bash \n microk8s kubectl "\$1" "\$2" "\$3" "\$4" "\$5" "\$6" "\$7" "\$8" "\$9" " > /usr/local/bin/kubectl' && sudo chmod +x /usr/local/bin/kubectl
 
 #Microk8s Configure
-microk8s start
-microk8s enable dns dashboard ingress storage
+microk8s start && microk8s enable dns dashboard ingress storage
 
 #Hack the dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
