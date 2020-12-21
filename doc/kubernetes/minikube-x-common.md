@@ -1,6 +1,8 @@
 #Minikube Remote Dashboard
 && sudo kubectl proxy --address='0.0.0.0' --disable-filter=true
 http://SERVERNAME:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=default
+#Microk8s Remote Dashboard
+http://kubernetes:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#/login
 
 ## Minikube Debug
 minikube start --alsologtostderr --v=2
