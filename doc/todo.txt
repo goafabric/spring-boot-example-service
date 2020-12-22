@@ -1,5 +1,6 @@
 Now
 - directory recursion and structure
+    - SSL and certificates
 
 - jobs
 - Statefulsets
