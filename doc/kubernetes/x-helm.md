@@ -9,7 +9,7 @@ helm create mychart
                                            
 #Search and install
 helm search repo stable
-helm install stable/postgresql --generate-name --set image.repository=postgres --set image.tag=10.6
+helm install stable/postgresql --generate-name --set image.repository=postgres --set image.tag=11.5
 
 helm ls
 helm uninstall postgresql-1609063021
