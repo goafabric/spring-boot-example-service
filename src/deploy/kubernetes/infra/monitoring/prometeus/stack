@@ -6,7 +6,7 @@ export COMMAND=$1
 if [ "${COMMAND}" = "up" ]
 then
     kubectl apply -f ./templates/ -n ${NAMESPACE}
-    minikube service prometheus-ip-service --url -n ${NAMESPACE}
+#    minikube service prometheus-ip-service --url -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
