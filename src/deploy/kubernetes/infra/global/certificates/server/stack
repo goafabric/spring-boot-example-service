@@ -2,7 +2,7 @@
 
 export COMMAND=$1
 
-if [ "${COMMAND}" = "prov" ]
+if [ "${COMMAND}" = "init" ]
 then
     #we need to do this for all namespaces
     kubectl delete secret --ignore-not-found server-certificate-secret -n example

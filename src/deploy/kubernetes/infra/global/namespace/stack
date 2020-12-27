@@ -2,7 +2,7 @@
 
 export COMMAND=$1
 
-if [ "${COMMAND}" = "prov" ]
+if [ "${COMMAND}" = "init" ]
 then
     kubectl apply -f ./templates/
 elif [ "${COMMAND}" = "prune" ]
