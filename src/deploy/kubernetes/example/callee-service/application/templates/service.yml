@@ -6,8 +6,13 @@ spec:
   selector:
     app: callee-service-application
   ports:
-    - protocol: TCP
+    - name: application
+      protocol: TCP
       port: 50100
-#      nodePort: 30800 #this is the external port
-#  type: NodePort
-  type: ClusterIP
+      nodePort: 30800 #this is the external port
+    - name: jmx
+      protocol: TCP
+      port: 50101
+      nodePort: 30801 #this is the external port
+  type: NodePort
+#  type: ClusterIP
