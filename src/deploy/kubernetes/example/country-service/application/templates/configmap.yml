@@ -10,7 +10,7 @@ data:
   management.database.monitoring.enabled: "true"
 
   #externals
-  adapter.calleeservice.url: "http://callee-service-application:50900"
+  adapter.calleeservice.url: "http://callee-service-application:50100"
 
   #stageing
   server.tomcat.threads.max: "20"

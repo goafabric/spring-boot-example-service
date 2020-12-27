@@ -22,10 +22,10 @@ spec:
           imagePullPolicy: IfNotPresent
 #          imagePullPolicy: Always
           ports:
-            - containerPort: 50900
+            - containerPort: 50100
           env:
             - name: server.port
-              value: "50900"
+              value: "50100"
           envFrom:
             - configMapRef:
                 name: callee-service-application-configmap
@@ -43,7 +43,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 50900
+              port: 50100
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 10
@@ -51,7 +51,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 50900
+              port: 50100
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 10

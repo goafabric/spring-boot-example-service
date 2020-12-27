@@ -7,6 +7,7 @@ spec:
     app: country-service-application
   ports:
     - protocol: TCP
-      port: 50700
-      nodePort: 30900 #this is the external port
-  type: NodePort
+      port: 50100
+#      nodePort: 30900 #this is the external port
+#  type: NodePort
+  type: ClusterIP

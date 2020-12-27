@@ -21,4 +21,4 @@ spec:
               service:
                 name: country-service-application
                 port:
-                  number: 50700
+                  number: 50100

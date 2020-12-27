@@ -31,10 +31,10 @@ spec:
           image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4-SNAPSHOT
           imagePullPolicy: IfNotPresent #Always
           ports:
-            - containerPort: 50700
+            - containerPort: 50100
           env:
             - name: server.port
-              value: "50700"
+              value: "50100"
           envFrom:
             - configMapRef:
                 name: country-service-application-configmap
@@ -51,7 +51,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 50700
+              port: 50100
             initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 10
@@ -59,7 +59,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 50700
+              port: 50100
             initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 10

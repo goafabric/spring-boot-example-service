@@ -7,6 +7,7 @@ spec:
     app: callee-service-application
   ports:
     - protocol: TCP
-      port: 50900
-      nodePort: 30800 #this is the external port
-  type: NodePort
+      port: 50100
+#      nodePort: 30800 #this is the external port
+#  type: NodePort
+  type: ClusterIP
