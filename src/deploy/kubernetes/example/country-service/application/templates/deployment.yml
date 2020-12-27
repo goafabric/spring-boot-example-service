@@ -14,7 +14,11 @@ spec:
       labels:
         app: country-service-application
     spec:
-      # initcontainers justs accepts a docker image, and uses postgres client to check readyness
+#      hostAliases:
+#        - ip: 192.168.64.206
+#          hostnames:
+#            - goafabric.org
+      
       initContainers:
         - name: check-db-ready
           image: postgres:12.4
