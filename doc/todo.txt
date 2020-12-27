@@ -1,14 +1,14 @@
 Now
 
-- monitoring
 - ingresses
-
 - jobs
 - Statefulsets
-- profiler per jmx
+
+- monitoring
 
 - private registry
 - SSL and certificates
+- profiler per jmx
 
 Fun
 - Prometheus, Graphana, Tracing
