@@ -7,9 +7,12 @@ then
     #we need to do this for all namespaces
     kubectl delete secret --ignore-not-found server-certificate-secret -n example
     kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n example
+
+    kubectl delete secret --ignore-not-found server-certificate-secret -n monitoring
+    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n monitoring
 elif [ "${COMMAND}" = "prune" ]
 then
-    kubectl delete --ignore-not-found secret server-certificate-secret -n example
+    kubectl delete --ignore-not-found secret server-certificate-secret -n monitoring
 else
     echo Doing nothing !
 fi
