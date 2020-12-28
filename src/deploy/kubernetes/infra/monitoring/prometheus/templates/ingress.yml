@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana-ingress
+  name: prometheus-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^(/grafana)$ $1/ redirect; #Redirect if traling slash is missing
+      rewrite ^(/prometheus)$ $1/ redirect; #Redirect if traling slash is missing
 
 spec:
   tls:
@@ -17,10 +17,10 @@ spec:
     - host: goafabric.org
       http:
         paths:
-          - path: /grafana(/|$)(.*)
+          - path: /prometheus(/|$)(.*)
             pathType: Prefix
             backend:
               service:
-                name: grafana-ip-service
+                name: prometheus-ip-service
                 port:
-                  number: 3000
+                  number: 9090

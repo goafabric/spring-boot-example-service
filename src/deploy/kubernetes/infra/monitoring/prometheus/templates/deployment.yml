@@ -19,6 +19,8 @@ spec:
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
+#            - "--web.external-url=/prometheus/"
+#            - "--web.route-prefix=prometheus"
           ports:
             - containerPort: 9090
           volumeMounts:
@@ -29,7 +31,7 @@ spec:
           resources:
             requests:
               memory: "256Mi"
-              cpu: "500m"
+              cpu: "256m"
             limits:
               memory: "256Mi"
               cpu: "1000m"
