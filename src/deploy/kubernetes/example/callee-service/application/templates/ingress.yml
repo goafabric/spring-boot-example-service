@@ -4,10 +4,11 @@ metadata:
   name: callee-service-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1 #/$2
-    
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+
     ##Multi Tenancy
     nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^(/callee)$ $1/ redirect;
       more_set_headers "x-origin-tenant-id: 40a1cab6";
 
     ##Authentication via Keycloak
@@ -23,8 +24,8 @@ spec:
     - host: goafabric.org
       http:
         paths:
-          - path: /callee/(.*)
-#          - path: /callee(/|$)(.*)
+#          - path: /callee/(.*)
+          - path: /callee(/|$)(.*)
             pathType: Prefix
             backend:
               service:
