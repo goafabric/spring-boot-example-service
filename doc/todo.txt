@@ -1,6 +1,7 @@
 Now
 
-- ingresses
+- ingresses (swagger basepath, monitoring ingresses, dashboard service)
+
 - jobs
 - Statefulsets
 
