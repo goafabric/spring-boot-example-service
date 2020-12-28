@@ -5,11 +5,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-
-    ##Multi Tenancy
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^(/callee)$ $1/ redirect;
-      more_set_headers "x-origin-tenant-id: 40a1cab6";
+      rewrite ^(/callee)$ $1/ redirect; #Redirect if traling slash is missing
+      more_set_headers "x-origin-tenant-id: 40a1cab6"; #Multi Tenancy
 
     ##Authentication via Keycloak
     #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
@@ -24,7 +22,6 @@ spec:
     - host: goafabric.org
       http:
         paths:
-#          - path: /callee/(.*)
           - path: /callee(/|$)(.*)
             pathType: Prefix
             backend:
