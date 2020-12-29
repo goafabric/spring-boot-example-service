@@ -5,8 +5,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^(/grafana)$ $1/ redirect; #Redirect if traling slash is missing
 
 spec:
   tls:

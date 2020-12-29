@@ -5,9 +5,8 @@ metadata:
 spec:
   selector:
     app: country-service-application
+  type: ClusterIP #NodePort
   ports:
     - protocol: TCP
       port: 50100
 #      nodePort: 30900 #this is the external port
-#  type: NodePort
-  type: ClusterIP

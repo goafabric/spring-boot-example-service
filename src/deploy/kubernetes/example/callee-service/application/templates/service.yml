@@ -5,9 +5,8 @@ metadata:
 spec:
   selector:
     app: callee-service-application
+  type: ClusterIP #NodePort
   ports:
     - protocol: TCP
       port: 50100
 #      nodePort: 30800 #this is the external port
-#  type: NodePort
-  type: ClusterIP

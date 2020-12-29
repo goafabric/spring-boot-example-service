@@ -27,13 +27,15 @@ spec:
         env:
           - name: GF_SERVER_ROOT_URL
             value: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+          - name: GF_AUTH_ANONYMOUS_ENABLED
+            value: "true"
         resources:
           requests:
-            cpu: 100m
-            memory: "256Mi"
+            cpu: 250m
+            memory: "64M"
           limits:
             cpu: 500m
-            memory: "256Mi"
+            memory: "128M"
         # livenessProbe:
         #   exec:
         #     command:

@@ -10,8 +10,8 @@ metadata:
 spec:
   selector:
     component: grafana
+  type: ClusterIP #NodePort
   ports:
   - port: 3000
     targetPort: 3000
 #    nodePort: 30000
-  type: ClusterIP
