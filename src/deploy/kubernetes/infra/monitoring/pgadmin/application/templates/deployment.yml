@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin-application
+spec:
+  selector:
+    matchLabels:
+      app: pgadmin-application
+  replicas: 1
+  strategy:
+    type: Recreate #RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: pgadmin-application
+    spec:
+      # initcontainers justs accepts a docker image, and uses postgres client to check readyness
+      containers:
+        - name: pgadmin-application
+          image: biarms/pgadmin4:4.21
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5050
+          envFrom:
+#            - configMapRef:
+#                name: pgadmin-application-configmap
+          resources:
+#            requests:
+#              memory: "128M"
+#              cpu: "250m"
+
+          volumeMounts:
+            - mountPath: /pgadmin
+              name: pgadmin-application-pvc-volume
+
+      volumes:
+        - name: pgadmin-application-pvc-volume
+          persistentVolumeClaim:
+            claimName: pgadmin-application-pvc

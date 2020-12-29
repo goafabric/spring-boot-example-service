@@ -1,6 +1,7 @@
 Now
 
-- ingresses (swagger basepath, monitoring ingresses)
+- static index.html
+- standartisierte start scripts
 
 - jobs
 - Statefulsets
@@ -10,6 +11,8 @@ Now
 - private registry
 - SSL and certificates
 - profiler per jmx
+
+- ingress: pgadmin, swagger, kubi dashboard
 
 Fun
 - Prometheus, Graphana, Tracing

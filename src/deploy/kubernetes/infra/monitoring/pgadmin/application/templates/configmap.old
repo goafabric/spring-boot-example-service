@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-application-configmap
+data:
+  TZ: Europe/Berlin
+#  PGADMIN_DEFAULT_EMAIL: postgres
+#  PGADMIN_DEFAULT_PASSWORD: postgres
+
