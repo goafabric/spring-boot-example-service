@@ -1,8 +1,5 @@
 Now
 
-- static index.html
-- standartisierte start scripts
-
 - jobs
 - Statefulsets
 
@@ -12,7 +9,10 @@ Now
 - SSL and certificates
 - profiler per jmx
 
-- ingress: pgadmin, swagger, kubi dashboard
+- keycloack / oauth
+
+- standartisierte start scripts
+- ingress: swagger, pgadmin
 
 Fun
 - Prometheus, Graphana, Tracing
