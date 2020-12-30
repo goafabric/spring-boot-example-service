@@ -11,6 +11,8 @@ spec:
     type: Recreate #RollingUpdate
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: callee-service-application
     spec:

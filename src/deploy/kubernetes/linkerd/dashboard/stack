@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export COMMAND=$1
+
+if [ "${COMMAND}" = "up" ]
+then
+    kubectl apply -f ./templates/
+elif [ "${COMMAND}" = "down" ]
+then
+    kubectl delete --ignore-not-found -f ./templates 
+else
+    echo Doing nothing !
+fi
