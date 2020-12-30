@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-welcome-application
+spec:
+  selector:
+    app: nginx-welcome-application
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30088 #this is the external port
