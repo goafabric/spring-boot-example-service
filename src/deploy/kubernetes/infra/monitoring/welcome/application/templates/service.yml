@@ -5,8 +5,7 @@ metadata:
 spec:
   selector:
     app: nginx-welcome-application
-  type: NodePort
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8080
-      nodePort: 30088 #this is the external port

@@ -5,7 +5,7 @@ export COMMAND=$1
 export DEPLOYMENT_NAME=nginx-welcome-application
 
 function up() {
-    [ -d "./config/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config/nginx.conf -n ${NAMESPACE}
+    [ -d "./config/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config/ -n ${NAMESPACE}
     [ -d "./data/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-data-files --from-file=./data/ -n ${NAMESPACE}
     [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
