@@ -10,9 +10,15 @@ then
 
     kubectl delete secret --ignore-not-found server-certificate-secret -n monitoring
     kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n monitoring
+
+    kubectl delete secret --ignore-not-found server-certificate-secret -n kube-system
+    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n kube-system
 elif [ "${COMMAND}" = "prune" ]
 then
+    kubectl delete --ignore-not-found secret server-certificate-secret -n example
     kubectl delete --ignore-not-found secret server-certificate-secret -n monitoring
+    kubectl delete --ignore-not-found secret server-certificate-secret -n kube-system
+
 else
     echo Doing nothing !
 fi
