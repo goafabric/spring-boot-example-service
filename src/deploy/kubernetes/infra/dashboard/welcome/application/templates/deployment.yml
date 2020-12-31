@@ -21,14 +21,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-          envFrom:
-#            - configMapRef:
-#                name: nginx-welcome-application-configmap
-          resources:
-#            requests:
-#              memory: "128M"
-#              cpu: "250m"
-            
+
           volumeMounts:
             - mountPath: /var/log/nginx/logs/
               name: nginx-welcome-application-applogs
