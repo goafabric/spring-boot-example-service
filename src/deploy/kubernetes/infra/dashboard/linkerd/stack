@@ -2,6 +2,8 @@
 
 export COMMAND=$1
 
+if ! kubectl get --ignore-not-found namespace linkerd | grep -q Active; then exit; fi
+
 if [ "${COMMAND}" = "up" ]
 then
     kubectl apply -f ./templates/

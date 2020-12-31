@@ -16,7 +16,7 @@ then
     echo please enter password for user admin
     htpasswd -c ./config/auth admin
 
-    create_secret linkerd
+    if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then create_secret linkerd; fi
     create_secret kube-system
     create_secret monitoring
     create_secret example
@@ -24,7 +24,7 @@ then
     rm ./config/auth
     elif [ "${COMMAND}" = "prune" ]
 then
-    delete_secret linkerd
+    if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then delete_secret linkerd; fi
     delete_secret kube-system
     delete_secret monitoring
     delete_secret example
