@@ -3,7 +3,7 @@
 export COMMAND=$1
 
 function delete_secret() {
-    kubectl delete --ignore-not-found -f ./template -n $1
+    kubectl delete --ignore-not-found authentication-secret -n $1
 }
 
 function create_secret() {
