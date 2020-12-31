@@ -8,6 +8,9 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite ^(/callee)$ $1/ redirect; #Redirect if traling slash is missing
 #      more_set_headers "x-origin-tenant-id: 40a1cab6"; #Multi Tenancy
+    # basic auth
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: authentication-secret
 
     ##Authentication via Keycloak
     #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
