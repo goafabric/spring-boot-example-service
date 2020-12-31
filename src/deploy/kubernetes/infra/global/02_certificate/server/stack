@@ -2,23 +2,28 @@
 
 export COMMAND=$1
 
+function delete() {
+    kubectl delete secret --ignore-not-found server-certificate-secret -n $1
+}
+
+function create() {
+    delete $1
+    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n $1
+}
+
 if [ "${COMMAND}" = "init" ]
 then
-    #we need to do this for all namespaces
-    kubectl delete secret --ignore-not-found server-certificate-secret -n example
-    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n example
-
-    kubectl delete secret --ignore-not-found server-certificate-secret -n monitoring
-    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n monitoring
-
-    kubectl delete secret --ignore-not-found server-certificate-secret -n kube-system
-    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n kube-system
-elif [ "${COMMAND}" = "prune" ]
+    create kube-system
+    create linkerd
+    create monitoring
+    create example
+    elif [ "${COMMAND}" = "prune" ]
 then
-    kubectl delete --ignore-not-found secret server-certificate-secret -n example
-    kubectl delete --ignore-not-found secret server-certificate-secret -n monitoring
-    kubectl delete --ignore-not-found secret server-certificate-secret -n kube-system
-
+    delete kube-system
+    delete linkerd
+    delete monitoring
+    delete example
 else
     echo Doing nothing !
 fi
+
