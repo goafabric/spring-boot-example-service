@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: nginx-welcome-application
+  name: welcome-board-application
 spec:
   selector:
-    app: nginx-welcome-application
+    app: welcome-board-application
   type: ClusterIP
   ports:
     - protocol: TCP

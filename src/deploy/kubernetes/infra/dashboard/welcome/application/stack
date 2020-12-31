@@ -2,7 +2,7 @@
 source .values
 
 export COMMAND=$1
-export DEPLOYMENT_NAME=nginx-welcome-application
+export DEPLOYMENT_NAME=welcome-board-application
 
 function up() {
     [ -d "./config/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config/ -n ${NAMESPACE}

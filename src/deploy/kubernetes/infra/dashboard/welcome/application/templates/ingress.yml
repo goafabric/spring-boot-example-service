@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-welcome-application-ingress
+  name: welcome-board-application-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -22,6 +22,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: nginx-welcome-application
+                name: welcome-board-application
                 port:
                   number: 8080
