@@ -3,20 +3,25 @@
 export COMMAND=$1
 
 function delete_secret() {
-    kubectl delete secret --ignore-not-found server-certificate-secret -n $1
+    kubectl delete --ignore-not-found -f ./template -n $1
 }
 
 function create_secret() {
     delete_secret $1
-    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n $1
+    kubectl create secret generic authentication-secret --from-file=./config/auth -n $1
 }
 
 if [ "${COMMAND}" = "init" ]
 then
+    echo please enter password for user admin
+    htpasswd -c ./config/auth admin
+
     create_secret linkerd
     create_secret kube-system
     create_secret monitoring
     create_secret example
+
+    rm ./config/auth
     elif [ "${COMMAND}" = "prune" ]
 then
     delete_secret linkerd
@@ -27,3 +32,6 @@ else
     echo Doing nothing !
 fi
 
+# htpasswd -c auth admin
+# kubectl create secret generic authentication-secret --from-file=auth
+# base64 auth
