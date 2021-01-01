@@ -1,15 +1,17 @@
 Now
 
+- jaeger
+
 - jobs
 - Statefulsets
 - private registry
 
 - SSL and certificates
 - profiler per jmx
+- standartisierte start scripts
 
 - keycloack / oauth
 - monitoring
-- standartisierte start scripts
 - ingress: swagger, pgadmin
 
 Fun
@@ -57,8 +59,14 @@ Other Stuff
 https://finestructure.co/blog/2020/11/27/running-docker-on-apple-silicon-m1
 https://www.mactechnews.de/news/article/Kostenlose-Linux-Virtualisierung-ARM-Windows-mittels-QEMU-auf-M1-176537.html
 
-
 #Keycloak
 ##Authentication via Keycloak
 #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
 #nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+
+#EOS
+- EOS Nginx / Ingress
+- Private Registry
+- EInfachere Provisionierung
+- Kaputtes Elastic
+
