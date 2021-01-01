@@ -70,3 +70,4 @@ https://www.mactechnews.de/news/article/Kostenlose-Linux-Virtualisierung-ARM-Win
 - EInfachere Provisionierung
 - Kaputtes Elastic
 
+- Profiling mit jars
