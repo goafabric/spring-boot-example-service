@@ -20,9 +20,9 @@ function down() {
 if [ "${COMMAND}" = "init" ]
 then
     up
-elif [ "${COMMAND}" = "down" ]
-then
-    down
+#elif [ "${COMMAND}" = "down" ]
+#then
+#    down
 elif [ "${COMMAND}" = "prune" ]
 then
     down
