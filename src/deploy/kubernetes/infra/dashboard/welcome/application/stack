@@ -17,7 +17,7 @@ function down() {
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 }
 
-if [ "${COMMAND}" = "up" ]
+if [ "${COMMAND}" = "init" ]
 then
     up
 elif [ "${COMMAND}" = "down" ]

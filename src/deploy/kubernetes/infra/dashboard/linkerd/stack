@@ -4,10 +4,10 @@ export COMMAND=$1
 
 if ! kubectl get --ignore-not-found namespace linkerd | grep -q Active; then exit; fi
 
-if [ "${COMMAND}" = "up" ]
+if [ "${COMMAND}" = "init" ]
 then
     kubectl apply -f ./templates/
-elif [ "${COMMAND}" = "down" ]
+elif [ "${COMMAND}" = "prune" ]
 then
     kubectl delete --ignore-not-found -f ./templates 
 else

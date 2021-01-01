@@ -4,10 +4,14 @@ export COMMAND=$1
 
 if [ "${COMMAND}" = "init" ]
 then
-    kubectl apply -f ./templates/
-elif [ "${COMMAND}" = "prune" ]
+    kubectl create namespace monitoring
+
+    kubectl create namespace example
+elif [ "${COMMAND}" = "prune-force" ]
 then
-    kubectl delete -f ./templates/
+    kubectl delete namespace monitoring
+
+    kubectl delete namespace example
 else
     echo Doing nothing !
 fi
