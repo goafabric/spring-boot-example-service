@@ -17,6 +17,11 @@ function down() {
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 }
 
+function prune() {
+    down
+    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${NAMESPACE}
+}
+
 if [ "${COMMAND}" = "init" ]
 then
     up
@@ -25,8 +30,7 @@ then
 #    down
 elif [ "${COMMAND}" = "prune" ]
 then
-    down
-    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${NAMESPACE}
+    prune
 else
     echo Doing nothing !
 fi
