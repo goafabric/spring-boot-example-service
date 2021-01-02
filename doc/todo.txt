@@ -64,6 +64,8 @@ https://www.mactechnews.de/news/article/Kostenlose-Linux-Virtualisierung-ARM-Win
 #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
 #nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 
+if [ "$(uname -m)" == "arm64" ]; then ARCH_SUFFIX="arm64v8"; fi
+
 #Variables
 eval "cat <<EOF
   $(<$1)
