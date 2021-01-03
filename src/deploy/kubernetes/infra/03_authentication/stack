@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source ../.values
 export COMMAND=$1
 
 function delete_secret() {
@@ -18,16 +18,20 @@ then
 
     if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then create_secret linkerd; fi
     create_secret kube-system
-    create_secret monitoring
-    create_secret example
+
+    for val in ${namespaces[@]}; do
+        create_secret $val
+    done
 
     rm ./config/auth
-    elif [ "${COMMAND}" = "prune" ]
+elif [ "${COMMAND}" = "prune" ]
 then
     if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then delete_secret linkerd; fi
     delete_secret kube-system
-    delete_secret monitoring
-    delete_secret example
+
+    for val in ${namespaces[@]}; do
+        delete_secret $val
+    done
 else
     echo Doing nothing !
 fi

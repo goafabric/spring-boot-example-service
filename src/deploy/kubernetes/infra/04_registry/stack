@@ -1,20 +1,26 @@
 #!/bin/bash
-
+source ../.values
 export COMMAND=$1
 
-function delete_secret() {
+function delete_secret_sub() {
     kubectl -n $1 delete secret --ignore-not-found docker-registry $2 $ 3
 }
 
-function create_secret() {
-  delete_secret $1 $2 $3
+function create_secret_sub() {
+  delete_secret_sub $1 $2 $3
   kubectl -n $1 create secret docker-registry $2 \
     --docker-server=$3 \
     --docker-username=$mailVar \
     --docker-password=$pwVar \
     --docker-email=$mailVar
+}
 
-  echo "" # add echo to prevent -n errors
+function delete_secret() {
+  delete_secret_sub $1 secret-name registry-name
+}
+
+function create_secret() {
+  create_secret_sub $1 secret-name registry-name
 }
 
 function input_secret() {
@@ -31,15 +37,18 @@ function input_secret() {
   echo "" # add echo to prevent -n errors
 }
 
-if [ "${COMMAND}" = "init" ]
+if [ "${COMMAND}" = "xinit" ]
 then
-#    input_secret
-#    create_secret example secret-name registry-name
-    echo ""
-elif [ "${COMMAND}" = "prune" ]
+    input_secret
+
+    for val in ${namespaces[@]}; do
+        create_secret $val
+    done
+elif [ "${COMMAND}" = "xprune" ]
 then
-    echo ""
-#    delete_secret example secret-name registry-name
+    for val in ${namespaces[@]}; do
+        delete_secret $val
+    done
 else
     echo Doing nothing !
 fi

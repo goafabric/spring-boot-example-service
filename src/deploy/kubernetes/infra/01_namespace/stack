@@ -1,7 +1,6 @@
 #!/bin/bash
-
-export COMMAND=$1
 source ../.values
+export COMMAND=$1
 
 if [ "${COMMAND}" = "init" ]
 then
