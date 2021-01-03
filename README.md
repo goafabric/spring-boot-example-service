@@ -3,8 +3,10 @@
 - See doc folder for more Details
              
 #Kubernetes
-- Do stack init once in uppermost folder to create namespaces and secrets
-- Afterwards you can jus do stack up/down in example or monitoring namespace
+- Do "stack init" once in uppermost folder to create namespaces and secrets
+- Afterwards you can jus do stack up/down in the example namespace
+- under <yourip>/welcome you get a nice welcome page
+
 
 # Kubernetes and Docker
 - See Readme inside src/deploy sub folder 
