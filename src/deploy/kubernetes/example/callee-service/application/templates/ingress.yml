@@ -11,6 +11,7 @@ metadata:
     # basic auth
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: authentication-secret
+#    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 
 spec:
   ## TLS + HTTP2
@@ -19,8 +20,8 @@ spec:
         - goafabric.org
       secretName: server-certificate-secret
   rules:
-    - host: goafabric.org
-      http:
+#    - host: goafabric.org
+    - http:
         paths:
           - path: /callee(/|$)(.*)
             pathType: Prefix

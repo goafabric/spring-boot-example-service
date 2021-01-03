@@ -20,8 +20,8 @@ spec:
         - goafabric.org
       secretName: server-certificate-secret
   rules:
-    - host: goafabric.org
-      http:
+#    - host: goafabric.org
+    - http:
         paths:
           - path: /dashboard(/|$)(.*)
             pathType: Prefix
