@@ -2,7 +2,6 @@
 source .values
 
 export COMMAND=$1
-export DEPLOYMENT_NAME=callee-service-application
 
 function up() {
     kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config -n ${NAMESPACE}
