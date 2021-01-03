@@ -1,24 +1,19 @@
 Now
 
-- jaeger
-
 - jobs
 - Statefulsets
 - private registry
 
 - SSL and certificates
 - profiler per jmx
-- standartisierte start scripts
 
 - keycloack / oauth
 - monitoring
 - ingress: swagger, pgadmin
 
 Fun
-- Prometheus, Graphana, Tracing
+- Prometheus, Graphana, Jaeger
 - Elk
-- Istio
-
 - Helm
 
 Code
@@ -64,24 +59,12 @@ https://www.mactechnews.de/news/article/Kostenlose-Linux-Virtualisierung-ARM-Win
 #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
 #nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 
-[[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]] && ARCH_SUFFIX="arm64v8"
-[[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]] && echo yo
-
-#Variables
-eval "cat <<EOF
-  $(<$1)
-  EOF
-  " | kubectl apply -f -
-
-
-
-
-
-
 #EOS
 - EOS Nginx / Ingress
 - Private Registry
 - EInfachere Provisionierung
 - Kaputtes Elastic
+- Start Scripts
 
 - Profiling mit jars
+
