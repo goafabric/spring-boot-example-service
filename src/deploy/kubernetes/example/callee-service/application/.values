@@ -1,5 +1,5 @@
 #!/bin/bash
-source ../../../.values
-
 export NAMESPACE="example"
+
+export ARCH_SUFFIX=-arm64v8
 export IMAGE_NAME="goafabric/calle-service${ARCH_SUFFIX}:1.0.0-SNAPSHOT"
