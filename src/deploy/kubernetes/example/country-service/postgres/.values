@@ -2,4 +2,4 @@
 source ../../../.values
 
 export NAMESPACE="example"
-export IMAGE_NAME="${ARCH_PREFIX}postgres:12.4"
+export DEPLOYMENT_NAME="country-service-postgres"

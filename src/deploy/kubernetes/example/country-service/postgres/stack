@@ -1,23 +1,27 @@
 #!/bin/bash
 source .values
-
 export COMMAND=$1
 
 function up() {
-    kubectl create configmap country-service-postgres-initdb --from-file=./config/initdb/ -n ${NAMESPACE}
-    kubectl apply -f ./templates/pvc -n ${NAMESPACE}
+    [ -d "./config/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config/ -n ${NAMESPACE}
+    [ -d "./config/data/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-data-files --from-file=./config/data/ -n ${NAMESPACE}
+    [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
+    [ ! -z "$IMAGE_NAME" ] && kubectl set image deployment ${DEPLOYMENT_NAME} ${DEPLOYMENT_NAME}=${IMAGE_NAME} -n ${NAMESPACE}
 }
 
 function down() {
-    kubectl delete --ignore-not-found configmap country-service-postgres-initdb -n ${NAMESPACE}
-    kubectl delete --ignore-not-found -f ./templates/ -n ${NAMESPACE}
+    [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-config-files -n ${NAMESPACE}
+    [ -d "./config/data/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-data-files -n ${NAMESPACE}
+    kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
+}
+
+function prune() {
+    down
+    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${NAMESPACE}
 }
 
 if [ "${COMMAND}" = "up" ]
-then
-    up
-elif [ "${COMMAND}" = "prov" ]
 then
     up
 elif [ "${COMMAND}" = "down" ]
@@ -25,8 +29,7 @@ then
     down
 elif [ "${COMMAND}" = "prune" ]
 then
-    down
-    kubectl delete --ignore-not-found -f ./templates/pvc -n ${NAMESPACE}
+    prune
 else
     echo Doing nothing !
 fi

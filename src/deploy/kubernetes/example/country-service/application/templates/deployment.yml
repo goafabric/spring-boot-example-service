@@ -78,4 +78,4 @@ spec:
             name: country-service-application-config-files
         - name: country-service-application-demodata-files-volume
           configMap:
-            name: country-service-application-demodata-files
+            name: country-service-application-data-files

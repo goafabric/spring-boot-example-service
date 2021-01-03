@@ -3,35 +3,33 @@ source .values
 export COMMAND=$1
 
 function up() {
-    kubectl create configmap country-service-application-demodata-files --from-file=./config/demodata/ -n ${NAMESPACE}
-    kubectl create configmap country-service-application-config-files --from-file=./config -n ${NAMESPACE}
+    [ -d "./config/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config/ -n ${NAMESPACE}
+    [ -d "./config/data/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-data-files --from-file=./config/data/ -n ${NAMESPACE}
+    [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${NAMESPACE}
     kubectl apply -f ./templates/ -n ${NAMESPACE}
-#    minikube service country-service-application --url -n ${NAMESPACE}
+    [ ! -z "$IMAGE_NAME" ] && kubectl set image deployment ${DEPLOYMENT_NAME} ${DEPLOYMENT_NAME}=${IMAGE_NAME} -n ${NAMESPACE}
 }
 
 function down() {
-    kubectl delete --ignore-not-found configmap country-service-application-demodata-files -n ${NAMESPACE}
-    kubectl delete --ignore-not-found configmap country-service-application-config-files -n ${NAMESPACE}
+    [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-config-files -n ${NAMESPACE}
+    [ -d "./config/data/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-data-files -n ${NAMESPACE}
     kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
 }
 
+function prune() {
+    down
+    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${NAMESPACE}
+}
 
 if [ "${COMMAND}" = "up" ]
 then
     up
-elif [ "${COMMAND}" = "prov" ]
-then
-    up
-    echo provisioning ...
-    kubectl wait --timeout=60s --for=condition=ready pod --selector app=country-service-application -n ${NAMESPACE}
-    echo done provisioning
 elif [ "${COMMAND}" = "down" ]
 then
     down
 elif [ "${COMMAND}" = "prune" ]
 then
-    down
+    prune
 else
     echo Doing nothing !
 fi
-
