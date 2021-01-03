@@ -1,0 +1,50 @@
+#!/bin/bash
+
+export COMMAND=$1
+
+function delete_secret() {
+    kubectl -n $1 delete secret --ignore-not-found docker-registry $2 $ 3
+}
+
+function create_secret() {
+  delete_secret $1 $2 $3
+  kubectl -n $1 create secret docker-registry $2 \
+    --docker-server=$3 \
+    --docker-username=$mailVar \
+    --docker-password=$pwVar \
+    --docker-email=$mailVar
+
+  echo "" # add echo to prevent -n errors
+}
+
+function input_secret() {
+  echo We now need the credentials to login to artifactory docker registry
+  read -p "email: " mailVar
+  printf "password: "
+  while IFS= read -p "$prompt" -r -s -n 1 char; do
+    if [[ $char == $'\0' ]]; then
+      break
+    fi
+    prompt='*'
+    pwVar+="$char"
+  done
+  echo "" # add echo to prevent -n errors
+}
+
+if [ "${COMMAND}" = "init" ]
+then
+#    input_secret
+#    create_secret example secret-name registry-name
+    echo ""
+elif [ "${COMMAND}" = "prune" ]
+then
+    echo ""
+#    delete_secret example secret-name registry-name
+else
+    echo Doing nothing !
+fi
+
+
+
+
+
