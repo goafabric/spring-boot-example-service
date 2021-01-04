@@ -37,14 +37,14 @@ function input_secret() {
   echo "" # add echo to prevent -n errors
 }
 
-if [ "${COMMAND}" = "xinit" ]
+if [ "${COMMAND}" = "init" ]
 then
     input_secret
 
     for val in ${namespaces[@]}; do
         create_secret $val
     done
-elif [ "${COMMAND}" = "xprune" ]
+elif [ "${COMMAND}" = "prune" ]
 then
     for val in ${namespaces[@]}; do
         delete_secret $val
