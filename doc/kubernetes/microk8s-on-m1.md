@@ -10,13 +10,19 @@ su - admin
 sudo sh -c 'echo "#!/bin/bash \n microk8s kubectl "\$1" "\$2" "\$3" "\$4" "\$5" "\$6" "\$7" "\$8" "\$9" " > /usr/local/bin/kubectl' && sudo chmod +x /usr/local/bin/kubectl
 
 #Microk8s Configure
-microk8s start && microk8s enable dns dashboard ingress storage
+microk8s enable dns dashboard ingress storage
 microk8s enable linkerd
 
 #Hack the dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 - args:
 - --enable-skip-login
+
+
+#Linkerd Dashboard (dd remove line, O insert -enforced-host=)
+microk8s.kubectl edit deployment/linkerd-web --namespace=linkerd
+
+- -enforced-host=^(localhost|127\.0\.0\.1|linkerd-web\.linkerd\.svc\.cluster\.local|linkerd-web\.linkerd\.svc|\[::1\])(:\d+)?$
 
 #Microk8s Run
 sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready 
