@@ -59,12 +59,3 @@ https://www.mactechnews.de/news/article/Kostenlose-Linux-Virtualisierung-ARM-Win
 #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
 #nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 
-#EOS
-- EOS Nginx / Ingress
-- Private Registry
-- EInfachere Provisionierung
-- Kaputtes Elastic
-- Start Scripts
-
-- Profiling mit jars
-
