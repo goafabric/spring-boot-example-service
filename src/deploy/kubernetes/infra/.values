@@ -1,2 +1,2 @@
 #!/bin/bash
-declare -a namespaces=("monitoring" "example")
+declare -a namespaces=("example")
