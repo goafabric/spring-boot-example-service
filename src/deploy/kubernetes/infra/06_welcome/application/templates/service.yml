@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: welcome-board-application
+spec:
+  selector:
+    app: welcome-board-application
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8080

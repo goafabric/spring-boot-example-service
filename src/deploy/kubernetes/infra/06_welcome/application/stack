@@ -1,0 +1,32 @@
+#!/bin/bash
+source .values
+export COMMAND=$1
+
+function up() {
+    [ -d "./config/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config/ -n ${NAMESPACE}
+    [ -d "./config/data/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-data-files --from-file=./config/data/ -n ${NAMESPACE}
+    [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${NAMESPACE}
+    kubectl apply -f ./templates/ -n ${NAMESPACE}
+    [ ! -z "$IMAGE_NAME" ] && kubectl set image deployment ${DEPLOYMENT_NAME} ${DEPLOYMENT_NAME}=${IMAGE_NAME} -n ${NAMESPACE}
+}
+
+function down() {
+    [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-config-files -n ${NAMESPACE}
+    [ -d "./config/data/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-data-files -n ${NAMESPACE}
+    kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
+}
+
+function prune() {
+    down
+    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${NAMESPACE}
+}
+
+if [ "${COMMAND}" = "init" ]
+then
+    up
+elif [ "${COMMAND}" = "prune" ]
+then
+    prune
+else
+    echo Doing nothing !
+fi

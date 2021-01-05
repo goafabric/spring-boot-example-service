@@ -1,0 +1,3 @@
+#!/bin/bash
+export NAMESPACE="default"
+export DEPLOYMENT_NAME="welcome-board-application"
