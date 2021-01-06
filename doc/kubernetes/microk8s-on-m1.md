@@ -33,3 +33,6 @@ microk8s config > config (should be put to ~/.kube on client machine)
 
 #Quemu for Amd64 Software, not recommended
 sudo apt --assume-yes install qemu-system-x86 qemu-user qemu-user-static
+
+#Linkerd CLI
+https://github.com/linkerd/linkerd2/releases/download/stable-2.9.0/linkerd2-cli-stable-2.9.0-darwin
