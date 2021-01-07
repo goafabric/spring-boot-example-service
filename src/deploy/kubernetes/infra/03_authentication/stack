@@ -13,8 +13,7 @@ function create_secret() {
 
 if [ "${COMMAND}" = "init" ]
 then
-    echo please enter password for user admin
-    htpasswd -c ./config/auth admin
+    [ ! -f "./config/auth" ] && echo please enter password for user admin && htpasswd -c ./config/auth admin
 
     if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then create_secret linkerd; fi
     create_secret kube-system
@@ -22,10 +21,9 @@ then
     for val in ${namespaces[@]}; do
         create_secret $val
     done
-
-    rm ./config/auth
 elif [ "${COMMAND}" = "prune" ]
 then
+    rm ./config/auth
     if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then delete_secret linkerd; fi
     delete_secret kube-system
 
