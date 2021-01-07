@@ -1,3 +1,0 @@
-#!/bin/bash
-export NAMESPACE="monitoring"
-export DEPLOYMENT_NAME="welcome-board-application"
