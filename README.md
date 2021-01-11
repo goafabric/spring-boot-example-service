@@ -3,7 +3,7 @@
 - See doc folder for more Details
              
 #Kubernetes
-- Do "stack init" once in uppermost folder to create namespaces and secrets
+- Do "stack init" once in uppermost folder of "src/deploy/kubernetes" to create namespaces and secrets
 - Afterwards you can jus do stack up/down in the example namespace
 - under <yourip>/welcome you get a nice welcome page
 - To delete everything "stack prune" in the uppermost folder
