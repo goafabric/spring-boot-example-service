@@ -1,3 +1,5 @@
+##Step 1
+
 #documentation
 https://microk8s.io/docs
 
@@ -11,13 +13,15 @@ sudo sh -c 'echo "#!/bin/bash \n microk8s kubectl "\$1" "\$2" "\$3" "\$4" "\$5" 
 
 #Microk8s Configure
 microk8s enable dns dashboard ingress storage
-microk8s enable linkerd
 
-#Hack the dashboard (O is for insert line)
+#Hack the Kubernetes dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 - args:
 - --enable-skip-login
 
+## Step 2
+#Linkerd
+microk8s enable linkerd
 
 #Linkerd Dashboard (dd remove line, O insert -enforced-host=)
 microk8s.kubectl edit deployment/linkerd-web --namespace=linkerd
@@ -25,8 +29,7 @@ microk8s.kubectl edit deployment/linkerd-web --namespace=linkerd
 - -enforced-host=^(localhost|127\.0\.0\.1|linkerd-web\.linkerd\.svc\.cluster\.local|linkerd-web\.linkerd\.svc|\[::1\])(:\d+)?$
 
 #Microk8s Run
-sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready 
-kubectl proxy --address='0.0.0.0' --disable-filter=true &
+sudo iptables -P FORWARD ACCEPT && microk8s start && microk8s status --wait-ready
 
 #Client Kubectl
 microk8s config > config (should be put to ~/.kube on client machine) 
