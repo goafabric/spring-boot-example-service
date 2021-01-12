@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: country-service-batch-configmap
+data:
+  TZ: Europe/Berlin
+  spring.config.location: /usr/share/config/application.yml
+  logging.config: /usr/share/config/logback-rollingfile-spring.xml
+  spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
+  management.database.monitoring.enabled: "true"
+  management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers"
+
+  #externals
+  adapter.calleeservice.url: "http://callee-service-application:50100"
+
+  #stageing
+  server.tomcat.threads.max: "20"
+
+  spring.datasource.hikari.maximum-pool-size: "10"
+  spring.datasource.hikari.connection-timeout: "10000"
+
+  resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
+
+  database.provisioning.goals: -migrate -import-demo-data -terminate
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: country-service-batch-secret
+data:
+  adapter.calleeservice.user: ZXhhbXBsZXVzZXI=
+  #exampleuser
+  adapter.calleeservice.password: RU5DKExnQ1Q0a3JXNU5EclFrZkdQUEVZdzdYT3Z6dWZ2SUFOV0ZxM3ZIb3crU3BoZDZBQ3RhdmFoVzhhTDI4TkRubVpleDUrUG56MTRORWVEdVIrWkk5MHNRPT0p
+  #ENC(LgCT ...) => we should replace jasypt we kubernetes aes256 secrets here
+  spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
+  spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
+
+
