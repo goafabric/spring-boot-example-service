@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: country-service-batch
 spec:
+  backoffLimit: 0
   template:
     metadata:
 #      annotations:
