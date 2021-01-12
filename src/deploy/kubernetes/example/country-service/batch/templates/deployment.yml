@@ -40,23 +40,6 @@ spec:
               memory: "256M"
               cpu: "250m"
 
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 50100
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 10
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 50100
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 10
-            failureThreshold: 5
-
           volumeMounts:
             - mountPath: /usr/share/logs
               name: country-service-applogs
