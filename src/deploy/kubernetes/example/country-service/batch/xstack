@@ -23,6 +23,7 @@ function prune() {
 
 if [ "${COMMAND}" = "import" ]
 then
+    down
     up
 elif [ "${COMMAND}" = "down" ]
 then
