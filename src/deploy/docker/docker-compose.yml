@@ -31,7 +31,8 @@ services:
       - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
       - ../config/application/demodata:/src/deploy/config/application/demodata
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
-                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
+#                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
+#                 "-XX:+UnlockCommercialFeatures", "-XX:+FlightRecorder","-XX:StartFlightRecording=duration=10s,filename=flight.jfr",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
     networks:
