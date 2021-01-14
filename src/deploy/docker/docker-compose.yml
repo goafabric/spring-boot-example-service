@@ -21,7 +21,7 @@ services:
 
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
-      interval: 20s
+      interval: 10s
       timeout: 10s
       retries: 10
     volumes:
@@ -31,7 +31,7 @@ services:
       - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
       - ../config/application/demodata:/src/deploy/config/application/demodata
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
-#                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=10.0.130.178","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
+                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
     networks:
