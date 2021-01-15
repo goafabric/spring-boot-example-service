@@ -3,7 +3,7 @@
 #documentation
 https://microk8s.io/docs
 
-#Microk8s Install
+#Microk8s Install (replace admin with your user)
 sudo snap install microk8s --classic --channel=1.19
 sudo usermod -a -G microk8s admin && sudo chown -f -R admin ~/.kube
 su - admin
@@ -14,12 +14,12 @@ sudo sh -c 'echo "#!/bin/bash \n microk8s kubectl "\$1" "\$2" "\$3" "\$4" "\$5" 
 #Microk8s Configure
 microk8s enable dns dashboard ingress storage
 
+## Step 2
 #Hack the Kubernetes dashboard (O is for insert line)
 microk8s.kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 - args:
 - --enable-skip-login
 
-## Step 2
 #Linkerd
 microk8s enable linkerd
 
