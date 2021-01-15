@@ -9,7 +9,7 @@ management:
     endpoints:
       web:
         exposure:
-          include: "info,health,prometheus,circuitbreakers,circuitbreakerevents"
+          include: "info,health,heapdump,prometheus,circuitbreakers,circuitbreakerevents"
     endpoint:
       health:
         show-details: always
