@@ -79,3 +79,6 @@ resilience4j.circuitbreaker:
     calleeservice:
       baseConfig: default
 
+#opentracing.jaeger.udp-sender.host: "localhost"
+#opentracing.jaeger.udp-sender.port: "14250"
+#opentracing.jaeger.service-name: "country-service"
