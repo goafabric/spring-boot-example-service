@@ -33,8 +33,9 @@ services:
       - ../config/application/demodata:/src/deploy/config/application/demodata
       - ./jprofiler/:/jprofiler/
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
+                 "-Xshareclasses:none","-agentpath:/jprofiler/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849",
+#                 "-agentpath:/jprofiler/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849,nowait,config=/jprofiler/jprofiler_config.xml",
 #                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
-                 "-agentpath:/jprofiler/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849,nowait,config=/jprofiler/jprofiler_config.xml",
 #                 "-XX:+UnlockCommercialFeatures", "-XX:+FlightRecorder","-XX:StartFlightRecording=duration=10s,filename=flight.jfr",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
