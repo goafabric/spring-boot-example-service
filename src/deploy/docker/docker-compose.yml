@@ -9,6 +9,7 @@ services:
     ports:
       - 50700:50700
       - 50701:50701
+      - 8849:8849
     environment:
       - TZ=Europe/Berlin
       - spring.config.location=/usr/share/config/application.yml
@@ -30,8 +31,10 @@ services:
       - ../config/application/application.yml:/usr/share/config/application.yml
       - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
       - ../config/application/demodata:/src/deploy/config/application/demodata
+      - ./jprofiler/:/jprofiler/
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
-                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
+#                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
+                 "-agentpath:/jprofiler/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849,nowait,config=/jprofiler/jprofiler_config.xml",
 #                 "-XX:+UnlockCommercialFeatures", "-XX:+FlightRecorder","-XX:StartFlightRecording=duration=10s,filename=flight.jfr",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
