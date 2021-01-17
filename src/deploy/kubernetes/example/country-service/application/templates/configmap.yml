@@ -7,8 +7,13 @@ data:
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
   spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
+
+  #monitoring
   management.database.monitoring.enabled: "true"
-  management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers"
+  management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers,prometheus"
+  opentracing.jaeger.udp-sender.host: "linkerd-collector.linkerd"
+  opentracing.jaeger.udp-sender.port: "55678"
+  opentracing.jaeger.enable-b3-propagation: "true"
 
   #externals
   adapter.calleeservice.url: "http://callee-service-application:50100"

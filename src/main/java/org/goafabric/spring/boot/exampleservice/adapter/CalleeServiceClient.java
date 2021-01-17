@@ -3,12 +3,11 @@ package org.goafabric.spring.boot.exampleservice.adapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-@Lazy //Lazy init, in case we need to reencrypt the password (cylic problem during startup)
+//@Lazy //Lazy init, in case we need to reencrypt the password (cylic problem during startup)
 public class CalleeServiceClient {
     @Autowired
     private RestTemplate calleeServiceRestTemplate;
