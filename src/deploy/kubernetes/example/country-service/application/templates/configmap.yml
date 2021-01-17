@@ -11,9 +11,15 @@ data:
   #monitoring
   management.database.monitoring.enabled: "true"
   management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers,prometheus"
+
   opentracing.jaeger.udp-sender.host: "linkerd-collector.linkerd"
   opentracing.jaeger.udp-sender.port: "55678"
   opentracing.jaeger.enable-b3-propagation: "true"
+#  opentracing.jaeger.udp-sender.host: "linkerd-jaeger.linkerd"
+#  opentracing.jaeger.udp-sender.port: "14268"
+  opentracing.jaeger.enabled: "true"
+  opentracing.jaeger.service-name: "country-service"
+
 
   #externals
   adapter.calleeservice.url: "http://callee-service-application:50100"
