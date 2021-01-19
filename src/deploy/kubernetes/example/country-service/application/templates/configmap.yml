@@ -15,9 +15,9 @@ data:
 #  opentracing.jaeger.udp-sender.host: "linkerd-collector.linkerd"
 #  opentracing.jaeger.udp-sender.port: "55678"
 #  opentracing.jaeger.enable-b3-propagation: "true"
-  opentracing.jaeger.udp-sender.host: "linkerd-jaeger.linkerd"
+#  opentracing.jaeger.udp-sender.host: "linkerd-jaeger.linkerd"
 #  opentracing.jaeger.udp-sender.port: "14268"
-  opentracing.jaeger.service-name: "country-service"
+#  opentracing.jaeger.service-name: "country-service"
 
 
   #externals
