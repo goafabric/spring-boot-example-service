@@ -25,6 +25,9 @@ if [ "${COMMAND}" = "import" ]
 then
     down
     up
+    sleep 10
+#    kubectl wait --timeout=60s --for=condition=available pod -l app=eos-provision -n ${NAMESPACE}
+    kubectl logs --follow -l app=${DEPLOYMENT_NAME} -n ${NAMESPACE}
 elif [ "${COMMAND}" = "down" ]
 then
     down
