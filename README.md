@@ -4,8 +4,8 @@
              
 #Kubernetes
 - Do "./stack init" once in uppermost folder of "src/deploy/kubernetes" to create namespaces and secrets
-- Afterwards you can jus do ./stack up/down in the example namespace
-- under <yourip>/welcome you get a nice welcome page
+- Afterwards you can just do ./stack up/down in the example namespace
+- under <yourip>/welcome you get a nice welcome page (for microk8s just localhost)
 - To delete everything "stack prune" in the uppermost folder
 
 
