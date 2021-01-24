@@ -2,7 +2,6 @@ Now
 
 - jobs
 - Statefulsets
-- private registry
 
 - SSL and certificates
 - profiler per jmx
