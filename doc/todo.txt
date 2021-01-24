@@ -1,5 +1,15 @@
 Now
 
+- scripte standartisierne mit variablen
+- dashboard
+- arm variable
+- services exposen, nicht exposen abhängig vom profile
+- jaeger, jprofiler
+- Statefulsets
+
+..
+
+
 - jobs
 - Statefulsets
 

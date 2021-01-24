@@ -1,7 +1,7 @@
 #!/bin/bash
 source ../../../.values
 
-#[[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]] && ARCH_SUFFIX="-arm64v8"
+[[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]] && ARCH_SUFFIX="-arm64v8"
 #export ARCH_SUFFIX="-arm64v8"
 
 export NAMESPACE="example"
