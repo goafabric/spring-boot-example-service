@@ -8,6 +8,8 @@
 - under <yourip>/welcome you get a nice welcome page (for microk8s just localhost)
 - To delete everything "stack prune" in the uppermost folder
 
+#Dashboard Access on MicroK8s
+- To access the Dashboard on MicroK8S you need a token: https://microk8s.io/docs/addon-dashboard
 
 # Kubernetes and Docker
 - See Readme inside src/deploy sub folder 
