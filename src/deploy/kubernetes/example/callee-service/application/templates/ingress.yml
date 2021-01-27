@@ -7,6 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite ^(/callee)$ $1/ redirect; #Redirect if traling slash is missing
+    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/callee"
 #      more_set_headers "x-origin-tenant-id: 40a1cab6"; #Multi Tenancy
     # basic auth
     nginx.ingress.kubernetes.io/auth-type: basic

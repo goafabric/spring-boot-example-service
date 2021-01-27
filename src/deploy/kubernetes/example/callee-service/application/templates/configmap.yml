@@ -6,7 +6,11 @@ data:
   TZ: Europe/Berlin
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
-  management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers"
+
+  #monitoring
+  server.forward-headers-strategy: FRAMEWORK
+  management.database.monitoring.enabled: "true"
+  management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers,prometheus"
 
   #stageing
   server.tomcat.threads.max: "20"

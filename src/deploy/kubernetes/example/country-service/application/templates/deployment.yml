@@ -29,7 +29,7 @@ spec:
 #          image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
 #          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4-SNAPSHOT
           image: " "
-          imagePullPolicy: Always #IfNotPresent #Always
+          imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 50100
           env:

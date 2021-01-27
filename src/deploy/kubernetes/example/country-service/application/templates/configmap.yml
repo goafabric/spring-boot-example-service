@@ -9,6 +9,7 @@ data:
   spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
 
   #monitoring
+  server.forward-headers-strategy: FRAMEWORK
   management.database.monitoring.enabled: "true"
   management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers,prometheus"
 
