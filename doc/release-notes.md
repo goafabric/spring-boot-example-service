@@ -1,7 +1,7 @@
 #1.0.5
 ## Updated
 CrossFunctional
-- Spring 2.4.5
+- Spring 2.4.2
 - Swagger updated to 3.0.0
 - AdoptOpenJDK Baseimage set to a specific version
 - Upgrade to Postgres 12.4
@@ -10,7 +10,6 @@ CrossFunctional
 ## Fix  
 - Fix for Openj9 Heapdump
 - Fix for Lombok / Mapstruct problem since Spring 2.4.0 (see maven-compiler-plugin section in parent-pom)
-
 
 ##Added
 - Jaeger Tracing, currently disabled

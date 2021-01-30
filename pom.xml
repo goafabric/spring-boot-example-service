@@ -66,7 +66,6 @@
         <dependency>
             <groupId>io.opentracing.contrib</groupId>
             <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
-            <version>${opentracing-spring-jaeger-web-starter.version}</version>
         </dependency>
 
         <!-- 3rd party -->
@@ -74,7 +73,6 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>${mapstruct.version}</version>
         </dependency>
 
         <dependency>
@@ -90,25 +88,21 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>${jasypt-spring-boot-starter.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt-hibernate5</artifactId>
-            <version>${jasypt-hibernate5.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-            <version>${springfox-swagger.version}</version>
         </dependency>
 
         <!-- Persistence -->
@@ -136,7 +130,6 @@
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring-boot2</artifactId>
-            <version>${resilience4j.version}</version>
         </dependency>
 
         <!-- *** Test *** -->
@@ -159,7 +152,6 @@
         <dependency>
             <groupId>org.databene</groupId>
             <artifactId>contiperf</artifactId>
-            <version>${contiperf.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

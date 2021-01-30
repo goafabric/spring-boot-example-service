@@ -33,15 +33,18 @@
         <!-- 3rd Party -->
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <lombok.version>1.18.16</lombok.version>
-
-        <contiperf.version>2.3.4</contiperf.version>
+        <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
         <joda-time.version>2.10.9</joda-time.version>
 
         <springfox-swagger.version>3.0.0</springfox-swagger.version>
+
         <resilience4j.version>1.7.0</resilience4j.version>
         <jasypt-spring-boot-starter.version>3.0.3</jasypt-spring-boot-starter.version>
         <jasypt-hibernate5.version>1.9.3</jasypt-hibernate5.version>
         <opentracing-spring-jaeger-web-starter.version>3.2.2</opentracing-spring-jaeger-web-starter.version>
+
+        <!-- Test -->
+        <contiperf.version>2.3.4</contiperf.version>
 
         <!-- Build Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -74,6 +77,62 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox-swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt-hibernate5</artifactId>
+                <version>${jasypt-hibernate5.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-spring-boot2</artifactId>
+                <version>${resilience4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.opentracing.contrib</groupId>
+                <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
+                <version>${opentracing-spring-jaeger-web-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.databene</groupId>
+                <artifactId>contiperf</artifactId>
+                <version>${contiperf.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -102,7 +161,7 @@
                             <path>
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok-mapstruct-binding</artifactId>
-                                <version>0.2.0</version>
+                                <version>${lombok.mapstruct.binding.version}</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
