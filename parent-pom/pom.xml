@@ -5,7 +5,7 @@
 
     <groupId>org.goafabric</groupId>
     <artifactId>goa-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>goa parent pom</name>
     <description>goa parent pom</description>
@@ -15,19 +15,10 @@
         <tag>HEAD</tag>
     </scm>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <properties>
+        <!-- Spring Boot -->
+        <spring.boot.version>2.4.2</spring.boot.version>
+
         <!-- Docker -->
         <docker.registry>docker.io/goafabric</docker.registry>
 
@@ -38,7 +29,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <spring.boot.version>2.4.0</spring.boot.version>
 
         <!-- 3rd Party -->
         <mapstruct.version>1.4.1.Final</mapstruct.version>
@@ -51,6 +41,7 @@
         <springfox-swagger.version>3.0.0</springfox-swagger.version>
         <jasypt-spring-boot-starter.version>3.0.2</jasypt-spring-boot-starter.version>
         <jasypt-hibernate5.version>1.9.3</jasypt-hibernate5.version>
+        <opentracing-spring-jaeger-web-starter.version>3.2.2</opentracing-spring-jaeger-web-starter.version>
 
         <!-- Build Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -65,7 +56,7 @@
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
         <dependency-check-maven.version>4.0.2</dependency-check-maven.version>
 
-        <!-- Further Plugins -->
+        <!-- Further Build Plugins -->
         <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>2.6.0</jib-maven-plugin.version>
 
@@ -75,6 +66,18 @@
         <sonar.language>java</sonar.language>
         <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
