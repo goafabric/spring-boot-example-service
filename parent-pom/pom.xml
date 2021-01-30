@@ -53,8 +53,6 @@
         <!-- Release and Deploy Plugins -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-        <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
-        <dependency-check-maven.version>4.0.2</dependency-check-maven.version>
 
         <!-- Further Build Plugins -->
         <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
@@ -104,7 +102,7 @@
                             <path>
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok-mapstruct-binding</artifactId>
-                                <version>0.1.0</version>
+                                <version>0.2.0</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
