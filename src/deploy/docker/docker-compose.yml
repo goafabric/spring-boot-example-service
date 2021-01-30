@@ -44,7 +44,7 @@ services:
 
   postgres:
     container_name: postgres_${STACK_NAME}
-    image: postgres:12.4
+    image: postgres:13.1
 #    image: arm64v8/postgres:12.4
     #image: postgres:9.6.17-alpine
     restart: 'no'

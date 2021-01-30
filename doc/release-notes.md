@@ -4,7 +4,7 @@ CrossFunctional
 - Spring 2.4.2
 - Swagger updated to 3.0.0
 - AdoptOpenJDK Baseimage set to a specific version
-- Upgrade to Postgres 12.4
+- Upgrade to Postgres 13.1
 - Prometheus metrics added
 
 ## Fix  
