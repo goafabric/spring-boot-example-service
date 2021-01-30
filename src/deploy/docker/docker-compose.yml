@@ -28,9 +28,9 @@ services:
     volumes:
       - tmp:/tmp
       - applogs:/usr/share/logs
-      - ./config/application/application.yml:/usr/share/config/application.yml
-      - ./config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
-      - ./config/application/demodata:/src/deploy/config/application/demodata
+      - ../config/application/application.yml:/usr/share/config/application.yml
+      - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
+      - ../config/application/demodata:/src/deploy/config/application/demodata
       - ./jprofiler/:/jprofiler/
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
 #                 "-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849",
@@ -58,7 +58,7 @@ services:
     command: postgres -c 'shared_buffers=128MB' -c 'max_connections=30' -c 'shared_preload_libraries=pg_stat_statements'
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./config/postgres/initdb/00_pg_statements.sql:/docker-entrypoint-initdb.d/00_pg_statements.sql
+      - ../config/postgres/initdb/00_pg_statements.sql:/docker-entrypoint-initdb.d/00_pg_statements.sql
     networks:
       - example-service-net
 
