@@ -20,8 +20,8 @@ spec:
       restartPolicy: Never
       containers:
         - name: country-service-batch
-          image: goafabric/spring-boot-exampleservice:1.0.4
-#          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4
+#          image: "none"
+          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.5-SNAPSHOT
           imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 50100

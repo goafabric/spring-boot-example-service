@@ -2,7 +2,7 @@
 docker run --rm -e database.provisioning.goals='-migrate -import-demo-data -import-catalog-data -terminate' \
 -e spring.datasource.url='jdbc:h2:mem:countrydb' \
 -v /Users/andreas/Projects/IdeaProjects/myprojects/spring_kubernetes/spring-boot-example-service/src/deploy/demodata:/src/deploy/demodata \
-goafabric/spring-boot-exampleservice:1.0.4
+goafabric/spring-boot-exampleservice:1.0.5-SNAPSHOT
 
 #SSL
 ##direct generation

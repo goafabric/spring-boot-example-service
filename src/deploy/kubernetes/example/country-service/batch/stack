@@ -1,3 +1,4 @@
+
 #!/bin/bash
 source .values
 export COMMAND=$1

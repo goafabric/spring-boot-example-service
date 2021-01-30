@@ -1,4 +1,7 @@
 #1.0.5
+
+
+#1.0.5-SNAPSHOT
 ## Updated
 CrossFunctional
 - Spring 2.4.2
