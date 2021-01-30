@@ -6,4 +6,4 @@ source ../../../.values
 
 export NAMESPACE="example"
 export DEPLOYMENT_NAME="country-service-application"
-export IMAGE_NAME="goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4-SNAPSHOT"
+export IMAGE_NAME="goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4"

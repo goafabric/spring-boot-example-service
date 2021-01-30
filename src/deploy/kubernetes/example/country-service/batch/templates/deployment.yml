@@ -13,15 +13,15 @@ spec:
     spec:
       initContainers:
         - name: check-db-ready
-          image: postgres:12.4
+          image: postgres:13.1
           command: ['sh', '-c',
                     'until pg_isready -h country-service-postgres -p 5432;
                      do echo waiting for database; sleep 2; done;']
       restartPolicy: Never
       containers:
         - name: country-service-batch
-          image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-#          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4-SNAPSHOT
+          image: goafabric/spring-boot-exampleservice:1.0.4
+#          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4
           imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 50100

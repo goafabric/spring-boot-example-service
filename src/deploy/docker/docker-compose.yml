@@ -3,8 +3,7 @@ version: "3.7"
 services:
   example-service:
     container_name: example-service-${STACK_NAME} #be extra carefull here container name must NOT contain an underscore _
-#    image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-    image: goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4-SNAPSHOT
+    image: goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4
     restart: 'no'
     ports:
       - 50700:50700
