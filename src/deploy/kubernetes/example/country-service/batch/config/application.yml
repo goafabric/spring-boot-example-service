@@ -9,7 +9,7 @@ management:
     endpoints:
       web:
         exposure:
-          include: "info,health,heapdump,prometheus,circuitbreakers,circuitbreakerevents"
+          include: "info,health,circuitbreakers,circuitbreakerevents,prometheus"
     endpoint:
       health:
         show-details: always
@@ -46,7 +46,7 @@ database:
 ## encryption section
 security:
   authentication:
-    enabled: true
+    enabled: false
 
 # cache
 cache:
@@ -79,6 +79,3 @@ resilience4j.circuitbreaker:
     calleeservice:
       baseConfig: default
 
-#opentracing.jaeger.udp-sender.host: "localhost"
-#opentracing.jaeger.udp-sender.port: "14250"
-#opentracing.jaeger.service-name: "country-service"

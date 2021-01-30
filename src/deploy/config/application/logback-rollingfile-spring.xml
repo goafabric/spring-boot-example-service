@@ -62,4 +62,8 @@
         <appender-ref ref="Console"/>
     </logger>
 
+    <logger name="io.opentracing" level="DEBUG" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
 </configuration>

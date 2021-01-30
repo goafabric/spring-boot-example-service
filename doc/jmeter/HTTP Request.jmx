@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.3">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -34,7 +34,7 @@
           <stringProp name="HTTPSampler.port">50700</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/countries/findByIsoCode?isoCode=es</stringProp>
+          <stringProp name="HTTPSampler.path">/countries/findAll</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -49,7 +49,7 @@
           <intProp name="calcMode">1</intProp>
           <doubleProp>
             <name>throughput</name>
-            <value>6000.0</value>
+            <value>60000.0</value>
             <savedValue>0.0</savedValue>
           </doubleProp>
         </ConstantThroughputTimer>

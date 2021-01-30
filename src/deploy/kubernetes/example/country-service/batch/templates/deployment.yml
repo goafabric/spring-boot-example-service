@@ -1,0 +1,60 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: country-service-batch
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+#      annotations:
+#        linkerd.io/inject: enabled
+      labels:
+        app: country-service-batch
+    spec:
+      initContainers:
+        - name: check-db-ready
+          image: postgres:13.1
+          command: ['sh', '-c',
+                    'until pg_isready -h country-service-postgres -p 5432;
+                     do echo waiting for database; sleep 2; done;']
+      restartPolicy: Never
+      containers:
+        - name: country-service-batch
+          image: goafabric/spring-boot-exampleservice:1.0.4
+#          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4
+          imagePullPolicy: IfNotPresent #Always
+          ports:
+            - containerPort: 50100
+          env:
+            - name: server.port
+              value: "50100"
+          envFrom:
+            - configMapRef:
+                name: country-service-batch-configmap
+            - secretRef:
+                name: country-service-batch-secret
+
+          command: ["java", "-Xms256M", "-Xmx256M",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
+          resources:
+            requests:
+              memory: "256M"
+              cpu: "250m"
+
+          volumeMounts:
+            - mountPath: /usr/share/logs
+              name: country-service-applogs
+            - mountPath: /usr/share/config/
+              name: country-service-batch-config-files-volume
+            - mountPath: src/deploy/config/application/demodata
+              name: country-service-batch-demodata-files-volume
+
+      volumes:
+        - name: country-service-applogs
+          emptyDir: {}
+        - name: country-service-batch-config-files-volume
+          configMap:
+            name: country-service-batch-config-files
+        - name: country-service-batch-demodata-files-volume
+          configMap:
+            name: country-service-batch-data-files

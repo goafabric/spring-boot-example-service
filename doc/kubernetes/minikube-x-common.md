@@ -33,5 +33,5 @@ https://www.cncf.io/wp-content/uploads/2019/07/The-Illustrated-Childrens-Guide-t
 https://www.cncf.io/wp-content/uploads/2018/12/Phippy-Goes-To-The-Zoo.pdf
 
 #Kubectl run
-sudo kubectl run -i --tty example-service --image=goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-sudo kubectl run -i --tty example-service --image=goafabric/spring-boot-exampleservice-arm64v8:1.0.4-SNAPSHOT
+sudo kubectl run -i --tty example-service --image=goafabric/spring-boot-exampleservice:1.0.4
+sudo kubectl run -i --tty example-service --image=goafabric/spring-boot-exampleservice-arm64v8:1.0.4

@@ -30,7 +30,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">goafabric.org</stringProp>
+          <stringProp name="HTTPSampler.domain">kubernetes</stringProp>
           <stringProp name="HTTPSampler.port">443</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -49,7 +49,7 @@
           <intProp name="calcMode">1</intProp>
           <doubleProp>
             <name>throughput</name>
-            <value>600.0</value>
+            <value>6000.0</value>
             <savedValue>0.0</savedValue>
           </doubleProp>
         </ConstantThroughputTimer>

@@ -5,5 +5,5 @@ source ../../../.values
 #export ARCH_SUFFIX="-arm64v8"
 
 export NAMESPACE="example"
-export DEPLOYMENT_NAME="country-service-application"
-export IMAGE_NAME="goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4"
+export DEPLOYMENT_NAME="country-service-batch"
+#export IMAGE_NAME="goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4"

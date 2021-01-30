@@ -13,19 +13,21 @@ spec:
     metadata:
       annotations:
         linkerd.io/inject: enabled
+        config.linkerd.io/trace-collector: linkerd-collector.linkerd:55678
+        config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
       labels:
         app: country-service-application
     spec:
       initContainers:
         - name: check-db-ready
-          image: postgres:12.4
+          image: postgres:13.1
           command: ['sh', '-c',
                     'until pg_isready -h country-service-postgres -p 5432;
                      do echo waiting for database; sleep 2; done;']
       containers:
         - name: country-service-application
-#          image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-#          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4-SNAPSHOT
+#          image: goafabric/spring-boot-exampleservice:1.0.4
+#          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4
           image: " "
           imagePullPolicy: IfNotPresent #Always
           ports:

@@ -3,12 +3,12 @@ version: "3.7"
 services:
   example-service:
     container_name: example-service-${STACK_NAME} #be extra carefull here container name must NOT contain an underscore _
-    image: goafabric/spring-boot-exampleservice:1.0.4-SNAPSHOT
-#    image: goafabric/spring-boot-exampleservice-arm64v8:1.0.4-SNAPSHOT
+    image: goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.4
     restart: 'no'
     ports:
       - 50700:50700
       - 50701:50701
+      - 8849:8849
     environment:
       - TZ=Europe/Berlin
       - spring.config.location=/usr/share/config/application.yml
@@ -21,7 +21,7 @@ services:
 
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
-      interval: 20s
+      interval: 10s
       timeout: 10s
       retries: 10
     volumes:
@@ -30,8 +30,12 @@ services:
       - ../config/application/application.yml:/usr/share/config/application.yml
       - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
       - ../config/application/demodata:/src/deploy/config/application/demodata
+      - ./jprofiler/:/jprofiler/
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
-#                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=10.0.130.178","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
+#                 "-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849",
+#                 "-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849,nowait,config=/jprofiler/jprofiler_config.xml",
+#                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
+#                 "-XX:+UnlockCommercialFeatures", "-XX:+FlightRecorder","-XX:StartFlightRecording=duration=10s,filename=flight.jfr",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
 
     networks:
@@ -39,7 +43,7 @@ services:
 
   postgres:
     container_name: postgres_${STACK_NAME}
-    image: postgres:12.4
+    image: postgres:13.1
 #    image: arm64v8/postgres:12.4
     #image: postgres:9.6.17-alpine
     restart: 'no'
