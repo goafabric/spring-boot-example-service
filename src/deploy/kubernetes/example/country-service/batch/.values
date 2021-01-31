@@ -1,9 +1,6 @@
-#!/bin/bash
-source ../../../.values
+_Release_namespace="example"
 
-[[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]] && ARCH_SUFFIX="-arm64v8"
-#export ARCH_SUFFIX="-arm64v8"
+_Values_app_name="country-service-batch"
 
-export NAMESPACE="example"
-export DEPLOYMENT_NAME="country-service-batch"
-export IMAGE_NAME="goafabric/spring-boot-exampleservice${ARCH_SUFFIX}:1.0.5-SNAPSHOT"
+_Values_image_repository="goafabric/spring-boot-exampleservice"
+_Values_image_tag="1.0.5-SNAPSHOT"

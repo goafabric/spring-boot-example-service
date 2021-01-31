@@ -33,7 +33,8 @@ then
     prune
 elif [ "${COMMAND}" = "restart" ]
 then
-    down && up
+    down
+    up
 else
     echo Doing nothing !
 fi

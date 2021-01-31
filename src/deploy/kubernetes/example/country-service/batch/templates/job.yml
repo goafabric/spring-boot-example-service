@@ -4,6 +4,8 @@ metadata:
   name: country-service-batch
 spec:
   backoffLimit: 0
+#  ttlSecondsAfterFinished: 60
+  activeDeadlineSeconds: 300
   template:
     metadata:
 #      annotations:
