@@ -1,8 +1,7 @@
 #!/bin/bash
-source .values
 COMMAND=$1
+source .values
 kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
-
 
 function up() {
     [ -d "./config/" ] && kubectl create configmap ${_Values_app_name}-config-files --from-file=./config/ -n ${_Release_namespace}
@@ -32,6 +31,9 @@ then
 elif [ "${COMMAND}" = "prune" ]
 then
     prune
+elif [ "${COMMAND}" = "restart" ]
+then
+    down && up
 else
     echo Doing nothing !
 fi
