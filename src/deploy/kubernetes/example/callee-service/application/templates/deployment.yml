@@ -18,9 +18,7 @@ spec:
     spec:
       containers:
         - name: callee-service-application
-#          image: goafabric/calle-service:1.0.0-SNAPSHOT
-#          image: goafabric/calle-service-arm64v8:1.0.0-SNAPSHOT
-          image: " "
+          image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
           imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 50100
