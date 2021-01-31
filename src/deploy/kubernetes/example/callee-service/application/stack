@@ -1,24 +1,26 @@
 #!/bin/bash
 source .values
-export COMMAND=$1
+COMMAND=$1
+kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
+
 
 function up() {
-    [ -d "./config/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-config-files --from-file=./config/ -n ${NAMESPACE}
-    [ -d "./config/data/" ] && kubectl create configmap ${DEPLOYMENT_NAME}-data-files --from-file=./config/data/ -n ${NAMESPACE}
-    [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${NAMESPACE}
-    kubectl apply -f ./templates/ -n ${NAMESPACE}
-    [ ! -z "$IMAGE_NAME" ] && kubectl set image deployment ${DEPLOYMENT_NAME} ${DEPLOYMENT_NAME}=${IMAGE_NAME} -n ${NAMESPACE}
+    [ -d "./config/" ] && kubectl create configmap ${_Values_app_name}-config-files --from-file=./config/ -n ${_Release_namespace}
+    [ -d "./config/data/" ] && kubectl create configmap ${_Values_app_name}-data-files --from-file=./config/data/ -n ${_Release_namespace}
+    [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${_Release_namespace}
+    kubectl apply -f ./templates/ -n ${_Release_namespace}
+    kubectl set image deployment ${_Values_app_name} ${_Values_app_name}=${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag} -n ${_Release_namespace}
 }
 
 function down() {
-    [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-config-files -n ${NAMESPACE}
-    [ -d "./config/data/" ] && kubectl delete --ignore-not-found configmap ${DEPLOYMENT_NAME}-data-files -n ${NAMESPACE}
-    kubectl delete --ignore-not-found -f ./templates -n ${NAMESPACE}
+    [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-config-files -n ${_Release_namespace}
+    [ -d "./config/data/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-data-files -n ${_Release_namespace}
+    kubectl delete --ignore-not-found -f ./templates -n ${_Release_namespace}
 }
 
 function prune() {
     down
-    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${NAMESPACE}
+    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${_Release_namespace}
 }
 
 if [ "${COMMAND}" = "up" ]
