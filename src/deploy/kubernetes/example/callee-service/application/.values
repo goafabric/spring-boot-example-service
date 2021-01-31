@@ -4,5 +4,9 @@ _Values_app_name="callee-service-application"
 
 _Values_image_repository="goafabric/calle-service"
 _Values_image_tag="1.0.0-SNAPSHOT"
-_Values_image_pullPolicy="IfNotPresent" #Always
+_Values_image_pullPolicy="IfNotPresent"
+
+_Values_readinessProbe_initialDelaySeconds="5"
+_Values_resources_requests_memory="128M"
+_Values_resources_requests_cpu="250m"
 

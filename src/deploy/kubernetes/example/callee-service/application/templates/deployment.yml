@@ -33,30 +33,30 @@ spec:
             - secretRef:
                 name: callee-service-application-secret
 
-          command: ["java", "-Xms128M", "-Xmx128M",
+          command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
                     "org.goafabric.calleservice.Application"]
           resources:
             requests:
-              memory: "128M"
-              cpu: "250m"
+              memory: "${_Values_resources_requests_memory}"
+              cpu: "${_Values_resources_requests_cpu}"
 
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 50100
-            initialDelaySeconds: 2
+            initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
-            failureThreshold: 5
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
               port: 50100
-            initialDelaySeconds: 2
+            initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
-            failureThreshold: 5
+            failureThreshold: 3
 
           volumeMounts:
             - mountPath: /usr/share/logs
