@@ -26,12 +26,12 @@ spec:
                      do echo waiting for database; sleep 2; done;']
       containers:
         - name: country-service-application
-#          image: goafabric/spring-boot-exampleservice:1.0.5-SNAPSHOT
-#          image: goafabric/spring-boot-exampleservice-arm64v8:1.0.5-SNAPSHOT
-          image: " "
+          image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
           imagePullPolicy: IfNotPresent #Always
           ports:
-            - containerPort: 50100
+            - name: http
+              containerPort: 50100
+              protocol: TCP
           env:
             - name: server.port
               value: "50100"

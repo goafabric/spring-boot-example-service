@@ -18,7 +18,6 @@ function up() {
     [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${_Release_namespace}
     [ -d "./templates/ingress/" ] && kubectl apply -f ./templates/ingress/ -n ${_Release_namespace}
     kapply
-#    [ ! -z "$_Values_image_repository" ] && kubectl set image deployment ${_Values_app_name} ${_Values_app_name}=${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag} -n ${_Release_namespace}
 }
 
 function down() {

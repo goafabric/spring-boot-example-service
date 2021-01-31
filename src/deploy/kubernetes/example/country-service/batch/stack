@@ -3,17 +3,27 @@ COMMAND=$1
 source .values
 kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
 
+function kapply() {
+for filename in ./templates/*.yml; do
+eval "cat <<EOF
+$(<$filename)
+EOF
+" | kubectl apply -n ${_Release_namespace} -f -
+done
+}
+
 function up() {
     [ -d "./config/" ] && kubectl create configmap ${_Values_app_name}-config-files --from-file=./config/ -n ${_Release_namespace}
     [ -d "./config/data/" ] && kubectl create configmap ${_Values_app_name}-data-files --from-file=./config/data/ -n ${_Release_namespace}
     [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${_Release_namespace}
-    kubectl apply -f ./templates/ -n ${_Release_namespace}
-    [ ! -z "$_Values_image_repository" ] && kubectl set image deployment ${_Values_app_name} ${_Values_app_name}=${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag} -n ${_Release_namespace}
+    [ -d "./templates/ingress/" ] && kubectl apply -f ./templates/ingress/ -n ${_Release_namespace}
+    kapply
 }
 
 function down() {
     [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-config-files -n ${_Release_namespace}
     [ -d "./config/data/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-data-files -n ${_Release_namespace}
+    [ -d "./templates/ingress/" ] && kubectl delete --ignore-not-found -f ./templates/ingress/ -n ${_Release_namespace}
     kubectl delete --ignore-not-found -f ./templates -n ${_Release_namespace}
 }
 
