@@ -21,7 +21,9 @@ spec:
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
           imagePullPolicy: IfNotPresent #Always
           ports:
-            - containerPort: 50100
+            - name: http
+              containerPort: 50100
+              protocol: TCP
           env:
             - name: server.port
               value: "50100"
@@ -43,7 +45,7 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: 50100
-            initialDelaySeconds: 5
+            initialDelaySeconds: 2
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5
@@ -51,7 +53,7 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 50100
-            initialDelaySeconds: 5
+            initialDelaySeconds: 2
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5

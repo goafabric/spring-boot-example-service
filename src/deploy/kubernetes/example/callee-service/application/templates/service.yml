@@ -7,6 +7,9 @@ spec:
     app: callee-service-application
   type: ClusterIP #NodePort
   ports:
-    - protocol: TCP
-      port: 50100
-#      nodePort: 30800 
+    - port: 50100
+#      nodePort: 30800
+      targetPort: http
+      protocol: TCP
+      name: http
+
