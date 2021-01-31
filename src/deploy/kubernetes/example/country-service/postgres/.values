@@ -1,5 +1,6 @@
-#!/bin/bash
-source ../../../.values
+_Release_namespace="example"
 
-export NAMESPACE="example"
-export DEPLOYMENT_NAME="country-service-postgres"
+_Values_app_name="country-service-postgres"
+
+#_Values_image_repository="postgres"
+#_Values_image_tag="13.1"

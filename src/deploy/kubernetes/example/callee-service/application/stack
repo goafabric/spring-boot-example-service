@@ -8,7 +8,7 @@ function up() {
     [ -d "./config/data/" ] && kubectl create configmap ${_Values_app_name}-data-files --from-file=./config/data/ -n ${_Release_namespace}
     [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${_Release_namespace}
     kubectl apply -f ./templates/ -n ${_Release_namespace}
-    kubectl set image deployment ${_Values_app_name} ${_Values_app_name}=${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag} -n ${_Release_namespace}
+    [ ! -z "$_Values_image_repository" ] && kubectl set image deployment ${_Values_app_name} ${_Values_app_name}=${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag} -n ${_Release_namespace}
 }
 
 function down() {
