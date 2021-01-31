@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: callee-service-application
+  name: ${_Values_app_name}
 spec:
   selector:
     matchLabels:
-      app: callee-service-application
+      app: ${_Values_app_name}
   replicas: 1
   strategy:
     type: Recreate #RollingUpdate
@@ -14,10 +14,10 @@ spec:
       annotations:
         linkerd.io/inject: enabled
       labels:
-        app: callee-service-application
+        app: ${_Values_app_name}
     spec:
       containers:
-        - name: callee-service-application
+        - name: ${_Values_app_name}
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
           imagePullPolicy: ${_Values_image_pullPolicy}
           ports:
@@ -29,9 +29,9 @@ spec:
               value: "50100"
           envFrom:
             - configMapRef:
-                name: callee-service-application-configmap
+                name: ${_Values_app_name}-configmap
             - secretRef:
-                name: callee-service-application-secret
+                name: ${_Values_app_name}-secret
 
           command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
@@ -60,14 +60,14 @@ spec:
 
           volumeMounts:
             - mountPath: /usr/share/logs
-              name: callee-service-applogs
+              name: ${_Values_app_name}-applogs
             - mountPath: /usr/share/config/
-              name: callee-service-application-config-files-volume
+              name: ${_Values_app_name}-config-files-volume
 
       volumes:
-        - name: callee-service-applogs
+        - name: ${_Values_app_name}-applogs
           emptyDir: {}
         # generated from local file system via "kubectl create configmap" inside stack
-        - name: callee-service-application-config-files-volume
+        - name: ${_Values_app_name}-config-files-volume
           configMap:
-            name: callee-service-application-config-files
+            name: ${_Values_app_name}-config-files

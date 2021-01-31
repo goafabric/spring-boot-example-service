@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: callee-service-application-configmap
+  name: ${_Values_app_name}-configmap
 data:
   TZ: Europe/Berlin
   spring.config.location: /usr/share/config/application.yml
@@ -20,7 +20,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: callee-service-application-secret
+  name: ${_Values_app_name}-secret
 data:
 
 
