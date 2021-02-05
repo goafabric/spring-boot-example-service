@@ -3,7 +3,7 @@ dd if=/dev/zero of=./image seek=20000000 obs=1024 count=0
 
 #system
 sudo apt --assume-yes update  
-sudo apt --assume-yes install mc && sudo apt --assume-yes install net-tools && sudo apt --assume-yes install conntrack
+sudo apt --assume-yes install mc && sudo apt --assume-yes install net-tools && sudo apt --assume-yes install conntrack && sudo apt --assume-yes install apache2-utils
 
 #ssh
 sudo sed -i '/PasswordAuthentication no/c PasswordAuthentication yes' /etc/ssh/sshd_config && sudo service ssh restart
