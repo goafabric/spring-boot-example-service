@@ -70,8 +70,6 @@ spec:
               name: country-service-applogs
             - mountPath: /usr/share/config/
               name: country-service-application-config-files-volume
-            - mountPath: src/deploy/config/application/demodata
-              name: country-service-application-demodata-files-volume
 
       volumes:
         - name: country-service-applogs
@@ -79,6 +77,3 @@ spec:
         - name: country-service-application-config-files-volume
           configMap:
             name: country-service-application-config-files
-        - name: country-service-application-demodata-files-volume
-          configMap:
-            name: country-service-application-data-files
