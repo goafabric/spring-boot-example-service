@@ -27,7 +27,7 @@ spec:
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
           imagePullPolicy: ${_Values_image_pullPolicy}
           ports:
-            - name: http
+            - name: transport
               containerPort: ${_Values_service_port}
               protocol: TCP
           envFrom:

@@ -9,7 +9,7 @@ spec:
   ports:
     - port: ${_Values_service_port}
       nodePort: ${_Values_service_nodePort}
-      targetPort: http
+      targetPort: transport
       protocol: TCP
-      name: http
+      name: transport
 

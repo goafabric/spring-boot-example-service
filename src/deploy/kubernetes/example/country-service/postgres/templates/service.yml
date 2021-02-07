@@ -1,14 +1,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: country-service-postgres
+  name: ${_Values_app_name}
 spec:
   selector:
-    app: country-service-postgres
-  type: NodePort #ClusterIP
+    app: ${_Values_app_name}
+  type: ${_Values_service_type}
   ports:
     - port: ${_Values_service_port}
-      nodePort: 30710
+      nodePort: ${_Values_service_nodePort}
       targetPort: transport
       protocol: TCP
-      name: tcp
+      name: transport
+
