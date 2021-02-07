@@ -1,7 +1,12 @@
 #!/bin/bash
 COMMAND=$1
+PROFILE=$2 
+
 source .values
 kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
+
+[ "$PROFILE" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
+
 
 function dynKubectl() {
 for filename in ./templates/*.yml; do
