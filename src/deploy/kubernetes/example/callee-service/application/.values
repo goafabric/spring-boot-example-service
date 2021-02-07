@@ -6,6 +6,7 @@ _Values_image_tag=1.0.0-SNAPSHOT
 _Values_image_pullPolicy=IfNotPresent
 
 _Values_ports_containerPort=50100
+_Values_command=org.goafabric.calleservice.Application
 
 _Values_resources_requests_memory=128M
 _Values_resources_requests_cpu=250m

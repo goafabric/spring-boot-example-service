@@ -32,7 +32,7 @@ spec:
 
           command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
-                    "org.goafabric.calleservice.Application"]
+                    "${_Values_command}"]
           resources:
             requests:
               memory: "${_Values_resources_requests_memory}"
