@@ -3,7 +3,7 @@ _Values_app_name=country-service-postgres
 
 _Values_image_pullPolicy=IfNotPresent #Always
 
-_Values_ports_containerPort=5432
+_Values_service_port=5432
 
 _Values_resources_requests_memory=128M
 _Values_resources_requests_cpu=250m

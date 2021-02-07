@@ -7,7 +7,7 @@ spec:
     app: country-service-postgres
   type: NodePort #ClusterIP
   ports:
-    - port: ${_Values_ports_containerPort}
+    - port: ${_Values_service_port}
       nodePort: 30710
       targetPort: transport
       protocol: TCP
