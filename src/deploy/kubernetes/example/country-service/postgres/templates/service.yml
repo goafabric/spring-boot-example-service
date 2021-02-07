@@ -5,8 +5,10 @@ metadata:
 spec:
   selector:
     app: country-service-postgres
-  type: NodePort #ClusterIPD
+  type: NodePort #ClusterIP
   ports:
-    - protocol: TCP
-      port: 5432
-      nodePort: 30710 #this is the external port
+    - port: ${_Values_ports_containerPort}
+      nodePort: 30710
+      targetPort: transport
+      protocol: TCP
+      name: tcp
