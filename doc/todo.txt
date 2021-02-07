@@ -1,7 +1,6 @@
 Now
 
 Check conformatiy with main applications
-Service Exposure ein und ausschalten
 Andere Strategie für Configfiles + Logging
 Zertifikate für Server generieren
 JProfiler in Kubi
