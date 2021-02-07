@@ -1,17 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: country-service-batch
+  name: ${_Values_app_name}
 spec:
   backoffLimit: 0
-#  ttlSecondsAfterFinished: 60
   activeDeadlineSeconds: 300
   template:
     metadata:
-#      annotations:
-#        linkerd.io/inject: enabled
+      annotations:
+        linkerd.io/inject: ${_Values_linkerd_inject}
       labels:
-        app: country-service-batch
+        app: ${_Values_app_name}
     spec:
       initContainers:
         - name: check-db-ready
@@ -21,41 +20,37 @@ spec:
                      do echo waiting for database; sleep 2; done;']
       restartPolicy: Never
       containers:
-        - name: country-service-batch
+        - name: ${_Values_app_name}
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
           imagePullPolicy: IfNotPresent #Always
-          ports:
-            - containerPort: 50100
-          env:
-            - name: server.port
-              value: "50100"
           envFrom:
             - configMapRef:
-                name: country-service-batch-configmap
+                name: ${_Values_app_name}-configmap
             - secretRef:
-                name: country-service-batch-secret
+                name: ${_Values_app_name}-secret
 
-          command: ["java", "-Xms256M", "-Xmx256M",
-                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
+          command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
+                    "${_Values_command}"]
           resources:
             requests:
-              memory: "256M"
-              cpu: "250m"
+              memory: "${_Values_resources_requests_memory}"
+              cpu: "${_Values_resources_requests_cpu}"
 
           volumeMounts:
             - mountPath: /usr/share/logs
               name: country-service-applogs
             - mountPath: /usr/share/config/
-              name: country-service-batch-config-files-volume
+              name: ${_Values_app_name}-config-files-volume
             - mountPath: src/deploy/config/application/demodata
-              name: country-service-batch-demodata-files-volume
+              name: ${_Values_app_name}-data-files-volume
 
       volumes:
         - name: country-service-applogs
           emptyDir: {}
-        - name: country-service-batch-config-files-volume
+        - name: ${_Values_app_name}-config-files-volume
           configMap:
-            name: country-service-batch-config-files
-        - name: country-service-batch-demodata-files-volume
+            name: ${_Values_app_name}-config-files
+        - name: ${_Values_app_name}-data-files-volume
           configMap:
-            name: country-service-batch-data-files
+            name: ${_Values_app_name}-data-files
