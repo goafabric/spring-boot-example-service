@@ -1,5 +1,4 @@
 _Release_namespace=example
-
 _Values_app_name=callee-service-application
 
 _Values_image_repository=goafabric/calle-service
@@ -12,3 +11,5 @@ _Values_resources_requests_memory=128M
 _Values_resources_requests_cpu=250m
 
 _Values_readinessProbe_initialDelaySeconds=1
+
+_Values_linkerd_inject=disabled

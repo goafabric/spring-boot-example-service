@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/inject: enabled
+        linkerd.io/inject: ${_Values_linkerd_inject}
       labels:
         app: ${_Values_app_name}
     spec:
