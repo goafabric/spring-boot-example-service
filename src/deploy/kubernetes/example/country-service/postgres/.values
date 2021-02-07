@@ -1,7 +1,7 @@
 _Release_namespace=example
 _Values_app_name=country-service-postgres
 
-_Values_image_pullPolicy=IfNotPresent
+_Values_image_pullPolicy=IfNotPresent #Always
 
 _Values_ports_containerPort=5432
 
