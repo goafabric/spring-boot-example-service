@@ -1,38 +1,21 @@
 Now
 
-- scripte standartisierne mit variablen
-- dashboard
-- arm variable
-- services exposen, nicht exposen abhängig vom profile
-- jaeger, jprofiler
-- Statefulsets
+Check conformatiy with main applications
+Service Exposure ein und ausschalten
+Andere Strategie für Configfiles + Logging
+Zertifikate für Server generieren
+JProfiler in Kubi
+artifactory secret encoden
 
-..
-
-
-- jobs
-- Statefulsets
-
-- SSL and certificates
-- profiler per jmx
-
-- keycloack / oauth
-- monitoring
-- ingress: swagger, pgadmin
+https://medium.com/flant-com/cert-manager-lets-encrypt-ssl-certs-for-kubernetes-7642e463bbce
 
 Fun
-- Prometheus, Graphana, Jaeger
-- Elk
-- Helm
-
-Code
-- Simpler Logging without Logback.xml
-- Outbound SSL
+- Prometheus, Graphana, Jaeger, Elk, Helm
 
 Later
+- Outbound SSL
 - Multi Tenancy
 - Statefulsets vs PVC
-- Database Provisioning
 - Networks Seperation (https://gardener.cloud/documentation/guides/applications/network-isolation/)
 
 ---
