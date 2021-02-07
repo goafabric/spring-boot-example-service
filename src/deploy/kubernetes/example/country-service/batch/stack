@@ -39,25 +39,23 @@ function import() {
     while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
     kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
     prune
-  }
+}
 
-if [ "${COMMAND}" = "import" ]
+if [ "${COMMAND}" = "up" ] && [ ! -f "./templates/job.yml" ]
 then
-    down
     up
-    echo waiting for batch to start/load
-    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
-    kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
-    down
 elif [ "${COMMAND}" = "down" ]
 then
     down
 elif [ "${COMMAND}" = "prune" ]
 then
     prune
-elif [ "${COMMAND}" = "restart" ]
+elif [ "${COMMAND}" = "restart" ] && [ ! -f "./templates/job.yml" ]
 then
     down && up
+elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]
+then
+    import
 else
     echo Doing nothing !
 fi

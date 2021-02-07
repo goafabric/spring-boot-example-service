@@ -32,7 +32,16 @@ function prune() {
     [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${_Release_namespace}
 }
 
-if [ "${COMMAND}" = "up" ]
+function import() {
+    prune
+    up
+    echo waiting for batch to start/load
+    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
+    kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
+    prune
+}
+
+if [ "${COMMAND}" = "up" ] && [ ! -f "./templates/job.yml" ]
 then
     up
 elif [ "${COMMAND}" = "down" ]
@@ -41,9 +50,12 @@ then
 elif [ "${COMMAND}" = "prune" ]
 then
     prune
-elif [ "${COMMAND}" = "restart" ]
+elif [ "${COMMAND}" = "restart" ] && [ ! -f "./templates/job.yml" ]
 then
     down && up
+elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]
+then
+    import
 else
     echo Doing nothing !
 fi
