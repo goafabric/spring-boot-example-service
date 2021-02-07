@@ -19,6 +19,8 @@ data:
 
 ---
 
+#Secrets to external resources
+
 apiVersion: v1
 kind: Secret
 metadata:

@@ -14,11 +14,6 @@ data:
   management.database.monitoring.enabled: "true"
   management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers,prometheus"
 
-  #externals
-  spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
-
-  adapter.calleeservice.url: "http://callee-service-application:50100"
-
   #stageing
   server.tomcat.threads.max: "20"
 
@@ -28,18 +23,21 @@ data:
   resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
 
   database.provisioning.goals: -migrate
+
 ---
+
+#Secrets to external resources
 
 apiVersion: v1
 kind: Secret
 metadata:
   name: ${_Values_app_name}-secret
+stringData:
+  adapter.calleeservice.url: "http://callee-service-application:50100"
+  spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
 data:
   adapter.calleeservice.user: ZXhhbXBsZXVzZXI=
-  #exampleuser
   adapter.calleeservice.password: RU5DKExnQ1Q0a3JXNU5EclFrZkdQUEVZdzdYT3Z6dWZ2SUFOV0ZxM3ZIb3crU3BoZDZBQ3RhdmFoVzhhTDI4TkRubVpleDUrUG56MTRORWVEdVIrWkk5MHNRPT0p
-  #ENC(LgCT ...) => we should replace jasypt we kubernetes aes256 secrets here
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
   spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
-
 
