@@ -1,6 +1,15 @@
-_Release_namespace="example"
+_Release_namespace=example
+_Values_app_name=country-service-postgres
 
-_Values_app_name="country-service-postgres"
+#_Values_image_repository=postgres
+#_Values_image_tag=13.1
+_Values_image_pullPolicy=IfNotPresent
 
-#_Values_image_repository="postgres"
-#_Values_image_tag="13.1"
+_Values_ports_containerPort=5432
+
+_Values_resources_requests_memory=256M
+_Values_resources_requests_cpu=250m
+
+#_Values_readinessProbe_initialDelaySeconds=10
+
+_Values_linkerd_inject=disabled

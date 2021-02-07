@@ -1,30 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: country-service-postgres
+  name: ${_Values_app_name}
 spec:
   selector:
     matchLabels:
-      app: country-service-postgres
+      app: ${_Values_app_name}
   replicas: 1
   strategy:
     type: Recreate #RollingUpdate
   template:
     metadata:
       annotations:
-        linkerd.io/inject: enabled
+        linkerd.io/inject: ${_Values_linkerd_inject}
       labels:
-        app: country-service-postgres
+        app: ${_Values_app_name}
     spec:
       containers:
-        - name: country-service-postgres
+        - name: ${_Values_app_name}
           image: "postgres:13.1"
           imagePullPolicy: IfNotPresent #Always
           ports:
-            - containerPort: 5432
+            - containerPort: ${_Values_ports_containerPort}
           envFrom:
+            - configMapRef:
+                name: ${_Values_app_name}-configmap
             - secretRef:
-                name: country-service-postgres-secret
+                name: ${_Values_app_name}-secret
 
           args:
             - postgres
@@ -43,9 +45,9 @@ spec:
 
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: country-service-postgres-pvc-volume
+              name: ${_Values_app_name}-pvc-volume
 
       volumes:
-        - name: country-service-postgres-pvc-volume
+        - name: ${_Values_app_name}-pvc-volume
           persistentVolumeClaim:
-            claimName: country-service-postgres-pvc
+            claimName: ${_Values_app_name}-pvc
