@@ -1,8 +1,8 @@
-_Release_namespace="example"
-_Values_app_name="country-service-application"
+_Release_namespace=example
+_Values_app_name=country-service-application
 
-_Values_image_repository="goafabric/spring-boot-exampleservice"
-_Values_image_tag="1.0.5-SNAPSHOT"
+_Values_image_repository=goafabric/spring-boot-exampleservice
+_Values_image_tag=1.0.5-SNAPSHOT
 _Values_image_pullPolicy=IfNotPresent
 
 _Values_ports_containerPort=50100
