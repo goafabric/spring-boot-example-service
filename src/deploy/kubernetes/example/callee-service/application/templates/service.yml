@@ -7,7 +7,7 @@ spec:
     app: ${_Values_app_name}
   type: ClusterIP #NodePort
   ports:
-    - port: 50100
+    - port: ${_Values_ports_containerPort}
 #      nodePort: 30800
       targetPort: http
       protocol: TCP

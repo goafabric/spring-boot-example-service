@@ -1,79 +1,70 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: country-service-application
+  name: ${_Values_app_name}
 spec:
   selector:
     matchLabels:
-      app: country-service-application
+      app: ${_Values_app_name}
   replicas: 1
   strategy:
     type: Recreate #RollingUpdate
   template:
     metadata:
       annotations:
-        linkerd.io/inject: enabled
-        config.linkerd.io/trace-collector: linkerd-collector.linkerd:55678
-        config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
+        linkerd.io/inject: ${_Values_linkerd_inject}
       labels:
-        app: country-service-application
+        app: ${_Values_app_name}
     spec:
-      initContainers:
-        - name: check-db-ready
-          image: postgres:13.1
-          command: ['sh', '-c',
-                    'until pg_isready -h country-service-postgres -p 5432;
-                     do echo waiting for database; sleep 2; done;']
       containers:
-        - name: country-service-application
+        - name: ${_Values_app_name}
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
-          imagePullPolicy: Always
+          imagePullPolicy: ${_Values_image_pullPolicy}
           ports:
             - name: http
-              containerPort: 50100
+              containerPort: ${_Values_ports_containerPort}
               protocol: TCP
-          env:
-            - name: server.port
-              value: "50100"
           envFrom:
             - configMapRef:
-                name: country-service-application-configmap
+                name: ${_Values_app_name}-configmap
             - secretRef:
-                name: country-service-application-secret
+                name: ${_Values_app_name}-secret
 
-          command: ["java", "-Xms256M", "-Xmx256M",
-                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
+          command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
+                    "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
+                    "${_Values_command}"]
           resources:
             requests:
-              memory: "256M"
-              cpu: "250m"
+              memory: "${_Values_resources_requests_memory}"
+              cpu: "${_Values_resources_requests_cpu}"
 
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 50100
-            initialDelaySeconds: 15
+              port: ${_Values_ports_containerPort}
+            initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
-            failureThreshold: 5
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 50100
-            initialDelaySeconds: 15
+              port: ${_Values_ports_containerPort}
+            initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
-            failureThreshold: 5
+            failureThreshold: 3
 
           volumeMounts:
             - mountPath: /usr/share/logs
-              name: country-service-applogs
+              name: ${_Values_app_name}-applogs
             - mountPath: /usr/share/config/
-              name: country-service-application-config-files-volume
+              name: ${_Values_app_name}-config-files-volume
 
       volumes:
-        - name: country-service-applogs
+        - name: ${_Values_app_name}-applogs
           emptyDir: {}
-        - name: country-service-application-config-files-volume
+        # generated from local file system via "kubectl create configmap" inside stack
+        - name: ${_Values_app_name}-config-files-volume
           configMap:
-            name: country-service-application-config-files
+            name: ${_Values_app_name}-config-files
