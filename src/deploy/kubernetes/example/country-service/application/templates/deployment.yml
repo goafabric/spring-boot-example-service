@@ -27,7 +27,7 @@ spec:
       containers:
         - name: country-service-application
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
-          imagePullPolicy: IfNotPresent #Always
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 50100

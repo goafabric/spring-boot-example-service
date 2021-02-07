@@ -62,7 +62,7 @@
         <appender-ref ref="Console"/>
     </logger>
 
-    <logger name="io" level="DEBUG" additivity="false">
+    <logger name="io" level="INFO" additivity="false">
         <appender-ref ref="Console"/>
     </logger>
 
