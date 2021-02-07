@@ -9,6 +9,8 @@ _Values_resources_requests_memory=128M
 _Values_resources_requests_cpu=250m
 _Values_resources_limits_cpu=500m
 
+_Values_postgres_max_connections=30
+
 #_Values_readinessProbe_initialDelaySeconds=10
 
 _Values_linkerd_inject=disabled
