@@ -16,6 +16,12 @@ spec:
       labels:
         app: ${_Values_app_name}
     spec:
+      initContainers:
+        - name: check-db-ready
+          image: postgres:13.1
+          command: ['sh', '-c',
+              'until pg_isready -h country-service-postgres -p 5432;
+                     do echo waiting for database; sleep 2; done;']
       containers:
         - name: ${_Values_app_name}
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
