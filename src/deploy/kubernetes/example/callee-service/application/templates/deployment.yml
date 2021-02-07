@@ -22,11 +22,8 @@ spec:
           imagePullPolicy: ${_Values_image_pullPolicy}
           ports:
             - name: http
-              containerPort: 50100
+              containerPort: ${_Values_ports_containerPort}
               protocol: TCP
-          env:
-            - name: server.port
-              value: "50100"
           envFrom:
             - configMapRef:
                 name: ${_Values_app_name}-configmap
@@ -44,7 +41,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 50100
+              port: ${_Values_ports_containerPort}
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
@@ -52,7 +49,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 50100
+              port: ${_Values_ports_containerPort}
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
