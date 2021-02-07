@@ -42,15 +42,10 @@ spec:
               cpu: "500m"
 
           volumeMounts:
-            - mountPath: /docker-entrypoint-initdb.d/
-              name: country-service-postgres-initdb-volume
             - mountPath: /var/lib/postgresql/data
               name: country-service-postgres-pvc-volume
 
       volumes:
-        - name: country-service-postgres-initdb-volume
-          configMap:
-            name: country-service-postgres-data-files
         - name: country-service-postgres-pvc-volume
           persistentVolumeClaim:
             claimName: country-service-postgres-pvc
