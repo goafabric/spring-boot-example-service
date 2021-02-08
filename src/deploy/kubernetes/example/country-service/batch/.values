@@ -1,5 +1,6 @@
 _Release_namespace="example"
-_Values_app_name="country-service-batch"
+_Values_root_name=country
+_Values_app_name=${_Values_root_name}-service-batch
 
 _Values_image_repository="goafabric/spring-boot-exampleservice"
 _Values_image_tag="1.0.5-SNAPSHOT"
