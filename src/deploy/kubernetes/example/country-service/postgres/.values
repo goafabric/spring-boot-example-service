@@ -15,4 +15,4 @@ _Values_postgres_max_connections=30
 
 #_Values_readinessProbe_initialDelaySeconds=10
 
-_Values_linkerd_inject=disabled
+_Values_linkerd_inject=enabled
