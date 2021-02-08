@@ -17,14 +17,5 @@ data:
   #stageing
   server.tomcat.threads.max: "20"
 
----
-
-#Secrets to external resources
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ${_Values_app_name}-secret
-data:
 
 
