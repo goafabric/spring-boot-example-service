@@ -46,15 +46,15 @@ spec:
               name: ${_Values_app_name}-pvc-volume
 
             - mountPath: /docker-entrypoint-initdb.d/
-              name: country-service-postgres-data-volume
+              name: country-service-postgres-initdb-volume
 
       volumes:
         - name: ${_Values_app_name}-pvc-volume
           persistentVolumeClaim:
             claimName: ${_Values_app_name}-pvc
 
-        - name: country-service-postgres-data-volume
+        - name: country-service-postgres-initdb-volume
           configMap:
-            name: country-service-postgres-data-files
+            name: country-service-postgres-initdb-files
 
 
