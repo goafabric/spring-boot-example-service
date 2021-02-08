@@ -8,25 +8,9 @@ data:
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
 
   #stageing
-  server.tomcat.threads.max: "20"
-
   spring.datasource.hikari.maximum-pool-size: "10"
   spring.datasource.hikari.connection-timeout: "10000"
 
   database.provisioning.goals: -migrate -import-demo-data -terminate # migrate is also needed because we misuse the service as batch here
-
----
-
-#Secrets to external resources
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ${_Values_app_name}-secret
-stringData:
-  spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/countrydb"
-data:
-  spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
-  spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
 
 
