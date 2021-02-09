@@ -38,7 +38,7 @@ function import() {
     echo waiting for batch to start/load
     while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
     kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
-    prune
+#    prune
 }
 
 if [ "${COMMAND}" = "up" ] && [ ! -f "./templates/job.yml" ]
