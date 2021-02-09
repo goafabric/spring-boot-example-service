@@ -1,6 +1,6 @@
 _Release_namespace=example
-_Values_root_name=country
-_Values_app_name=${_Values_root_name}-service-postgres
+_Values_root_name=country-service
+_Values_app_name=${_Values_root_name}-postgres
 
 _Values_image_pullPolicy=IfNotPresent #Always
 

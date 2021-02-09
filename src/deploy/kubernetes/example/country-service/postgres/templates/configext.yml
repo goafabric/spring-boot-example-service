@@ -3,6 +3,8 @@ kind: Secret
 metadata:
   name: ${_Values_app_name}-secret
 type: Opaque
+stringData:
+  POSTGRES_DB: country
 data:
   POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
   #echo -n example-service | base64

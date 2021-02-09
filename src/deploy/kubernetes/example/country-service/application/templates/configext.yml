@@ -3,7 +3,7 @@ kind: Secret
 metadata:
   name: ${_Values_app_name}-secret
 stringData:
-  spring.datasource.url: "jdbc:postgresql://${_Values_root_name}-service-postgres:5432/${_Values_root_name}"
+  spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/country"
   adapter.calleeservice.url: "http://callee-service-application:50100"
 data:
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl

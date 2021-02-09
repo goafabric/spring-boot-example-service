@@ -20,7 +20,7 @@ spec:
         - name: check-db-ready
           image: postgres:13.1
           command: ['sh', '-c',
-              'until pg_isready -h ${_Values_root_name}-service-postgres -p 5432;
+              'until pg_isready -h ${_Values_root_name}-postgres -p 5432;
                      do echo waiting for database; sleep 2; done;']
       containers:
         - name: ${_Values_app_name}

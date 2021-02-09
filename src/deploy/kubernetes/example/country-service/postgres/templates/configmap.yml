@@ -4,7 +4,6 @@ metadata:
   name: ${_Values_app_name}-configmap
 data:
   TZ: Europe/Berlin
-  POSTGRES_DB: ${_Values_root_name}
 
 ---
 
