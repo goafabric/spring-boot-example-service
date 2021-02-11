@@ -55,6 +55,6 @@ spec:
 
         - name: ${_Values_app_name}-initdb-volume
           configMap:
-            name: ${_Values_app_name}-initdb-files
+            name: ${_Values_app_name}-data-files
 
 
