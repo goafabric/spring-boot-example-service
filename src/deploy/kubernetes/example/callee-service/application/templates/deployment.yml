@@ -41,7 +41,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: ${_Values_service_port}
+              port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
@@ -49,7 +49,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: ${_Values_service_port}
+              port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
             timeoutSeconds: 10
