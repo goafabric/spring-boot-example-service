@@ -7,7 +7,7 @@ kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Val
 
 _Values_jprofiler_port=$((_Values_service_port+48))
 [ "$PROFILE" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
-#[ "$PROFILE" = "-jprofiler" ] && _Values_service_type=NodePort && _Values_jprofiler_nodePort=$((_Values_service_nodePort_dev+48))
+#[ "$PROFILE" = "-jprofiler" ] && _Values_jpropfiler_command='"-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849",'
 
 function dynKubectl() {
 for filename in $2/*.yml; do
