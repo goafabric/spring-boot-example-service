@@ -12,4 +12,9 @@ spec:
       targetPort: transport
       protocol: TCP
       name: transport
+    - port: ${_Values_jprofiler_port}
+      nodePort: 0
+      targetPort: jprofiler
+      protocol: TCP
+      name: jprofiler
 

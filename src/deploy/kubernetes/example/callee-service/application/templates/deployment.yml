@@ -24,6 +24,9 @@ spec:
             - name: transport
               containerPort: ${_Values_service_port}
               protocol: TCP
+            - name: jprofiler
+              containerPort: 8849
+              protocol: TCP
           envFrom:
             - configMapRef:
                 name: ${_Values_app_name}-configmap
