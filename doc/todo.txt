@@ -1,20 +1,18 @@
 Now
+
 Andere Strategie für Configfiles + Logging
-Zertifikate für Server generieren
+Zertifikate für Server generieren (https://tinyurl.com/1wjhxz9m)
 JProfiler in Kubi
-
-password encryption
-
-https://medium.com/flant-com/cert-manager-lets-encrypt-ssl-certs-for-kubernetes-7642e463bbce
-
-Fun
-- Prometheus, Graphana, Jaeger, Elk, Helm
+Jaeger
 
 Later
 - Outbound SSL
 - Multi Tenancy
-- Statefulsets vs PVC
 - Networks Seperation (https://gardener.cloud/documentation/guides/applications/network-isolation/)
+- Password encryption via Kubernetes
+
+- Prometheus, Graphana, Jaeger, Elk, Helm
+
 
 ---
 ## Ingress
