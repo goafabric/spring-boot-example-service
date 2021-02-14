@@ -1,35 +1,40 @@
 #!/bin/bash
 COMMAND=$1
+PROFILE=$2 
+
 source .values
 kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
 
+[ "$PROFILE" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
+
+
 function dynKubectl() {
-for filename in ./templates/*.yml; do
+for filename in $2/*.yml; do
 eval "cat <<EOF
 $(<$filename)
 EOF
-" | kubectl $1 $2 -n ${_Release_namespace} -f -
+" | kubectl $1 -n ${_Release_namespace} -f -
 done
 }
 
 function up() {
     [ -d "./config/" ] && kubectl create configmap ${_Values_app_name}-config-files --from-file=./config/ -n ${_Release_namespace}
     [ -d "./config/data/" ] && kubectl create configmap ${_Values_app_name}-data-files --from-file=./config/data/ -n ${_Release_namespace}
-    [ -d "./templates/pvc/" ] && kubectl apply -f ./templates/pvc/ -n ${_Release_namespace}
+    [ -d "./templates/pvc/" ] && dynKubectl apply ./templates/pvc
     [ -d "./templates/ingress/" ] && kubectl apply -f ./templates/ingress/ -n ${_Release_namespace}
-    dynKubectl apply
+    dynKubectl apply ./templates
 }
 
 function down() {
     [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-config-files -n ${_Release_namespace}
     [ -d "./config/data/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-data-files -n ${_Release_namespace}
     [ -d "./templates/ingress/" ] && kubectl delete --ignore-not-found -f ./templates/ingress/ -n ${_Release_namespace}
-    dynKubectl delete --ignore-not-found
+    dynKubectl "delete --ignore-not-found" ./templates
 }
 
 function prune() {
     down
-    [ -d "./templates/pvc/" ] && kubectl delete --ignore-not-found -f ./templates/pvc/ -n ${_Release_namespace}
+    [ -d "./templates/pvc/" ] && dynKubectl "delete --ignore-not-found" ./templates/pvc
 }
 
 function import() {
@@ -50,9 +55,6 @@ then
 elif [ "${COMMAND}" = "prune" ]
 then
     prune
-elif [ "${COMMAND}" = "restart" ] && [ ! -f "./templates/job.yml" ]
-then
-    down && up
 elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]
 then
     import
