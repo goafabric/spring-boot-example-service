@@ -1,8 +1,8 @@
 Now
 
+JProfiler in Kubi
 Andere Strategie für Configfiles + Logging
 Zertifikate für Server generieren (https://tinyurl.com/1wjhxz9m)
-JProfiler in Kubi
 Jaeger
 
 Later
