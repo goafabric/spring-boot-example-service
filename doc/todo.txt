@@ -1,10 +1,7 @@
 Now
-
-Check conformatiy with main applications
 Andere Strategie für Configfiles + Logging
 Zertifikate für Server generieren
 JProfiler in Kubi
-artifactory secret encoden
 
 password encryption
 
