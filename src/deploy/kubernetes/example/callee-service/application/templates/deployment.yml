@@ -24,8 +24,8 @@ spec:
             - name: transport
               containerPort: ${_Values_service_port}
               protocol: TCP
-            - name: jprofiler
-              containerPort: 8849
+            - name: jmx
+              containerPort: 1099
               protocol: TCP
           envFrom:
             - configMapRef:
@@ -35,7 +35,7 @@ spec:
 
           command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
-                    ${_Values_jpropfiler_command}
+                    ${_Values_jmx_command}
                     "${_Values_command}"]
           resources:
             requests:

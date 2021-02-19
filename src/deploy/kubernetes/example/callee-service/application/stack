@@ -5,9 +5,7 @@ PROFILE=$2
 source .values
 kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
 
-_Values_jprofiler_port=$((_Values_service_port+48))
 [ "$PROFILE" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
-#[ "$PROFILE" = "-jprofiler" ] && _Values_jpropfiler_command='"-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849",'
 
 function dynKubectl() {
 for filename in $2/*.yml; do
@@ -38,11 +36,16 @@ function prune() {
     [ -d "./templates/pvc/" ] && dynKubectl "delete --ignore-not-found" ./templates/pvc
 }
 
+function wait_until_running() {
+    echo waiting for application to start ...
+    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
+}
+
 function import() {
     prune
     up
     echo waiting for batch to start/load
-    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
+    wait_until_running
     kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
     prune
 }
@@ -59,6 +62,12 @@ then
 elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]
 then
     import
+elif [ "${COMMAND}" = "jmx" ]
+then
+    _Values_jmx_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
+    up
+    wait_until_running
+    kubectl port-forward deployment/${_Values_app_name} 1099:1099 -n ${_Release_namespace}
 else
     echo Doing nothing !
 fi
