@@ -4,7 +4,6 @@ PROFILE=$2
 
 source .values
 kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
-
 [ "$PROFILE" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
 
 
@@ -15,6 +14,11 @@ $(<$filename)
 EOF
 " | kubectl $1 -n ${_Release_namespace} -f -
 done
+}
+
+function wait_until_running() {
+    echo waiting for application to start ...
+    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
 }
 
 function up() {
@@ -41,13 +45,24 @@ function import() {
     prune
     up
     echo waiting for batch to start/load
-    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
+    wait_until_running
     kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
     prune
 }
 
+function jmx() {
+    _Values_profiler_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
+    up
+    wait_until_running
+    kubectl port-forward deployment/${_Values_app_name} 1099:1099 -n ${_Release_namespace}
+}
+
 if [ "${COMMAND}" = "up" ] && [ ! -f "./templates/job.yml" ]
 then
+    up
+elif [ "${COMMAND}" = "restart" ] && [ ! -f "./templates/job.yml" ]
+then
+    down
     up
 elif [ "${COMMAND}" = "down" ]
 then
@@ -58,6 +73,10 @@ then
 elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]
 then
     import
+elif [ "${COMMAND}" = "jmx" ]
+then
+  jmx
 else
     echo Doing nothing !
 fi
+

@@ -12,4 +12,3 @@ spec:
       targetPort: transport
       protocol: TCP
       name: transport
-

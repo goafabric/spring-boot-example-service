@@ -16,12 +16,6 @@ spec:
       labels:
         app: ${_Values_app_name}
     spec:
-      initContainers:
-        - name: check-db-ready
-          image: postgres:13.1
-          command: ['sh', '-c',
-              'until pg_isready -h ${_Values_root_name}-postgres -p 5432;
-                     do echo waiting for database; sleep 2; done;']
       containers:
         - name: ${_Values_app_name}
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
@@ -29,6 +23,9 @@ spec:
           ports:
             - name: transport
               containerPort: ${_Values_service_port}
+              protocol: TCP
+            - name: jmx
+              containerPort: 1099
               protocol: TCP
           envFrom:
             - configMapRef:
@@ -38,6 +35,7 @@ spec:
 
           command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
+                    ${_Values_profiler_command}
                     "${_Values_command}"]
           resources:
             requests:

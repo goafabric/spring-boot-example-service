@@ -2,6 +2,8 @@ _Release_namespace=example
 _Values_root_name=country-service
 _Values_app_name=${_Values_root_name}-postgres
 
+_Values_image_repository=postgres
+_Values_image_tag=13.2
 _Values_image_pullPolicy=IfNotPresent #Always
 
 _Values_service_type=ClusterIP
