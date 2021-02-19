@@ -30,4 +30,4 @@ spec:
               service:
                 name: callee-service-application
                 port:
-                  number: 50100
+                  name: transport

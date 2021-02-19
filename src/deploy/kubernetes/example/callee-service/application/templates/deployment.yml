@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: ${_Values_image_pullPolicy}
           ports:
             - name: transport
-              containerPort: ${_Values_service_port}
+              containerPort: ${_Values_container_port}
               protocol: TCP
             - name: jmx
               containerPort: 1099
