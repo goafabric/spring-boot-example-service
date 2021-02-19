@@ -7,7 +7,7 @@ data:
   spring.config.location: /usr/share/config/application.yml
   logging.config: /usr/share/config/logback-rollingfile-spring.xml
 
-  server.port: "${_Values_container_port}"
+  server.port: "${_Values_service_port}"
 
   #monitoring
   server.forward-headers-strategy: FRAMEWORK
