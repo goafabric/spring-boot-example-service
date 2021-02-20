@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: ${_Values_app_name}
-          image: "${_Values_image_repository}:${_Values_image_tag}"
+          image: "postgres:13.2"
           imagePullPolicy: ${_Values_image_pullPolicy}
           ports:
             - name: transport
