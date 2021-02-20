@@ -13,7 +13,7 @@ _Values_service_nodePort_dev=30800
 _Values_resources_requests_memory=128M
 _Values_resources_requests_cpu=250m
 
-_Values_readinessProbe_initialDelaySeconds=1
+_Values_readinessProbe_initialDelaySeconds=2
 
 _Values_command=org.goafabric.calleservice.Application
 
