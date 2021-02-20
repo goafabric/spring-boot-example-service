@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ${_Values_app_name}-configmap
+  name: ${_Values_app_name}-config
 data:
   TZ: Europe/Berlin
   server.port: "${_Values_service_port}"
@@ -14,13 +14,6 @@ data:
   #stageing
   server.tomcat.threads.max: "20"
   security.authentication.enabled: "false"
-
-  spring.datasource.hikari.maximum-pool-size: "10"
-  spring.datasource.hikari.connection-timeout: "10000"
-
-  resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
-
-  database.provisioning.goals: -migrate
 
   #log levels
   logging.level.root: "WARN"

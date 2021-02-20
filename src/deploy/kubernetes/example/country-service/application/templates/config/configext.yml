@@ -1,10 +1,19 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: ${_Values_app_name}-secret
+  name: ${_Values_app_name}-config-external
 stringData:
+  #datasource
   spring.datasource.url: "jdbc:postgresql://country-service-postgres:5432/country"
+  spring.datasource.hikari.maximum-pool-size: "10"
+  spring.datasource.hikari.connection-timeout: "10000"
+
+  database.provisioning.goals: -migrate
+
+  #adapter
   adapter.calleeservice.url: "http://callee-service-application:8080"
+  resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
+
 data:
   spring.datasource.username: ZXhhbXBsZS1zZXJ2aWNl
   spring.datasource.password: Y3JOYjJaNm12QnlTUkt3dQ==
