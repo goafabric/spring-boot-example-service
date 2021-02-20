@@ -1,8 +1,6 @@
 server:
   port: 50900
-  tomcat:
-    threads:
-      max: 20
+  tomcat.max-threads: 20
 
 management:
     endpoint:
@@ -19,4 +17,8 @@ info:
 
 security:
   authentication:
-    enabled: false
+    enabled: true
+
+#opentracing.jaeger.udp-sender.host: "localhost"
+#opentracing.jaeger.udp-sender.port: "14250"
+#opentracing.jaeger.service-name: "callee-service"

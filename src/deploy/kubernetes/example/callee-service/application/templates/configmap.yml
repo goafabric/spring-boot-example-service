@@ -4,7 +4,6 @@ metadata:
   name: ${_Values_app_name}-configmap
 data:
   TZ: Europe/Berlin
-  spring.config.location: /usr/share/config/application.yml
   server.port: "${_Values_service_port}"
 
   #monitoring
@@ -14,6 +13,7 @@ data:
 
   #stageing
   server.tomcat.threads.max: "20"
+  security.authentication.enabled: "false"
 
   #log levels
   logging.level.root: "WARN"
@@ -29,7 +29,6 @@ data:
   logging.pattern.file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n%throwable"
   logging.pattern.console: "%white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
   logging.config: "/usr/share/config/logback-spring.xml"
-
 
 
 
