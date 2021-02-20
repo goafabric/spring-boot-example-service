@@ -13,6 +13,7 @@ data:
 
   #stageing
   server.tomcat.threads.max: "20"
+  security.authentication.enabled: "false"
 
   spring.datasource.hikari.maximum-pool-size: "10"
   spring.datasource.hikari.connection-timeout: "10000"
