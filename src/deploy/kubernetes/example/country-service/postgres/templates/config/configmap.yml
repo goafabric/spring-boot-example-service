@@ -5,15 +5,4 @@ metadata:
 data:
   TZ: Europe/Berlin
 
----
-
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: ${_Values_app_name}-data-files
-data:
-  00_pg_statements.sql: |-
-    CREATE EXTENSION pg_stat_statements;
-
-
 

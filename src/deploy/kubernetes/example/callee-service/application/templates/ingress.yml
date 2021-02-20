@@ -4,9 +4,9 @@ metadata:
   name: callee-service-application-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /\$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^(/callee)$ $1/ redirect; #Redirect if traling slash is missing
+      rewrite ^(/callee)$ \$1/ redirect; #Redirect if traling slash is missing
     nginx.ingress.kubernetes.io/x-forwarded-prefix: "/callee"
 
     # basic auth
