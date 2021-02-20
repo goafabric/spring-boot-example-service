@@ -24,11 +24,11 @@ data:
   logging.level.org.hibernate.SQL: "INFO"
 
   #log standard settings
+  logging.config: "/usr/share/config/logback-spring.xml"
   logging.file.max-size: "10MB"
   logging.file.name: "/usr/share/logs/application.log"
   logging.pattern.file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n%throwable"
   logging.pattern.console: "%white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
-  logging.config: "/usr/share/config/logback-spring.xml"
 
 
 
