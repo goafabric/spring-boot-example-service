@@ -4,9 +4,6 @@ metadata:
   name: ${_Values_app_name}-configmap
 data:
   TZ: Europe/Berlin
-  spring.config.location: /usr/share/config/application.yml
-  logging.config: /usr/share/config/logback-rollingfile-spring.xml
-
   server.port: "${_Values_service_port}"
 
   #monitoring
@@ -23,3 +20,18 @@ data:
   resilience4j.circuitbreaker.configs.default.slowCallDurationThreshold: "10000"
 
   database.provisioning.goals: -migrate
+
+  #log levels
+  logging.level.root: "WARN"
+  logging.level.org.goafabric: "INFO"
+
+  logging.level.org.springframework: "INFO"
+  logging.level.org.flywaydb.core: "INFO"
+  logging.level.org.hibernate.SQL: "INFO"
+
+  #log standard settings
+  logging.file.max-size: "10MB"
+  logging.file.name: "/usr/share/logs/application.log"
+  logging.pattern.file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n%throwable"
+  logging.pattern.console: "%white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
+  logging.config: "/usr/share/config/logback-spring.xml"
