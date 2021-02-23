@@ -72,6 +72,9 @@ then
 elif [ "${COMMAND}" = "prune" ]
 then
     prune
+elif [ "${COMMAND}" = "prov" ] && [ -d "./templates/pvc/" ]
+then
+    up
 elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]
 then
     import
