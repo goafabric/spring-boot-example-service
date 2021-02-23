@@ -39,14 +39,14 @@ spec:
 
           volumeMounts:
             - mountPath: /usr/share/logs
-              name: country-service-applogs
+              name: ${_Values_app_name}-applogs
             - mountPath: /usr/share/config/
               name: ${_Values_app_name}-config-files-volume
             - mountPath: src/deploy/config/application/demodata
               name: ${_Values_app_name}-data-files-volume
 
       volumes:
-        - name: country-service-applogs
+        - name: ${_Values_app_name}-applogs
           emptyDir: {}
         - name: ${_Values_app_name}-config-files-volume
           configMap:
