@@ -54,6 +54,7 @@ function import() {
 
 function jmx() {
     _Values_profiler_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
+    down
     up
     wait_until_running
     kubectl port-forward deployment/${_Values_app_name} 1099:1099 -n ${_Release_namespace}
