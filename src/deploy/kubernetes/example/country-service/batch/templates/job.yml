@@ -4,7 +4,7 @@ metadata:
   name: ${_Values_app_name}
 spec:
   backoffLimit: 0
-  activeDeadlineSeconds: 300
+  activeDeadlineSeconds: 240
   template:
     metadata:
       annotations:
