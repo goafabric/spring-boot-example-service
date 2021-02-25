@@ -30,10 +30,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: ${_Values_app_name}-config
-            - secretRef:
-                name: ${_Values_app_name}-config-external
             - configMapRef:
                 name: ${_Values_app_name}-config-log
+            - secretRef:
+                name: ${_Values_app_name}-config-external
 
           command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}",
                     "-Djava.security.egd=file:/dev/./urandom", "-cp", "/app/resources:/app/classes:/app/libs/*",
