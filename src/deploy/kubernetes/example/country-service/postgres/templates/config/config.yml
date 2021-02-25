@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ${_Values_app_name}-config
-data:
-  TZ: Europe/Berlin
-
-

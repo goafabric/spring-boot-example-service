@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${_Values_app_name}-config
+data:
+  TZ: Europe/Berlin
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ${_Values_app_name}-config-external
+type: Opaque
+stringData:
+  POSTGRES_DB: country
+data:
+  POSTGRES_USER: ZXhhbXBsZS1zZXJ2aWNl
+  POSTGRES_PASSWORD: Y3JOYjJaNm12QnlTUkt3dQ==
+
+  #echo -n crNb2Z6mvBySRKwu | base64
+  #echo -n Y3JOYjJaNm12QnlTUkt3dQ== | base64 -d
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${_Values_app_name}-data-files
+data:
+  00_pg_statements.sql: |-
+    CREATE EXTENSION pg_stat_statements;

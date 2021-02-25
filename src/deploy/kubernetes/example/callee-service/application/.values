@@ -17,5 +17,5 @@ _Values_readinessProbe_initialDelaySeconds=2
 
 _Values_command=org.goafabric.calleservice.Application
 
-_Values_linkerd_inject=enabled
+_Values_linkerd_inject=disabled
 

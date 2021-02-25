@@ -1,20 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ${_Values_app_name}-config
+  name: ${_Values_app_name}-config-log
 data:
-  TZ: Europe/Berlin
-  server.port: "${_Values_service_port}"
-
-  #monitoring
-  server.forward-headers-strategy: FRAMEWORK
-  management.database.monitoring.enabled: "true"
-  management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers,prometheus"
-
-  #stageing
-  server.tomcat.threads.max: "20"
-  security.authentication.enabled: "false"
-
   #log levels
   logging.level.root: "WARN"
   logging.level.org.goafabric: "INFO"
@@ -28,4 +16,16 @@ data:
   logging.file.name: "/usr/share/logs/application.log"
   logging.pattern.file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n%throwable"
   logging.pattern.console: "%white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
+
   logging.config: "/usr/share/config/logback-spring.xml"
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${_Values_app_name}-config-files
+data:
+  logback-spring.xml: >-
+    <?xml version="1.0" encoding="UTF-8"?><configuration><include resource="org/springframework/boot/logging/logback/default.xml"/><include resource="org/springframework/boot/logging/logback/console-appender.xml" /><include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+    <root level="WARN"><appender-ref ref="CONSOLE" /><appender-ref ref="FILE" /></root></configuration>

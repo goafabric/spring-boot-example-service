@@ -17,4 +17,4 @@ _Values_readinessProbe_initialDelaySeconds=10
 
 _Values_command=org.goafabric.spring.boot.exampleservice.Application
 
-_Values_linkerd_inject=enabled
+_Values_linkerd_inject=disabled
