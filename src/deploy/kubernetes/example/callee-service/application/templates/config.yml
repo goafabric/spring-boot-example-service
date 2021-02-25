@@ -11,7 +11,6 @@ data:
   management.database.monitoring.enabled: "true"
   management.endpoints.web.exposure.include: "info,health,heapdump,circuitbreakers,prometheus"
 
-  #stageing
   server.tomcat.threads.max: "20"
   security.authentication.enabled: "false"
 
