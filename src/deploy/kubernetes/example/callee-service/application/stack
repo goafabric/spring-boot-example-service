@@ -18,7 +18,7 @@ done
 
 function wait_until_running() {
     echo waiting for application to start ...
-    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
+    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null ; do sleep 1; done
 }
 
 function up() {
@@ -59,6 +59,12 @@ function jmx() {
     kubectl port-forward deployment/${_Values_app_name} 1099:1099 -n ${_Release_namespace}
 }
 
+function proxy() {
+  up
+  wait_until_running
+  kubectl port-forward deployment/${_Values_app_name} ${_Values_service_port}:${_Values_service_port} -n ${_Release_namespace}
+}
+
 if [ "${COMMAND}" = "up" ] && [ ! -f "./templates/job.yml" ]
 then
     up
@@ -81,6 +87,9 @@ then
 elif [ "${COMMAND}" = "jmx" ]
 then
   jmx
+elif [ "${COMMAND}" = "proxy" ]
+then
+  proxy
 else
     echo Doing nothing !
 fi
