@@ -48,7 +48,7 @@ function import() {
     up
     echo waiting for batch to start/load
     wait_until_running
-    kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
+    time kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
     prune
 }
 
