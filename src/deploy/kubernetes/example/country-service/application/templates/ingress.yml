@@ -1,14 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: country-service-ingress
+  name: ${_Values_root_name}-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /\$2
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^(/country)$ \$1/ redirect; #Redirect if traling slash is missing
-    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/country"
-
+      rewrite ^(/${_Values_ingress_name})$ \$1/ redirect; #Redirect if traling slash is missing
+    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/${_Values_ingress_name}"
     # basic auth
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: authentication-secret
@@ -19,13 +18,13 @@ spec:
         - goafabric.org
       secretName: server-certificate-secret
   rules:
-#    - host: goafabric.org
+    #    - host: goafabric.org
     - http:
         paths:
-          - path: /country(/|$)(.*)
+          - path: /${_Values_ingress_name}(/|$)(.*)
             pathType: Prefix
             backend:
               service:
-                name: country-service-application
+                name: ${_Values_app_name}
                 port:
                   name: transport
