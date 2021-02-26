@@ -18,23 +18,19 @@ done
 
 function wait_until_running() {
     echo waiting for application to start ...
-    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null; do sleep 1; done
+    while ! kubectl get pods -n ${_Release_namespace} | grep ${_Values_app_name} | grep Running > /dev/null ; do sleep 1; done
 }
 
 function up() {
     [ -d "./config/" ] && kubectl create configmap ${_Values_app_name}-config-files --from-file=./config/ -n ${_Release_namespace}
     [ -d "./data/" ] && kubectl create configmap ${_Values_app_name}-data-files --from-file=./data/ -n ${_Release_namespace}
     [ -d "./templates/pvc/" ] && dynKubectl apply ./templates/pvc
-    [ -d "./templates/config/" ] && dynKubectl apply ./templates/config
-    [ -d "./templates/ingress/" ] && kubectl apply -f ./templates/ingress/ -n ${_Release_namespace}
     dynKubectl apply ./templates
 }
 
 function down() {
     [ -d "./config/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-config-files -n ${_Release_namespace}
     [ -d "./data/" ] && kubectl delete --ignore-not-found configmap ${_Values_app_name}-data-files -n ${_Release_namespace}
-    [ -d "./templates/config/" ] && dynKubectl "delete --ignore-not-found" ./templates/config/ -n ${_Release_namespace}
-    [ -d "./templates/ingress/" ] && kubectl delete --ignore-not-found -f ./templates/ingress/ -n ${_Release_namespace}
     dynKubectl "delete --ignore-not-found" ./templates
 }
 
@@ -59,6 +55,12 @@ function jmx() {
     kubectl port-forward deployment/${_Values_app_name} 1099:1099 -n ${_Release_namespace}
 }
 
+function proxy() {
+  up
+  wait_until_running
+  kubectl port-forward deployment/${_Values_app_name} ${_Values_service_port}:${_Values_service_port} -n ${_Release_namespace}
+}
+
 if [ "${COMMAND}" = "up" ] && [ ! -f "./templates/job.yml" ]
 then
     up
@@ -81,6 +83,9 @@ then
 elif [ "${COMMAND}" = "jmx" ]
 then
   jmx
+elif [ "${COMMAND}" = "proxy" ]
+then
+  proxy
 else
     echo Doing nothing !
 fi
