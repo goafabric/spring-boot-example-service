@@ -25,7 +25,7 @@ spec:
               containerPort: ${_Values_service_port}
               protocol: TCP
             - name: jmx
-              containerPort: 1099
+              containerPort: 8849
               protocol: TCP
           envFrom:
             - configMapRef:
@@ -80,3 +80,4 @@ spec:
           hostPath:
             path: /home/admin/jprofiler
             type: Directory
+#            type: DirectoryOrCreate
