@@ -57,7 +57,9 @@ function jmx() {
 }
 
 function profile() {
-    '"-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=1099"'
+    _Values_profiler_command='"-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=1099",'
+    echo ${_Values_profiler_command}
+    exit
     forward 1099
 }
 
@@ -86,6 +88,9 @@ then
 elif [ "${COMMAND}" = "jmx" ]
 then
   jmx
+elif [ "${COMMAND}" = "profile" ]
+then
+  profile
 elif [ "${COMMAND}" = "proxy" ]
 then
   proxy
