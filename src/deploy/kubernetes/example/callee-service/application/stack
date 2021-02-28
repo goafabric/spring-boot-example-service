@@ -57,8 +57,8 @@ function jmx() {
 }
 
 function profile() {
-    '"-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849"'
-    forward 8849
+    '"-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=1099"'
+    forward 1099
 }
 
 function proxy() {
