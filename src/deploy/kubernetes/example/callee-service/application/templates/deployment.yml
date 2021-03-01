@@ -66,8 +66,8 @@ spec:
               name: ${_Values_app_name}-applogs
             - mountPath: /usr/share/config/
               name: ${_Values_app_name}-config-files-volume
-            - mountPath: /usr/share/jprofiler
-              name: ${_Values_app_name}-${_Values_volume_jprofiler}
+            - mountPath: /usr/share/profiler
+              name: ${_Values_app_name}-profiler-volume
 
       volumes:
         - name: ${_Values_app_name}-applogs
@@ -76,8 +76,6 @@ spec:
         - name: ${_Values_app_name}-config-files-volume
           configMap:
             name: ${_Values_app_name}-config-files
-        - name: ${_Values_app_name}-jprofiler-empty-volume
-          emptyDir: {}
-        - name: ${_Values_app_name}-jprofiler-bin-volume
-          hostPath:
-            path: /home/admin/jprofiler
+        - name: ${_Values_app_name}-profiler-volume
+          ${_Values_volume_type_profiler}
+            ${_Values_volume_path_profiler}

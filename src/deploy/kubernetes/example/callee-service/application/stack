@@ -58,10 +58,8 @@ function jmx() {
 }
 
 function profile() {
-    _Values_volume_jprofiler=jprofiler-bin-volume
-    _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/jprofiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
-    #echo ${_Values_profiler_command}
-    #exit
+    _Values_volume_type_profiler="hostPath:" && _Values_volume_path_profiler="path: /home/admin/jprofiler"
+    _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/profiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
     forward 1099
 }
 
