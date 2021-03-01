@@ -81,4 +81,3 @@ spec:
         - name: ${_Values_app_name}-jprofiler-bin-volume
           hostPath:
             path: /home/admin/jprofiler
-            type: Directory
