@@ -58,7 +58,7 @@ function jmx() {
 }
 
 function profile() {
-    _Values_profiler_command='"-Xshareclasses:none","-agentpath:/jprofiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
+    _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/jprofiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
     #echo ${_Values_profiler_command}
     #exit
     forward 1099
