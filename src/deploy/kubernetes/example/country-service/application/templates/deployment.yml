@@ -16,12 +16,6 @@ spec:
       labels:
         app: ${_Values_app_name}
     spec:
-      initContainers:
-        - name: check-db-ready
-          image: postgres:13.2
-          command: ['sh', '-c',
-              'until pg_isready -h ${_Values_root_name}-postgres -p 5432;
-                     do echo waiting for database; sleep 2; done;']
       imagePullSecrets:
         - name: ${_Values_image_pullSecrets}
       containers:
@@ -85,4 +79,4 @@ spec:
             name: ${_Values_app_name}-config-files
         - name: ${_Values_app_name}-profiler-volume
           ${_Values_volume_type_profiler}
-            ${_Values_volume_path_profiler}
+          ${_Values_volume_path_profiler}

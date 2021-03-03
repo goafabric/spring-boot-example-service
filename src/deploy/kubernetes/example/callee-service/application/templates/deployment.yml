@@ -79,4 +79,4 @@ spec:
             name: ${_Values_app_name}-config-files
         - name: ${_Values_app_name}-profiler-volume
           ${_Values_volume_type_profiler}
-            ${_Values_volume_path_profiler}
+          ${_Values_volume_path_profiler}
