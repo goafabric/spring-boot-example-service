@@ -7,7 +7,7 @@ kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Val
 
 [ "${PROFILE}" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
 [ "${COMMAND}" = "jmx" ] && _Values_profiler_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
-[ "${COMMAND}" = "profile" ] && _Values_volume_type_profiler="hostPath:" && _Values_volume_path_profiler="  path: /home/admin/jprofiler" && _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/profiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
+[ "${COMMAND}" = "profile" ] && _Values_volume_type_profiler="hostPath:" && _Values_volume_path_profiler="  path: /home/admin/jprofiler" && _Values_profiler_command='"-agentpath:/usr/share/profiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
 
 function dynKubectl() {
 for filename in $2/*.yml; do
