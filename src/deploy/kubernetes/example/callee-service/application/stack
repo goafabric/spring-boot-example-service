@@ -1,11 +1,13 @@
 #!/bin/bash
-COMMAND=$1
-PROFILE=$2 
-
 source .values
-kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
-[ "$PROFILE" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
+COMMAND=$1
+PROFILE=$2
 
+kubectl version | grep "Server Version" | grep "linux/arm64" > /dev/null && _Values_server_arch="-arm64v8"
+
+[ "${PROFILE}" = "-dev" ] && _Values_service_type=NodePort && _Values_service_nodePort=${_Values_service_nodePort_dev}
+[ "${COMMAND}" = "jmx" ] && _Values_profiler_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
+[ "${COMMAND}" = "profile" ] && _Values_volume_type_profiler="hostPath:" && _Values_volume_path_profiler="path: /home/admin/jprofiler" && _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/profiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
 
 function dynKubectl() {
 for filename in $2/*.yml; do
@@ -35,68 +37,29 @@ function down() {
 }
 
 function prune() {
-    down
-    [ -d "./templates/pvc/" ] && dynKubectl "delete --ignore-not-found" ./templates/pvc
+    down && [ -d "./templates/pvc/" ] && dynKubectl "delete --ignore-not-found" ./templates/pvc
 }
 
 function import() {
-    prune
-    up && wait_until_running
+    prune && up && wait_until_running
     time kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
     prune
 }
 
 function forward() {
-    up && wait_until_running
-    kubectl port-forward deployment/${_Values_app_name} $1:$1 -n ${_Release_namespace}
+    up && wait_until_running && kubectl port-forward deployment/${_Values_app_name} $1:$1 -n ${_Release_namespace}
 }
 
-function jmx() {
-    down
-    _Values_readinessProbe_initialDelaySeconds=120
-    _Values_profiler_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
-    forward 1099
-}
+if   [ "${COMMAND}" = "up" ] && [ -f "./templates/deployment.yml" ]; then up;
+elif [ "${COMMAND}" = "restart" ] && [ -f "./templates/deployment.yml" ]; then down && up;
+elif [ "${COMMAND}" = "down" ]; then down;
+elif [ "${COMMAND}" = "prune" ]; then prune;
 
-function profile() {
-    down
-    _Values_volume_type_profiler="hostPath:" && _Values_volume_path_profiler="path: /home/admin/jprofiler"
-    _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/profiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
-    forward 1099
-}
+elif [ "${COMMAND}" = "prov" ] && [ -d "./templates/pvc/" ]; then up;
+elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]; then import;
 
-function proxy() {
-  forward ${_Values_service_port}
-}
+elif [ "${COMMAND}" = "jmx" ]; then down && forward 1099;
+elif [ "${COMMAND}" = "profile" ]; then down && forward 1099;
+elif [ "${COMMAND}" = "proxy" ]; then forward ${_Values_service_port};
 
-if [ "${COMMAND}" = "up" ] && [ -f "./templates/deployment.yml" ]
-then
-    up
-elif [ "${COMMAND}" = "restart" ] && [ -f "./templates/deployment.yml" ]
-then
-    down && up
-elif [ "${COMMAND}" = "down" ]
-then
-    down
-elif [ "${COMMAND}" = "prune" ]
-then
-    prune
-elif [ "${COMMAND}" = "prov" ] && [ -d "./templates/pvc/" ]
-then
-    up
-elif [ "${COMMAND}" = "import" ] && [ -f "./templates/job.yml" ]
-then
-    import
-elif [ "${COMMAND}" = "jmx" ]
-then
-  jmx
-elif [ "${COMMAND}" = "profile" ]
-then
-  profile
-elif [ "${COMMAND}" = "proxy" ]
-then
-  proxy
-else
-    echo Doing nothing !
-fi
-
+else echo Doing nothing !; fi
