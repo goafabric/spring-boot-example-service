@@ -41,33 +41,40 @@ function prune() {
 
 function import() {
     prune
-    up
-    echo waiting for batch to start/load
-    wait_until_running
+    up && wait_until_running
     time kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
     prune
 }
 
+function forward() {
+    up && wait_until_running
+    kubectl port-forward deployment/${_Values_app_name} $1:$1 -n ${_Release_namespace}
+}
+
 function jmx() {
+    down
+    _Values_readinessProbe_initialDelaySeconds=120
     _Values_profiler_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
-    up
-    wait_until_running
-    kubectl port-forward deployment/${_Values_app_name} 1099:1099 -n ${_Release_namespace}
+    forward 1099
+}
+
+function profile() {
+    down
+    _Values_volume_type_profiler="hostPath:" && _Values_volume_path_profiler="path: /home/admin/jprofiler"
+    _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/profiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
+    forward 1099
 }
 
 function proxy() {
-  up
-  wait_until_running
-  kubectl port-forward deployment/${_Values_app_name} ${_Values_service_port}:${_Values_service_port} -n ${_Release_namespace}
+  forward ${_Values_service_port}
 }
 
-if [ "${COMMAND}" = "up" ] && [ ! -f "./templates/job.yml" ]
+if [ "${COMMAND}" = "up" ] && [ -f "./templates/deployment.yml" ]
 then
     up
-elif [ "${COMMAND}" = "restart" ] && [ ! -f "./templates/job.yml" ]
+elif [ "${COMMAND}" = "restart" ] && [ -f "./templates/deployment.yml" ]
 then
-    down
-    up
+    down && up
 elif [ "${COMMAND}" = "down" ]
 then
     down
@@ -83,6 +90,9 @@ then
 elif [ "${COMMAND}" = "jmx" ]
 then
   jmx
+elif [ "${COMMAND}" = "profile" ]
+then
+  profile
 elif [ "${COMMAND}" = "proxy" ]
 then
   proxy

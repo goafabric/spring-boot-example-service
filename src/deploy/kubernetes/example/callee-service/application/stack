@@ -52,12 +52,14 @@ function forward() {
 }
 
 function jmx() {
+    down
     _Values_readinessProbe_initialDelaySeconds=120
     _Values_profiler_command='"-Dcom.sun.management.jmxremote.port=1099","-Dcom.sun.management.jmxremote.rmi.port=1099","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",'
     forward 1099
 }
 
 function profile() {
+    down
     _Values_volume_type_profiler="hostPath:" && _Values_volume_path_profiler="path: /home/admin/jprofiler"
     _Values_profiler_command='"-Xshareclasses:none","-agentpath:/usr/share/profiler/bin/linux'${_Values_server_arch}'/libjprofilerti.so=port=1099",'
     forward 1099
