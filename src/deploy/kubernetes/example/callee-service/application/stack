@@ -36,7 +36,8 @@ function prune() {
 }
 
 function import() {
-    prune && up && wait_until_running
+    prune
+    up && wait_until_running
     time kubectl logs --follow -l app=${_Values_app_name} -n ${_Release_namespace}
     prune
 }
