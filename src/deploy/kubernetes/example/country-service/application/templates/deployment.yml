@@ -16,6 +16,12 @@ spec:
       labels:
         app: ${_Values_app_name}
     spec:
+      initContainers:
+        - name: check-db-ready
+          image: postgres:13.1
+          command: ['sh', '-c',
+              'until pg_isready -h ${_Values_root_name}-postgres -p 5432;
+                     do echo waiting for database; sleep 2; done;']
       imagePullSecrets:
         - name: ${_Values_image_pullSecrets}
       containers:
@@ -48,7 +54,7 @@ spec:
 
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: ${_Values_readinessProbe_path}
               port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
@@ -56,7 +62,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: ${_Values_readinessProbe_path}
               port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
