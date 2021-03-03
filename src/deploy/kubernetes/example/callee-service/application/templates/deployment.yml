@@ -72,7 +72,6 @@ spec:
       volumes:
         - name: ${_Values_app_name}-applogs
           emptyDir: {}
-        # generated from local file system via "kubectl create configmap" inside stack
         - name: ${_Values_app_name}-config-files-volume
           configMap:
             name: ${_Values_app_name}-config-files
