@@ -19,6 +19,8 @@ spec:
                     'until pg_isready -h ${_Values_root_name}-postgres -p 5432;
                      do echo waiting for database; sleep 2; done;']
       restartPolicy: Never
+      imagePullSecrets:
+        - name: ${_Values_image_pullSecrets}
       containers:
         - name: ${_Values_app_name}
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
