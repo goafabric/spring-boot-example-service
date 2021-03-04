@@ -1,5 +1,6 @@
 _Release_namespace=example
-_Values_app_name=callee-service
+_Values_root_name=callee-service
+_Values_app_name=${_Values_root_name}-application
 _Values_ingress_name=callee
 
 _Values_image_repository=goafabric/calle-service

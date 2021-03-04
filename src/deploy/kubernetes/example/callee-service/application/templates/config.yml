@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ${_Values_app_name}-application-config
+  name: ${_Values_app_name}-config
 data:
   TZ: Europe/Berlin
   server.port: "${_Values_service_port}"
@@ -19,7 +19,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: ${_Values_app_name}-application-config-external
+  name: ${_Values_app_name}-config-external
 data:
 
 
