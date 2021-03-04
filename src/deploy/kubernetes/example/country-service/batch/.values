@@ -1,4 +1,4 @@
-_Release_namespace="example"
+_Release_namespace=example
 _Values_root_name=country-service
 _Values_app_name=${_Values_root_name}-batch
 
