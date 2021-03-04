@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/inject: ${_Values_linkerd_inject}
+        linkerd.io/inject: disabled
       labels:
         app: ${_Values_app_name}
     spec:
@@ -27,7 +27,7 @@ spec:
       containers:
         - name: ${_Values_app_name}
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
-          imagePullPolicy: ${_Values_image_pullPolicy}
+          imagePullPolicy: IfNotPresent #Always
           ports:
             - name: transport
               containerPort: ${_Values_service_port}
@@ -54,7 +54,7 @@ spec:
 
           readinessProbe:
             httpGet:
-              path: ${_Values_readinessProbe_path}
+              path: /actuator/health
               port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
@@ -62,7 +62,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: ${_Values_readinessProbe_path}
+              path: /actuator/health
               port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10

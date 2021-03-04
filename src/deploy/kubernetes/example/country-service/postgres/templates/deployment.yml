@@ -12,14 +12,14 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/inject: ${_Values_linkerd_inject}
+        linkerd.io/inject: disabled
       labels:
         app: ${_Values_app_name}
     spec:
       containers:
         - name: ${_Values_app_name}
           image: "postgres:13.2"
-          imagePullPolicy: ${_Values_image_pullPolicy}
+          imagePullPolicy: IfNotPresent #Always
           ports:
             - name: transport
               containerPort: ${_Values_service_port}

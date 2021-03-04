@@ -2,8 +2,6 @@ _Release_namespace=example
 _Values_root_name=country-service
 _Values_app_name=${_Values_root_name}-postgres
 
-_Values_image_pullPolicy=IfNotPresent #Always
-
 _Values_service_type=ClusterIP
 _Values_service_port=5432
 _Values_service_nodePort_dev=30910
@@ -15,5 +13,3 @@ _Values_resources_limits_cpu=500m
 _Values_postgres_max_connections=30
 
 #_Values_readinessProbe_initialDelaySeconds=10
-
-_Values_linkerd_inject=enabled
