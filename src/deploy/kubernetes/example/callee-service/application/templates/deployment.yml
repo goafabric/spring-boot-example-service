@@ -48,7 +48,7 @@ spec:
 
           readinessProbe:
             httpGet:
-              path: ${_Values_readinessProbe_path}
+              path: /actuator/health
               port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
@@ -56,7 +56,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: ${_Values_readinessProbe_path}
+              path: /actuator/health
               port: transport
             initialDelaySeconds: ${_Values_readinessProbe_initialDelaySeconds}
             periodSeconds: 10
