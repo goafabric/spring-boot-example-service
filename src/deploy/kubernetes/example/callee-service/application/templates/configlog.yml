@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ${_Values_app_name}-config-log
+  name: ${_Values_app_name}-application-config-log
 data:
   #log levels
   logging.level.root: "WARN"
@@ -24,7 +24,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ${_Values_app_name}-config-files
+  name: ${_Values_app_name}-application-config-files
 data:
   logback-spring.xml: >-
     <?xml version="1.0" encoding="UTF-8"?><configuration><include resource="org/springframework/boot/logging/logback/default.xml"/><include resource="org/springframework/boot/logging/logback/console-appender.xml" /><include resource="org/springframework/boot/logging/logback/file-appender.xml" />

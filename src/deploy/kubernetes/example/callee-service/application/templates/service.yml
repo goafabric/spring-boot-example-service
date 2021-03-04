@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ${_Values_app_name}
+  name: ${_Values_app_name}-application
 spec:
   selector:
-    app: ${_Values_app_name}
+    app: ${_Values_app_name}-application
   type: ${_Values_service_type}
   ports:
     - port: ${_Values_service_port}

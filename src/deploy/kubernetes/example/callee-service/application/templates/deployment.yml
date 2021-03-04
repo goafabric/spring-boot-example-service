@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${_Values_app_name}
+  name: ${_Values_app_name}-application
 spec:
   selector:
     matchLabels:
-      app: ${_Values_app_name}
+      app: ${_Values_app_name}-application
   replicas: 1
   strategy:
     type: Recreate #RollingUpdate
@@ -14,12 +14,12 @@ spec:
       annotations:
         linkerd.io/inject: disabled
       labels:
-        app: ${_Values_app_name}
+        app: ${_Values_app_name}-application
     spec:
       imagePullSecrets:
         - name: ${_Values_image_pullSecrets}
       containers:
-        - name: ${_Values_app_name}
+        - name: ${_Values_app_name}-application
           image: "${_Values_image_repository}${_Values_server_arch}:${_Values_image_tag}"
           imagePullPolicy: IfNotPresent #Always
           ports:
@@ -31,11 +31,11 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: ${_Values_app_name}-config
+                name: ${_Values_app_name}-application-config
             - configMapRef:
-                name: ${_Values_app_name}-config-log
+                name: ${_Values_app_name}-application-config-log
             - secretRef:
-                name: ${_Values_app_name}-config-external
+                name: ${_Values_app_name}-application-config-external
 
           command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}", "-Djava.security.egd=file:/dev/./urandom",
                     ${_Values_profiler_command}
@@ -65,18 +65,18 @@ spec:
 
           volumeMounts:
             - mountPath: /usr/share/logs
-              name: ${_Values_app_name}-applogs
+              name: ${_Values_app_name}-application-applogs
             - mountPath: /usr/share/config/
-              name: ${_Values_app_name}-config-files-volume
+              name: ${_Values_app_name}-application-config-files-volume
             - mountPath: /usr/share/profiler
-              name: ${_Values_app_name}-profiler-volume
+              name: ${_Values_app_name}-application-profiler-volume
 
       volumes:
-        - name: ${_Values_app_name}-applogs
+        - name: ${_Values_app_name}-application-applogs
           emptyDir: {}
-        - name: ${_Values_app_name}-config-files-volume
+        - name: ${_Values_app_name}-application-config-files-volume
           configMap:
-            name: ${_Values_app_name}-config-files
-        - name: ${_Values_app_name}-profiler-volume
+            name: ${_Values_app_name}-application-config-files
+        - name: ${_Values_app_name}-application-profiler-volume
           ${_Values_volume_type_profiler}
           ${_Values_volume_path_profiler}
