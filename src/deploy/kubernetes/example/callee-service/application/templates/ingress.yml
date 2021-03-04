@@ -25,6 +25,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ${_Values_app_name}-application
+                name: ${_Values_app_name}-service
                 port:
                   name: transport

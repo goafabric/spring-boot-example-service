@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ${_Values_app_name}-application
+  name: ${_Values_app_name}-service
 spec:
   selector:
     app: ${_Values_app_name}-application
