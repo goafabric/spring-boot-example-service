@@ -12,7 +12,6 @@ _Values_service_nodePort_dev=30900
 
 _Values_resources_requests_memory=256M
 _Values_resources_requests_cpu=250m
-
 _Values_readinessProbe_initialDelaySeconds=10
 
 _Values_command=org.goafabric.spring.boot.exampleservice.Application
