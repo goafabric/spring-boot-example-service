@@ -34,6 +34,7 @@ spec:
                 name: ${_Values_app_name}-config-external
 
           command: ["java", "-Xms${_Values_resources_requests_memory}", "-Xmx${_Values_resources_requests_memory}", "-Djava.security.egd=file:/dev/./urandom",
+                    ${_Values_profiler_command}
                     "-cp", "/app/resources:/app/classes:/app/libs/*",
                     "${_Values_command}"]
           resources:
@@ -46,8 +47,8 @@ spec:
               name: ${_Values_app_name}-applogs
             - mountPath: /usr/share/config/
               name: ${_Values_app_name}-config-files-volume
-            - mountPath: src/deploy/config/application/demodata
-              name: ${_Values_app_name}-data-files-volume
+            - mountPath: /usr/share/profiler
+              name: ${_Values_app_name}-profiler-volume
 
       volumes:
         - name: ${_Values_app_name}-applogs
@@ -55,6 +56,6 @@ spec:
         - name: ${_Values_app_name}-config-files-volume
           configMap:
             name: ${_Values_app_name}-config-files
-        - name: ${_Values_app_name}-data-files-volume
-          configMap:
-            name: ${_Values_app_name}-data-files
+        - name: ${_Values_app_name}-profiler-volume
+          ${_Values_volume_type_profiler}
+          ${_Values_volume_path_profiler}
