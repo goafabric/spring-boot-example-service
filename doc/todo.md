@@ -14,6 +14,7 @@
 - Helm 
 
 - JProfiler Test for Docker + Kubi
+- NGinx Rewrites
 
 ---
 ## Ingress
