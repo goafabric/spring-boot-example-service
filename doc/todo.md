@@ -13,6 +13,8 @@
 - Monitoring (Prometheus, Graphana ...)
 - Helm 
 
+- JProfiler Test for Docker + Kubi
+
 ---
 ## Ingress
 https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
