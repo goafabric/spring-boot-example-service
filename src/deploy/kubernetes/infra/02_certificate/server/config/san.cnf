@@ -11,6 +11,6 @@ commonName                 = Example
 [ SAN ]
 subjectAltName = @alt_names
 [alt_names]
-DNS.1   = example.org
+DNS.1   = SERVER_NAME
 
 #https://geekflare.com/san-ssl-certificate/
