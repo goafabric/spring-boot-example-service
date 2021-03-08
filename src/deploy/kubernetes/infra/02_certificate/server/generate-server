@@ -1,6 +1,6 @@
 #!/bin/bash
-
-sed -i '' 's/SERVER_NAME/'"${SERVER_NAME}"'/g' ./config/san.cnf
+[ -z "$_Values_server_name" ] && echo "Server Name is empty" && exit
+sed -i '' 's/SERVER_NAME/'"${_Values_server_name}"'/g' ./config/san.cnf
 
 #variables
 export DAYS_VALID="365"

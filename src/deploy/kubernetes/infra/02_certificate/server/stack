@@ -13,20 +13,20 @@ function create_secret() {
 
 
 function read_servername() {
-    read -p "server name (<kubernetes>): " SERVER_NAME < /dev/tty
-    SERVER_NAME="${SERVER_NAME:=kubernetes}"
+    read -p "server name (<kubernetes>): " _Values_server_name < /dev/tty
+    _Values_server_name="${_Values_server_name:=kubernetes}"
 
     kubectl delete --ignore-not-found configmap cluster-config -n default
-    kubectl create configmap cluster-config -n default --from-literal=servername=${SERVER_NAME}
-    SERVER_NAME=`kubectl get configmaps cluster-config -o jsonpath='{.data.servername}' -n default`
-    [ -z "$SERVER_NAME" ] && echo "Server Name is empty" && exit
-    echo ${SERVER_NAME}
+    kubectl create configmap cluster-config -n default --from-literal=servername=${_Values_server_name}
+    export _Values_server_name=`kubectl get configmaps cluster-config -o jsonpath='{.data.servername}' -n default`
+    [ -z "$_Values_server_name" ] && echo "Server Name is empty" && exit
+    echo Server Name is: ${_Values_server_name}
 }
 
 if [ "${COMMAND}" = "init" ]
 then
     read_servername
-    #./generate-server
+    ./generate-server
 
     if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then create_secret linkerd; fi
     create_secret kube-system
