@@ -6,8 +6,8 @@ prompt             = no
 [ req_distinguished_name ]
 countryName                 = DE
 localityName               = Berlin
-organizationName           = example
-commonName                 = example
+organizationName           = Example
+commonName                 = Example
 [ SAN ]
 subjectAltName = @alt_names
 [alt_names]

@@ -8,7 +8,7 @@ function delete_secret() {
 
 function create_secret() {
     delete_secret $1
-    kubectl create secret tls server-certificate-secret --cert=./config/goafabric-server.pem --key=./config/goafabric-server.key -n $1
+    kubectl create secret tls server-certificate-secret --cert=./config/server.pem --key=./config/server.key -n $1
 }
 
 if [ "${COMMAND}" = "init" ]

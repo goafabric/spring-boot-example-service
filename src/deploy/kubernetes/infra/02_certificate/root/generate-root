@@ -11,4 +11,4 @@ openssl genrsa -aes256 -out ${ROOT_FILE}.key 4096
 openssl req -x509 -new -nodes -sha512 -days ${DAYS_VALID}\
         -key ${ROOT_FILE}.key\
         -out ${ROOT_FILE}.pem\
-        -subj '/CN=example root/O=example/C=DE'
+        -subj '/CN=Example CA/O=Example/C=DE'

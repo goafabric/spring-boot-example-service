@@ -28,4 +28,4 @@ openssl x509 -req -sha512 -days ${DAYS_VALID}\
 
 
 # remove csr
-rm config/goafabric-server.csr
+rm ${SERVER_FILE}.csr
