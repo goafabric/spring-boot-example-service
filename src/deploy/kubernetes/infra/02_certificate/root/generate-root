@@ -2,13 +2,13 @@
 
 #variables
 export DAYS_VALID="3650"
-export ROOT_FILE="config/goafabric-root"
+export ROOT_FILE="config/root"
 
 #create key, asks for password because of ae256
-openssl genrsa -aes256 -out config/goafabric-root.key 4096
+openssl genrsa -aes256 -out ${ROOT_FILE}.key 4096
 
 #create root certificate
 openssl req -x509 -new -nodes -sha512 -days ${DAYS_VALID}\
         -key ${ROOT_FILE}.key\
         -out ${ROOT_FILE}.pem\
-        -subj '/CN=Goafabric Root/O=Goafabric Ltd./C=DE'
+        -subj '/CN=example root/O=example/C=DE'

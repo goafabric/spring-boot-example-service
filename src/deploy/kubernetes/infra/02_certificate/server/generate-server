@@ -2,12 +2,12 @@
 
 #variables
 export DAYS_VALID="365"
-export ROOT_FILE="../root/config/goafabric-root"
-export SERVER_FILE="config/goafabric-server"
+export ROOT_FILE="../root/config/root"
+export SERVER_FILE="config/server"
 
 # create key, won't ask for password because no encryption applied
 openssl genrsa\
-        -out config/goafabric-server.key\
+        -out ${SERVER_FILE}.key\
         4096
 
 # create signing request (csr)

@@ -18,8 +18,8 @@ spec:
         - goafabric.org
       secretName: server-certificate-secret
   rules:
-    #    - host: goafabric.org
-    - http:
+    - host: goafabric.org
+      http:
         paths:
           - path: /${_Values_ingress_name}(/|$)(.*)
             pathType: Prefix

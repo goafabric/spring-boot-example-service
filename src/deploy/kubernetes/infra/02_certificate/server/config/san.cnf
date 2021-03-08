@@ -6,11 +6,11 @@ prompt             = no
 [ req_distinguished_name ]
 countryName                 = DE
 localityName               = Berlin
-organizationName           = Goafabric
-commonName                 = Goafabric EndEntity
+organizationName           = example
+commonName                 = example
 [ SAN ]
 subjectAltName = @alt_names
 [alt_names]
-DNS.1   = goafabric.org
+DNS.1   = example.org
 
 #https://geekflare.com/san-ssl-certificate/
