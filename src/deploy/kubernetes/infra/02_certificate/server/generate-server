@@ -1,7 +1,5 @@
 #!/bin/bash
 
-read -p "server name (<kubernetes>): " SERVER_NAME < /dev/tty
-SERVER_NAME="${SERVER_NAME:=kubernetes}"
 sed -i '' 's/SERVER_NAME/'"${SERVER_NAME}"'/g' ./config/san.cnf
 
 #variables

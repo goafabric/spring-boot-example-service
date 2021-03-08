@@ -11,9 +11,23 @@ function create_secret() {
     kubectl create secret tls server-certificate-secret --cert=./config/server.pem --key=./config/server.key -n $1
 }
 
+
+function read_servername() {
+    read -p "server name (<kubernetes>): " SERVER_NAME < /dev/tty
+    SERVER_NAME="${SERVER_NAME:=kubernetes}"
+
+    kubectl delete --ignore-not-found configmap cluster-config -n default
+    kubectl create configmap cluster-config -n default --from-literal=servername=${SERVER_NAME}
+    SERVER_NAME=`kubectl get configmaps cluster-config -o jsonpath='{.data.servername}' -n default`
+    [ -z "$SERVER_NAME" ] && echo "Server Name is empty" && exit
+    echo ${SERVER_NAME}
+}
+
 if [ "${COMMAND}" = "init" ]
 then
-    ./generate-server
+    read_servername
+    #./generate-server
+
     if kubectl get --ignore-not-found namespace linkerd | grep -q Active; then create_secret linkerd; fi
     create_secret kube-system
 
