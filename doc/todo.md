@@ -14,7 +14,7 @@
 - Helm 
 
 - JProfiler Test for Docker + Kubi
-- NGinx Rewrites, Mod Security, Websockets
+- NGinx Rewrites, Mod Security, Websockets (https://tinyurl.com/4zyhd2hf)
 
 ---
 ## Ingress
