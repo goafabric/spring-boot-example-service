@@ -1,2 +1,0 @@
-#!/bin/bash
-find . -maxdepth 1 -not -path "." -type d -exec bash -c "cd '{}' && [ -f ./stack ] && echo '{}' && ./stack $1" \;
