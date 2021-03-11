@@ -27,6 +27,9 @@ https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/
 https://contentlab.io/postgresql-on-kubernetes/
 https://medium.com/@suyashmohan/setting-up-postgresql-database-on-kubernetes-24a2a192e962
 
+#hostname from kubectl
+kubectl get node -o wide
+
 #Keycloak
 ##Authentication via Keycloak
 #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
