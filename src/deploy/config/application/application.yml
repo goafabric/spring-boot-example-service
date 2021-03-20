@@ -24,7 +24,7 @@ management:
 spring:
     datasource:
       url: jdbc:h2:mem:countrydb
-#      url: jdbc:postgresql://localhost:50710/countrydb
+#      url: jdbc:postgresql://kubernetes:30710/countrydb
       username: example-service
       password: example-service
 
@@ -46,7 +46,7 @@ database:
 ## encryption section
 security:
   authentication:
-    enabled: false
+    enabled: true
 
 # cache
 cache:
@@ -79,3 +79,20 @@ resilience4j.circuitbreaker:
     calleeservice:
       baseConfig: default
 
+#opentracing.jaeger.udp-sender.host: "localhost"
+#opentracing.jaeger.udp-sender.port: "14250"
+#opentracing.jaeger.service-name: "country-service"
+
+#log levels
+logging.level.root: "WARN"
+logging.level.org.goafabric: "INFO"
+
+logging.level.org.springframework: "INFO"
+logging.level.org.flywaydb.core: "INFO"
+logging.level.org.hibernate.SQL: "INFO"
+
+#log standard settings
+logging.file.max-size: "10MB"
+logging.file.name: "/usr/share/logs/application.log"
+logging.pattern.file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n%throwable"
+logging.pattern.console: "%white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"

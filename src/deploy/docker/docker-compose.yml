@@ -12,12 +12,12 @@ services:
     environment:
       - TZ=Europe/Berlin
       - spring.config.location=/usr/share/config/application.yml
-      - logging.config=/usr/share/config/logback-rollingfile-spring.xml
       - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
       - spring.datasource.username=example-service
       - spring.datasource.password=example-service
       - adapter.calleeservice.url=http://host.docker.internal:50900
       - management.database.monitoring.enabled=true
+      - security.authentication.enabled=false
 
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
@@ -28,7 +28,6 @@ services:
       - tmp:/tmp
       - applogs:/usr/share/logs
       - ../config/application/application.yml:/usr/share/config/application.yml
-      - ../config/application/logback-rollingfile-spring.xml:/usr/share/config/logback-rollingfile-spring.xml
       - ../config/application/demodata:/src/deploy/config/application/demodata
       - ./jprofiler/:/jprofiler/
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
