@@ -1,5 +1,10 @@
 #1.0.5
+## Updated
+- Spring Boot 2.4.4
+- Parent POM
 
+## Modified
+- Remoded logback.xml, is now part of application.yml
 
 #1.0.4-SNAPSHOT
 ## Updated
