@@ -16,3 +16,7 @@
 
 # Release notes
 - See release-notes file in doc folder for more infos
+
+#docker run
+docker run --name spring-boot-example-service --rm -p50700:50700 goafabric/spring-boot-exampleservice-arm64v8:1.0.5-SNAPSHOT
+
