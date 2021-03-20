@@ -1,7 +1,0 @@
-#!/bin/bash
-#sudo ./01_user
-./90_system
-./91_docker
-./92_minikube
-./93_maven
-./94_geekbench
