@@ -254,6 +254,7 @@
                                 <configuration>
                                     <from>
                                         <image>adoptopenjdk/openjdk11-openj9:x86_64-debian-jre-11.0.10_9_openj9-0.24.0</image>
+                                        <!-- <image>adoptopenjdk/openjdk16-openj9:x86_64-debian-jre-16_36_openj9-0.25.0</image> -->
                                     </from>
                                     <to>
                                         <image>${docker.registry}/${project.artifactId}</image>
@@ -296,6 +297,7 @@
                                 <configuration>
                                     <from>
                                         <image>adoptopenjdk/openjdk11-openj9:aarch64-debian-jre-11.0.10_9_openj9-0.24.0</image>
+                                        <!-- <image>adoptopenjdk/openjdk16-openj9:aarch64-debian-jre-16_36_openj9-0.25.0</image> -->
                                     </from>
                                     <to>
                                         <image>${docker.registry}/${project.artifactId}-arm64v8</image>
