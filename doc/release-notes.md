@@ -1,7 +1,8 @@
 #1.0.5
 ## Updated
-- Spring Boot 2.4.4
 - Parent POM
+- Spring Boot 2.4.4
+- Lombok 1.18.20 for Java16 Compatibility
 
 ## Modified
 - Remoded logback.xml, is now part of application.yml
