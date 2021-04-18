@@ -20,3 +20,4 @@ Keycloak)
 
 - Multi Tenancy: https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
 => PathBaseContextResolver could than directly to requst.getHeader(getTenantId())
+=> Also see official Keycloak: https://www.keycloak.org/docs/latest/securing_apps/#_multi_tenancy
