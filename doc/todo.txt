@@ -17,3 +17,5 @@ Keycloak)
         - add role STANDARD_ROLE
         
 - docker run -d --name=keycloak -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak:8.0.1
+
+- Multi Tenancy: https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
