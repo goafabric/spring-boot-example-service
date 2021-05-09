@@ -63,11 +63,12 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
-
+        <!--
         <dependency>
             <groupId>io.opentracing.contrib</groupId>
             <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
         </dependency>
+        -->
 
         <!-- 3rd party -->
         <!-- mapstruct before lombok and processer part of plugin management in parent pom-->
