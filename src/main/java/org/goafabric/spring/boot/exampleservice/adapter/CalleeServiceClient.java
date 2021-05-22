@@ -16,7 +16,7 @@ public class CalleeServiceClient {
     private String url;
 
     public Boolean isAlive() {
-        return calleeServiceRestTemplate.getForObject(url + "callees/isAlive", Boolean.class);
+        return calleeServiceRestTemplate.getForObject(url + "/callees/isAlive", Boolean.class);
     }
 
     @Bean

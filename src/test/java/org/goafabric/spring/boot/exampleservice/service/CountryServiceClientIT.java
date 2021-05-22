@@ -166,7 +166,7 @@ public class CountryServiceClientIT {
             countryService.isAlive();
             fail("should net get here");
         } catch (HttpClientErrorException e) {
-            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.PRECONDITION_FAILED);
+            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
             assertThat(e.getResponseBodyAsString()).isNotNull();
         }
     }
