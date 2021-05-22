@@ -1,7 +1,7 @@
 #1.0.5
 ## Updated
 - Parent POM
-- Spring Boot 2.4.4
+- Spring Boot 2.5.0
 - Lombok 1.18.20 for Java16 Compatibility
 
 ## Modified

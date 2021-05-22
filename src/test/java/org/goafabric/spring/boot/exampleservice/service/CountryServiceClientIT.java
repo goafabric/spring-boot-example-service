@@ -2,9 +2,7 @@ package org.goafabric.spring.boot.exampleservice.service;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.goafabric.spring.boot.exampleservice.client.CountryServiceClient;
-import org.goafabric.spring.boot.exampleservice.client.TenantIdClientStorage;
 import org.goafabric.spring.boot.exampleservice.service.dto.Country;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,7 +166,7 @@ public class CountryServiceClientIT {
             countryService.isAlive();
             fail("should net get here");
         } catch (HttpClientErrorException e) {
-            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+            assertThat(e.getStatusCode()).isEqualTo(HttpStatus.PRECONDITION_FAILED);
             assertThat(e.getResponseBodyAsString()).isNotNull();
         }
     }
