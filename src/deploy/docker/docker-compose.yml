@@ -19,6 +19,12 @@ services:
       - spring.datasource.password=example-service
       # Adapter
       - adapter.calleeservice.url=http://host.docker.internal:50900
+      #log levels
+      - logging.level.root="WARN"
+      - logging.level.org.goafabric="INFO"
+      - logging.level.org.springframework="INFO"
+      - logging.level.org.flywaydb.core="INFO"
+      - logging.level.org.hibernate.SQL="INFO"
 
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
@@ -28,7 +34,6 @@ services:
     volumes:
       - tmp:/tmp
       - applogs:/usr/share/logs
-      - ../config/application/application.yml:/usr/share/config/application.yml
       - ../config/application/demodata:/src/deploy/config/application/demodata
       - ./jprofiler/:/jprofiler/
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
