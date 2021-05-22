@@ -11,13 +11,14 @@ services:
       - 8849:8849
     environment:
       - TZ=Europe/Berlin
-      - spring.config.location=/usr/share/config/application.yml
+      - management.database.monitoring.enabled=true
+      - security.authentication.enabled=false
+      # Datasource
       - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
       - spring.datasource.username=example-service
       - spring.datasource.password=example-service
+      # Adapter
       - adapter.calleeservice.url=http://host.docker.internal:50900
-      - management.database.monitoring.enabled=true
-      - security.authentication.enabled=false
 
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
