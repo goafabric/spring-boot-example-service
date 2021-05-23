@@ -9,23 +9,6 @@ services:
       - 50700:50700
       - 50701:50701
       - 8849:8849
-    environment:
-      - TZ=Europe/Berlin
-      - management.database.monitoring.enabled=true
-      - security.authentication.enabled=false
-      # Datasource
-      - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
-      - spring.datasource.username=example-service
-      - spring.datasource.password=example-service
-      # Adapter
-      - adapter.calleeservice.url=http://host.docker.internal:50900
-      #log levels
-      - logging.level.root="WARN"
-      - logging.level.org.goafabric="INFO"
-      - logging.level.org.springframework="INFO"
-      - logging.level.org.flywaydb.core="INFO"
-      - logging.level.org.hibernate.SQL="INFO"
-
     healthcheck:
       test: "curl -f http://localhost:50700/actuator/health || exit 1"
       interval: 10s
@@ -38,12 +21,32 @@ services:
       - ./jprofiler/:/jprofiler/
     entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
 #                 "-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849",
-#                 "-Xshareclasses:none","-agentpath:/jprofiler/bin/linux${ARCH_SUFFIX}/libjprofilerti.so=port=8849,nowait,config=/jprofiler/jprofiler_config.xml",
 #                 "-Dcom.sun.management.jmxremote.port=50701","-Dcom.sun.management.jmxremote.rmi.port=50701","-Dcom.sun.management.jmxremote","-Djava.rmi.server.hostname=0.0.0.0","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false",
                  "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.spring.boot.exampleservice.Application"]
-
     networks:
       - example-service-net
+
+    environment:
+      - TZ=Europe/Berlin
+      - management.database.monitoring.enabled=true
+      - security.authentication.enabled=false
+      # Datasource
+      - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/countrydb
+      - spring.datasource.username=example-service
+      - spring.datasource.password=example-service
+      # Adapter
+      - adapter.calleeservice.url=http://host.docker.internal:50900
+      #log levels
+      - logging.level.root=WARN
+      - logging.level.org.goafabric=INFO
+      - logging.level.org.springframework=INFO
+      - logging.level.org.flywaydb.core=INFO
+      - logging.level.org.hibernate.SQL=INFO
+      #log standard settings
+      - logging.file.max-size=10MB
+      - logging.file.name=/usr/share/logs/application.log
+      - logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n%throwable
+      #- logging.pattern.console=%white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}) %msg%n%throwable
 
   postgres:
     container_name: postgres_${STACK_NAME}
