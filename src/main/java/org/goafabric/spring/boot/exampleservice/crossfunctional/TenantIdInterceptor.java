@@ -9,21 +9,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
-public class TenantIdInterceptorConfiguration implements WebMvcConfigurer {
+public class TenantIdInterceptor implements WebMvcConfigurer {
+    private static final ThreadLocal<String> tenantIdThreadLocal = new ThreadLocal<>();
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-                TenantRequestContext.setTenantId(request.getHeader("X-TenantId"));
+                tenantIdThreadLocal.set(request.getHeader("X-TenantId"));
                 return true;
             }
 
             @Override
             public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-                TenantRequestContext.remove();
+                tenantIdThreadLocal.remove();
             }
         });
     }
+
+    public static String getTenantId() {
+        final String tenantId = tenantIdThreadLocal.get();
+        return tenantId == null ? "0" : tenantId;  //Todo: should throw exception
+    }
+
 }
