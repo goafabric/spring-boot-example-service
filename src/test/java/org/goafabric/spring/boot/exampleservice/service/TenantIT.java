@@ -48,7 +48,7 @@ public class TenantIT {
             AssertionsForClassTypes.assertThat(countryService.findByIsoCode("de")).isNull();;
             AssertionsForClassTypes.assertThat(countryService.findByName("Germany")).isNull();;
         } finally {
-            TenantIdClientStorage.setTenantId("10");
+            TenantIdClientStorage.setTenantId("0");
         }
     }
 
@@ -76,7 +76,7 @@ public class TenantIT {
                     .isInstanceOf(HttpClientErrorException.class)
                     .hasMessageContaining("No value present");
         } finally {
-            TenantIdClientStorage.setTenantId("10");
+            TenantIdClientStorage.setTenantId("0");
         }
     }
 
@@ -94,7 +94,7 @@ public class TenantIT {
             countryService.save(country).getId();
             assertThat(countryService.findByIsoCode("nz").getIsoCode()).isEqualTo("nz");
         } finally {
-            TenantIdClientStorage.setTenantId("10");
+            TenantIdClientStorage.setTenantId("0");
         }
 
         //during this access we should get nothing from the cache as it is anotha tenant
@@ -102,7 +102,7 @@ public class TenantIT {
         try {
             assertThat(countryService.findByIsoCode("nz")).isNull();
         } finally {
-            TenantIdClientStorage.setTenantId("10");
+            TenantIdClientStorage.setTenantId("0");
         }
     }
 }
