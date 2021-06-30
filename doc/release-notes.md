@@ -1,3 +1,7 @@
+#1.0.6
+- Auditing added
+- Upgrade to Spring Boot 2.5.2
+
 #1.0.5
 ## Updated
 - Parent POM
